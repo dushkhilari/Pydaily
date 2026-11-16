@@ -1,0 +1,23 @@
+{
+  "day": 80,
+  "slug": "day-80-multilevel-inheritance",
+  "title": "Multilevel Inheritance in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 13,
+  "words": 471,
+  "videoUrl": "https://www.youtube.com/embed/Il7XMJJeXiA",
+  "sections": [
+    {
+      "file": "01.multilevelinheri.md",
+      "heading": "Multilevel Inheritance in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 32
+    }
+  ],
+  "sourceFolder": "80-Day-80-Multilevel-Inheritance"
+}

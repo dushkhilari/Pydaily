@@ -1,0 +1,23 @@
+{
+  "day": 70,
+  "slug": "day-70-class-methods-as-alternative-constructors",
+  "title": "Class Methods as Alternative Constructors",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 11,
+  "words": 401,
+  "videoUrl": "https://www.youtube.com/embed/FGlKJdy--p8",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Class Methods as Alternative Constructors"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 30
+    }
+  ],
+  "sourceFolder": "70-Day-70-Class-methods-as-alternative-constructors"
+}

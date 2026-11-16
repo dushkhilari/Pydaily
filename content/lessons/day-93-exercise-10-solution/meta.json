@@ -1,0 +1,23 @@
+{
+  "day": 93,
+  "slug": "day-93-exercise-10-solution",
+  "title": "Exercise 10 Solution",
+  "type": "solution",
+  "module": "advanced",
+  "minutes": 4,
+  "words": 33,
+  "videoUrl": "https://www.youtube.com/embed/bnAz7Kb2efE",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Exercise 10"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 14
+    }
+  ],
+  "sourceFolder": "93-Day-93-Exercise-10-Solution"
+}

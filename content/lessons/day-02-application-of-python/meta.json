@@ -1,0 +1,23 @@
+{
+  "day": 2,
+  "slug": "day-02-application-of-python",
+  "title": "My Python Success Story",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 8,
+  "words": 261,
+  "videoUrl": "https://www.youtube.com/embed/Tto8TS-fJQU",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 2 - My Python Success Story"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 25
+    }
+  ],
+  "sourceFolder": "02-Day2-Application-of-Python"
+}

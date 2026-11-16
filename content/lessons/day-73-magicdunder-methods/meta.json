@@ -1,0 +1,27 @@
+{
+  "day": 73,
+  "slug": "day-73-magicdunder-methods",
+  "title": "Magic/Dunder Methods in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 10,
+  "words": 370,
+  "videoUrl": "https://www.youtube.com/embed/DmgQVJXhuLQ",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Magic/Dunder Methods in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "emp.py",
+      "lines": 20
+    },
+    {
+      "file": "main.py",
+      "lines": 7
+    }
+  ],
+  "sourceFolder": "73-Day-73-MagicDunder-Methods"
+}

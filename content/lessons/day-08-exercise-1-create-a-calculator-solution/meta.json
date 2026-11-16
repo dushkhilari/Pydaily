@@ -1,0 +1,23 @@
+{
+  "day": 8,
+  "slug": "day-08-exercise-1-create-a-calculator-solution",
+  "title": "Exercise 1 Create A Calculator Solution",
+  "type": "solution",
+  "module": "getting-started",
+  "minutes": 4,
+  "words": 36,
+  "videoUrl": "https://www.youtube.com/embed/dohaSBCKCr0",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Exercise 1 - Create a Calculator Solution"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 9
+    }
+  ],
+  "sourceFolder": "08-Day8-Exercise-1-Create-a-Calculator-Solution"
+}

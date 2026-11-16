@@ -1,0 +1,27 @@
+{
+  "day": 34,
+  "slug": "day-34-dictionary-methods",
+  "title": "Dictionary Methods",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 6,
+  "words": 267,
+  "videoUrl": "https://www.youtube.com/embed/LmbFwaLjT9k",
+  "sections": [
+    {
+      "file": "01-Dictionary_methods.md",
+      "heading": "Dictionary Methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 5
+    },
+    {
+      "file": "tempCodeRunnerFile.py",
+      "lines": 1
+    }
+  ],
+  "sourceFolder": "34-Day34-Dictionary-Methods"
+}

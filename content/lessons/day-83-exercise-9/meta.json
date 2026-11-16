@@ -1,0 +1,23 @@
+{
+  "day": 83,
+  "slug": "day-83-exercise-9",
+  "title": "Exercise 9",
+  "type": "exercise",
+  "module": "oop",
+  "minutes": 4,
+  "words": 67,
+  "videoUrl": "https://www.youtube.com/embed/1WjwnlRXfHc",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 1
+    }
+  ],
+  "sourceFolder": "83-Day-83-Exercise-9"
+}

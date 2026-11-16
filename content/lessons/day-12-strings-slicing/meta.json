@@ -1,0 +1,23 @@
+{
+  "day": 12,
+  "slug": "day-12-strings-slicing",
+  "title": "String Slicing & Operations on String",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 6,
+  "words": 188,
+  "videoUrl": "https://www.youtube.com/embed/8jW7lpT8HW8",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "String Slicing & Operations on String"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 18
+    }
+  ],
+  "sourceFolder": "12-Day12-Strings-Slicing"
+}

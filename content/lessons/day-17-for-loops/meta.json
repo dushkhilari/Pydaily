@@ -1,0 +1,23 @@
+{
+  "day": 17,
+  "slug": "day-17-for-loops",
+  "title": "Introduction to Loops",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 7,
+  "words": 245,
+  "videoUrl": "https://www.youtube.com/embed/fIYVzKp0q5w",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Introduction to Loops"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 21
+    }
+  ],
+  "sourceFolder": "17-Day17-For-Loops"
+}

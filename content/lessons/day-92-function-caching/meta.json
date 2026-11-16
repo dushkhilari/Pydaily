@@ -1,0 +1,23 @@
+{
+  "day": 92,
+  "slug": "day-92-function-caching",
+  "title": "Function Caching in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 10,
+  "words": 368,
+  "videoUrl": "https://www.youtube.com/embed/K8gjSwc3Rlo",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Function Caching in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 25
+    }
+  ],
+  "sourceFolder": "92-Day-92-Function-Caching"
+}

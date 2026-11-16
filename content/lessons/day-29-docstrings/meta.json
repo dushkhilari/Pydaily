@@ -1,0 +1,27 @@
+{
+  "day": 29,
+  "slug": "day-29-docstrings",
+  "title": "Docstrings in python",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 13,
+  "words": 569,
+  "videoUrl": "https://www.youtube.com/embed/SJzsNd7SM0g",
+  "sections": [
+    {
+      "file": "01 docstring.md",
+      "heading": "Docstrings in python"
+    },
+    {
+      "file": "02 pep8.md",
+      "heading": "PEP 8"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 6
+    }
+  ],
+  "sourceFolder": "29-Day29-Docstrings"
+}

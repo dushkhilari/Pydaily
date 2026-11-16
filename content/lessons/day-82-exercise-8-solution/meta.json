@@ -1,0 +1,23 @@
+{
+  "day": 82,
+  "slug": "day-82-exercise-8-solution",
+  "title": "Exercise 8 Solution",
+  "type": "solution",
+  "module": "oop",
+  "minutes": 4,
+  "words": 77,
+  "videoUrl": "https://www.youtube.com/embed/qKKGemhBRVM",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 11
+    }
+  ],
+  "sourceFolder": "82-Day-82-Exercise-8-Solution"
+}

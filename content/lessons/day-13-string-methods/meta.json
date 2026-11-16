@@ -1,0 +1,23 @@
+{
+  "day": 13,
+  "slug": "day-13-string-methods",
+  "title": "String methods",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 31,
+  "words": 1129,
+  "videoUrl": "https://www.youtube.com/embed/0INvoK_T0cE",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "String methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 74
+    }
+  ],
+  "sourceFolder": "13-Day13-String-Methods"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 58,
+  "slug": "day-58-constructors",
+  "title": "Constructors",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 7,
+  "words": 257,
+  "videoUrl": "https://www.youtube.com/embed/12HRkYld22c",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Constructors"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "58-Day58-Constructors"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 5,
+  "slug": "day-05-comments-and-print",
+  "title": "Comments, Escape sequence & Print in Python",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 11,
+  "words": 479,
+  "videoUrl": "https://www.youtube.com/embed/qxPMmW93eDs",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 5 - Comments, Escape sequence & Print in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 2
+    }
+  ],
+  "sourceFolder": "05-Day5-Comments-and-Print"
+}

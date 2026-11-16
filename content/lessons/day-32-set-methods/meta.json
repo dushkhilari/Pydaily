@@ -1,0 +1,27 @@
+{
+  "day": 32,
+  "slug": "day-32-set-methods",
+  "title": "Joining Sets",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 22,
+  "words": 977,
+  "videoUrl": "https://www.youtube.com/embed/HOrutCnp2zo",
+  "sections": [
+    {
+      "file": "01 joining sets.md",
+      "heading": "Joining Sets"
+    },
+    {
+      "file": "02 set methods.md",
+      "heading": "Set Methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 5
+    }
+  ],
+  "sourceFolder": "32-Day32-Set-Methods"
+}

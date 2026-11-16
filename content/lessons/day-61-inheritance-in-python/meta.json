@@ -1,0 +1,27 @@
+{
+  "day": 61,
+  "slug": "day-61-inheritance-in-python",
+  "title": "Inheritance in python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 15,
+  "words": 591,
+  "videoUrl": "https://www.youtube.com/embed/-KsfUaQEY9Y",
+  "sections": [
+    {
+      "file": "01-Inheritance.md",
+      "heading": "Inheritance in python"
+    },
+    {
+      "file": "02-examples.md",
+      "heading": "Single Inheritance:"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 23
+    }
+  ],
+  "sourceFolder": "61-Day-61-Inheritance-in-Python"
+}

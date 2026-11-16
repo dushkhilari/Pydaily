@@ -1,0 +1,23 @@
+{
+  "day": 1,
+  "slug": "day-01-intro-to-python",
+  "title": "What is Programming and Python?",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 9,
+  "words": 390,
+  "videoUrl": "https://www.youtube.com/embed/7wnove7K-ZQ",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 1 - What is Programming and Python?"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 2
+    }
+  ],
+  "sourceFolder": "01-Day1-Intro-to-Python"
+}

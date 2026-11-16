@@ -1,0 +1,23 @@
+{
+  "day": 59,
+  "slug": "day-59-decorators-in-python",
+  "title": "Python Decorators",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 9,
+  "words": 338,
+  "videoUrl": "https://www.youtube.com/embed/PTBZ674EsvI",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Python Decorators"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 21
+    }
+  ],
+  "sourceFolder": "59-Day-59-Decorators-in-Python"
+}

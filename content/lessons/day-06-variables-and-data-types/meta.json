@@ -1,0 +1,23 @@
+{
+  "day": 6,
+  "slug": "day-06-variables-and-data-types",
+  "title": "Variables and Data Types",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 9,
+  "words": 333,
+  "videoUrl": "https://www.youtube.com/embed/ORCuz7s5cCY",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 6 - Variables and Data Types"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 21
+    }
+  ],
+  "sourceFolder": "06-Day6-Variables-and-Data-Types"
+}

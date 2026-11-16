@@ -1,0 +1,23 @@
+{
+  "day": 20,
+  "slug": "day-20-functions",
+  "title": "Python Functions",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 8,
+  "words": 218,
+  "videoUrl": "https://www.youtube.com/embed/dyvxxJSGUsE",
+  "sections": [
+    {
+      "file": "01 Functions.md",
+      "heading": "Python Functions"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 40
+    }
+  ],
+  "sourceFolder": "20-Day20-Functions"
+}

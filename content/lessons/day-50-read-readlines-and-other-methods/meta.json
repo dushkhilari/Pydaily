@@ -1,0 +1,23 @@
+{
+  "day": 50,
+  "slug": "day-50-read-readlines-and-other-methods",
+  "title": "readlines() method",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 7,
+  "words": 221,
+  "videoUrl": "https://www.youtube.com/embed/l1FsnQxET9U",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "readlines() method"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "50-Day50-read-readlines-and-other-methods"
+}

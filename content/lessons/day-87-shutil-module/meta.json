@@ -1,0 +1,23 @@
+{
+  "day": 87,
+  "slug": "day-87-shutil-module",
+  "title": "Shutil Module in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 9,
+  "words": 379,
+  "videoUrl": "https://www.youtube.com/embed/wII2JhNACJE",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Shutil Module in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 8
+    }
+  ],
+  "sourceFolder": "87-Day-87-Shutil-Module"
+}

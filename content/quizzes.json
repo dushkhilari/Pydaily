@@ -1,0 +1,318 @@
+[
+  {
+    "moduleId": "getting-started",
+    "title": "Getting Started — Days 1-8",
+    "questions": [
+      {
+        "id": "gs-1",
+        "prompt": "What does the print(\"Hello World\") statement do in Python?",
+        "options": [
+          "Declares a variable called Hello",
+          "Displays the text Hello World on the screen",
+          "Saves Hello World to a file",
+          "Returns Hello World to the operating system"
+        ],
+        "answer": 1,
+        "explanation": "print() writes its arguments to the standard output stream — the console window. It is usually the first function every Python programmer uses."
+      },
+      {
+        "id": "gs-2",
+        "prompt": "Which command installs an external package like numpy using pip?",
+        "options": ["pip install numpy", "python install numpy", "import numpy --install", "pip add numpy"],
+        "answer": 0,
+        "explanation": "pip is Python's package manager. `pip install <package>` downloads and installs packages from PyPI so you can import them in your code."
+      },
+      {
+        "id": "gs-3",
+        "prompt": "Which of the following is a valid Python variable name?",
+        "options": ["2day", "my-score", "day_one", "class"],
+        "answer": 2,
+        "explanation": "Variable names can contain letters, numbers and underscores but cannot start with a digit, cannot contain hyphens, and cannot be reserved keywords like class."
+      },
+      {
+        "id": "gs-4",
+        "prompt": "What is the output of print(type(5.0))?",
+        "options": ["<class 'int'>", "<class 'float'>", "<class 'str'>", "<class 'num'>"],
+        "answer": 1,
+        "explanation": "A number with a decimal point is a float in Python. 5.0 is a float even though its value is a whole number."
+      },
+      {
+        "id": "gs-5",
+        "prompt": "What does an escape sequence like \\n do inside a string?",
+        "options": [
+          "Adds a comment",
+          "Inserts a newline character",
+          "Ends the program",
+          "Converts the string to a number"
+        ],
+        "answer": 1,
+        "explanation": "Escape sequences start with a backslash. \\n inserts a newline, \\t inserts a tab, and \\\" lets you place a quote inside a double-quoted string."
+      }
+    ]
+  },
+  {
+    "moduleId": "language-basics",
+    "title": "Language Basics — Days 9-19",
+    "questions": [
+      {
+        "id": "lb-1",
+        "prompt": "What will int(\"42\") + 8 evaluate to?",
+        "options": ["\"428\"", "50", "Error", "\"50\""],
+        "answer": 1,
+        "explanation": "int(\"42\") typecasts the string to the integer 42, so the expression is 42 + 8 = 50. String + int would raise a TypeError without the cast."
+      },
+      {
+        "id": "lb-2",
+        "prompt": "name = \"Harry\" — what does name[0] return?",
+        "options": ["\"Harry\"", "\"H\"", "\"y\"", "IndexError"],
+        "answer": 1,
+        "explanation": "String indexing starts at 0, so name[0] gives the first character \"H\". Accessing name[5] would raise an IndexError."
+      },
+      {
+        "id": "lb-3",
+        "prompt": "What does len(\"python\") return?",
+        "options": ["5", "6", "7", "\"python\""],
+        "answer": 1,
+        "explanation": "len() returns the number of characters in the string. \"python\" has six characters, so the result is 6."
+      },
+      {
+        "id": "lb-4",
+        "prompt": "Which keyword do you use to take user input from the keyboard?",
+        "options": ["print()", "scan()", "input()", "read()"],
+        "answer": 2,
+        "explanation": "input() reads a line from the keyboard and always returns it as a string — you often need int() or float() to convert it."
+      },
+      {
+        "id": "lb-5",
+        "prompt": "How many times does the body of `for i in range(3):` run?",
+        "options": ["2", "3", "4", "Infinite"],
+        "answer": 1,
+        "explanation": "range(3) produces 0, 1, 2 — three values, so the loop body executes three times. The stop value (3) is excluded."
+      }
+    ]
+  },
+  {
+    "moduleId": "functions-collections",
+    "title": "Functions & Collections — Days 20-35",
+    "questions": [
+      {
+        "id": "fc-1",
+        "prompt": "What keyword defines a function in Python?",
+        "options": ["func", "define", "def", "lambda"],
+        "answer": 2,
+        "explanation": "Functions are defined with `def name(parameters):`. lambda defines small anonymous functions, but def is the standard way."
+      },
+      {
+        "id": "fc-2",
+        "prompt": "What is the key difference between a list and a tuple?",
+        "options": [
+          "Tuples are mutable, lists are not",
+          "Lists are mutable, tuples are not",
+          "Lists can only hold numbers",
+          "There is no difference"
+        ],
+        "answer": 1,
+        "explanation": "Lists ([]) can be modified after creation — append, remove, sort. Tuples (()) are immutable: once created they cannot change, which makes them safer for fixed data."
+      },
+      {
+        "id": "fc-3",
+        "prompt": "What does a.append(5) do when a is a list?",
+        "options": [
+          "Inserts 5 at index 0",
+          "Adds 5 to every element",
+          "Adds 5 at the end of the list",
+          "Removes the number 5"
+        ],
+        "answer": 2,
+        "explanation": "append() adds a single item to the end of a list. To insert at a position you would use a.insert(index, value)."
+      },
+      {
+        "id": "fc-4",
+        "prompt": "What happens when a function calls itself inside its own body?",
+        "options": [
+          "It is called lambda recursion",
+          "It is called recursion and needs a base case to stop",
+          "Python automatically stops it after 10 calls",
+          "It creates a new thread"
+        ],
+        "answer": 1,
+        "explanation": "This is recursion — like factorial(n) = n * factorial(n-1). Without a base case (factorial(0) = 1) it would recurse forever and hit Python's recursion limit."
+      },
+      {
+        "id": "fc-5",
+        "prompt": "members = {\"harry\": 20} — how do you read Harry's age?",
+        "options": ["members(0)", "members[\"harry\"]", "members.harry", "members->harry"],
+        "answer": 1,
+        "explanation": "Dictionaries map keys to values and are accessed with square brackets: members[\"harry\"] returns 20. Using .get(\"harry\") is a safe alternative."
+      }
+    ]
+  },
+  {
+    "moduleId": "errors-files-functional",
+    "title": "Errors, Files & Functional Tools — Days 36-55",
+    "questions": [
+      {
+        "id": "ef-1",
+        "prompt": "Which block runs only when NO exception is raised in the try block?",
+        "options": ["except", "finally", "else", "raise"],
+        "answer": 2,
+        "explanation": "try/except/else: the else block runs when the try block succeeds without error. finally runs no matter what — success or failure."
+      },
+      {
+        "id": "ef-2",
+        "prompt": "What does the finally block guarantee?",
+        "options": [
+          "It runs only if an error occurred",
+          "It runs regardless of whether an error occurred",
+          "It prevents all errors",
+          "It runs before the try block"
+        ],
+        "answer": 1,
+        "explanation": "finally always executes — perfect for cleanup like closing files or database connections, even when exceptions are raised."
+      },
+      {
+        "id": "ef-3",
+        "prompt": "What mode opens a file for writing and erases its existing content?",
+        "options": ["\"r\"", "\"a\"", "\"w\"", "\"x\""],
+        "answer": 2,
+        "explanation": "\"w\" (write) truncates the file — existing content is gone. \"a\" (append) preserves it and adds to the end, and \"r\" is read-only."
+      },
+      {
+        "id": "ef-4",
+        "prompt": "What is a lambda function?",
+        "options": [
+          "A function that can only be called once",
+          "A one-line anonymous function like lambda x: x * 2",
+          "A special type of loop",
+          "A way to import functions"
+        ],
+        "answer": 1,
+        "explanation": "lambda creates small anonymous functions on one line: square = lambda x: x * 2. They shine inside map(), filter() and sorted(key=...)."
+      },
+      {
+        "id": "ef-5",
+        "prompt": "What does enumerate([\"a\", \"b\"]) yield in a for loop?",
+        "options": [
+          "Only the values",
+          "Only the indexes",
+          "Index and value pairs like (0, \"a\")",
+          "Alphabet positions"
+        ],
+        "answer": 2,
+        "explanation": "enumerate() pairs each item with its index: `for i, ch in enumerate(list)`. It replaces manual counter variables."
+      }
+    ]
+  },
+  {
+    "moduleId": "oop",
+    "title": "Object-Oriented Python — Days 56-83",
+    "questions": [
+      {
+        "id": "op-1",
+        "prompt": "What is the first parameter of an instance method in a class?",
+        "options": ["cls", "this", "self", "obj"],
+        "answer": 2,
+        "explanation": "self refers to the instance the method is called on. Python passes it automatically: a.info() is effectively Person.info(a)."
+      },
+      {
+        "id": "op-2",
+        "prompt": "What is the special method called automatically when an object is created?",
+        "options": ["__init__()", "__start__()", "__new_object__()", "__create__()"],
+        "answer": 0,
+        "explanation": "__init__ is the constructor. It initialises the new instance right after it is built: def __init__(self, name): self.name = name."
+      },
+      {
+        "id": "op-3",
+        "prompt": "What does inheritance allow a child class to do?",
+        "options": [
+          "Delete the parent class",
+          "Reuse and extend attributes and methods of the parent class",
+          "Run faster than normal classes",
+          "Create multiple programs"
+        ],
+        "answer": 1,
+        "explanation": "class Employee(Person) means Employee gets every attribute and method of Person, and can override or extend them — code reuse without duplication."
+      },
+      {
+        "id": "op-4",
+        "prompt": "Which method is a @classmethod and receives as its first argument?",
+        "options": ["self", "cls", "instance", "module"],
+        "answer": 1,
+        "explanation": "Class methods receive the class itself (cls), not an instance. They are often used as alternative constructors like Employee.from_string(s)."
+      },
+      {
+        "id": "op-5",
+        "prompt": "What are dunder (magic) methods like __str__ and __add__ used for?",
+        "options": [
+          "Encrypting classes",
+          "Integrating custom classes with built-in syntax like str() and +",
+          "Declaring private variables",
+          "Importing modules faster"
+        ],
+        "answer": 1,
+        "explanation": "Dunder methods hook your class into Python syntax: __str__ controls what print(obj) shows, __add__ makes obj + obj2 work, __len__ powers len(obj)."
+      }
+    ]
+  },
+  {
+    "moduleId": "advanced",
+    "title": "Advanced Python — Days 84-100",
+    "questions": [
+      {
+        "id": "ad-1",
+        "prompt": "What makes generators (yield) memory efficient?",
+        "options": [
+          "They compress the data",
+          "They produce values lazily, one at a time, instead of storing everything in memory",
+          "They run on the GPU",
+          "They delete old variables automatically"
+        ],
+        "answer": 1,
+        "explanation": "A generator pauses at each yield and resumes on demand — it never builds the whole sequence in memory, which is ideal for huge datasets or infinite sequences."
+      },
+      {
+        "id": "ad-2",
+        "prompt": "What does the walrus operator := do?",
+        "options": [
+          "Compares two values",
+          "Assigns and returns a value inside an expression",
+          "Creates a tuple",
+          "Adds type hints"
+        ],
+        "answer": 1,
+        "explanation": "Introduced in Python 3.8: `if (n := len(data)) > 10:` assigns n AND uses it in the same expression — no repeated computation."
+      },
+      {
+        "id": "ad-3",
+        "prompt": "Which module would you use for async/await concurrency with coroutines?",
+        "options": ["threading", "multiprocessing", "asyncio", "shutil"],
+        "answer": 2,
+        "explanation": "asyncio runs coroutines on an event loop — great for I/O-bound work like many network requests. threading is OS threads; multiprocessing uses separate processes for CPU-bound work."
+      },
+      {
+        "id": "ad-4",
+        "prompt": "What is the difference between threading and multiprocessing?",
+        "options": [
+          "They are identical",
+          "Threading runs tasks in the same process (shared memory); multiprocessing uses separate processes (separate memory)",
+          "Multiprocessing is only for Windows",
+          "Threading is faster for CPU-heavy math"
+        ],
+        "answer": 1,
+        "explanation": "Threads share one process and one GIL — good for I/O-bound tasks. Multiprocessing spawns real processes with separate memory, bypassing the GIL for CPU-bound parallelism."
+      },
+      {
+        "id": "ad-5",
+        "prompt": "What does the regex pattern \\d+ match?",
+        "options": [
+          "A single letter",
+          "One or more consecutive digits",
+          "The literal text \\d",
+          "Any whitespace"
+        ],
+        "answer": 1,
+        "explanation": "\\d means any digit 0-9 and the + quantifier means one or more of them — so \\d+ matches \"42\", \"7\", \"2025\" etc."
+      }
+    ]
+  }
+]

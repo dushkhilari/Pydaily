@@ -1,0 +1,23 @@
+{
+  "day": 56,
+  "slug": "day-56-intro-to-oops",
+  "title": "Introduction to Object-oriented programming",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 10,
+  "words": 370,
+  "videoUrl": "https://www.youtube.com/embed/HQnoYzxOHMw",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Introduction to Object-oriented programming"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 24
+    }
+  ],
+  "sourceFolder": "56-Day56-Intro-to-oops"
+}

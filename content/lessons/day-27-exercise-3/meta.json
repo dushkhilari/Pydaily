@@ -1,0 +1,23 @@
+{
+  "day": 27,
+  "slug": "day-27-exercise-3",
+  "title": "Exercise 3",
+  "type": "exercise",
+  "module": "functions-collections",
+  "minutes": 4,
+  "words": 40,
+  "videoUrl": "https://www.youtube.com/embed/Vs1Z7K70Mvw",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 15
+    }
+  ],
+  "sourceFolder": "27-Day27-Exercise-3"
+}

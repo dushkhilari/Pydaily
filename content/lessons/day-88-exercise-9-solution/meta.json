@@ -1,0 +1,23 @@
+{
+  "day": 88,
+  "slug": "day-88-exercise-9-solution",
+  "title": "Exercise 9 Solution",
+  "type": "solution",
+  "module": "advanced",
+  "minutes": 4,
+  "words": 67,
+  "videoUrl": "https://www.youtube.com/embed/C9VP-56RXNM",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 5
+    }
+  ],
+  "sourceFolder": "88-Day-88-Exercise-9-Solution"
+}

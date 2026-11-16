@@ -1,0 +1,23 @@
+{
+  "day": 42,
+  "slug": "day-42-enumerate",
+  "title": "Enumerate function in python",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 10,
+  "words": 385,
+  "videoUrl": "https://www.youtube.com/embed/kGnYc_h1geM",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Enumerate function in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 13
+    }
+  ],
+  "sourceFolder": "42-Day-42-Enumerate"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 15,
+  "slug": "day-15-exercise-2-good-morning-sir",
+  "title": "Excersice 2: Good Morning Sir",
+  "type": "exercise",
+  "module": "language-basics",
+  "minutes": 4,
+  "words": 68,
+  "videoUrl": "https://www.youtube.com/embed/d7ng_aV4qdI",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Excersice 2: Good Morning Sir"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 24
+    }
+  ],
+  "sourceFolder": "15-Day15-Exercise-2-Good-Morning-Sir"
+}

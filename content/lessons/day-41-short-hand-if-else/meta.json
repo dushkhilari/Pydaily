@@ -1,0 +1,23 @@
+{
+  "day": 41,
+  "slug": "day-41-short-hand-if-else",
+  "title": "Short Hand If Else",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 5,
+  "words": 194,
+  "videoUrl": "https://www.youtube.com/embed/Qqx_zNmQVGI",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "If ... Else in One Line"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 6
+    }
+  ],
+  "sourceFolder": "41-Day41-Short-Hand-if-else"
+}

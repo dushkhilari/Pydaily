@@ -1,0 +1,23 @@
+{
+  "day": 36,
+  "slug": "day-36-exception-handling",
+  "title": "Exception Handling",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 6,
+  "words": 189,
+  "videoUrl": "https://www.youtube.com/embed/4LKo6dlku7M",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Exception Handling"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 25
+    }
+  ],
+  "sourceFolder": "36-Day36-Exception-Handling"
+}

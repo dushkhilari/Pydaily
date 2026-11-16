@@ -1,0 +1,23 @@
+{
+  "day": 53,
+  "slug": "day-53-map-filter-and-reduce",
+  "title": "Map, Filter and Reduce",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 17,
+  "words": 651,
+  "videoUrl": "https://www.youtube.com/embed/OErhjT4f5Cs",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Map, Filter and Reduce"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 35
+    }
+  ],
+  "sourceFolder": "53-Day53-Map-Filter-and-Reduce"
+}

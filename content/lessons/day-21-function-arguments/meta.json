@@ -1,0 +1,23 @@
+{
+  "day": 21,
+  "slug": "day-21-function-arguments",
+  "title": "Function Arguments and return statement",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 13,
+  "words": 461,
+  "videoUrl": "https://www.youtube.com/embed/0d6b6fFuCkE",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Function Arguments and return statement"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 30
+    }
+  ],
+  "sourceFolder": "21-Day-21-Function-Arguments"
+}

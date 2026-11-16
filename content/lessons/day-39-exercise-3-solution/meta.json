@@ -1,0 +1,23 @@
+{
+  "day": 39,
+  "slug": "day-39-exercise-3-solution",
+  "title": "Exercise 3 Solution",
+  "type": "solution",
+  "module": "errors-files-functional",
+  "minutes": 11,
+  "words": 40,
+  "videoUrl": "https://www.youtube.com/embed/nyfeYAxP-EM",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 124
+    }
+  ],
+  "sourceFolder": "39-Day39-Exercise-3-Solution"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 98,
+  "slug": "day-98-multiprocessing-in-python",
+  "title": "Multiprocessing in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 16,
+  "words": 629,
+  "videoUrl": "https://www.youtube.com/embed/zGe-9LfnAaA",
+  "sections": [
+    {
+      "file": "01-MultiProcessing.md",
+      "heading": "Multiprocessing in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 28
+    }
+  ],
+  "sourceFolder": "98-Day-98-MultiProcessing-in-Python"
+}

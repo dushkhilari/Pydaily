@@ -1,0 +1,23 @@
+{
+  "day": 60,
+  "slug": "day-60-getters-and-setters",
+  "title": "Getters",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 8,
+  "words": 267,
+  "videoUrl": "https://www.youtube.com/embed/2gbCT8h9uyk",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Getters"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 19
+    }
+  ],
+  "sourceFolder": "60-Day-60-Getters-and-Setters"
+}

@@ -1,0 +1,27 @@
+{
+  "day": 44,
+  "slug": "day-44-how-import-works",
+  "title": "How Import Works",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 13,
+  "words": 495,
+  "videoUrl": "https://www.youtube.com/embed/Pr7UOr35NcI",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "How importing in python works"
+    }
+  ],
+  "code": [
+    {
+      "file": "harry.py",
+      "lines": 4
+    },
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "44-Day44-How-import-works"
+}

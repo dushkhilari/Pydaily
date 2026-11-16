@@ -1,0 +1,27 @@
+{
+  "day": 24,
+  "slug": "day-24-introduction-to-tuples",
+  "title": "Python Tuples",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 18,
+  "words": 745,
+  "videoUrl": "https://www.youtube.com/embed/PipsOUDKrVk",
+  "sections": [
+    {
+      "file": "01-python_tuples.md",
+      "heading": "Python Tuples"
+    },
+    {
+      "file": "02-tuple_indexes.md",
+      "heading": "Tuple Indexes"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 14
+    }
+  ],
+  "sourceFolder": "24-Day24-Introduction-to-Tuples"
+}

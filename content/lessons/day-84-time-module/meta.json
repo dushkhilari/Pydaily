@@ -1,0 +1,23 @@
+{
+  "day": 84,
+  "slug": "day-84-time-module",
+  "title": "The time Module in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 13,
+  "words": 479,
+  "videoUrl": "https://www.youtube.com/embed/oTtIvV-Q1FY",
+  "sections": [
+    {
+      "file": "Time Tutorial.md",
+      "heading": "The time Module in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 29
+    }
+  ],
+  "sourceFolder": "84-Day-84-Time-Module"
+}

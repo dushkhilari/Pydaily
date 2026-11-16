@@ -1,0 +1,23 @@
+{
+  "day": 100,
+  "slug": "day-100-conclusion-where-to-go-from-here",
+  "title": "Conclusion",
+  "type": "conclusion",
+  "module": "advanced",
+  "minutes": 7,
+  "words": 322,
+  "videoUrl": "https://www.youtube.com/embed/5Pz8WGiMJ_c",
+  "sections": [
+    {
+      "file": "01-conclusion.md",
+      "heading": "Conclusion"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 1
+    }
+  ],
+  "sourceFolder": "100-Day-100-Conclusion-Where-to-go-from-here"
+}

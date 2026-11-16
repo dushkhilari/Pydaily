@@ -1,0 +1,31 @@
+{
+  "day": 46,
+  "slug": "day-46-os-module",
+  "title": "os Module in Python",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 11,
+  "words": 400,
+  "videoUrl": "https://www.youtube.com/embed/dkVYSsL90Oo",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "os Module in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 9
+    },
+    {
+      "file": "oslist.py",
+      "lines": 11
+    },
+    {
+      "file": "rena.py",
+      "lines": 7
+    }
+  ],
+  "sourceFolder": "46-Day-46-os-Module"
+}

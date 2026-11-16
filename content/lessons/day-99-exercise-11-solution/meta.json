@@ -1,0 +1,23 @@
+{
+  "day": 99,
+  "slug": "day-99-exercise-11-solution",
+  "title": "Exercise 11 Solution",
+  "type": "solution",
+  "module": "advanced",
+  "minutes": 4,
+  "words": 39,
+  "videoUrl": "https://www.youtube.com/embed/18vZnLqXMoM",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Exercise 11 - Drink Water Reminder (Solution)"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 9
+    }
+  ],
+  "sourceFolder": "99-Day-99-Exercise-11-Solution"
+}

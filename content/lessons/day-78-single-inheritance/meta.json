@@ -1,0 +1,23 @@
+{
+  "day": 78,
+  "slug": "day-78-single-inheritance",
+  "title": "Single Inheritance in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 10,
+  "words": 293,
+  "videoUrl": "https://www.youtube.com/embed/U53_Gw55NI8",
+  "sections": [
+    {
+      "file": "01-SingleInheritance.md",
+      "heading": "Single Inheritance in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 37
+    }
+  ],
+  "sourceFolder": "78-Day-78-Single-Inheritance"
+}

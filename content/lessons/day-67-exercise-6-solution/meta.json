@@ -1,0 +1,23 @@
+{
+  "day": 67,
+  "slug": "day-67-exercise-6-solution",
+  "title": "Exercise 6 Solution",
+  "type": "solution",
+  "module": "oop",
+  "minutes": 4,
+  "words": 60,
+  "videoUrl": "https://www.youtube.com/embed/uRIEjf2vCIg",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 22
+    }
+  ],
+  "sourceFolder": "67-Day-67-Exercise-6-Solution"
+}

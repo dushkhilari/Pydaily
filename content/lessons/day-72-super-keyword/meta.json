@@ -1,0 +1,23 @@
+{
+  "day": 72,
+  "slug": "day-72-super-keyword",
+  "title": "Super keyword in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 10,
+  "words": 341,
+  "videoUrl": "https://www.youtube.com/embed/P648reefNh0",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Super keyword in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 27
+    }
+  ],
+  "sourceFolder": "72-Day-72-super-Keyword"
+}

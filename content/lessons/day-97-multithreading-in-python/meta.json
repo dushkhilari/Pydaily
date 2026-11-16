@@ -1,0 +1,23 @@
+{
+  "day": 97,
+  "slug": "day-97-multithreading-in-python",
+  "title": "Multithreading in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 15,
+  "words": 503,
+  "videoUrl": "https://www.youtube.com/embed/ICbU6zAKtqQ",
+  "sections": [
+    {
+      "file": "01-multithreading.md",
+      "heading": "Multithreading in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 49
+    }
+  ],
+  "sourceFolder": "97-Day-97-MultiThreading-in-Python"
+}

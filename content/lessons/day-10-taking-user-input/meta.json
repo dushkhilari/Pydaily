@@ -1,0 +1,23 @@
+{
+  "day": 10,
+  "slug": "day-10-taking-user-input",
+  "title": "Taking User Input in python",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 4,
+  "words": 112,
+  "videoUrl": "https://www.youtube.com/embed/WvG-R-xXouA",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 10 - Taking User Input in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 10
+    }
+  ],
+  "sourceFolder": "10-Day10-Taking-User-Input"
+}

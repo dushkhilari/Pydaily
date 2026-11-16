@@ -1,0 +1,23 @@
+{
+  "day": 91,
+  "slug": "day-91-generators-in-python",
+  "title": "Generators in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 13,
+  "words": 518,
+  "videoUrl": "https://www.youtube.com/embed/ixd-u3pmsUc",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Generators in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 12
+    }
+  ],
+  "sourceFolder": "91-Day-91-Generators-in-Python"
+}

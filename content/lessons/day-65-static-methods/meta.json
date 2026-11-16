@@ -1,0 +1,23 @@
+{
+  "day": 65,
+  "slug": "day-65-static-methods",
+  "title": "Static Methods",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 5,
+  "words": 135,
+  "videoUrl": "https://www.youtube.com/embed/GcSVYNSsJxo",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "65-Day-65-Static-Methods"
+}

@@ -1,0 +1,27 @@
+{
+  "day": 19,
+  "slug": "day-19-break-and-continue",
+  "title": "break statement",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 4,
+  "words": 108,
+  "videoUrl": "https://www.youtube.com/embed/RkwJnjdrm70",
+  "sections": [
+    {
+      "file": "01 break.md",
+      "heading": "break statement"
+    },
+    {
+      "file": "02 continue.md",
+      "heading": "Continue Statement"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 13
+    }
+  ],
+  "sourceFolder": "19-Day-19-break-and-continue"
+}

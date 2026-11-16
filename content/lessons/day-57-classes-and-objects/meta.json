@@ -1,0 +1,27 @@
+{
+  "day": 57,
+  "slug": "day-57-classes-and-objects",
+  "title": "Python Class and Objects",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 7,
+  "words": 210,
+  "videoUrl": "https://www.youtube.com/embed/a7baAGCBA9U",
+  "sections": [
+    {
+      "file": "01-Class_objects.md",
+      "heading": "Python Class and Objects"
+    },
+    {
+      "file": "02-self_parameter.md",
+      "heading": "self parameter"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 23
+    }
+  ],
+  "sourceFolder": "57-Day57-Classes-and-Objects"
+}

@@ -1,0 +1,27 @@
+{
+  "day": 45,
+  "slug": "day-45-if-name-main-in-python",
+  "title": "# Code to be run when the script is run directly",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 11,
+  "words": 456,
+  "videoUrl": "https://www.youtube.com/embed/y_CX2Rvitk8",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "`if \"__name__ == \"__main__\"` in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "harry.py",
+      "lines": 8
+    },
+    {
+      "file": "main.py",
+      "lines": 4
+    }
+  ],
+  "sourceFolder": "45-Day45-if-name-main-in-Python"
+}

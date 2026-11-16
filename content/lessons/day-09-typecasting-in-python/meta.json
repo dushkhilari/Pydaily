@@ -1,0 +1,23 @@
+{
+  "day": 9,
+  "slug": "day-09-typecasting-in-python",
+  "title": "Typecasting in python",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 9,
+  "words": 347,
+  "videoUrl": "https://www.youtube.com/embed/Pu5bqySSSS0",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Typecasting in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 11
+    }
+  ],
+  "sourceFolder": "09-Day9-Typecasting-in-Python"
+}

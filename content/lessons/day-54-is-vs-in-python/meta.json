@@ -1,0 +1,23 @@
+{
+  "day": 54,
+  "slug": "day-54-is-vs-in-python",
+  "title": "'is' vs '==' in Python",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 8,
+  "words": 311,
+  "videoUrl": "https://www.youtube.com/embed/TOemdfX_0xc",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "'is' vs '==' in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 11
+    }
+  ],
+  "sourceFolder": "54-Day54-is-vs-in-Python"
+}

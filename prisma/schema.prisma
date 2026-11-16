@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// User data is keyed by an anonymous `userKey` generated in the browser and
+// sent via the `x-user-key` header. Lesson content itself is NOT stored here —
+// it is served from the content/ tree synced from the course repository.
+// ---------------------------------------------------------------------------
+
+model LessonProgress {
+  id            String    @id @default(cuid())
+  userKey       String
+  lessonSlug    String
+  completed     Boolean   @default(false)
+  visits        Int       @default(0)
+  lastVisitedAt DateTime  @default(now())
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([userKey, lessonSlug])
+  @@index([userKey])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userKey   String
+  lessonSlug String
+  createdAt DateTime @default(now())
+
+  @@unique([userKey, lessonSlug])
+  @@index([userKey])
+}
+
+model Note {
+  id         String   @id @default(cuid())
+  userKey    String
+  lessonSlug String
+  content    String   @default("")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userKey, lessonSlug])
+  @@index([userKey])
+}
+
+model QuizResult {
+  id         String   @id @default(cuid())
+  userKey    String
+  quizId     String
+  score      Int
+  total      Int
+  details    String   @default("[]") // JSON array of QuizAnswerRecord
+  completedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  @@index([userKey])
+}

@@ -1,0 +1,35 @@
+{
+  "day": 22,
+  "slug": "day-22-introduction-to-lists",
+  "title": "Python Lists",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 24,
+  "words": 940,
+  "videoUrl": "https://www.youtube.com/embed/eF6nK5bSlmg",
+  "sections": [
+    {
+      "file": "01-lists.md",
+      "heading": "Python Lists"
+    },
+    {
+      "file": "02-lists_indexes.md",
+      "heading": "List Index"
+    },
+    {
+      "file": "03-lists_comprehension.md",
+      "heading": "List Comprehension"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 32
+    },
+    {
+      "file": "tempCodeRunnerFile.py",
+      "lines": 5
+    }
+  ],
+  "sourceFolder": "22-Day-22-Introduction-to-Lists"
+}

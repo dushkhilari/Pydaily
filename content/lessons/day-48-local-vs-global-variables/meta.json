@@ -1,0 +1,23 @@
+{
+  "day": 48,
+  "slug": "day-48-local-vs-global-variables",
+  "title": "local and global variables",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 10,
+  "words": 426,
+  "videoUrl": "https://www.youtube.com/embed/RaG6GgcDt54",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "local and global variables"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 12
+    }
+  ],
+  "sourceFolder": "48-Day48-local-vs-global-variables"
+}

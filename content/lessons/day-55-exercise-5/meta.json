@@ -1,0 +1,23 @@
+{
+  "day": 55,
+  "slug": "day-55-exercise-5",
+  "title": "Snake Water Gun",
+  "type": "exercise",
+  "module": "errors-files-functional",
+  "minutes": 4,
+  "words": 78,
+  "videoUrl": "https://www.youtube.com/embed/dDsh7FT6-0I",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Snake Water Gun"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 22
+    }
+  ],
+  "sourceFolder": "55-Day55-Exercise-5"
+}

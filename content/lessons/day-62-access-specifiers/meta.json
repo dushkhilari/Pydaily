@@ -1,0 +1,35 @@
+{
+  "day": 62,
+  "slug": "day-62-access-specifiers",
+  "title": "Access Specifiers/Modifiers",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 20,
+  "words": 713,
+  "videoUrl": "https://www.youtube.com/embed/43FK20rWvKQ",
+  "sections": [
+    {
+      "file": "01-Access_specifiers.md",
+      "heading": "Access Specifiers/Modifiers"
+    },
+    {
+      "file": "02-public.md",
+      "heading": "Public Access Specifier in Python"
+    },
+    {
+      "file": "03-private.md",
+      "heading": "Private Access Modifier"
+    },
+    {
+      "file": "04-protected.md",
+      "heading": "Protected Access Modifier"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 54
+    }
+  ],
+  "sourceFolder": "62-Day-62-Access-Specifiers"
+}

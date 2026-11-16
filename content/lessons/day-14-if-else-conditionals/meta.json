@@ -1,0 +1,43 @@
+{
+  "day": 14,
+  "slug": "day-14-if-else-conditionals",
+  "title": "if-else Statements",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 14,
+  "words": 443,
+  "videoUrl": "https://www.youtube.com/embed/ceiuLR2ysas",
+  "sections": [
+    {
+      "file": "01-if_else_statements.md",
+      "heading": "if-else Statements"
+    },
+    {
+      "file": "02-elif_statements.md",
+      "heading": "elif Statements"
+    },
+    {
+      "file": "03-nested_if_statements.md",
+      "heading": "Nested if statements"
+    }
+  ],
+  "code": [
+    {
+      "file": "01 myif.py",
+      "lines": 16
+    },
+    {
+      "file": "02 if-else.py",
+      "lines": 6
+    },
+    {
+      "file": "03 elif.py",
+      "lines": 12
+    },
+    {
+      "file": "04 nested.py",
+      "lines": 12
+    }
+  ],
+  "sourceFolder": "14-Day14-If-Else-Conditionals"
+}

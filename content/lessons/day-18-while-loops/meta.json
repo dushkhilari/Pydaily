@@ -1,0 +1,27 @@
+{
+  "day": 18,
+  "slug": "day-18-while-loops",
+  "title": "Python while Loop",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 11,
+  "words": 413,
+  "videoUrl": "https://www.youtube.com/embed/-tCFyIyKVx0",
+  "sections": [
+    {
+      "file": "01 While Loops.md",
+      "heading": "Python while Loop"
+    },
+    {
+      "file": "02 Emulate Do While Loops.md",
+      "heading": "Do-While loop in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "18-Day18-While-Loops"
+}

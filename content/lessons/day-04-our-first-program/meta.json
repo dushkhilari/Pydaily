@@ -1,0 +1,23 @@
+{
+  "day": 4,
+  "slug": "day-04-our-first-program",
+  "title": "Our First Program",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 4,
+  "words": 89,
+  "videoUrl": "https://www.youtube.com/embed/7IWOYhfAcVg",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 4 - Our First Program"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 4
+    }
+  ],
+  "sourceFolder": "04-Day4-Our-First-Program"
+}

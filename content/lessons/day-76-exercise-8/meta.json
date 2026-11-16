@@ -1,0 +1,23 @@
+{
+  "day": 76,
+  "slug": "day-76-exercise-8",
+  "title": "Exercise 8",
+  "type": "exercise",
+  "module": "oop",
+  "minutes": 4,
+  "words": 77,
+  "videoUrl": "https://www.youtube.com/embed/uUbvJ7ZEhPE",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 2
+    }
+  ],
+  "sourceFolder": "76-Day-76-Exercise-8"
+}

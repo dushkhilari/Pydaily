@@ -1,0 +1,23 @@
+{
+  "day": 23,
+  "slug": "day-23-list-methods",
+  "title": "List Methods",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 13,
+  "words": 505,
+  "videoUrl": "https://www.youtube.com/embed/scWc3F8LbOo",
+  "sections": [
+    {
+      "file": "01-lists_methods.md",
+      "heading": "List Methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "23-Day-23-List-Methods"
+}

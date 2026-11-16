@@ -1,0 +1,23 @@
+{
+  "day": 11,
+  "slug": "day-11-strings",
+  "title": "What are strings?",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 7,
+  "words": 256,
+  "videoUrl": "https://www.youtube.com/embed/kMNFQYArrLg",
+  "sections": [
+    {
+      "file": "01-string_methods.md",
+      "heading": "What are strings?"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "11-Day11-Strings"
+}

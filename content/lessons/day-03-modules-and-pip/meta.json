@@ -1,0 +1,23 @@
+{
+  "day": 3,
+  "slug": "day-03-modules-and-pip",
+  "title": "Modules and pip in Python!",
+  "type": "lesson",
+  "module": "getting-started",
+  "minutes": 6,
+  "words": 226,
+  "videoUrl": "https://www.youtube.com/embed/xwKO_y2gHxQ",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Day 3 - Modules and pip in Python!"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 9
+    }
+  ],
+  "sourceFolder": "03-Day3-Modules-and-Pip"
+}

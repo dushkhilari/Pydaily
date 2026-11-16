@@ -1,0 +1,23 @@
+{
+  "day": 77,
+  "slug": "day-77-operator-overloading",
+  "title": "Operator Overloading in Python: An Introduction",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 10,
+  "words": 359,
+  "videoUrl": "https://www.youtube.com/embed/D67-b2t-y4k",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Operator Overloading in Python: An Introduction"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 19
+    }
+  ],
+  "sourceFolder": "77-Day-77-Operator-Overloading"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 47,
+  "slug": "day-47-exercise-4-solution",
+  "title": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language",
+  "type": "solution",
+  "module": "errors-files-functional",
+  "minutes": 8,
+  "words": 184,
+  "videoUrl": "https://www.youtube.com/embed/4lSQfOJKn7U",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 43
+    }
+  ],
+  "sourceFolder": "47-Day47-Exercise-4-Solution"
+}

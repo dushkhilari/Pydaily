@@ -1,0 +1,23 @@
+{
+  "day": 66,
+  "slug": "day-66-instance-vs-class-variables",
+  "title": "Instance vs class variables",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 11,
+  "words": 430,
+  "videoUrl": "https://www.youtube.com/embed/tQdaeiF4j38",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Instance vs class variables"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 22
+    }
+  ],
+  "sourceFolder": "66-Day-66-Instance-vs-Class-variables"
+}

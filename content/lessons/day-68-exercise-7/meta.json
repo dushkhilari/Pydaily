@@ -1,0 +1,23 @@
+{
+  "day": 68,
+  "slug": "day-68-exercise-7",
+  "title": "Exercise 7",
+  "type": "exercise",
+  "module": "oop",
+  "minutes": 4,
+  "words": 74,
+  "videoUrl": "https://www.youtube.com/embed/6KvnP13TnhY",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 1
+    }
+  ],
+  "sourceFolder": "68-Day-68-Exercise-7"
+}

@@ -1,0 +1,23 @@
+{
+  "day": 69,
+  "slug": "day-69-class-methods",
+  "title": "Python Class Methods",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 11,
+  "words": 429,
+  "videoUrl": "https://www.youtube.com/embed/9ynmDLc5FYo",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Python Class Methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 16
+    }
+  ],
+  "sourceFolder": "69-Day-69-Class-Methods"
+}

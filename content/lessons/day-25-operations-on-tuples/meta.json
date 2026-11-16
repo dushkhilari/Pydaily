@@ -1,0 +1,27 @@
+{
+  "day": 25,
+  "slug": "day-25-operations-on-tuples",
+  "title": "Manipulating Tuples",
+  "type": "lesson",
+  "module": "functions-collections",
+  "minutes": 8,
+  "words": 287,
+  "videoUrl": "https://www.youtube.com/embed/XblLSduioJI",
+  "sections": [
+    {
+      "file": "01-manipulating_tuples.md",
+      "heading": "Manipulating Tuples"
+    },
+    {
+      "file": "02-tuple_methods.md",
+      "heading": "Tuple methods"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 16
+    }
+  ],
+  "sourceFolder": "25-Day25-Operations-on-Tuples"
+}

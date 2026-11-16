@@ -1,0 +1,2481 @@
+{
+  "course": {
+    "title": "100 Days of Python",
+    "description": "A 100-day journey from zero to job-ready Python developer — synced from the Learn_Python course repository.",
+    "source": "https://github.com/dush404/Learn_Python",
+    "totalDays": 99
+  },
+  "modules": [
+    {
+      "id": "getting-started",
+      "title": "Getting Started",
+      "subtitle": "Setup, first programs & the Python mindset",
+      "from": 1,
+      "to": 8,
+      "icon": "rocket",
+      "accent": "amber",
+      "lessonCount": 8,
+      "days": [
+        1,
+        8
+      ]
+    },
+    {
+      "id": "language-basics",
+      "title": "Language Basics",
+      "subtitle": "Types, strings, input & control flow",
+      "from": 9,
+      "to": 19,
+      "icon": "code",
+      "accent": "orange",
+      "lessonCount": 11,
+      "days": [
+        9,
+        19
+      ]
+    },
+    {
+      "id": "functions-collections",
+      "title": "Functions & Collections",
+      "subtitle": "Functions, lists, tuples, sets & dictionaries",
+      "from": 20,
+      "to": 35,
+      "icon": "layers",
+      "accent": "amber",
+      "lessonCount": 16,
+      "days": [
+        20,
+        35
+      ]
+    },
+    {
+      "id": "errors-files-functional",
+      "title": "Errors, Files & Functional Tools",
+      "subtitle": "Exception handling, file I/O, lambda, map/filter",
+      "from": 36,
+      "to": 55,
+      "icon": "shield",
+      "accent": "orange",
+      "lessonCount": 19,
+      "days": [
+        36,
+        55
+      ]
+    },
+    {
+      "id": "oop",
+      "title": "Object-Oriented Python",
+      "subtitle": "Classes, inheritance, dunder methods & more",
+      "from": 56,
+      "to": 83,
+      "icon": "boxes",
+      "accent": "amber",
+      "lessonCount": 28,
+      "days": [
+        56,
+        83
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced Python",
+      "subtitle": "Time, regex, asyncio, threading & multiprocessing",
+      "from": 84,
+      "to": 100,
+      "icon": "zap",
+      "accent": "orange",
+      "lessonCount": 17,
+      "days": [
+        84,
+        100
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "slug": "day-01-intro-to-python",
+      "title": "What is Programming and Python?",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 9,
+      "words": 390,
+      "videoUrl": "https://www.youtube.com/embed/7wnove7K-ZQ",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 1 - What is Programming and Python?"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 2
+        }
+      ],
+      "sourceFolder": "01-Day1-Intro-to-Python"
+    },
+    {
+      "day": 2,
+      "slug": "day-02-application-of-python",
+      "title": "My Python Success Story",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 8,
+      "words": 261,
+      "videoUrl": "https://www.youtube.com/embed/Tto8TS-fJQU",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 2 - My Python Success Story"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 25
+        }
+      ],
+      "sourceFolder": "02-Day2-Application-of-Python"
+    },
+    {
+      "day": 3,
+      "slug": "day-03-modules-and-pip",
+      "title": "Modules and pip in Python!",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 6,
+      "words": 226,
+      "videoUrl": "https://www.youtube.com/embed/xwKO_y2gHxQ",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 3 - Modules and pip in Python!"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 9
+        }
+      ],
+      "sourceFolder": "03-Day3-Modules-and-Pip"
+    },
+    {
+      "day": 4,
+      "slug": "day-04-our-first-program",
+      "title": "Our First Program",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 4,
+      "words": 89,
+      "videoUrl": "https://www.youtube.com/embed/7IWOYhfAcVg",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 4 - Our First Program"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 4
+        }
+      ],
+      "sourceFolder": "04-Day4-Our-First-Program"
+    },
+    {
+      "day": 5,
+      "slug": "day-05-comments-and-print",
+      "title": "Comments, Escape sequence & Print in Python",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 11,
+      "words": 479,
+      "videoUrl": "https://www.youtube.com/embed/qxPMmW93eDs",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 5 - Comments, Escape sequence & Print in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 2
+        }
+      ],
+      "sourceFolder": "05-Day5-Comments-and-Print"
+    },
+    {
+      "day": 6,
+      "slug": "day-06-variables-and-data-types",
+      "title": "Variables and Data Types",
+      "type": "lesson",
+      "module": "getting-started",
+      "minutes": 9,
+      "words": 333,
+      "videoUrl": "https://www.youtube.com/embed/ORCuz7s5cCY",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 6 - Variables and Data Types"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 21
+        }
+      ],
+      "sourceFolder": "06-Day6-Variables-and-Data-Types"
+    },
+    {
+      "day": 7,
+      "slug": "day-07-exercise-1-create-a-calculator",
+      "title": "Operators",
+      "type": "exercise",
+      "module": "getting-started",
+      "minutes": 6,
+      "words": 208,
+      "videoUrl": "https://www.youtube.com/embed/FLVqcxnJP_E",
+      "sections": [
+        {
+          "file": "01_Operators.md",
+          "heading": "Operators"
+        },
+        {
+          "file": "02_Exercise.md",
+          "heading": "Exercise 1 - Create a Calculator"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 12
+        }
+      ],
+      "sourceFolder": "07-Day7-Exercise-1-Create-a-Calculator"
+    },
+    {
+      "day": 8,
+      "slug": "day-08-exercise-1-create-a-calculator-solution",
+      "title": "Exercise 1 Create A Calculator Solution",
+      "type": "solution",
+      "module": "getting-started",
+      "minutes": 4,
+      "words": 36,
+      "videoUrl": "https://www.youtube.com/embed/dohaSBCKCr0",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exercise 1 - Create a Calculator Solution"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 9
+        }
+      ],
+      "sourceFolder": "08-Day8-Exercise-1-Create-a-Calculator-Solution"
+    },
+    {
+      "day": 9,
+      "slug": "day-09-typecasting-in-python",
+      "title": "Typecasting in python",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 9,
+      "words": 347,
+      "videoUrl": "https://www.youtube.com/embed/Pu5bqySSSS0",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Typecasting in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 11
+        }
+      ],
+      "sourceFolder": "09-Day9-Typecasting-in-Python"
+    },
+    {
+      "day": 10,
+      "slug": "day-10-taking-user-input",
+      "title": "Taking User Input in python",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 4,
+      "words": 112,
+      "videoUrl": "https://www.youtube.com/embed/WvG-R-xXouA",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Day 10 - Taking User Input in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 10
+        }
+      ],
+      "sourceFolder": "10-Day10-Taking-User-Input"
+    },
+    {
+      "day": 11,
+      "slug": "day-11-strings",
+      "title": "What are strings?",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 7,
+      "words": 256,
+      "videoUrl": "https://www.youtube.com/embed/kMNFQYArrLg",
+      "sections": [
+        {
+          "file": "01-string_methods.md",
+          "heading": "What are strings?"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "11-Day11-Strings"
+    },
+    {
+      "day": 12,
+      "slug": "day-12-strings-slicing",
+      "title": "String Slicing & Operations on String",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 6,
+      "words": 188,
+      "videoUrl": "https://www.youtube.com/embed/8jW7lpT8HW8",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "String Slicing & Operations on String"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 18
+        }
+      ],
+      "sourceFolder": "12-Day12-Strings-Slicing"
+    },
+    {
+      "day": 13,
+      "slug": "day-13-string-methods",
+      "title": "String methods",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 31,
+      "words": 1129,
+      "videoUrl": "https://www.youtube.com/embed/0INvoK_T0cE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "String methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 74
+        }
+      ],
+      "sourceFolder": "13-Day13-String-Methods"
+    },
+    {
+      "day": 14,
+      "slug": "day-14-if-else-conditionals",
+      "title": "if-else Statements",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 14,
+      "words": 443,
+      "videoUrl": "https://www.youtube.com/embed/ceiuLR2ysas",
+      "sections": [
+        {
+          "file": "01-if_else_statements.md",
+          "heading": "if-else Statements"
+        },
+        {
+          "file": "02-elif_statements.md",
+          "heading": "elif Statements"
+        },
+        {
+          "file": "03-nested_if_statements.md",
+          "heading": "Nested if statements"
+        }
+      ],
+      "code": [
+        {
+          "file": "01 myif.py",
+          "lines": 16
+        },
+        {
+          "file": "02 if-else.py",
+          "lines": 6
+        },
+        {
+          "file": "03 elif.py",
+          "lines": 12
+        },
+        {
+          "file": "04 nested.py",
+          "lines": 12
+        }
+      ],
+      "sourceFolder": "14-Day14-If-Else-Conditionals"
+    },
+    {
+      "day": 15,
+      "slug": "day-15-exercise-2-good-morning-sir",
+      "title": "Excersice 2: Good Morning Sir",
+      "type": "exercise",
+      "module": "language-basics",
+      "minutes": 4,
+      "words": 68,
+      "videoUrl": "https://www.youtube.com/embed/d7ng_aV4qdI",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Excersice 2: Good Morning Sir"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 24
+        }
+      ],
+      "sourceFolder": "15-Day15-Exercise-2-Good-Morning-Sir"
+    },
+    {
+      "day": 16,
+      "slug": "day-16-match-case",
+      "title": "Match Case Statements",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 8,
+      "words": 284,
+      "videoUrl": "https://www.youtube.com/embed/bthQCK1QAmQ",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Match Case Statements"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 18
+        }
+      ],
+      "sourceFolder": "16-Day-16-Match-Case"
+    },
+    {
+      "day": 17,
+      "slug": "day-17-for-loops",
+      "title": "Introduction to Loops",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 7,
+      "words": 245,
+      "videoUrl": "https://www.youtube.com/embed/fIYVzKp0q5w",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Introduction to Loops"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 21
+        }
+      ],
+      "sourceFolder": "17-Day17-For-Loops"
+    },
+    {
+      "day": 18,
+      "slug": "day-18-while-loops",
+      "title": "Python while Loop",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 11,
+      "words": 413,
+      "videoUrl": "https://www.youtube.com/embed/-tCFyIyKVx0",
+      "sections": [
+        {
+          "file": "01 While Loops.md",
+          "heading": "Python while Loop"
+        },
+        {
+          "file": "02 Emulate Do While Loops.md",
+          "heading": "Do-While loop in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "18-Day18-While-Loops"
+    },
+    {
+      "day": 19,
+      "slug": "day-19-break-and-continue",
+      "title": "break statement",
+      "type": "lesson",
+      "module": "language-basics",
+      "minutes": 4,
+      "words": 108,
+      "videoUrl": "https://www.youtube.com/embed/RkwJnjdrm70",
+      "sections": [
+        {
+          "file": "01 break.md",
+          "heading": "break statement"
+        },
+        {
+          "file": "02 continue.md",
+          "heading": "Continue Statement"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 13
+        }
+      ],
+      "sourceFolder": "19-Day-19-break-and-continue"
+    },
+    {
+      "day": 20,
+      "slug": "day-20-functions",
+      "title": "Python Functions",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 8,
+      "words": 218,
+      "videoUrl": "https://www.youtube.com/embed/dyvxxJSGUsE",
+      "sections": [
+        {
+          "file": "01 Functions.md",
+          "heading": "Python Functions"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 40
+        }
+      ],
+      "sourceFolder": "20-Day20-Functions"
+    },
+    {
+      "day": 21,
+      "slug": "day-21-function-arguments",
+      "title": "Function Arguments and return statement",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 13,
+      "words": 461,
+      "videoUrl": "https://www.youtube.com/embed/0d6b6fFuCkE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Function Arguments and return statement"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 30
+        }
+      ],
+      "sourceFolder": "21-Day-21-Function-Arguments"
+    },
+    {
+      "day": 22,
+      "slug": "day-22-introduction-to-lists",
+      "title": "Python Lists",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 24,
+      "words": 940,
+      "videoUrl": "https://www.youtube.com/embed/eF6nK5bSlmg",
+      "sections": [
+        {
+          "file": "01-lists.md",
+          "heading": "Python Lists"
+        },
+        {
+          "file": "02-lists_indexes.md",
+          "heading": "List Index"
+        },
+        {
+          "file": "03-lists_comprehension.md",
+          "heading": "List Comprehension"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 32
+        },
+        {
+          "file": "tempCodeRunnerFile.py",
+          "lines": 5
+        }
+      ],
+      "sourceFolder": "22-Day-22-Introduction-to-Lists"
+    },
+    {
+      "day": 23,
+      "slug": "day-23-list-methods",
+      "title": "List Methods",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 13,
+      "words": 505,
+      "videoUrl": "https://www.youtube.com/embed/scWc3F8LbOo",
+      "sections": [
+        {
+          "file": "01-lists_methods.md",
+          "heading": "List Methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "23-Day-23-List-Methods"
+    },
+    {
+      "day": 24,
+      "slug": "day-24-introduction-to-tuples",
+      "title": "Python Tuples",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 18,
+      "words": 745,
+      "videoUrl": "https://www.youtube.com/embed/PipsOUDKrVk",
+      "sections": [
+        {
+          "file": "01-python_tuples.md",
+          "heading": "Python Tuples"
+        },
+        {
+          "file": "02-tuple_indexes.md",
+          "heading": "Tuple Indexes"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 14
+        }
+      ],
+      "sourceFolder": "24-Day24-Introduction-to-Tuples"
+    },
+    {
+      "day": 25,
+      "slug": "day-25-operations-on-tuples",
+      "title": "Manipulating Tuples",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 8,
+      "words": 287,
+      "videoUrl": "https://www.youtube.com/embed/XblLSduioJI",
+      "sections": [
+        {
+          "file": "01-manipulating_tuples.md",
+          "heading": "Manipulating Tuples"
+        },
+        {
+          "file": "02-tuple_methods.md",
+          "heading": "Tuple methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 16
+        }
+      ],
+      "sourceFolder": "25-Day25-Operations-on-Tuples"
+    },
+    {
+      "day": 26,
+      "slug": "day-26-exercise-2-solution",
+      "title": "Excersice 2: Good Morning Sir",
+      "type": "solution",
+      "module": "functions-collections",
+      "minutes": 4,
+      "words": 68,
+      "videoUrl": "https://www.youtube.com/embed/IZBKXWrbqBM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Excersice 2: Good Morning Sir"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 11
+        }
+      ],
+      "sourceFolder": "26-Day-26-Exercise-2-Solution"
+    },
+    {
+      "day": 27,
+      "slug": "day-27-exercise-3",
+      "title": "Exercise 3",
+      "type": "exercise",
+      "module": "functions-collections",
+      "minutes": 4,
+      "words": 40,
+      "videoUrl": "https://www.youtube.com/embed/Vs1Z7K70Mvw",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 15
+        }
+      ],
+      "sourceFolder": "27-Day27-Exercise-3"
+    },
+    {
+      "day": 28,
+      "slug": "day-28-f-strings",
+      "title": "String formatting in python",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 6,
+      "words": 210,
+      "videoUrl": "https://www.youtube.com/embed/ixmxgUf8yIg",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "String formatting in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 13
+        }
+      ],
+      "sourceFolder": "28-Day28-f-strings"
+    },
+    {
+      "day": 29,
+      "slug": "day-29-docstrings",
+      "title": "Docstrings in python",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 13,
+      "words": 569,
+      "videoUrl": "https://www.youtube.com/embed/SJzsNd7SM0g",
+      "sections": [
+        {
+          "file": "01 docstring.md",
+          "heading": "Docstrings in python"
+        },
+        {
+          "file": "02 pep8.md",
+          "heading": "PEP 8"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 6
+        }
+      ],
+      "sourceFolder": "29-Day29-Docstrings"
+    },
+    {
+      "day": 30,
+      "slug": "day-30-recursion",
+      "title": "Recursion in python",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 5,
+      "words": 93,
+      "videoUrl": "https://www.youtube.com/embed/XYwJKFB8DUk",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Recursion in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 34
+        }
+      ],
+      "sourceFolder": "30-Day30-Recursion"
+    },
+    {
+      "day": 31,
+      "slug": "day-31-sets",
+      "title": "Python Sets",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 5,
+      "words": 164,
+      "videoUrl": "https://www.youtube.com/embed/l3kCO8cVA6o",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Python Sets"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 13
+        }
+      ],
+      "sourceFolder": "31-Day31-Sets"
+    },
+    {
+      "day": 32,
+      "slug": "day-32-set-methods",
+      "title": "Joining Sets",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 22,
+      "words": 977,
+      "videoUrl": "https://www.youtube.com/embed/HOrutCnp2zo",
+      "sections": [
+        {
+          "file": "01 joining sets.md",
+          "heading": "Joining Sets"
+        },
+        {
+          "file": "02 set methods.md",
+          "heading": "Set Methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 5
+        }
+      ],
+      "sourceFolder": "32-Day32-Set-Methods"
+    },
+    {
+      "day": 33,
+      "slug": "day-33-dictionary",
+      "title": "Python Dictionaries",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 6,
+      "words": 215,
+      "videoUrl": "https://www.youtube.com/embed/j2G68uQtOwM",
+      "sections": [
+        {
+          "file": "01-Dictionaries.md",
+          "heading": "Python Dictionaries"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "33-Day-33-Dictionary"
+    },
+    {
+      "day": 34,
+      "slug": "day-34-dictionary-methods",
+      "title": "Dictionary Methods",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 6,
+      "words": 267,
+      "videoUrl": "https://www.youtube.com/embed/LmbFwaLjT9k",
+      "sections": [
+        {
+          "file": "01-Dictionary_methods.md",
+          "heading": "Dictionary Methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 5
+        },
+        {
+          "file": "tempCodeRunnerFile.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "34-Day34-Dictionary-Methods"
+    },
+    {
+      "day": 35,
+      "slug": "day-35-for-loop-with-else",
+      "title": "Python - else in Loop",
+      "type": "lesson",
+      "module": "functions-collections",
+      "minutes": 5,
+      "words": 160,
+      "videoUrl": "https://www.youtube.com/embed/qUkcIgErZzc",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Python - else in Loop"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 15
+        }
+      ],
+      "sourceFolder": "35-Day-35-For-loop-with-else"
+    },
+    {
+      "day": 36,
+      "slug": "day-36-exception-handling",
+      "title": "Exception Handling",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 6,
+      "words": 189,
+      "videoUrl": "https://www.youtube.com/embed/4LKo6dlku7M",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exception Handling"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 25
+        }
+      ],
+      "sourceFolder": "36-Day36-Exception-Handling"
+    },
+    {
+      "day": 37,
+      "slug": "day-37-finally-keyword",
+      "title": "Finally Clause",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 6,
+      "words": 191,
+      "videoUrl": "https://www.youtube.com/embed/r_iuC-IDpPM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Finally Clause"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 18
+        }
+      ],
+      "sourceFolder": "37-Day37-Finally-keyword"
+    },
+    {
+      "day": 38,
+      "slug": "day-38-custom-errors",
+      "title": "# code ...",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 4,
+      "words": 151,
+      "videoUrl": "https://www.youtube.com/embed/Phr4CNppYoM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Raising Custom errors"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 6
+        }
+      ],
+      "sourceFolder": "38-Day38-Custom-Errors"
+    },
+    {
+      "day": 39,
+      "slug": "day-39-exercise-3-solution",
+      "title": "Exercise 3 Solution",
+      "type": "solution",
+      "module": "errors-files-functional",
+      "minutes": 11,
+      "words": 40,
+      "videoUrl": "https://www.youtube.com/embed/nyfeYAxP-EM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 124
+        }
+      ],
+      "sourceFolder": "39-Day39-Exercise-3-Solution"
+    },
+    {
+      "day": 40,
+      "slug": "day-40-exercise-4",
+      "title": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language",
+      "type": "exercise",
+      "module": "errors-files-functional",
+      "minutes": 8,
+      "words": 107,
+      "videoUrl": "https://www.youtube.com/embed/pOWJ6WgVRIU",
+      "sections": [
+        {
+          "file": "tutorial.md",
+          "heading": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 62
+        }
+      ],
+      "sourceFolder": "40-Day40-Exercise-4"
+    },
+    {
+      "day": 41,
+      "slug": "day-41-short-hand-if-else",
+      "title": "Short Hand If Else",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 5,
+      "words": 194,
+      "videoUrl": "https://www.youtube.com/embed/Qqx_zNmQVGI",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "If ... Else in One Line"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 6
+        }
+      ],
+      "sourceFolder": "41-Day41-Short-Hand-if-else"
+    },
+    {
+      "day": 42,
+      "slug": "day-42-enumerate",
+      "title": "Enumerate function in python",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 10,
+      "words": 385,
+      "videoUrl": "https://www.youtube.com/embed/kGnYc_h1geM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Enumerate function in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 13
+        }
+      ],
+      "sourceFolder": "42-Day-42-Enumerate"
+    },
+    {
+      "day": 44,
+      "slug": "day-44-how-import-works",
+      "title": "How Import Works",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 13,
+      "words": 495,
+      "videoUrl": "https://www.youtube.com/embed/Pr7UOr35NcI",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "How importing in python works"
+        }
+      ],
+      "code": [
+        {
+          "file": "harry.py",
+          "lines": 4
+        },
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "44-Day44-How-import-works"
+    },
+    {
+      "day": 45,
+      "slug": "day-45-if-name-main-in-python",
+      "title": "# Code to be run when the script is run directly",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 11,
+      "words": 456,
+      "videoUrl": "https://www.youtube.com/embed/y_CX2Rvitk8",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "`if \"__name__ == \"__main__\"` in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "harry.py",
+          "lines": 8
+        },
+        {
+          "file": "main.py",
+          "lines": 4
+        }
+      ],
+      "sourceFolder": "45-Day45-if-name-main-in-Python"
+    },
+    {
+      "day": 46,
+      "slug": "day-46-os-module",
+      "title": "os Module in Python",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 11,
+      "words": 400,
+      "videoUrl": "https://www.youtube.com/embed/dkVYSsL90Oo",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "os Module in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 9
+        },
+        {
+          "file": "oslist.py",
+          "lines": 11
+        },
+        {
+          "file": "rena.py",
+          "lines": 7
+        }
+      ],
+      "sourceFolder": "46-Day-46-os-Module"
+    },
+    {
+      "day": 47,
+      "slug": "day-47-exercise-4-solution",
+      "title": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language",
+      "type": "solution",
+      "module": "errors-files-functional",
+      "minutes": 8,
+      "words": 184,
+      "videoUrl": "https://www.youtube.com/embed/4lSQfOJKn7U",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Write a python program to translate a message into secret code language. Use the rules below to translate normal English into secret code language"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 43
+        }
+      ],
+      "sourceFolder": "47-Day47-Exercise-4-Solution"
+    },
+    {
+      "day": 48,
+      "slug": "day-48-local-vs-global-variables",
+      "title": "local and global variables",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 10,
+      "words": 426,
+      "videoUrl": "https://www.youtube.com/embed/RaG6GgcDt54",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "local and global variables"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 12
+        }
+      ],
+      "sourceFolder": "48-Day48-local-vs-global-variables"
+    },
+    {
+      "day": 49,
+      "slug": "day-49-file-io",
+      "title": "... do something with the file",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 13,
+      "words": 528,
+      "videoUrl": "https://www.youtube.com/embed/eDBPlcWYses",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Opening a File"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 16
+        }
+      ],
+      "sourceFolder": "49-Day49-File-IO"
+    },
+    {
+      "day": 50,
+      "slug": "day-50-read-readlines-and-other-methods",
+      "title": "readlines() method",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 7,
+      "words": 221,
+      "videoUrl": "https://www.youtube.com/embed/l1FsnQxET9U",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "readlines() method"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "50-Day50-read-readlines-and-other-methods"
+    },
+    {
+      "day": 51,
+      "slug": "day-51-seek-and-tell-functions",
+      "title": "seek() and tell() functions",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 7,
+      "words": 292,
+      "videoUrl": "https://www.youtube.com/embed/PByYX-2l5Us",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "seek() and tell() functions"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 6
+        }
+      ],
+      "sourceFolder": "51-Day51-seek-and-tell-functions"
+    },
+    {
+      "day": 52,
+      "slug": "day-52-lambda-functions",
+      "title": "Lambda Functions in Python",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 8,
+      "words": 277,
+      "videoUrl": "https://www.youtube.com/embed/UfFWf-PXUqE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Lambda Functions in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 19
+        }
+      ],
+      "sourceFolder": "52-Day52-Lambda-Functions"
+    },
+    {
+      "day": 53,
+      "slug": "day-53-map-filter-and-reduce",
+      "title": "Map, Filter and Reduce",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 17,
+      "words": 651,
+      "videoUrl": "https://www.youtube.com/embed/OErhjT4f5Cs",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Map, Filter and Reduce"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 35
+        }
+      ],
+      "sourceFolder": "53-Day53-Map-Filter-and-Reduce"
+    },
+    {
+      "day": 54,
+      "slug": "day-54-is-vs-in-python",
+      "title": "'is' vs '==' in Python",
+      "type": "lesson",
+      "module": "errors-files-functional",
+      "minutes": 8,
+      "words": 311,
+      "videoUrl": "https://www.youtube.com/embed/TOemdfX_0xc",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "'is' vs '==' in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 11
+        }
+      ],
+      "sourceFolder": "54-Day54-is-vs-in-Python"
+    },
+    {
+      "day": 55,
+      "slug": "day-55-exercise-5",
+      "title": "Snake Water Gun",
+      "type": "exercise",
+      "module": "errors-files-functional",
+      "minutes": 4,
+      "words": 78,
+      "videoUrl": "https://www.youtube.com/embed/dDsh7FT6-0I",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Snake Water Gun"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 22
+        }
+      ],
+      "sourceFolder": "55-Day55-Exercise-5"
+    },
+    {
+      "day": 56,
+      "slug": "day-56-intro-to-oops",
+      "title": "Introduction to Object-oriented programming",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 10,
+      "words": 370,
+      "videoUrl": "https://www.youtube.com/embed/HQnoYzxOHMw",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Introduction to Object-oriented programming"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 24
+        }
+      ],
+      "sourceFolder": "56-Day56-Intro-to-oops"
+    },
+    {
+      "day": 57,
+      "slug": "day-57-classes-and-objects",
+      "title": "Python Class and Objects",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 7,
+      "words": 210,
+      "videoUrl": "https://www.youtube.com/embed/a7baAGCBA9U",
+      "sections": [
+        {
+          "file": "01-Class_objects.md",
+          "heading": "Python Class and Objects"
+        },
+        {
+          "file": "02-self_parameter.md",
+          "heading": "self parameter"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 23
+        }
+      ],
+      "sourceFolder": "57-Day57-Classes-and-Objects"
+    },
+    {
+      "day": 58,
+      "slug": "day-58-constructors",
+      "title": "Constructors",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 7,
+      "words": 257,
+      "videoUrl": "https://www.youtube.com/embed/12HRkYld22c",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Constructors"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "58-Day58-Constructors"
+    },
+    {
+      "day": 59,
+      "slug": "day-59-decorators-in-python",
+      "title": "Python Decorators",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 9,
+      "words": 338,
+      "videoUrl": "https://www.youtube.com/embed/PTBZ674EsvI",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Python Decorators"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 21
+        }
+      ],
+      "sourceFolder": "59-Day-59-Decorators-in-Python"
+    },
+    {
+      "day": 60,
+      "slug": "day-60-getters-and-setters",
+      "title": "Getters",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 8,
+      "words": 267,
+      "videoUrl": "https://www.youtube.com/embed/2gbCT8h9uyk",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Getters"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 19
+        }
+      ],
+      "sourceFolder": "60-Day-60-Getters-and-Setters"
+    },
+    {
+      "day": 61,
+      "slug": "day-61-inheritance-in-python",
+      "title": "Inheritance in python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 15,
+      "words": 591,
+      "videoUrl": "https://www.youtube.com/embed/-KsfUaQEY9Y",
+      "sections": [
+        {
+          "file": "01-Inheritance.md",
+          "heading": "Inheritance in python"
+        },
+        {
+          "file": "02-examples.md",
+          "heading": "Single Inheritance:"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 23
+        }
+      ],
+      "sourceFolder": "61-Day-61-Inheritance-in-Python"
+    },
+    {
+      "day": 62,
+      "slug": "day-62-access-specifiers",
+      "title": "Access Specifiers/Modifiers",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 20,
+      "words": 713,
+      "videoUrl": "https://www.youtube.com/embed/43FK20rWvKQ",
+      "sections": [
+        {
+          "file": "01-Access_specifiers.md",
+          "heading": "Access Specifiers/Modifiers"
+        },
+        {
+          "file": "02-public.md",
+          "heading": "Public Access Specifier in Python"
+        },
+        {
+          "file": "03-private.md",
+          "heading": "Private Access Modifier"
+        },
+        {
+          "file": "04-protected.md",
+          "heading": "Protected Access Modifier"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 54
+        }
+      ],
+      "sourceFolder": "62-Day-62-Access-Specifiers"
+    },
+    {
+      "day": 63,
+      "slug": "day-63-exercise-5-solution",
+      "title": "Exercise 5 Solution",
+      "type": "solution",
+      "module": "oop",
+      "minutes": 5,
+      "words": 77,
+      "videoUrl": "https://www.youtube.com/embed/GkfBpm6MN9A",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Snake Water Gun"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 37
+        }
+      ],
+      "sourceFolder": "63-Day-63-Exercise-5-Solution"
+    },
+    {
+      "day": 64,
+      "slug": "day-64-exercise-6",
+      "title": "Exercise 6",
+      "type": "exercise",
+      "module": "oop",
+      "minutes": 4,
+      "words": 59,
+      "videoUrl": "https://www.youtube.com/embed/mlDZTSH2FFc",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 29
+        }
+      ],
+      "sourceFolder": "64-Day-64-Exercise-6"
+    },
+    {
+      "day": 65,
+      "slug": "day-65-static-methods",
+      "title": "Static Methods",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 5,
+      "words": 135,
+      "videoUrl": "https://www.youtube.com/embed/GcSVYNSsJxo",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "65-Day-65-Static-Methods"
+    },
+    {
+      "day": 66,
+      "slug": "day-66-instance-vs-class-variables",
+      "title": "Instance vs class variables",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 11,
+      "words": 430,
+      "videoUrl": "https://www.youtube.com/embed/tQdaeiF4j38",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Instance vs class variables"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 22
+        }
+      ],
+      "sourceFolder": "66-Day-66-Instance-vs-Class-variables"
+    },
+    {
+      "day": 67,
+      "slug": "day-67-exercise-6-solution",
+      "title": "Exercise 6 Solution",
+      "type": "solution",
+      "module": "oop",
+      "minutes": 4,
+      "words": 60,
+      "videoUrl": "https://www.youtube.com/embed/uRIEjf2vCIg",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 22
+        }
+      ],
+      "sourceFolder": "67-Day-67-Exercise-6-Solution"
+    },
+    {
+      "day": 68,
+      "slug": "day-68-exercise-7",
+      "title": "Exercise 7",
+      "type": "exercise",
+      "module": "oop",
+      "minutes": 4,
+      "words": 74,
+      "videoUrl": "https://www.youtube.com/embed/6KvnP13TnhY",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "68-Day-68-Exercise-7"
+    },
+    {
+      "day": 69,
+      "slug": "day-69-class-methods",
+      "title": "Python Class Methods",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 11,
+      "words": 429,
+      "videoUrl": "https://www.youtube.com/embed/9ynmDLc5FYo",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Python Class Methods"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 16
+        }
+      ],
+      "sourceFolder": "69-Day-69-Class-Methods"
+    },
+    {
+      "day": 70,
+      "slug": "day-70-class-methods-as-alternative-constructors",
+      "title": "Class Methods as Alternative Constructors",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 11,
+      "words": 401,
+      "videoUrl": "https://www.youtube.com/embed/FGlKJdy--p8",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Class Methods as Alternative Constructors"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 30
+        }
+      ],
+      "sourceFolder": "70-Day-70-Class-methods-as-alternative-constructors"
+    },
+    {
+      "day": 71,
+      "slug": "day-71-dir-dict-and-help-methods",
+      "title": "`dir()`, `__dict__` and `help()` methods in python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 9,
+      "words": 357,
+      "videoUrl": "https://www.youtube.com/embed/Wgo9TaBcuJ4",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "`dir()`, `__dict__` and `help()` methods in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 11
+        }
+      ],
+      "sourceFolder": "71-Day-71-dir-dict-and-help-methods"
+    },
+    {
+      "day": 72,
+      "slug": "day-72-super-keyword",
+      "title": "Super keyword in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 10,
+      "words": 341,
+      "videoUrl": "https://www.youtube.com/embed/P648reefNh0",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Super keyword in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 27
+        }
+      ],
+      "sourceFolder": "72-Day-72-super-Keyword"
+    },
+    {
+      "day": 73,
+      "slug": "day-73-magicdunder-methods",
+      "title": "Magic/Dunder Methods in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 10,
+      "words": 370,
+      "videoUrl": "https://www.youtube.com/embed/DmgQVJXhuLQ",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Magic/Dunder Methods in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "emp.py",
+          "lines": 20
+        },
+        {
+          "file": "main.py",
+          "lines": 7
+        }
+      ],
+      "sourceFolder": "73-Day-73-MagicDunder-Methods"
+    },
+    {
+      "day": 74,
+      "slug": "day-74-method-overriding",
+      "title": "Method Overriding in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 16,
+      "words": 533,
+      "videoUrl": "https://www.youtube.com/embed/46_yfYC36JY",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Method Overriding in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 45
+        }
+      ],
+      "sourceFolder": "74-Day-74-Method-Overriding"
+    },
+    {
+      "day": 75,
+      "slug": "day-75-exercise-7-solution",
+      "title": "Exercise 7 Solution",
+      "type": "solution",
+      "module": "oop",
+      "minutes": 4,
+      "words": 74,
+      "videoUrl": "https://www.youtube.com/embed/Wt9Shnzv_Yg",
+      "sections": [
+        {
+          "file": "01-exercise.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 9
+        }
+      ],
+      "sourceFolder": "75-Day-75-Exercise-7-Solution"
+    },
+    {
+      "day": 76,
+      "slug": "day-76-exercise-8",
+      "title": "Exercise 8",
+      "type": "exercise",
+      "module": "oop",
+      "minutes": 4,
+      "words": 77,
+      "videoUrl": "https://www.youtube.com/embed/uUbvJ7ZEhPE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 2
+        }
+      ],
+      "sourceFolder": "76-Day-76-Exercise-8"
+    },
+    {
+      "day": 77,
+      "slug": "day-77-operator-overloading",
+      "title": "Operator Overloading in Python: An Introduction",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 10,
+      "words": 359,
+      "videoUrl": "https://www.youtube.com/embed/D67-b2t-y4k",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Operator Overloading in Python: An Introduction"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 19
+        }
+      ],
+      "sourceFolder": "77-Day-77-Operator-Overloading"
+    },
+    {
+      "day": 78,
+      "slug": "day-78-single-inheritance",
+      "title": "Single Inheritance in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 10,
+      "words": 293,
+      "videoUrl": "https://www.youtube.com/embed/U53_Gw55NI8",
+      "sections": [
+        {
+          "file": "01-SingleInheritance.md",
+          "heading": "Single Inheritance in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 37
+        }
+      ],
+      "sourceFolder": "78-Day-78-Single-Inheritance"
+    },
+    {
+      "day": 79,
+      "slug": "day-79-multiple-inheritance",
+      "title": "Multiple Inheritance in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 7,
+      "words": 216,
+      "videoUrl": "https://www.youtube.com/embed/4o7xSHgKlvI",
+      "sections": [
+        {
+          "file": "01.Multiple inheritance.md",
+          "heading": "Multiple Inheritance in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 23
+        }
+      ],
+      "sourceFolder": "79-Day-79-Multiple-Inheritance"
+    },
+    {
+      "day": 80,
+      "slug": "day-80-multilevel-inheritance",
+      "title": "Multilevel Inheritance in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 13,
+      "words": 471,
+      "videoUrl": "https://www.youtube.com/embed/Il7XMJJeXiA",
+      "sections": [
+        {
+          "file": "01.multilevelinheri.md",
+          "heading": "Multilevel Inheritance in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 32
+        }
+      ],
+      "sourceFolder": "80-Day-80-Multilevel-Inheritance"
+    },
+    {
+      "day": 81,
+      "slug": "day-81-hybrid-and-hierarchical-inheritance",
+      "title": "Hybrid Inheritance in Python",
+      "type": "lesson",
+      "module": "oop",
+      "minutes": 18,
+      "words": 701,
+      "videoUrl": "https://www.youtube.com/embed/B4Q8zxRkm_I",
+      "sections": [
+        {
+          "file": "01.hybrid.md",
+          "heading": "Hybrid Inheritance in Python"
+        },
+        {
+          "file": "02.Hierarchical Inheritance.md",
+          "heading": "Hierarchical Inheritance"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 25
+        }
+      ],
+      "sourceFolder": "81-Day-81-Hybrid-and-Hierarchical-Inheritance"
+    },
+    {
+      "day": 82,
+      "slug": "day-82-exercise-8-solution",
+      "title": "Exercise 8 Solution",
+      "type": "solution",
+      "module": "oop",
+      "minutes": 4,
+      "words": 77,
+      "videoUrl": "https://www.youtube.com/embed/qKKGemhBRVM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 11
+        }
+      ],
+      "sourceFolder": "82-Day-82-Exercise-8-Solution"
+    },
+    {
+      "day": 83,
+      "slug": "day-83-exercise-9",
+      "title": "Exercise 9",
+      "type": "exercise",
+      "module": "oop",
+      "minutes": 4,
+      "words": 67,
+      "videoUrl": "https://www.youtube.com/embed/1WjwnlRXfHc",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "83-Day-83-Exercise-9"
+    },
+    {
+      "day": 84,
+      "slug": "day-84-time-module",
+      "title": "The time Module in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 13,
+      "words": 479,
+      "videoUrl": "https://www.youtube.com/embed/oTtIvV-Q1FY",
+      "sections": [
+        {
+          "file": "Time Tutorial.md",
+          "heading": "The time Module in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 29
+        }
+      ],
+      "sourceFolder": "84-Day-84-Time-Module"
+    },
+    {
+      "day": 85,
+      "slug": "day-85-command-line-utility",
+      "title": "Creating Command Line Utilities in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 9,
+      "words": 296,
+      "videoUrl": "https://www.youtube.com/embed/3IAu6-pgw7I",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Creating Command Line Utilities in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 31
+        }
+      ],
+      "sourceFolder": "85-Day-85-Command-Line-Utility"
+    },
+    {
+      "day": 86,
+      "slug": "day-86-walrus-operator",
+      "title": "The Walrus Operator in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 10,
+      "words": 382,
+      "videoUrl": "https://www.youtube.com/embed/NCmMEEyzLT8",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "The Walrus Operator in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 20
+        }
+      ],
+      "sourceFolder": "86-Day-86-Walrus-Operator"
+    },
+    {
+      "day": 87,
+      "slug": "day-87-shutil-module",
+      "title": "Shutil Module in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 9,
+      "words": 379,
+      "videoUrl": "https://www.youtube.com/embed/wII2JhNACJE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Shutil Module in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 8
+        }
+      ],
+      "sourceFolder": "87-Day-87-Shutil-Module"
+    },
+    {
+      "day": 88,
+      "slug": "day-88-exercise-9-solution",
+      "title": "Exercise 9 Solution",
+      "type": "solution",
+      "module": "advanced",
+      "minutes": 4,
+      "words": 67,
+      "videoUrl": "https://www.youtube.com/embed/C9VP-56RXNM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Next Lesson>>"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 5
+        }
+      ],
+      "sourceFolder": "88-Day-88-Exercise-9-Solution"
+    },
+    {
+      "day": 89,
+      "slug": "day-89-requests-module",
+      "title": "Requests module in python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 7,
+      "words": 217,
+      "videoUrl": "https://www.youtube.com/embed/Nsb3bLIlO4w",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Requests module in python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 24
+        }
+      ],
+      "sourceFolder": "89-Day-89-Requests-Module"
+    },
+    {
+      "day": 90,
+      "slug": "day-90-exercise-10",
+      "title": "Exercise 10",
+      "type": "exercise",
+      "module": "advanced",
+      "minutes": 4,
+      "words": 34,
+      "videoUrl": "https://www.youtube.com/embed/BGzFp9mwFQ4",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exercise 10"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "90-Day-90-Exercise-10"
+    },
+    {
+      "day": 91,
+      "slug": "day-91-generators-in-python",
+      "title": "Generators in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 13,
+      "words": 518,
+      "videoUrl": "https://www.youtube.com/embed/ixd-u3pmsUc",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Generators in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 12
+        }
+      ],
+      "sourceFolder": "91-Day-91-Generators-in-Python"
+    },
+    {
+      "day": 92,
+      "slug": "day-92-function-caching",
+      "title": "Function Caching in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 10,
+      "words": 368,
+      "videoUrl": "https://www.youtube.com/embed/K8gjSwc3Rlo",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Function Caching in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 25
+        }
+      ],
+      "sourceFolder": "92-Day-92-Function-Caching"
+    },
+    {
+      "day": 93,
+      "slug": "day-93-exercise-10-solution",
+      "title": "Exercise 10 Solution",
+      "type": "solution",
+      "module": "advanced",
+      "minutes": 4,
+      "words": 33,
+      "videoUrl": "https://www.youtube.com/embed/bnAz7Kb2efE",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exercise 10"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 14
+        }
+      ],
+      "sourceFolder": "93-Day-93-Exercise-10-Solution"
+    },
+    {
+      "day": 94,
+      "slug": "day-94-exercise-11",
+      "title": "Exercise 11",
+      "type": "exercise",
+      "module": "advanced",
+      "minutes": 4,
+      "words": 38,
+      "videoUrl": "https://www.youtube.com/embed/1i4piFhpnm8",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exercise 11 - Drink Water Reminder"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "94-Day-94-Exercise-11"
+    },
+    {
+      "day": 95,
+      "slug": "day-95-regular-expressions",
+      "title": "Regular Expressions in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 12,
+      "words": 487,
+      "videoUrl": "https://www.youtube.com/embed/TCWOwavqFrw",
+      "sections": [
+        {
+          "file": "01-regularExpressions.md",
+          "heading": "Regular Expressions in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 15
+        }
+      ],
+      "sourceFolder": "95-Day-95-Regular-Expressions"
+    },
+    {
+      "day": 96,
+      "slug": "day-96-asyncio-in-python",
+      "title": "Async IO in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 7,
+      "words": 176,
+      "videoUrl": "https://www.youtube.com/embed/lgoB3_-ejnI",
+      "sections": [
+        {
+          "file": "01-AsyncIOinPython.md",
+          "heading": "Async IO in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 42
+        }
+      ],
+      "sourceFolder": "96-Day-96-AsyncIO-in-Python"
+    },
+    {
+      "day": 97,
+      "slug": "day-97-multithreading-in-python",
+      "title": "Multithreading in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 15,
+      "words": 503,
+      "videoUrl": "https://www.youtube.com/embed/ICbU6zAKtqQ",
+      "sections": [
+        {
+          "file": "01-multithreading.md",
+          "heading": "Multithreading in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 49
+        }
+      ],
+      "sourceFolder": "97-Day-97-MultiThreading-in-Python"
+    },
+    {
+      "day": 98,
+      "slug": "day-98-multiprocessing-in-python",
+      "title": "Multiprocessing in Python",
+      "type": "lesson",
+      "module": "advanced",
+      "minutes": 16,
+      "words": 629,
+      "videoUrl": "https://www.youtube.com/embed/zGe-9LfnAaA",
+      "sections": [
+        {
+          "file": "01-MultiProcessing.md",
+          "heading": "Multiprocessing in Python"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 28
+        }
+      ],
+      "sourceFolder": "98-Day-98-MultiProcessing-in-Python"
+    },
+    {
+      "day": 99,
+      "slug": "day-99-exercise-11-solution",
+      "title": "Exercise 11 Solution",
+      "type": "solution",
+      "module": "advanced",
+      "minutes": 4,
+      "words": 39,
+      "videoUrl": "https://www.youtube.com/embed/18vZnLqXMoM",
+      "sections": [
+        {
+          "file": "Tutorial.md",
+          "heading": "Exercise 11 - Drink Water Reminder (Solution)"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 9
+        }
+      ],
+      "sourceFolder": "99-Day-99-Exercise-11-Solution"
+    },
+    {
+      "day": 100,
+      "slug": "day-100-conclusion-where-to-go-from-here",
+      "title": "Conclusion",
+      "type": "conclusion",
+      "module": "advanced",
+      "minutes": 7,
+      "words": 322,
+      "videoUrl": "https://www.youtube.com/embed/5Pz8WGiMJ_c",
+      "sections": [
+        {
+          "file": "01-conclusion.md",
+          "heading": "Conclusion"
+        }
+      ],
+      "code": [
+        {
+          "file": "main.py",
+          "lines": 1
+        }
+      ],
+      "sourceFolder": "100-Day-100-Conclusion-Where-to-go-from-here"
+    }
+  ]
+}

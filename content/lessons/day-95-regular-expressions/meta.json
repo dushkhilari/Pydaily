@@ -1,0 +1,23 @@
+{
+  "day": 95,
+  "slug": "day-95-regular-expressions",
+  "title": "Regular Expressions in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 12,
+  "words": 487,
+  "videoUrl": "https://www.youtube.com/embed/TCWOwavqFrw",
+  "sections": [
+    {
+      "file": "01-regularExpressions.md",
+      "heading": "Regular Expressions in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 15
+    }
+  ],
+  "sourceFolder": "95-Day-95-Regular-Expressions"
+}

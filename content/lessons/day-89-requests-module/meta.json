@@ -1,0 +1,23 @@
+{
+  "day": 89,
+  "slug": "day-89-requests-module",
+  "title": "Requests module in python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 7,
+  "words": 217,
+  "videoUrl": "https://www.youtube.com/embed/Nsb3bLIlO4w",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Requests module in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 24
+    }
+  ],
+  "sourceFolder": "89-Day-89-Requests-Module"
+}

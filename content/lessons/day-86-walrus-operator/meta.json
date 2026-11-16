@@ -1,0 +1,23 @@
+{
+  "day": 86,
+  "slug": "day-86-walrus-operator",
+  "title": "The Walrus Operator in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 10,
+  "words": 382,
+  "videoUrl": "https://www.youtube.com/embed/NCmMEEyzLT8",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "The Walrus Operator in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 20
+    }
+  ],
+  "sourceFolder": "86-Day-86-Walrus-Operator"
+}

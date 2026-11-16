@@ -1,0 +1,27 @@
+{
+  "day": 81,
+  "slug": "day-81-hybrid-and-hierarchical-inheritance",
+  "title": "Hybrid Inheritance in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 18,
+  "words": 701,
+  "videoUrl": "https://www.youtube.com/embed/B4Q8zxRkm_I",
+  "sections": [
+    {
+      "file": "01.hybrid.md",
+      "heading": "Hybrid Inheritance in Python"
+    },
+    {
+      "file": "02.Hierarchical Inheritance.md",
+      "heading": "Hierarchical Inheritance"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 25
+    }
+  ],
+  "sourceFolder": "81-Day-81-Hybrid-and-Hierarchical-Inheritance"
+}

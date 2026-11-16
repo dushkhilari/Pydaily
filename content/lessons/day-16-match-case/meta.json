@@ -1,0 +1,23 @@
+{
+  "day": 16,
+  "slug": "day-16-match-case",
+  "title": "Match Case Statements",
+  "type": "lesson",
+  "module": "language-basics",
+  "minutes": 8,
+  "words": 284,
+  "videoUrl": "https://www.youtube.com/embed/bthQCK1QAmQ",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Match Case Statements"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 18
+    }
+  ],
+  "sourceFolder": "16-Day-16-Match-Case"
+}

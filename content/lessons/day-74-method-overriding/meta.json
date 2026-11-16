@@ -1,0 +1,23 @@
+{
+  "day": 74,
+  "slug": "day-74-method-overriding",
+  "title": "Method Overriding in Python",
+  "type": "lesson",
+  "module": "oop",
+  "minutes": 16,
+  "words": 533,
+  "videoUrl": "https://www.youtube.com/embed/46_yfYC36JY",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Method Overriding in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 45
+    }
+  ],
+  "sourceFolder": "74-Day-74-Method-Overriding"
+}

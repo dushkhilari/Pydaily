@@ -1,0 +1,23 @@
+{
+  "day": 75,
+  "slug": "day-75-exercise-7-solution",
+  "title": "Exercise 7 Solution",
+  "type": "solution",
+  "module": "oop",
+  "minutes": 4,
+  "words": 74,
+  "videoUrl": "https://www.youtube.com/embed/Wt9Shnzv_Yg",
+  "sections": [
+    {
+      "file": "01-exercise.md",
+      "heading": "Next Lesson>>"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 9
+    }
+  ],
+  "sourceFolder": "75-Day-75-Exercise-7-Solution"
+}

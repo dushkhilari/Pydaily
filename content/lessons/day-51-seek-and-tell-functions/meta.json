@@ -1,0 +1,23 @@
+{
+  "day": 51,
+  "slug": "day-51-seek-and-tell-functions",
+  "title": "seek() and tell() functions",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 7,
+  "words": 292,
+  "videoUrl": "https://www.youtube.com/embed/PByYX-2l5Us",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "seek() and tell() functions"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 6
+    }
+  ],
+  "sourceFolder": "51-Day51-seek-and-tell-functions"
+}

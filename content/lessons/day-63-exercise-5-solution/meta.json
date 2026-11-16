@@ -1,0 +1,23 @@
+{
+  "day": 63,
+  "slug": "day-63-exercise-5-solution",
+  "title": "Exercise 5 Solution",
+  "type": "solution",
+  "module": "oop",
+  "minutes": 5,
+  "words": 77,
+  "videoUrl": "https://www.youtube.com/embed/GkfBpm6MN9A",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Snake Water Gun"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 37
+    }
+  ],
+  "sourceFolder": "63-Day-63-Exercise-5-Solution"
+}

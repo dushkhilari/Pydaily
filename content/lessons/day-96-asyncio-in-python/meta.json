@@ -1,0 +1,23 @@
+{
+  "day": 96,
+  "slug": "day-96-asyncio-in-python",
+  "title": "Async IO in Python",
+  "type": "lesson",
+  "module": "advanced",
+  "minutes": 7,
+  "words": 176,
+  "videoUrl": "https://www.youtube.com/embed/lgoB3_-ejnI",
+  "sections": [
+    {
+      "file": "01-AsyncIOinPython.md",
+      "heading": "Async IO in Python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 42
+    }
+  ],
+  "sourceFolder": "96-Day-96-AsyncIO-in-Python"
+}

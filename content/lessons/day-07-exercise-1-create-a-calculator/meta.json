@@ -1,0 +1,27 @@
+{
+  "day": 7,
+  "slug": "day-07-exercise-1-create-a-calculator",
+  "title": "Operators",
+  "type": "exercise",
+  "module": "getting-started",
+  "minutes": 6,
+  "words": 208,
+  "videoUrl": "https://www.youtube.com/embed/FLVqcxnJP_E",
+  "sections": [
+    {
+      "file": "01_Operators.md",
+      "heading": "Operators"
+    },
+    {
+      "file": "02_Exercise.md",
+      "heading": "Exercise 1 - Create a Calculator"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 12
+    }
+  ],
+  "sourceFolder": "07-Day7-Exercise-1-Create-a-Calculator"
+}
