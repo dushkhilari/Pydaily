@@ -9,7 +9,6 @@
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), var(--font-body), ui-sans-serif, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-hand: var(--font-hand), "Segoe Print", cursive;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -40,25 +39,24 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  /* notebook palette */
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-pencil: var(--pencil);
-  --color-pen-blue: var(--pen-blue);
-  --color-pen-red: var(--pen-red);
-  --color-pen-green: var(--pen-green);
-  --color-pen-purple: var(--pen-purple);
-  --color-pen-amber: var(--pen-amber);
-  --color-marker: var(--marker);
-  --color-rule: var(--rule);
-  --color-margin-line: var(--margin-line);
-  --color-paper: var(--paper);
-  --color-paper-cream: var(--paper-cream);
-  --color-paper-deep: var(--paper-deep);
-  --color-cover: var(--cover);
-  --color-cover-deep: var(--cover-deep);
-  --color-sticky: var(--sticky);
-  --color-sticky-deep: var(--sticky-deep);
+
+  /* ---- neobrutalism palette ---- */
+  --color-nb-card: var(--nb-card);
+  --color-nb-border: var(--nb-border);
+  --color-nb-text: var(--nb-text);
+  --color-nb-muted: var(--nb-muted);
+  --color-nb-red: var(--nb-red);
+  --color-nb-purple: var(--nb-purple);
+  --color-nb-teal: var(--nb-teal);
+  --color-nb-yellow: var(--nb-yellow);
+  --color-nb-pink: var(--nb-pink);
+  --color-nb-orange: var(--nb-orange);
+  --color-nb-green: var(--nb-green);
+  --color-nb-track: var(--nb-track);
+  --color-nb-code: var(--nb-code);
+  --color-nb-code-deep: var(--nb-code-deep);
+  --color-nb-grid: var(--nb-grid);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -66,202 +64,128 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Notebook light theme — "PyDaily notebook"                           */
-/* The whole site is a notebook: warm paper pages, blue-black ink,     */
-/* ruled lines, a red margin, punched holes, washi tape and sticky     */
-/* notes. Highlights may use any pen colour; backgrounds stay paper.   */
+/* NEOBRUTALISM LIGHT — warm cream desk, white paper cards, thick ink  */
+/* borders, hard offset shadows and a loud sticker palette.            */
 /* ------------------------------------------------------------------ */
 :root {
-  --radius: 1rem;
+  --radius: 0.9rem;
 
-  /* desk around the notebook */
-  --background: oklch(0.958 0.008 95);
-  --foreground: oklch(0.27 0.025 262);        /* blue-black ink */
-  --card: oklch(0.993 0.003 95);              /* paper white */
-  --card-foreground: oklch(0.27 0.025 262);
-  --popover: oklch(0.99 0.003 95);
-  --popover-foreground: oklch(0.27 0.025 262);
-  --primary: oklch(0.5 0.14 262);             /* ballpoint blue */
-  --primary-foreground: oklch(0.99 0.003 95);
-  --secondary: oklch(0.945 0.008 95);
-  --secondary-foreground: oklch(0.27 0.025 262);
-  --muted: oklch(0.945 0.008 95);
-  --muted-foreground: oklch(0.5 0.02 258);
-  --accent: oklch(0.93 0.015 262);
-  --accent-foreground: oklch(0.27 0.025 262);
-  --destructive: oklch(0.55 0.19 25);         /* red pen */
-  --destructive-foreground: oklch(0.99 0.003 95);
-  --border: oklch(0.3 0.03 262 / 16%);
-  --input: oklch(0.3 0.03 262 / 22%);
-  --ring: oklch(0.55 0.13 262);
-  --chart-1: oklch(0.5 0.14 262);
-  --chart-2: oklch(0.55 0.12 155);
-  --chart-3: oklch(0.55 0.19 25);
-  --chart-4: oklch(0.6 0.12 75);
-  --chart-5: oklch(0.52 0.12 305);
-  --sidebar: oklch(0.26 0.018 262);
-  --sidebar-foreground: oklch(0.955 0.006 95);
-  --sidebar-primary: oklch(0.5 0.14 262);
-  --sidebar-primary-foreground: oklch(0.99 0.003 95);
-  --sidebar-accent: oklch(0.32 0.02 262);
-  --sidebar-accent-foreground: oklch(0.955 0.006 95);
-  --sidebar-border: oklch(0.12 0.01 262 / 70%);
-  --sidebar-ring: oklch(0.55 0.13 262);
+  --background: #fcefdf;          /* warm cream page            */
+  --foreground: #1f1a14;          /* near-black warm ink        */
+  --card: #ffffff;
+  --card-foreground: #1f1a14;
+  --popover: #ffffff;
+  --popover-foreground: #1f1a14;
+  --primary: #ff5959;             /* loud red                   */
+  --primary-foreground: #ffffff;
+  --secondary: #ffe35c;           /* sticker yellow             */
+  --secondary-foreground: #1f1a14;
+  --muted: #f4e7d3;
+  --muted-foreground: #7d7263;
+  --accent: #ffe35c;
+  --accent-foreground: #1f1a14;
+  --destructive: #ff5959;
+  --destructive-foreground: #ffffff;
+  --border: #1f1a14;
+  --input: #1f1a14;
+  --ring: #a98bfa;
+  --chart-1: #ff5959;
+  --chart-2: #a98bfa;
+  --chart-3: #3ecfc5;
+  --chart-4: #ffe35c;
+  --chart-5: #ff8fb0;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1f1a14;
+  --sidebar-primary: #ff5959;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffe35c;
+  --sidebar-accent-foreground: #1f1a14;
+  --sidebar-border: #1f1a14;
+  --sidebar-ring: #a98bfa;
 
-  /* ink & pens */
-  --ink: oklch(0.27 0.025 262);
-  --ink-soft: oklch(0.4 0.025 262);
-  --pencil: oklch(0.52 0.02 258);
-  --pen-blue: oklch(0.5 0.14 262);
-  --pen-red: oklch(0.55 0.19 25);
-  --pen-green: oklch(0.55 0.12 155);
-  --pen-purple: oklch(0.52 0.12 305);
-  --pen-amber: oklch(0.6 0.12 75);
+  /* neo primitives */
+  --nb-card: #ffffff;
+  --nb-border: #1f1a14;          /* the "black" for every border  */
+  --nb-shadow: #1f1a14;          /* hard shadow colour            */
+  --nb-text: #1f1a14;
+  --nb-muted: #7d7263;
+  --nb-red: #ff5959;
+  --nb-purple: #a98bfa;
+  --nb-teal: #3ecfc5;
+  --nb-yellow: #ffe35c;
+  --nb-pink: #ff8fb0;
+  --nb-orange: #ffa94d;
+  --nb-green: #43d17c;
+  --nb-track: #f3e8d5;           /* progress-bar track            */
+  --nb-code: #211d17;            /* dark code block surface       */
+  --nb-code-deep: #17140f;
+  --nb-grid: #1f1a14;            /* dot-grid tint (used at low alpha) */
 
-  /* paper surfaces */
-  --paper: oklch(0.993 0.003 95);
-  --paper-cream: oklch(0.972 0.008 95);
-  --paper-deep: oklch(0.945 0.008 92);
-  --cover: oklch(0.26 0.018 262);
-  --cover-deep: oklch(0.19 0.015 262);
-
-  /* notebook hardware */
-  --rule: oklch(0.62 0.075 258 / 45%);
-  --rule-soft: oklch(0.55 0.09 258 / 12%);
-  --margin-line: oklch(0.63 0.18 25 / 55%);
-  --marker: oklch(0.92 0.075 105);
-  --sticky: oklch(0.975 0.05 105);
-  --sticky-deep: oklch(0.955 0.055 100);
-
-  /* material plumbing (light) */
-  --ink-line: oklch(0.3 0.03 262 / 18%);
-  --ink-line-strong: oklch(0.3 0.03 262 / 30%);
-  --paper-sheen: oklch(1 0 0 / 85%);
-  --sheen-line: oklch(1 0 0 / 75%);
-  --shadow-soft: oklch(0.3 0.03 262 / 9%);
-  --shadow-deep: oklch(0.3 0.03 262 / 30%);
-  --chip-a: oklch(0.965 0.006 95);
-  --chip-b: oklch(0.93 0.01 93);
-  --chip-border: oklch(0.3 0.03 262 / 24%);
-  --btnp-a: oklch(1 0 0);
-  --btnp-b: oklch(0.965 0.005 95);
-  --btnp-c: oklch(0.935 0.008 93);
-  --btn-edge: oklch(0.3 0.03 262 / 26%);
-  --btnink-a: oklch(0.58 0.14 262);
-  --btnink-b: oklch(0.5 0.14 262);
-  --btnink-c: oklch(0.42 0.13 265);
-  --btnink-border: oklch(0.35 0.12 265 / 90%);
-  --pressed-a: oklch(0.93 0.008 95);
-  --pressed-b: oklch(0.97 0.005 95);
-  --grid-line: oklch(0.55 0.08 258 / 13%);
-  --hole-fill: oklch(0.94 0.008 95);
-  --hole-ring: oklch(0.42 0.03 262 / 40%);
-  --scrollbar: oklch(0.5 0.05 258 / 40%);
-  --selection: oklch(0.92 0.075 105 / 70%);
-  --code-chip-bg: oklch(0.972 0.008 95);
-
-  /* desk gradient stops */
-  --desk-light: oklch(1 0 0 / 50%);
-  --desk-vignette: oklch(0.45 0.04 80 / 0.14);
-  --desk-top: oklch(0.962 0.008 95);
-  --desk-bottom: oklch(0.942 0.012 92);
+  --dot-grid: radial-gradient(circle, rgba(31, 26, 20, 0.13) 1.4px, transparent 1.5px);
+  --shape-opacity: 0.85;
+  --scrollbar: rgba(31, 26, 20, 0.35);
+  --selection: rgba(255, 227, 92, 0.75);
 }
 
 /* ------------------------------------------------------------------ */
-/* Notebook dark theme — the same notebook, studied at night:          */
-/* charcoal "black paper" pages, chalk-white ink, softer pen colours.  */
+/* NEOBRUTALISM DARK — the same poster printed on black paper: cream   */
+/* borders, hard black shadows, the stickers stay loud.                */
 /* ------------------------------------------------------------------ */
 .dark {
-  --background: oklch(0.21 0.012 80);         /* dark desk at night */
-  --foreground: oklch(0.93 0.01 95);          /* chalk-white ink */
-  --card: oklch(0.265 0.012 262);             /* charcoal paper */
-  --card-foreground: oklch(0.93 0.01 95);
-  --popover: oklch(0.28 0.012 262);
-  --popover-foreground: oklch(0.93 0.01 95);
-  --primary: oklch(0.66 0.14 262);            /* ballpoint blue, lit */
-  --primary-foreground: oklch(0.14 0.02 262);
-  --secondary: oklch(0.315 0.012 262);
-  --secondary-foreground: oklch(0.93 0.01 95);
-  --muted: oklch(0.315 0.012 262);
-  --muted-foreground: oklch(0.68 0.015 258);
-  --accent: oklch(0.34 0.015 262);
-  --accent-foreground: oklch(0.93 0.01 95);
-  --destructive: oklch(0.68 0.17 25);
-  --destructive-foreground: oklch(0.14 0.02 262);
-  --border: oklch(0.85 0.01 95 / 15%);
-  --input: oklch(0.85 0.01 95 / 22%);
-  --ring: oklch(0.68 0.13 262);
-  --chart-1: oklch(0.72 0.13 262);
-  --chart-2: oklch(0.72 0.11 155);
-  --chart-3: oklch(0.7 0.16 25);
-  --chart-4: oklch(0.75 0.11 80);
-  --chart-5: oklch(0.7 0.11 305);
-  --sidebar: oklch(0.24 0.016 262);
-  --sidebar-foreground: oklch(0.93 0.01 95);
-  --sidebar-primary: oklch(0.66 0.14 262);
-  --sidebar-primary-foreground: oklch(0.14 0.02 262);
-  --sidebar-accent: oklch(0.3 0.018 262);
-  --sidebar-accent-foreground: oklch(0.93 0.01 95);
-  --sidebar-border: oklch(0.1 0.01 262 / 70%);
-  --sidebar-ring: oklch(0.68 0.13 262);
+  --background: #191611;
+  --foreground: #f2e9d8;
+  --card: #241f18;
+  --card-foreground: #f2e9d8;
+  --popover: #241f18;
+  --popover-foreground: #f2e9d8;
+  --primary: #ff5959;
+  --primary-foreground: #1a1108;
+  --secondary: #ffe35c;
+  --secondary-foreground: #1a1108;
+  --muted: #2e2820;
+  --muted-foreground: #a79b87;
+  --accent: #ffe35c;
+  --accent-foreground: #1a1108;
+  --destructive: #ff5959;
+  --destructive-foreground: #1a1108;
+  --border: #f2e9d8;
+  --input: #f2e9d8;
+  --ring: #a98bfa;
+  --chart-1: #ff5959;
+  --chart-2: #a98bfa;
+  --chart-3: #3ecfc5;
+  --chart-4: #ffe35c;
+  --chart-5: #ff8fb0;
+  --sidebar: #241f18;
+  --sidebar-foreground: #f2e9d8;
+  --sidebar-primary: #ff5959;
+  --sidebar-primary-foreground: #1a1108;
+  --sidebar-accent: #ffe35c;
+  --sidebar-accent-foreground: #1a1108;
+  --sidebar-border: #f2e9d8;
+  --sidebar-ring: #a98bfa;
 
-  /* ink & pens — chalked up for dark paper */
-  --ink: oklch(0.92 0.01 95);
-  --ink-soft: oklch(0.8 0.012 260);
-  --pencil: oklch(0.63 0.015 258);
-  --pen-blue: oklch(0.74 0.12 262);
-  --pen-red: oklch(0.72 0.15 25);
-  --pen-green: oklch(0.74 0.11 155);
-  --pen-purple: oklch(0.73 0.11 305);
-  --pen-amber: oklch(0.78 0.12 80);
+  --nb-card: #241f18;
+  --nb-border: #f2e9d8;
+  --nb-shadow: #000000;
+  --nb-text: #f2e9d8;
+  --nb-muted: #a79b87;
+  --nb-red: #ff5959;
+  --nb-purple: #a98bfa;
+  --nb-teal: #3ecfc5;
+  --nb-yellow: #ffe35c;
+  --nb-pink: #ff8fb0;
+  --nb-orange: #ffa94d;
+  --nb-green: #43d17c;
+  --nb-track: #373025;
+  --nb-code: #12100c;
+  --nb-code-deep: #0b0a07;
+  --nb-grid: #f2e9d8;
 
-  /* paper surfaces */
-  --paper: oklch(0.265 0.012 262);
-  --paper-cream: oklch(0.3 0.012 262);
-  --paper-deep: oklch(0.235 0.012 262);
-  --cover: oklch(0.2 0.016 262);
-  --cover-deep: oklch(0.14 0.014 262);
-
-  /* notebook hardware */
-  --rule: oklch(0.72 0.07 258 / 30%);
-  --rule-soft: oklch(0.72 0.07 258 / 10%);
-  --margin-line: oklch(0.66 0.16 25 / 50%);
-  --marker: oklch(0.44 0.07 105);
-  --sticky: oklch(0.42 0.045 100);
-  --sticky-deep: oklch(0.38 0.045 100);
-
-  /* material plumbing (dark) */
-  --ink-line: oklch(0.88 0.01 95 / 16%);
-  --ink-line-strong: oklch(0.88 0.01 95 / 30%);
-  --paper-sheen: oklch(1 0 0 / 5%);
-  --sheen-line: oklch(1 0 0 / 8%);
-  --shadow-soft: oklch(0 0 0 / 32%);
-  --shadow-deep: oklch(0 0 0 / 52%);
-  --chip-a: oklch(0.23 0.012 262);
-  --chip-b: oklch(0.3 0.012 262);
-  --chip-border: oklch(0.85 0.01 95 / 20%);
-  --btnp-a: oklch(0.32 0.012 262);
-  --btnp-b: oklch(0.28 0.012 262);
-  --btnp-c: oklch(0.245 0.012 262);
-  --btn-edge: oklch(0.88 0.01 95 / 28%);
-  --btnink-a: oklch(0.62 0.14 262);
-  --btnink-b: oklch(0.55 0.14 262);
-  --btnink-c: oklch(0.46 0.13 265);
-  --btnink-border: oklch(0.72 0.12 265 / 90%);
-  --pressed-a: oklch(0.21 0.012 262);
-  --pressed-b: oklch(0.25 0.012 262);
-  --grid-line: oklch(0.75 0.07 258 / 12%);
-  --hole-fill: oklch(0.22 0.012 80);
-  --hole-ring: oklch(0 0 0 / 55%);
-  --scrollbar: oklch(0.8 0.02 258 / 30%);
-  --selection: oklch(0.44 0.07 105 / 80%);
-  --code-chip-bg: oklch(0.3 0.012 262);
-
-  /* desk gradient stops */
-  --desk-light: oklch(1 0 0 / 4%);
-  --desk-vignette: oklch(0 0 0 / 0.42);
-  --desk-top: oklch(0.235 0.014 80);
-  --desk-bottom: oklch(0.185 0.012 78);
+  --dot-grid: radial-gradient(circle, rgba(242, 233, 216, 0.09) 1.4px, transparent 1.5px);
+  --shape-opacity: 0.28;
+  --scrollbar: rgba(242, 233, 216, 0.3);
+  --selection: rgba(255, 227, 92, 0.4);
 }
 
 @layer base {
@@ -281,53 +205,30 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Notebook material utilities                                         */
+/* Neo utilities                                                       */
 /* ------------------------------------------------------------------ */
 
-/* Film grain / paper fiber overlay */
-@utility bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+/* dot-grid backdrop for the whole page */
+@utility bg-dots {
+  background-image: var(--dot-grid);
+  background-size: 26px 26px;
 }
 
-/* Desk around the open notebook (light: warm daylight; dark: lamplight) */
-@utility bg-desk {
-  background-image:
-    radial-gradient(120% 60% at 50% -10%, var(--desk-light) 0%, transparent 60%),
-    radial-gradient(ellipse at center, transparent 58%, var(--desk-vignette) 100%),
-    linear-gradient(180deg, var(--desk-top) 0%, var(--desk-bottom) 100%);
+/* hard shadows — the signature of the style */
+@utility shadow-hard-xs {
+  box-shadow: 2px 2px 0 0 var(--nb-shadow);
+}
+@utility shadow-hard-sm {
+  box-shadow: 3px 3px 0 0 var(--nb-shadow);
+}
+@utility shadow-hard {
+  box-shadow: 5px 5px 0 0 var(--nb-shadow);
+}
+@utility shadow-hard-lg {
+  box-shadow: 8px 8px 0 0 var(--nb-shadow);
 }
 
-/* Ruled paper lines (subtle, for the open page) */
-@utility bg-ruled {
-  background-image: repeating-linear-gradient(
-    180deg,
-    transparent 0 27px,
-    var(--rule-soft) 27px 28px
-  );
-}
-
-/* Graph paper (code on paper) */
-@utility bg-grid-paper {
-  background-image:
-    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 22px),
-    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
-}
-
-/* Punched holes strip — repeats vertically down a page edge */
-@utility hole-strip {
-  background-image: radial-gradient(
-    circle at 50% 20px,
-    var(--hole-fill) 0 4.5px,
-    var(--hole-ring) 5px 6px,
-    transparent 6.5px
-  );
-  background-size: 18px 44px;
-  background-repeat: repeat-y;
-  background-position: center top;
-}
-
-/* Bottom safe area for mobile */
+/* bottom safe area for mobile */
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -335,7 +236,7 @@
   margin-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Custom scrollbars */
+/* custom scrollbars */
 @utility scroll-slim {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar) transparent;
@@ -353,217 +254,189 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Notebook component classes                                          */
+/* Neo component classes                                               */
 /* ------------------------------------------------------------------ */
 @layer components {
-  /* ---- raised paper sheet (cards) ---- */
-  .sheet {
-    background-color: var(--paper);
-    background-image:
-      radial-gradient(120% 90% at 50% 0%, var(--paper-sheen) 0%, transparent 55%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-    border: 1px solid var(--ink-line);
-    box-shadow:
-      0 1px 0 var(--sheen-line) inset,
-      0 2px 4px var(--shadow-soft),
-      0 12px 24px -14px var(--shadow-deep);
+  /* ---- the card: white sheet, thick ink border, hard shadow ---- */
+  .neo-card {
+    background: var(--nb-card);
+    border: 3px solid var(--nb-border);
+    border-radius: 1.25rem;
+    box-shadow: 6px 6px 0 0 var(--nb-shadow);
+  }
+  .neo-card-sm {
+    background: var(--nb-card);
+    border: 3px solid var(--nb-border);
+    border-radius: 1rem;
+    box-shadow: 4px 4px 0 0 var(--nb-shadow);
+  }
+  .neo-inset {
+    background: var(--nb-card);
+    border: 2.5px solid var(--nb-border);
+    border-radius: 0.8rem;
   }
 
-  /* ---- flat paper strip ---- */
-  .sheet-flat {
-    background-color: var(--paper);
-    border: 1px solid var(--ink-line);
-    box-shadow: 0 1px 2px var(--shadow-soft);
-  }
-
-  /* ---- the big open notebook page ---- */
-  .page-sheet {
-    background-color: var(--paper);
-    background-image: repeating-linear-gradient(
-      180deg,
-      transparent 0 27px,
-      var(--rule-soft) 27px 28px
-    );
-    box-shadow:
-      0 1px 0 var(--sheen-line) inset,
-      0 18px 40px -22px var(--shadow-deep);
-  }
-
-  /* ---- paper chip (inset well for icons / badges) ---- */
-  .chip {
-    background: linear-gradient(180deg, var(--chip-a) 0%, var(--chip-b) 100%);
-    border: 1px solid var(--chip-border);
-    box-shadow:
-      0 2px 4px var(--shadow-soft) inset,
-      0 1px 0 var(--sheen-line);
-  }
-
-  /* ---- dark inset chip (on the notebook cover) ---- */
-  .chip-dark {
-    background: linear-gradient(180deg, oklch(0.16 0.015 262) 0%, oklch(0.22 0.018 262) 100%);
-    border: 1px solid oklch(0.02 0.01 262 / 80%);
-    box-shadow:
-      0 2px 5px oklch(0 0 0 / 40%) inset,
-      0 1px 0 oklch(1 0 0 / 8%);
-  }
-
-  /* ---- hand-inked buttons ----
-     Pressable paper/ink keys with a pen-drawn offset edge, so every
-     button reads like it was drawn on the page. */
-  .btn3d {
+  /* ---- pressable button ---- */
+  .neo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--nb-card);
+    color: var(--nb-text);
+    border: 3px solid var(--nb-border);
+    border-radius: 0.9rem;
+    font-weight: 700;
+    box-shadow: 4px 4px 0 0 var(--nb-shadow);
     cursor: pointer;
     user-select: none;
-    transition: transform 90ms ease, box-shadow 90ms ease, filter 90ms ease;
+    transition: transform 110ms ease, box-shadow 110ms ease, filter 110ms ease;
     will-change: transform;
   }
-  .btn3d:hover:not(:disabled) {
-    transform: translateY(-1px);
+  .neo-btn:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 0 var(--nb-shadow);
+    filter: brightness(1.04);
   }
-  .btn3d:active:not(:disabled) {
-    transform: translateY(1px);
+  .neo-btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--nb-shadow);
   }
-  .btn3d:disabled {
+  .neo-btn:disabled {
     opacity: 0.55;
     cursor: not-allowed;
+    box-shadow: 2px 2px 0 0 var(--nb-shadow);
   }
-  .btn3d:focus-visible {
-    outline: 2px solid var(--ring);
+  .neo-btn:focus-visible {
+    outline: 3px solid var(--nb-purple);
     outline-offset: 2px;
   }
 
-  /* white paper key (neutral action) */
-  .btn-paper {
-    background-image: linear-gradient(180deg, var(--btnp-a) 0%, var(--btnp-b) 90%, var(--btnp-c) 100%);
-    border: 1.5px solid var(--ink-line-strong);
-    box-shadow:
-      2px 3px 0 -0.5px var(--btn-edge),
-      0 1px 0 var(--sheen-line) inset,
-      0 -2px 3px var(--shadow-soft) inset;
-    color: var(--foreground);
-  }
-  .btn-paper:hover:not(:disabled) {
-    filter: brightness(1.03);
-  }
-  .btn-paper:active:not(:disabled) {
-    box-shadow:
-      0 2px 4px var(--shadow-soft) inset,
-      0 1px 0 var(--sheen-line);
+  /* colour variants (text colour follows the sticker rules) */
+  .neo-btn-red { background: var(--nb-red); color: #ffffff; }
+  .neo-btn-purple { background: var(--nb-purple); color: #17110a; }
+  .neo-btn-teal { background: var(--nb-teal); color: #0c2725; }
+  .neo-btn-yellow { background: var(--nb-yellow); color: #17110a; }
+  .neo-btn-pink { background: var(--nb-pink); color: #17110a; }
+  .neo-btn-orange { background: var(--nb-orange); color: #17110a; }
+  .dark .neo-btn-red { color: #1a1108; }
+  .dark .neo-btn-purple { color: #17110a; }
+
+  /* ---- pill chip / badge ---- */
+  .neo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--nb-card);
+    color: var(--nb-text);
+    border: 2.5px solid var(--nb-border);
+    border-radius: 999px;
+    font-weight: 700;
+    box-shadow: 2px 2px 0 0 var(--nb-shadow);
+    white-space: nowrap;
   }
 
-  /* ballpoint blue ink button (primary action) */
-  .btn-ink {
-    background-image: linear-gradient(180deg, var(--btnink-a) 0%, var(--btnink-b) 50%, var(--btnink-c) 100%);
-    border: 1.5px solid var(--btnink-border);
-    box-shadow:
-      2px 3px 0 -0.5px var(--btn-edge),
-      0 1px 0 oklch(1 0 0 / 30%) inset,
-      0 -2px 4px oklch(0.3 0.1 266 / 35%) inset;
-    color: oklch(0.99 0.003 95);
-    text-shadow: 0 -1px 0 oklch(0.3 0.1 266 / 40%);
-  }
-  .btn-ink:hover:not(:disabled) {
-    filter: brightness(1.06);
-  }
-  .btn-ink:active:not(:disabled) {
-    box-shadow:
-      0 3px 6px oklch(0.3 0.1 266 / 40%) inset,
-      0 1px 0 oklch(1 0 0 / 20%);
+  /* ---- icon tile ---- */
+  .neo-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--nb-card);
+    color: var(--nb-text);
+    border: 3px solid var(--nb-border);
+    border-radius: 0.8rem;
+    box-shadow: 3px 3px 0 0 var(--nb-shadow);
+    flex-shrink: 0;
   }
 
-  /* pressed-in state (toggled / active nav) */
-  .btn-pressed {
-    background-image: linear-gradient(180deg, var(--pressed-a) 0%, var(--pressed-b) 100%);
-    border: 1px solid var(--chip-border);
-    box-shadow:
-      0 2px 5px var(--shadow-soft) inset,
-      0 1px 0 var(--sheen-line);
-    color: var(--pen-blue);
+  /* ---- segmented control (Tab 1 | Tab 2 | Tab 3) ---- */
+  .neo-seg {
+    display: inline-flex;
+    background: var(--nb-card);
+    border: 3px solid var(--nb-border);
+    border-radius: 0.9rem;
+    box-shadow: 4px 4px 0 0 var(--nb-shadow);
+    overflow: hidden;
+  }
+  .neo-seg-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    font-weight: 700;
+    color: var(--nb-muted);
+    border-right: 3px solid var(--nb-border);
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: background 110ms ease, color 110ms ease;
+    min-height: 42px;
+  }
+  .neo-seg-item:last-child {
+    border-right: 0;
+  }
+  .neo-seg-item:hover {
+    color: var(--nb-text);
+    background: var(--nb-track);
+  }
+  .neo-seg-item[data-active="true"] {
+    background: var(--nb-yellow);
+    color: #17110a;
   }
 
-  /* ---- black notebook cover (sidebar) — stays dark in both modes ---- */
-  .cover-mat {
-    background-image:
-      radial-gradient(120% 80% at 30% 0%, oklch(0.36 0.02 262 / 80%) 0%, transparent 55%),
-      linear-gradient(165deg, oklch(0.31 0.02 262) 0%, oklch(0.26 0.018 262) 45%, oklch(0.19 0.015 262) 100%);
+  /* ---- progress bar ---- */
+  .neo-bar {
+    height: 16px;
+    background: var(--nb-track);
+    border: 2.5px solid var(--nb-border);
+    border-radius: 999px;
+    overflow: hidden;
   }
-  .cover-text {
-    color: oklch(0.955 0.006 95);
-    text-shadow: 0 -1px 1px oklch(0 0 0 / 50%);
-  }
-  .elastic-band {
-    background: linear-gradient(90deg, oklch(0.2 0.015 262) 0%, oklch(0.34 0.02 262) 40%, oklch(0.17 0.015 262) 100%);
-    box-shadow:
-      1px 0 2px oklch(0 0 0 / 55%),
-      inset 0 0 0 1px oklch(1 0 0 / 6%);
+  .neo-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 500ms ease;
   }
 
-  /* ---- washi tape strip ---- */
-  .washi {
+  /* ---- decorative floating shapes ---- */
+  .neo-shape {
     position: absolute;
-    top: -9px;
+    opacity: var(--shape-opacity);
+    pointer-events: none;
+  }
+
+  /* ---- tooltip (hover-only shortcut hint on Run) ---- */
+  .neo-tip {
+    position: relative;
+  }
+  .neo-tip::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 9px);
     left: 50%;
-    width: 88px;
-    height: 20px;
-    transform: translateX(-50%) rotate(-2deg);
-    background:
-      repeating-linear-gradient(45deg, oklch(0.72 0.06 258 / 35%) 0 6px, oklch(0.96 0.01 250 / 55%) 6px 12px),
-      linear-gradient(180deg, oklch(0.98 0.004 250 / 72%) 0%, oklch(0.9 0.01 250 / 66%) 100%);
-    box-shadow: 0 1px 3px var(--shadow-soft);
-    border-left: 1px dashed var(--ink-line);
-    border-right: 1px dashed var(--ink-line);
-    z-index: 5;
+    transform: translateX(-50%) scale(0.95);
+    background: var(--nb-border);
+    color: var(--nb-card);
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-mono), monospace;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 130ms ease, transform 130ms ease;
+    z-index: 30;
   }
-
-  /* ---- sticky note (pale yellow in light, deep amber in dark) ---- */
-  .sticky-note {
-    background:
-      repeating-linear-gradient(180deg, transparent 0 25px, var(--rule) 25px 26px),
-      linear-gradient(180deg, var(--sticky) 0%, var(--sticky-deep) 100%);
-    border: 1px solid var(--ink-line);
-    box-shadow:
-      0 1px 0 var(--sheen-line) inset,
-      0 6px 14px -6px var(--shadow-deep);
-    transform: rotate(-1.1deg);
-  }
-  .sticky-note.alt {
-    transform: rotate(1.2deg);
-  }
-
-  /* ---- ruled legal pad (notes editor): paper sheet, blue rules, red margin ---- */
-  .legal-pad {
-    background:
-      linear-gradient(90deg, transparent 0 34px, var(--margin-line) 34px 35.5px, transparent 35.5px),
-      repeating-linear-gradient(180deg, transparent 0 27px, var(--rule) 27px 28px),
-      linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
-    border: 1px solid var(--ink-line-strong);
-    box-shadow:
-      0 2px 6px var(--shadow-soft) inset,
-      0 -1px 0 var(--sheen-line);
-  }
-
-  /* ---- blue bookmark ribbon ---- */
-  .ribbon {
-    background: linear-gradient(180deg, var(--pen-blue) 0%, oklch(0.42 0.13 265) 100%);
-    box-shadow: 0 1px 2px var(--shadow-deep);
-  }
-
-  /* ---- highlighter marker behind text ---- */
-  .marker-hl {
-    background: linear-gradient(180deg, transparent 8%, var(--marker) 8% 90%, transparent 90%);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    border-radius: 2px;
-    padding: 0 3px;
-  }
-
-  /* ---- handwritten font helper ---- */
-  .hand {
-    font-family: var(--font-hand), "Segoe Print", cursive;
+  .neo-tip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
   }
 }
 
 /* ------------------------------------------------------------------ */
-/* Markdown reader typography (lesson content on paper)                */
+/* Markdown reader typography                                          */
 /* ------------------------------------------------------------------ */
 .md-scope {
   @apply text-[15.5px] leading-7 text-foreground/90;
@@ -572,7 +445,7 @@
   @apply font-display text-2xl font-bold mt-1 mb-4;
 }
 .md-scope h2 {
-  @apply font-display text-xl font-bold mt-8 mb-3 underline decoration-pen-blue/30 decoration-2 underline-offset-8;
+  @apply font-display text-xl font-bold mt-8 mb-3;
 }
 .md-scope h3 {
   @apply font-display text-lg font-bold mt-6 mb-2;
@@ -584,83 +457,86 @@
   @apply my-4 space-y-1.5;
 }
 .md-scope ul li {
-  @apply relative pl-5;
+  @apply relative pl-6;
 }
 .md-scope ul li::before {
   content: "";
-  @apply absolute left-0 top-[0.6rem] h-1.5 w-1.5 rounded-full bg-pen-blue/70;
+  @apply absolute left-0 top-[0.55rem] h-2.5 w-2.5 -rotate-3 border-2 border-nb-border bg-nb-teal;
 }
 .md-scope ol {
-  @apply my-4 space-y-1.5 list-decimal pl-5 marker:text-pen-blue marker:font-semibold;
+  @apply my-4 space-y-1.5 list-decimal pl-5 marker:font-display marker:font-bold marker:text-nb-purple;
 }
 .md-scope a {
-  @apply text-pen-blue underline underline-offset-4 decoration-pen-blue/40 hover:decoration-pen-blue break-words;
+  @apply text-nb-purple font-bold underline underline-offset-4 decoration-nb-purple/50 hover:decoration-nb-purple break-words;
 }
 .md-scope strong {
   @apply text-foreground font-bold;
 }
 .md-scope blockquote {
-  @apply my-4 rounded-r-lg border-l-[3px] border-pen-red/60 py-1.5 pl-4 pr-3 text-pencil italic;
+  @apply my-4 rounded-r-xl border-l-4 border-nb-yellow bg-nb-yellow/15 py-2 pl-4 pr-3 italic;
 }
 .md-scope hr {
-  @apply my-6 border-0 border-t border-dashed border-ink/25;
+  @apply my-6 border-0 border-t-[3px] border-dashed border-border/30;
 }
 .md-scope code:not(pre code) {
-  @apply rounded-md border border-ink/15 px-1.5 py-0.5 font-mono text-[13px] text-foreground shadow-[0_1px_0_oklch(1_0_0/30%)_inset];
-  background: var(--code-chip-bg);
+  @apply rounded-md border-2 border-nb-border bg-nb-yellow/40 px-1.5 py-0.5 font-mono text-[13px] font-semibold text-foreground;
+}
+.dark .md-scope code:not(pre code) {
+  @apply bg-nb-yellow/25;
 }
 .md-scope pre {
   margin: 0;
 }
 .md-scope table {
-  @apply my-4 w-full text-sm border-separate border-spacing-0 rounded-xl overflow-hidden border border-ink/15 shadow-sm;
+  @apply my-5 w-full text-sm border-separate border-spacing-0 overflow-hidden rounded-xl border-[2.5px] border-border;
 }
 .md-scope th {
-  @apply bg-paper-cream px-3 py-2 text-left font-bold text-foreground/80;
+  @apply bg-nb-yellow/40 px-3 py-2 text-left font-display font-bold text-foreground;
+}
+.dark .md-scope th {
+  @apply bg-nb-yellow/20;
 }
 .md-scope td {
-  @apply border-t border-ink/10 px-3 py-2;
+  @apply border-t-2 border-border/40 px-3 py-2;
 }
 .md-scope img {
-  @apply my-4 rounded-xl max-w-full border border-ink/15 shadow-md;
+  @apply my-4 max-w-full rounded-xl border-[2.5px] border-border;
 }
 
-/* Python syntax token colors — "ink on graph paper" palette.
-   Colours come from the pen variables, so dark mode chalks them up
-   automatically. */
+/* Python syntax tokens — loud neo palette on the dark code surface */
 .hljs {
-  color: var(--ink);
+  color: #f2e9d8;
   background: transparent;
 }
 .hljs-keyword,
 .hljs-built_in {
-  color: var(--pen-blue);
-  font-weight: 600;
+  color: #ff8f8f;
+  font-weight: 700;
 }
 .hljs-string,
 .hljs-attr {
-  color: var(--pen-green);
+  color: #7ee8c7;
 }
 .hljs-title,
 .hljs-title.function_,
 .hljs-section {
-  color: var(--pen-purple);
+  color: #c9a6ff;
 }
 .hljs-number,
 .hljs-literal {
-  color: var(--pen-amber);
+  color: #ffd866;
 }
 .hljs-comment {
-  color: var(--pencil);
+  color: #948a79;
   font-style: italic;
 }
 .hljs-name,
 .hljs-tag {
-  color: var(--pen-blue);
+  color: #ff8f8f;
 }
 .hljs-punctuation {
-  color: var(--pencil);
+  color: #b5ab99;
 }
 .hljs-operator {
-  color: var(--ink-soft);
+  color: #f2e9d8;
 }

@@ -26,13 +26,16 @@ import type {
 import { useStudyStore } from "@/lib/store";
 import { saveQuizResultApi } from "@/lib/api-client";
 import { ProgressGauge } from "./progress-gauge";
+import { SOFT_CLS } from "@/lib/accents";
 import { cn } from "@/lib/utils";
 
-const DIFFICULTY_STYLES: Record<Exercise["difficulty"], string> = {
-  easy: "border-pen-green/40 text-pen-green",
-  medium: "border-pen-amber/50 text-pen-amber",
-  hard: "border-pen-red/40 text-pen-red",
-};
+/** Neo tile colours for the A/B/C/D option keys, cycled per option. */
+const OPTION_TILE = [
+  "bg-nb-red text-white dark:text-[#1a1108]",
+  "bg-nb-purple text-[#17110a]",
+  "bg-nb-teal text-[#0c2725]",
+  "bg-nb-yellow text-[#17110a]",
+];
 
 export function QuizView({
   manifest,
@@ -55,21 +58,17 @@ export function QuizView({
 
   return (
     <div className="space-y-4 pt-2 sm:space-y-6">
-      <div className="space-y-3 sm:flex sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
-        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-          Knowledge check
-        </h1>
+      <div className="space-y-3 sm:flex sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
+        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Practice</h1>
 
-        {/* mode switch — paper tabs */}
-        <div className="chip inline-flex w-full rounded-full p-1 sm:w-auto" role="tablist" aria-label="Practice mode">
+        {/* mode switch — segmented tabs */}
+        <div className="neo-seg w-full sm:w-auto" role="tablist" aria-label="Practice mode">
           <button
             role="tab"
             aria-selected={mode === "quiz"}
+            data-active={mode === "quiz"}
             onClick={() => setMode("quiz")}
-            className={cn(
-              "btn3d inline-flex min-h-[38px] flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-bold sm:flex-none",
-              mode === "quiz" ? "btn-pressed" : "text-pencil hover:text-foreground"
-            )}
+            className="neo-seg-item flex-1 text-sm sm:flex-none"
           >
             <Target className="h-4 w-4" aria-hidden />
             Quiz
@@ -77,11 +76,9 @@ export function QuizView({
           <button
             role="tab"
             aria-selected={mode === "practice"}
+            data-active={mode === "practice"}
             onClick={() => setMode("practice")}
-            className={cn(
-              "btn3d inline-flex min-h-[38px] flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-bold sm:flex-none",
-              mode === "practice" ? "btn-pressed" : "text-pencil hover:text-foreground"
-            )}
+            className="neo-seg-item flex-1 text-sm sm:flex-none"
           >
             <Dumbbell className="h-4 w-4" aria-hidden />
             Exercises
@@ -99,7 +96,7 @@ export function QuizView({
 }
 
 /* ------------------------------------------------------------------ */
-/* Quiz list — responsive paper cards                                  */
+/* Quiz list                                                           */
 /* ------------------------------------------------------------------ */
 
 function QuizList({
@@ -123,35 +120,29 @@ function QuizList({
           <button
             key={q.moduleId}
             onClick={() => setActiveQuiz(q.moduleId)}
-            className="sheet btn3d flex w-full flex-col gap-3 rounded-2xl p-4 text-left sm:flex-row sm:items-center sm:justify-between sm:p-5"
+            className="neo-card-sm flex w-full items-center gap-3 p-4 text-left transition-transform hover:scale-[1.01] sm:gap-4"
           >
+            <span className="neo-tile h-11 w-11 shrink-0 bg-nb-purple">
+              <Target className="h-5 w-5 text-[#17110a]" aria-hidden />
+            </span>
             <div className="min-w-0 flex-1">
               <p className="line-clamp-2 font-display text-sm font-bold leading-snug sm:text-[15px]">
                 {q.title}
               </p>
-              <p className="mt-1 text-[11px] font-semibold text-pencil sm:text-xs">
-                {q.questions.length} questions
-                {mod ? ` · Days ${mod.days[0]}–${mod.days[1]}` : ""}
+              <p className="mt-1 text-[11px] font-bold text-nb-muted sm:text-xs">
+                {q.questions.length} questions{mod ? ` · Days ${mod.days[0]}–${mod.days[1]}` : ""}
               </p>
-              {result && (
-                <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-pencil sm:mt-3 sm:text-[11px]">
-                  Best score {result.score}/{result.total}
-                </p>
-              )}
             </div>
-            <span className="shrink-0 self-start sm:self-center">
-              {pct !== null ? (
-                <span className="inline-flex items-center gap-1 rounded-full border border-pen-green/40 bg-pen-green/10 px-2.5 py-1 text-[11px] font-bold text-pen-green sm:text-xs">
-                  <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />
-                  {pct}%
-                </span>
-              ) : (
-                <span className="chip inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold text-pencil sm:text-xs">
-                  <Target className="h-3.5 w-3.5" aria-hidden />
-                  Start
-                </span>
-              )}
-            </span>
+            {pct !== null ? (
+              <span className="neo-chip shrink-0 bg-nb-green px-2.5 py-1 text-[11px] text-[#0b2a17]">
+                <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />
+                {pct}%
+              </span>
+            ) : (
+              <span className="neo-chip shrink-0 bg-nb-yellow px-2.5 py-1 text-[11px] text-[#17110a]">
+                Start
+              </span>
+            )}
           </button>
         );
       })}
@@ -160,7 +151,7 @@ function QuizList({
 }
 
 /* ------------------------------------------------------------------ */
-/* Exercise list — coding tasks solved in the Code Lab                 */
+/* Exercise list                                                       */
 /* ------------------------------------------------------------------ */
 
 function ExerciseList({ exercises }: { exercises: Exercise[] }) {
@@ -174,18 +165,22 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
     setView("lab");
   };
 
+  const DIFF: Record<Exercise["difficulty"], string> = {
+    easy: SOFT_CLS.green,
+    medium: SOFT_CLS.orange,
+    hard: SOFT_CLS.red,
+  };
+
   return (
     <div className="space-y-3 sm:space-y-4">
       {exercises.map((ex) => (
-        <div key={ex.id} className="sheet space-y-3 rounded-2xl p-4 sm:p-5">
+        <div key={ex.id} className="neo-card-sm space-y-3 p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="chip rounded-full px-2.5 py-1 text-[10px] font-bold text-pencil">
-              Day {ex.day}
-            </span>
+            <span className="neo-chip px-2.5 py-1 text-[10px]">Day {ex.day}</span>
             <span
               className={cn(
-                "rounded-full border bg-card px-2.5 py-1 text-[10px] font-bold capitalize",
-                DIFFICULTY_STYLES[ex.difficulty]
+                "neo-chip px-2.5 py-1 text-[10px] capitalize",
+                DIFF[ex.difficulty]
               )}
             >
               {ex.difficulty}
@@ -199,20 +194,20 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
             {ex.task}
           </p>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-ink/15 bg-grid-paper p-3">
-              <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-pencil">
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="neo-inset overflow-hidden bg-nb-code shadow-hard-xs">
+              <p className="border-b-2 border-nb-border bg-nb-code-deep px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-nb-muted">
                 Starter code
               </p>
-              <pre className="overflow-x-auto scroll-slim whitespace-pre font-mono text-xs leading-5 text-foreground/90">
+              <pre className="overflow-x-auto scroll-slim whitespace-pre px-3 py-2.5 font-mono text-xs leading-5 text-[#f2e9d8]">
                 {ex.starterCode}
               </pre>
             </div>
-            <div className="rounded-xl border border-ink/15 bg-paper-cream p-3">
-              <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-pencil">
+            <div className="neo-inset overflow-hidden shadow-hard-xs">
+              <p className="border-b-2 border-nb-border bg-nb-teal px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#0c2725]">
                 Expected output
               </p>
-              <pre className="whitespace-pre-wrap break-words font-mono text-xs leading-5 text-pen-blue">
+              <pre className="overflow-x-auto scroll-slim whitespace-pre-wrap break-words px-3 py-2.5 font-mono text-xs leading-5 text-foreground/90">
                 {ex.expectedOutput}
               </pre>
             </div>
@@ -221,7 +216,7 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => openInLab(ex.starterCode)}
-              className="btn3d btn-ink inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 text-sm font-bold"
+              className="neo-btn neo-btn-red min-h-[40px] gap-2 rounded-xl px-4 text-sm"
             >
               <TerminalSquare className="h-4 w-4" aria-hidden />
               Open in Code Lab
@@ -229,20 +224,23 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
             <button
               onClick={() => setOpenHint(openHint === ex.id ? null : ex.id)}
               aria-expanded={openHint === ex.id}
-              className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-1.5 rounded-xl px-3.5 text-sm font-bold"
+              className={cn(
+                "neo-btn min-h-[40px] gap-1.5 rounded-xl px-3.5 text-sm",
+                openHint === ex.id ? "bg-nb-yellow text-[#17110a]" : ""
+              )}
             >
-              <Lightbulb className="h-4 w-4 text-pen-amber" aria-hidden />
+              <Lightbulb className="h-4 w-4" aria-hidden />
               Hint
             </button>
             <button
               onClick={() => setOpenSolution(openSolution === ex.id ? null : ex.id)}
               aria-expanded={openSolution === ex.id}
-              className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-1.5 rounded-xl px-3.5 text-sm font-bold"
+              className="neo-btn min-h-[40px] gap-1.5 rounded-xl px-3.5 text-sm"
             >
               {openSolution === ex.id ? (
-                <EyeOff className="h-4 w-4 text-pencil" aria-hidden />
+                <EyeOff className="h-4 w-4" aria-hidden />
               ) : (
-                <Eye className="h-4 w-4 text-pencil" aria-hidden />
+                <Eye className="h-4 w-4" aria-hidden />
               )}
               Solution
             </button>
@@ -257,8 +255,8 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="rounded-xl border border-pen-amber/40 bg-pen-amber/10 p-3 text-[13px] font-semibold text-foreground/85">
-                  <span className="hand mr-2 text-xl leading-none text-pen-amber">Hint:</span>
+                <div className="neo-inset bg-nb-yellow/25 p-3 text-[13px] font-semibold text-foreground/90">
+                  <span className="mr-2 font-display font-bold text-[#7a5b00] dark:text-nb-yellow">Hint:</span>
                   {ex.hint}
                 </div>
               </motion.div>
@@ -271,7 +269,7 @@ function ExerciseList({ exercises }: { exercises: Exercise[] }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <pre className="overflow-x-auto scroll-slim whitespace-pre rounded-xl border border-pen-green/40 bg-pen-green/10 p-3 font-mono text-xs leading-5 text-foreground/90">
+                <pre className="neo-inset overflow-x-auto scroll-slim whitespace-pre bg-nb-code p-3 font-mono text-xs leading-5 text-[#f2e9d8]">
                   {ex.solution}
                 </pre>
               </motion.div>
@@ -339,30 +337,31 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
         animate={{ opacity: 1, scale: 1 }}
         className="flex w-full min-w-0 flex-col items-center py-6 text-center sm:py-10"
       >
-        <div className="sheet relative w-full max-w-md rounded-[22px] p-6 sm:p-10">
-          <span className="washi" aria-hidden />
-          <div className="relative flex min-w-0 flex-col items-center">
-            <ProgressGauge value={pct} tone="paper" className="h-28 w-28 sm:h-36 sm:w-36" />
-            <p className={cn("hand mt-3 text-3xl leading-none", passed ? "text-pen-green" : "text-pen-red")}>
+        <div className="neo-card w-full max-w-md p-6 sm:p-9">
+          <div className="flex min-w-0 flex-col items-center">
+            <ProgressGauge value={pct} className="h-28 w-28 sm:h-36 sm:w-36" />
+            <p
+              className={cn(
+                "neo-chip mt-4 -rotate-1 px-4 py-1.5 font-display text-base",
+                passed ? "bg-nb-green text-[#0b2a17]" : "bg-nb-red text-white dark:text-[#1a1108]"
+              )}
+            >
               {passed ? "Nice work!" : "So close!"}
             </p>
-            <h1 className="mt-1.5 font-display text-xl font-bold sm:text-2xl">
+            <h1 className="mt-2 font-display text-xl font-bold sm:text-2xl">
               {score}/{total} correct
             </h1>
-            <p className="mx-auto mt-1.5 max-w-xs text-[13px] font-semibold text-pencil sm:text-sm">
-              {passed ? "Keep the momentum going." : "Review the lessons and retry."}
-            </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3">
               <button
                 onClick={restart}
-                className="btn3d btn-ink inline-flex min-h-[44px] items-center gap-2 rounded-xl px-5 text-sm font-bold"
+                className="neo-btn neo-btn-red min-h-[44px] gap-2 rounded-xl px-5 text-sm"
               >
                 <RotateCcw className="h-4 w-4" aria-hidden />
                 Retake
               </button>
               <button
                 onClick={() => setActiveQuiz(null)}
-                className="btn3d btn-paper inline-flex min-h-[44px] items-center gap-2 rounded-xl px-5 text-sm font-bold"
+                className="neo-btn min-h-[44px] rounded-xl px-5 text-sm"
               >
                 All quizzes
               </button>
@@ -377,23 +376,23 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
     <div className="mx-auto min-w-0 max-w-2xl space-y-4 pt-2 sm:space-y-5">
       <button
         onClick={() => setActiveQuiz(null)}
-        className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-1.5 rounded-lg px-3 text-sm font-bold"
+        className="neo-btn min-h-[40px] gap-1.5 rounded-lg px-3 text-sm"
       >
-        <ArrowLeft className="h-4 w-4 text-pen-blue" aria-hidden />
+        <ArrowLeft className="h-4 w-4" aria-hidden />
         All quizzes
       </button>
 
       {/* question progress */}
       <div>
-        <div className="flex items-center justify-between gap-2 text-[11px] font-bold uppercase tracking-wider text-pencil sm:text-xs">
+        <div className="flex items-center justify-between gap-2 text-[11px] font-bold uppercase tracking-wider text-nb-muted sm:text-xs">
           <span>
             Question {current + 1} of {total}
           </span>
-          <span className="tabular-nums normal-case">{score} correct so far</span>
+          <span className="tabular-nums normal-case">{score} correct</span>
         </div>
-        <div className="chip mt-2 h-3 overflow-hidden rounded-full p-[2px]">
+        <div className="neo-bar mt-2">
           <div
-            className="h-full rounded-full bg-pen-blue shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)] transition-all duration-300"
+            className="neo-bar-fill bg-nb-purple"
             style={{ width: `${((current + (picked !== null ? 1 : 0)) / total) * 100}%` }}
           />
         </div>
@@ -406,12 +405,12 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.2 }}
-          className="sheet min-w-0 rounded-2xl p-4 sm:p-7"
+          className="neo-card min-w-0 p-4 sm:p-6"
         >
-          <h2 className="font-display text-[15.5px] font-bold leading-snug sm:text-lg">
+          <h2 className="font-display text-[16px] font-bold leading-snug sm:text-lg">
             {q.prompt}
           </h2>
-          <div className="mt-3.5 space-y-2.5 sm:mt-5 sm:space-y-3" role="radiogroup" aria-label="Answer options">
+          <div className="mt-4 space-y-2.5 sm:space-y-3" role="radiogroup" aria-label="Answer options">
             {q.options.map((opt, idx) => {
               const isPicked = picked === idx;
               const isAnswer = q.answer === idx;
@@ -424,34 +423,32 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
                   disabled={reveal}
                   onClick={() => pick(idx)}
                   className={cn(
-                    "btn3d flex min-h-[48px] w-full items-center gap-2.5 rounded-xl px-3 py-3 text-left text-[13px] font-bold transition-all sm:min-h-[52px] sm:gap-3 sm:px-4 sm:py-3.5 sm:text-sm",
-                    !reveal && "btn-paper",
-                    reveal && isAnswer &&
-                      "border border-pen-green bg-pen-green/10 text-foreground shadow-[0_2px_4px_oklch(0.55_0.12_155/0.2)_inset]",
-                    reveal && isPicked && !isAnswer &&
-                      "border border-pen-red bg-pen-red/10 text-foreground shadow-[0_2px_4px_oklch(0.55_0.19_25/0.2)_inset]",
-                    reveal && !isPicked && !isAnswer &&
-                      "border border-ink/10 bg-transparent opacity-50 shadow-none"
+                    "flex min-h-[50px] w-full items-center gap-2.5 rounded-xl border-[3px] px-3 py-2.5 text-left text-[13px] font-bold transition-all sm:min-h-[54px] sm:gap-3 sm:px-4 sm:text-sm",
+                    !reveal &&
+                      "border-nb-border bg-nb-card shadow-hard-xs hover:-translate-y-px hover:shadow-hard-sm",
+                    reveal && isAnswer && "border-nb-green bg-nb-green/15",
+                    reveal && isPicked && !isAnswer && "border-nb-red bg-nb-red/15",
+                    reveal && !isPicked && !isAnswer && "border-border/30 bg-transparent opacity-50 shadow-none"
                   )}
                 >
                   <span
                     className={cn(
-                      "relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border font-display text-[11px] font-bold sm:h-8 sm:w-8 sm:text-xs",
+                      "neo-tile h-8 w-8 font-display text-xs",
                       reveal && isAnswer
-                        ? "border-pen-green bg-card text-pen-green"
+                        ? "border-nb-green bg-nb-green text-[#0b2a17]"
                         : reveal && isPicked && !isAnswer
-                          ? "border-pen-red bg-card text-pen-red"
-                          : "chip text-pen-blue"
+                          ? "border-nb-red bg-nb-red text-white dark:text-[#1a1108]"
+                          : OPTION_TILE[idx % OPTION_TILE.length]
                     )}
                   >
                     {String.fromCharCode(65 + idx)}
                   </span>
                   <span className="min-w-0 flex-1 break-words">{opt}</span>
                   {reveal && isAnswer && (
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-pen-green" aria-hidden />
+                    <CheckCircle2 className="h-5 w-5 shrink-0 text-nb-green" aria-hidden />
                   )}
                   {reveal && isPicked && !isAnswer && (
-                    <XCircle className="h-5 w-5 shrink-0 text-pen-red" aria-hidden />
+                    <XCircle className="h-5 w-5 shrink-0 text-nb-red" aria-hidden />
                   )}
                 </button>
               );
@@ -462,18 +459,18 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 rounded-xl border border-ink/15 bg-paper-cream p-3.5 sm:mt-5 sm:p-4"
+              className="neo-inset mt-4 bg-nb-yellow/20 p-3.5 sm:mt-5 sm:p-4"
             >
-              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-pencil sm:text-xs">
-                <Trophy className="h-3.5 w-3.5 text-pen-amber" aria-hidden />
+              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-nb-muted">
+                <Trophy className="h-3.5 w-3.5 text-nb-orange" aria-hidden />
                 {picked === q.answer ? "Correct" : "Explanation"}
               </p>
-              <p className="mt-1.5 break-words text-[13px] font-semibold leading-6 text-foreground/85 sm:text-sm">
+              <p className="mt-1.5 break-words text-[13px] font-semibold leading-6 text-foreground/90 sm:text-sm">
                 {q.explanation}
               </p>
               <button
                 onClick={advance}
-                className="btn3d btn-ink mt-3.5 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-6 text-sm font-bold sm:mt-4 sm:w-auto"
+                className="neo-btn neo-btn-red mt-3.5 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-6 text-sm sm:mt-4 sm:w-auto"
               >
                 {current + 1 < total ? "Next question" : "See results"}
                 <ArrowRight className="h-4 w-4" aria-hidden />

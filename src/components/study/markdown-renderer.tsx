@@ -4,57 +4,53 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Check, Copy, TerminalSquare } from "lucide-react";
 
 /**
- * Recolors the editor theme into a notebook "ink on graph paper" palette:
- * blue keywords, green strings, purple functions, amber numbers —
- * like writing code with coloured pens on grid paper.
+ * Syntax palette for the dark code surface: loud neo tokens —
+ * red keywords, teal strings, purple functions, yellow numbers.
  */
-const inkTheme = {
-  ...oneLight,
+const neoCodeTheme = {
   'code[class*="language-"]': {
-    ...oneLight['code[class*="language-"]'],
-    color: "oklch(0.3 0.025 262)",
+    color: "#f2e9d8",
     textShadow: "none",
+    fontFamily: "var(--font-mono), ui-monospace, monospace",
   },
   'pre[class*="language-"]': {
-    ...oneLight['pre[class*="language-"]'],
     background: "transparent",
   },
-  comment: { color: "oklch(0.52 0.02 258)", fontStyle: "italic" },
-  prolog: { color: "oklch(0.52 0.02 258)" },
-  doctype: { color: "oklch(0.52 0.02 258)" },
-  cdata: { color: "oklch(0.52 0.02 258)" },
-  punctuation: { color: "oklch(0.42 0.02 262)" },
-  property: { color: "oklch(0.52 0.12 305)" },
-  tag: { color: "oklch(0.5 0.14 262)" },
-  boolean: { color: "oklch(0.55 0.13 70)" },
-  number: { color: "oklch(0.55 0.13 70)" },
-  constant: { color: "oklch(0.55 0.13 70)" },
-  symbol: { color: "oklch(0.55 0.13 70)" },
-  deleted: { color: "oklch(0.52 0.02 258)" },
-  selector: { color: "oklch(0.52 0.12 305)" },
-  "attr-name": { color: "oklch(0.52 0.12 305)" },
-  string: { color: "oklch(0.5 0.11 155)" },
-  char: { color: "oklch(0.5 0.11 155)" },
-  builtin: { color: "oklch(0.5 0.14 262)", fontWeight: "600" },
-  inserted: { color: "oklch(0.5 0.11 155)" },
-  operator: { color: "oklch(0.38 0.03 262)" },
-  entity: { color: "oklch(0.38 0.03 262)", cursor: "help" },
-  url: { color: "oklch(0.38 0.03 262)" },
-  variable: { color: "oklch(0.35 0.03 262)" },
-  atrule: { color: "oklch(0.52 0.12 305)" },
-  "attr-value": { color: "oklch(0.5 0.11 155)" },
-  keyword: { color: "oklch(0.5 0.14 262)", fontWeight: "600" },
-  function: { color: "oklch(0.45 0.12 305)" },
-  "class-name": { color: "oklch(0.45 0.12 305)" },
-  regex: { color: "oklch(0.55 0.13 70)" },
-  important: { color: "oklch(0.55 0.19 25)", fontWeight: "bold" },
+  comment: { color: "#948a79", fontStyle: "italic" },
+  prolog: { color: "#948a79" },
+  doctype: { color: "#948a79" },
+  cdata: { color: "#948a79" },
+  punctuation: { color: "#b5ab99" },
+  property: { color: "#c9a6ff" },
+  tag: { color: "#ff8f8f" },
+  boolean: { color: "#ffd866" },
+  number: { color: "#ffd866" },
+  constant: { color: "#ffd866" },
+  symbol: { color: "#ffd866" },
+  deleted: { color: "#ff8f8f" },
+  selector: { color: "#7ee8c7" },
+  "attr-name": { color: "#c9a6ff" },
+  string: { color: "#7ee8c7" },
+  char: { color: "#7ee8c7" },
+  builtin: { color: "#ff8f8f", fontWeight: "700" },
+  inserted: { color: "#7ee8c7" },
+  operator: { color: "#f2e9d8" },
+  entity: { color: "#f2e9d8", cursor: "help" },
+  url: { color: "#7ee8c7" },
+  variable: { color: "#f2e9d8" },
+  atrule: { color: "#c9a6ff" },
+  "attr-value": { color: "#7ee8c7" },
+  keyword: { color: "#ff8f8f", fontWeight: "700" },
+  function: { color: "#c9a6ff" },
+  "class-name": { color: "#ffd866" },
+  regex: { color: "#ffd866" },
+  important: { color: "#ff8f8f", fontWeight: "bold" },
 };
 
-/** Python code on a graph-paper sheet with a paper header strip. */
+/** Python code block: dark neo editor sheet with a black header strip. */
 function CodeBlock({ language, value }: { language: string; value: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -69,21 +65,21 @@ function CodeBlock({ language, value }: { language: string; value: string }) {
   };
 
   return (
-    <div className="relative my-5 overflow-hidden rounded-xl border border-ink/15 bg-grid-paper shadow-[0_2px_4px_oklch(0.3_0.03_262/0.08),0_12px_24px_-14px_oklch(0.3_0.03_262/0.25)]">
-      {/* paper header strip */}
-      <div className="flex items-center justify-between gap-2 border-b border-ink/10 bg-paper-cream/90 px-3 py-1.5">
-        <span className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-wider text-pencil">
-          <TerminalSquare className="h-3.5 w-3.5" aria-hidden />
+    <div className="my-5 overflow-hidden rounded-xl border-[3px] border-nb-border shadow-hard-sm">
+      {/* header strip */}
+      <div className="flex items-center justify-between gap-2 border-b-[3px] border-nb-border bg-nb-code-deep px-3 py-1.5">
+        <span className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-wider text-nb-muted">
+          <span className="h-2.5 w-2.5 rounded-full border-2 border-[#f2e9d8]/60 bg-nb-red" aria-hidden />
           {language || "python"}
         </span>
         <button
           onClick={copy}
           aria-label="Copy code"
-          className="btn3d btn-paper inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-mono text-[11px] font-bold"
+          className="neo-btn min-h-[28px] rounded-lg px-2.5 py-0.5 font-mono text-[11px]"
         >
           {copied ? (
             <>
-              <Check className="h-3.5 w-3.5 text-pen-green" aria-hidden />
+              <Check className="h-3.5 w-3.5 text-nb-green" aria-hidden />
               Copied
             </>
           ) : (
@@ -95,10 +91,10 @@ function CodeBlock({ language, value }: { language: string; value: string }) {
         </button>
       </div>
 
-      <div className="relative max-w-full overflow-x-auto scroll-slim">
+      <div className="relative max-w-full overflow-x-auto scroll-slim bg-nb-code">
         <SyntaxHighlighter
           language={language || "python"}
-          style={inkTheme}
+          style={neoCodeTheme}
           wrapLongLines={false}
           customStyle={{
             background: "transparent",

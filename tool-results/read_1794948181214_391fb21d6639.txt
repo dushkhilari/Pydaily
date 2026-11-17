@@ -1,0 +1,740 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→<meta charset="utf-8">
+     5→<meta name="viewport" content="width=device-width, initial-scale=1">
+     6→<title>Code Lab — Real Python 3 in your browser</title>
+     7→<meta name="description" content="Code Lab — a notebook-themed Python 3 playground. Real CPython compiled to WebAssembly via Pyodide + a CodeMirror editor. Runs 100% in your browser, no server needed.">
+     8→
+     9→<!-- ========================================================================
+    10→     CODE LAB — single-file Python playground
+    11→     ------------------------------------------------------------------------
+    12→     This page is built to be embedded in a notebook-themed learning site via
+    13→     an <iframe>, but it also works perfectly when opened directly as a file.
+    14→
+    15→     HOW THE PIECES FIT TOGETHER
+    16→       <head>   : Google Fonts + CodeMirror stylesheets + all page CSS (§1)
+    17→       <body>   : slim top bar (status pill + Run/Clear buttons), the editor
+    18→                  pane on TOP and the console pane BELOW it — stacked, so the
+    19→                  editor gets the full width and lots of height on any screen
+    20→       scripts  : pyodide.js (Python runtime) → CodeMirror JS (core FIRST,
+    21→                  then the Python mode, then the addons) → app script (§2–§7)
+    22→
+    23→     EMBEDDING NOTES FOR THE HOST SITE
+    24→       • Wait for the { type: "pyodide-ready" } postMessage before triggering
+    25→         runs from outside the frame.
+    26→       • Push code into the editor from the host page with:
+    27→             iframe.contentWindow.postMessage(
+    28→               { type: "set-code", code: "print('hi')" }, "*")
+    29→       • If the host uses the `sandbox` attribute on the iframe, include
+    30→         `allow-scripts` (required) and `allow-modals` (needed so that
+    31→         Python's input() can open window.prompt()).
+    32→     ======================================================================== -->
+    33→
+    34→<!-- Google Fonts: Caveat (handwritten headings) + Nunito (UI text) -->
+    35→<link rel="preconnect" href="https://fonts.googleapis.com">
+    36→<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    37→<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    38→
+    39→<!-- CodeMirror CSS: core editor chrome + the "material-darker" dark theme.
+    40→     Loaded BEFORE our <style> block below so our overrides win any ties. -->
+    41→<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    42→<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+    43→
+    44→<style>
+    45→/* ============================================================
+    46→   1. LAYOUT & NOTEBOOK THEME
+    47→   A lab page taped into a paper notebook: warm paper background
+    48→   with a faint grain, ink and ballpoint-pen colours, a tall dark
+    49→   navy editor card on TOP and a ruled-paper console BELOW it.
+    50→============================================================ */
+    51→
+    52→/* ---- 1a. Design tokens (the notebook palette) -------------- */
+    53→:root {
+    54→  --paper:      #f6f3ec;  /* page background — warm paper          */
+    55→  --paper-card: #fffdf8;  /* cards / buttons — paper white         */
+    56→  --ink:        #23283b;  /* ink black — headings, borders         */
+    57→  --ink-soft:   #2a3040;  /* console text                          */
+    58→  --muted:      #8a8f9d;  /* gray system lines                     */
+    59→  --blue:       #3457d5;  /* ballpoint blue — Run button, accents  */
+    60→  --blue-dark:  #2a46ad;  /* ballpoint blue — hover state          */
+    61→  --red:        #d0342c;  /* red pen — Python errors               */
+    62→  --green:      #2e7d4f;  /* green pen — "ready" state             */
+    63→  --amber:      #b8860b;  /* amber — "booting" state               */
+    64→  --navy:       #1f2433;  /* editor card background                */
+    65→  --navy-deep:  #171b28;  /* editor header strip                   */
+    66→  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    67→}
+    68→
+    69→/* ---- 1b. Paper background: warm cream + subtle SVG grain + soft vignette */
+    70→* { box-sizing: border-box; }
+    71→html, body { margin: 0; padding: 0; height: 100%; }
+    72→body {
+    73→  min-height: 100vh;
+    74→  color: var(--ink);
+    75→  font-family: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    76→  background-color: var(--paper);
+    77→  background-image:
+    78→    /* tiny inline SVG using feTurbulence = paper grain (~5% opacity) */
+    79→    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='0.05'/%3E%3C/svg%3E"),
+    80→    /* soft light from the top + a faint vignette toward the edges */
+    81→    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
+    82→    radial-gradient(140% 120% at 50% 110%, rgba(35, 40, 59, 0.06) 0%, rgba(35, 40, 59, 0) 55%);
+    83→}
+    84→
+    85→/* ---- 1c. Outer wrapper: single centered column that EXACTLY fills the
+    86→     viewport (or iframe). The editor + console split whatever height is
+    87→     left after the slim top bar, so the editor is always as large as the
+    88→     screen allows and the output always stays visible below it.          */
+    89→.lab-wrap {
+    90→  max-width: 1240px;
+    91→  margin: 0 auto;
+    92→  padding: 12px 16px 16px;
+    93→  height: 100vh;               /* in an iframe, vh = the iframe height */
+    94→  display: flex;
+    95→  flex-direction: column;
+    96→}
+    97→@supports (height: 100dvh) {
+    98→  .lab-wrap { height: 100dvh; }
+    99→}
+   100→
+   101→/* ---- 1d. Slim top bar: status pill LEFT, action keys RIGHT ---
+   102→     No big page title here — the host page (or the editor itself)
+   103→     already says what this is. Everything lives on one row so the
+   104→     panes below get maximum height.                               */
+   105→.topbar {
+   106→  flex: 0 0 auto;
+   107→  display: flex;
+   108→  align-items: center;
+   109→  justify-content: space-between;
+   110→  flex-wrap: wrap;
+   111→  gap: 10px 14px;
+   112→  margin-bottom: 12px;
+   113→}
+   114→.topbar-actions { display: inline-flex; align-items: center; gap: 10px; }
+   115→
+   116→/* Status pill — one element, three state classes:
+   117→     .booting  → amber dot  + CSS spinner + "Booting Python runtime…"
+   118→     .ready    → green dot  + "Python 3 · ready"
+   119→     .running  → blue pulsing dot + "Running…"
+   120→     (.error   → red dot, used only if the Pyodide CDN fails)        */
+   121→.status-pill {
+   122→  display: inline-flex;
+   123→  align-items: center;
+   124→  gap: 8px;
+   125→  padding: 8px 14px;
+   126→  background: var(--paper-card);
+   127→  border: 1.5px solid rgba(35, 40, 59, 0.18);
+   128→  border-radius: 999px;
+   129→  box-shadow: 0 1px 3px rgba(35, 40, 59, 0.08);
+   130→  font-size: 13px;
+   131→  font-weight: 700;
+   132→  color: var(--ink-soft);
+   133→  white-space: nowrap;
+   134→}
+   135→.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); flex: 0 0 auto; }
+   136→.status-pill.ready   .status-dot { background: var(--green); }
+   137→.status-pill.running .status-dot { background: var(--blue); animation: pill-pulse 1.1s ease-in-out infinite; }
+   138→.status-pill.error   .status-dot { background: var(--red); }
+   139→.status-spinner {
+   140→  display: none;
+   141→  width: 12px; height: 12px;
+   142→  border-radius: 50%;
+   143→  border: 2px solid rgba(184, 134, 11, 0.25);
+   144→  border-top-color: var(--amber);
+   145→  animation: spin 0.8s linear infinite;
+   146→}
+   147→.status-pill.booting .status-spinner { display: inline-block; }
+   148→
+   149→@keyframes spin { to { transform: rotate(360deg); } }
+   150→@keyframes pill-pulse {
+   151→  0%, 100% { opacity: 1; transform: scale(1); }
+   152→  50%      { opacity: 0.45; transform: scale(0.8); }
+   153→}
+   154→
+   155→/* ---- 1e. Action keys ---------------------------------------- */
+   156→/* Shared button base: ~44px tall, rounded, presses down on click */
+   157→.btn {
+   158→  min-height: 44px;
+   159→  padding: 0 22px;
+   160→  border-radius: 12px;
+   161→  font-family: "Nunito", sans-serif;
+   162→  font-size: 15px;
+   163→  font-weight: 800;
+   164→  letter-spacing: 0.01em;
+   165→  cursor: pointer;
+   166→  transition: background-color 0.15s ease, transform 0.06s ease, box-shadow 0.15s ease;
+   167→}
+   168→.btn:active:not(:disabled) { transform: translateY(2px); }
+   169→.btn:focus-visible { outline: 3px solid rgba(52, 87, 213, 0.35); outline-offset: 2px; }
+   170→
+   171→/* Run Code — solid ballpoint blue; grayed out while disabled.
+   172→   The usage hint appears as a small ink speech bubble ON HOVER
+   173→   (there is no keyboard shortcut in this lab).                   */
+   174→.btn-run {
+   175→  position: relative;
+   176→  background: var(--blue);
+   177→  color: #ffffff;
+   178→  border: none;
+   179→  box-shadow: 0 3px 0 rgba(26, 42, 110, 0.4), 0 8px 16px rgba(52, 87, 213, 0.22);
+   180→}
+   181→.btn-run:hover:not(:disabled) { background: var(--blue-dark); }
+   182→.btn-run:disabled { background: #b7bac6; color: #f3f4f7; cursor: not-allowed; box-shadow: none; }
+   183→
+   184→/* hover tooltip (pure CSS, anchored below the button so it is never
+   185→   clipped by the top edge of the viewport) */
+   186→.btn-run::after {
+   187→  content: attr(data-tip);
+   188→  position: absolute;
+   189→  top: calc(100% + 9px);
+   190→  right: 0;
+   191→  transform: translateY(-3px);
+   192→  padding: 6px 12px;
+   193→  border-radius: 9px;
+   194→  background: var(--ink);
+   195→  color: var(--paper-card);
+   196→  font-size: 12px;
+   197→  font-weight: 700;
+   198→  white-space: nowrap;
+   199→  box-shadow: 0 4px 10px rgba(35, 40, 59, 0.25);
+   200→  opacity: 0;
+   201→  visibility: hidden;
+   202→  pointer-events: none;
+   203→  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+   204→  z-index: 20;
+   205→}
+   206→/* the little bubble tail */
+   207→.btn-run::before {
+   208→  content: "";
+   209→  position: absolute;
+   210→  top: calc(100% + 3px);
+   211→  right: 26px;
+   212→  transform: translateY(-3px);
+   213→  border: 6px solid transparent;
+   214→  border-bottom-color: var(--ink);
+   215→  opacity: 0;
+   216→  visibility: hidden;
+   217→  pointer-events: none;
+   218→  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+   219→  z-index: 20;
+   220→}
+   221→.btn-run:hover:not(:disabled)::after,
+   222→.btn-run:hover:not(:disabled)::before {
+   223→  opacity: 1;
+   224→  visibility: visible;
+   225→  transform: translateY(0);
+   226→}
+   227→.btn-run:disabled::after,
+   228→.btn-run:disabled::before { display: none; }
+   229→
+   230→/* Clear Output — white paper button with an ink border */
+   231→.btn-clear {
+   232→  background: var(--paper-card);
+   233→  color: var(--ink);
+   234→  border: 1.5px solid var(--ink);
+   235→  box-shadow: 0 3px 0 rgba(35, 40, 59, 0.2);
+   236→}
+   237→.btn-clear:hover { background: #f3efe3; }
+   238→
+   239→/* ---- 1f. Main stack: editor on TOP, console BELOW ------------
+   240→     A vertical grid that fills the remaining height. The editor row
+   241→     gets roughly twice the console row (2fr vs 1fr), with sensible
+   242→     minimums so both stay usable on short screens.                */
+   243→.lab-stack {
+   244→  flex: 1 1 auto;
+   245→  min-height: 0;                /* let the grid shrink inside the flex column */
+   246→  display: grid;
+   247→  grid-template-columns: 1fr;   /* always one column: editor, then output */
+   248→  grid-template-rows: minmax(260px, 2.1fr) minmax(150px, 1fr);
+   249→  gap: 14px;
+   250→  align-items: stretch;
+   251→}
+   252→.lab-stack > * { min-width: 0; } /* keep panes from overflowing */
+   253→
+   254→.pane {
+   255→  display: flex;
+   256→  flex-direction: column;
+   257→  border-radius: 16px;
+   258→  overflow: hidden;
+   259→}
+   260→/* Editor pane — dark navy card with a subtle outer shadow */
+   261→.pane-editor {
+   262→  background: var(--navy);
+   263→  box-shadow: 0 14px 30px rgba(35, 40, 59, 0.20), 0 3px 8px rgba(35, 40, 59, 0.12);
+   264→}
+   265→/* Console pane — light ruled-paper card */
+   266→.pane-console {
+   267→  background: var(--paper-card);
+   268→  border: 1.5px solid rgba(35, 40, 59, 0.16);
+   269→  box-shadow: 0 10px 24px rgba(35, 40, 59, 0.10);
+   270→}
+   271→
+   272→/* Slim header strip shared by both panes */
+   273→.pane-head {
+   274→  flex: 0 0 auto;
+   275→  display: flex;
+   276→  align-items: center;
+   277→  justify-content: space-between;
+   278→  gap: 10px;
+   279→  min-height: 40px;
+   280→  padding: 7px 16px;
+   281→}
+   282→.dark-head  { background: var(--navy-deep); }
+   283→.paper-head { border-bottom: 1px solid rgba(35, 40, 59, 0.12); }
+   284→.file-name {
+   285→  font-family: var(--mono);
+   286→  font-size: 11.5px;
+   287→  font-weight: 700;
+   288→  letter-spacing: 0.14em;
+   289→  text-transform: uppercase;   /* "main.py" renders as MAIN.PY */
+   290→  color: #9aa4bf;
+   291→}
+   292→.paper-file { color: rgba(35, 40, 59, 0.6); }
+   293→.head-right { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+   294→.mono-label {
+   295→  font-family: var(--mono);
+   296→  font-size: 10px;
+   297→  letter-spacing: 0.16em;
+   298→  color: rgba(35, 40, 59, 0.45);
+   299→  text-transform: uppercase;
+   300→}
+   301→.term-label {
+   302→  font-family: var(--mono);
+   303→  font-size: 10px;
+   304→  font-weight: 600;
+   305→  letter-spacing: 0.18em;
+   306→  color: #6f7a99;
+   307→}
+   308→
+   309→/* ---- 1g. CodeMirror host: pane stretches to its grid row ------ */
+   310→.editor-host { height: 100%; min-height: 260px; }
+   311→.editor-host .CodeMirror {
+   312→  height: 100%;               /* CodeMirror stretches to the pane */
+   313→  background: transparent;    /* let the navy card show through   */
+   314→  font-family: var(--mono);
+   315→  font-size: 13.5px;
+   316→  line-height: 1.6;
+   317→}
+   318→.editor-host .CodeMirror-gutters {
+   319→  background: transparent;
+   320→  border-right: 1px solid rgba(154, 164, 191, 0.16);
+   321→}
+   322→
+   323→/* ---- 1h. Console: ruled paper, mono text, auto-scrolled ----- */
+   324→.console-wrap { position: relative; height: 100%; min-height: 150px; }
+   325→.console-body {
+   326→  height: 100%;
+   327→  overflow-y: auto;
+   328→  padding: 0 16px 14px;
+   329→  background-color: var(--paper-card);
+   330→  /* horizontal ruled lines every 26px — output line-height matches */
+   331→  background-image: repeating-linear-gradient(
+   332→    to bottom,
+   333→    transparent 0px,
+   334→    transparent 25px,
+   335→    rgba(52, 87, 213, 0.14) 25px,
+   336→    rgba(52, 87, 213, 0.14) 26px
+   337→  );
+   338→  background-attachment: local; /* rules scroll together with the text */
+   339→  font-family: var(--mono);
+   340→  font-size: 13px;
+   341→  line-height: 26px;
+   342→  color: var(--ink-soft);
+   343→}
+   344→/* every appended output line wraps instead of overflowing horizontally */
+   345→.console-body > div {
+   346→  white-space: pre-wrap;
+   347→  word-break: break-word;
+   348→}
+   349→.console-body .err   { color: var(--red); }   /* Python tracebacks */
+   350→.console-body .muted { color: var(--muted); } /* system messages   */
+   351→/* thin, unobtrusive scrollbar */
+   352→.console-body::-webkit-scrollbar { width: 10px; }
+   353→.console-body::-webkit-scrollbar-track { background: transparent; }
+   354→.console-body::-webkit-scrollbar-thumb {
+   355→  background: rgba(35, 40, 59, 0.18);
+   356→  border-radius: 8px;
+   357→  border: 2.5px solid transparent;
+   358→  background-clip: content-box;
+   359→}
+   360→
+   361→/* ---- 1i. Boot overlay: covers the console while Pyodide loads */
+   362→.boot-overlay {
+   363→  position: absolute;
+   364→  inset: 0;
+   365→  z-index: 5;
+   366→  display: flex;
+   367→  flex-direction: column;
+   368→  align-items: center;
+   369→  justify-content: center;
+   370→  gap: 14px;
+   371→  padding: 20px;
+   372→  text-align: center;
+   373→  background: rgba(255, 253, 248, 0.92); /* semi-transparent over the rules */
+   374→}
+   375→.boot-overlay[hidden] { display: none !important; } /* beat the display:flex above */
+   376→.boot-spinner {
+   377→  width: 34px; height: 34px;
+   378→  border-radius: 50%;
+   379→  border: 3.5px solid rgba(52, 87, 213, 0.18);
+   380→  border-top-color: var(--blue);
+   381→  animation: spin 0.85s linear infinite;
+   382→}
+   383→.boot-text {
+   384→  margin: 0;
+   385→  max-width: 340px;
+   386→  font-size: 13.5px;
+   387→  font-weight: 700;
+   388→  color: var(--ink-soft);
+   389→}
+   390→
+   391→/* ---- 1j. Responsive: keep the stack, tighten chrome on phones -- */
+   392→@media (max-width: 700px) {
+   393→  .lab-wrap { padding: 10px 12px 14px; }
+   394→  .lab-stack { grid-template-rows: minmax(230px, 1.8fr) minmax(140px, 1fr); gap: 12px; }
+   395→  .editor-host { min-height: 230px; }
+   396→  .console-wrap { min-height: 140px; }
+   397→  .btn { min-height: 42px; padding: 0 16px; font-size: 14px; }
+   398→  .status-pill { font-size: 12px; padding: 7px 12px; }
+   399→  /* let the pill and keys share the row nicely on narrow screens */
+   400→  .topbar { justify-content: center; }
+   401→}
+   402→</style>
+   403→</head>
+   404→<body>
+   405→
+   406→<div class="lab-wrap">
+   407→
+   408→  <!-- ====================================================================
+   409→       SLIM TOP BAR — runtime status pill on the left, Run/Clear keys on
+   410→       the right. Run is disabled (grayed) until Pyodide is ready, and
+   411→       hovering it shows a small ink tooltip instead of any shortcut hint.
+   412→  ==================================================================== -->
+   413→  <div class="topbar">
+   414→    <div class="status-pill booting" id="status-pill" role="status" aria-live="polite">
+   415→      <span class="status-spinner" aria-hidden="true"></span>
+   416→      <span class="status-dot" aria-hidden="true"></span>
+   417→      <span class="status-text" id="status-text">Booting Python runtime…</span>
+   418→    </div>
+   419→
+   420→    <div class="topbar-actions">
+   421→      <button id="run-btn" class="btn btn-run" type="button" data-tip="Runs your Python code" aria-label="Run the Python code" disabled>Run Code</button>
+   422→      <button id="clear-btn" class="btn btn-clear" type="button" aria-label="Clear the console output">Clear Output</button>
+   423→    </div>
+   424→  </div>
+   425→
+   426→  <!-- ====================================================================
+   427→       MAIN STACK — the editor pane on TOP and the console pane BELOW it,
+   428→       on every screen size. Both panes carry accessible labels. The boot
+   429→       overlay covers the console while the Python runtime loads.
+   430→  ==================================================================== -->
+   431→  <main class="lab-stack">
+   432→
+   433→    <!-- EDITOR PANE: dark navy card, slim "main.py" header strip, CodeMirror inside -->
+   434→    <section class="pane pane-editor" aria-label="Python code editor">
+   435→      <div class="pane-head dark-head">
+   436→        <span class="file-name">main.py</span>
+   437→        <span class="head-right">
+   438→          <span class="term-label">PYTHON · WASM</span>
+   439→        </span>
+   440→      </div>
+   441→      <div class="editor-host" id="editor-host"><!-- CodeMirror mounts here --></div>
+   442→    </section>
+   443→
+   444→    <!-- CONSOLE PANE: ruled-paper card. role="log" + aria-live announce new
+   445→         output to screen readers. -->
+   446→    <section class="pane pane-console" aria-label="Python console">
+   447→      <div class="pane-head paper-head">
+   448→        <span class="file-name paper-file">output</span>
+   449→        <span class="head-right mono-label">stdout · stderr</span>
+   450→      </div>
+   451→      <div class="console-wrap">
+   452→        <div class="console-body" id="console-body" role="log" aria-live="polite" aria-label="Python output console"></div>
+   453→        <div class="boot-overlay" id="boot-overlay" role="status">
+   454→          <span class="boot-spinner" aria-hidden="true"></span>
+   455→          <p class="boot-text">Loading Python runtime — first run takes a few seconds…</p>
+   456→        </div>
+   457→      </div>
+   458→    </section>
+   459→
+   460→  </main>
+   461→
+   462→</div>
+   463→
+   464→<!-- ==========================================================================
+   465→     LIBRARY SCRIPTS (plain <script> tags — they execute in order, so by the
+   466→     time the application script below runs, both libraries are guaranteed
+   467→     to be loaded. If Pyodide's CDN is unreachable, its <script> simply fails
+   468→     and the app script's boot() reports the error gracefully.)
+   469→========================================================================== -->
+   470→
+   471→<!-- Pyodide v0.26.4 — real CPython 3 compiled to WebAssembly -->
+   472→<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+   473→
+   474→<!-- CodeMirror 5.65.16 — core FIRST, then the Python mode, then the addons -->
+   475→<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+   476→<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+   477→<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+   478→<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+   479→<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+   480→
+   481→<!-- ==========================================================================
+   482→     APPLICATION SCRIPT — everything the playground does lives here.
+   483→========================================================================== -->
+   484→<script>
+   485→(function () {
+   486→  "use strict";
+   487→
+   488→  /* ------------------------------------------------------------------
+   489→     Shared DOM references & app state (used by every section below).
+   490→     ------------------------------------------------------------------ */
+   491→  var PYODIDE_INDEX_URL = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/";
+   492→
+   493→  var runBtn      = document.getElementById("run-btn");       // "Run Code" button
+   494→  var clearBtn    = document.getElementById("clear-btn");     // "Clear Output" button
+   495→  var editorHost  = document.getElementById("editor-host");   // div CodeMirror mounts into
+   496→  var consoleBody = document.getElementById("console-body");  // ruled-paper output pane
+   497→  var statusPill  = document.getElementById("status-pill");   // top-bar status pill
+   498→  var statusText  = document.getElementById("status-text");   // pill text node
+   499→  var bootOverlay = document.getElementById("boot-overlay");  // "Loading Python…" overlay
+   500→
+   501→  var pyodide   = null;   // Pyodide runtime instance (assigned during boot)
+   502→  var pyReady   = false;  // true once loadPyodide() has resolved
+   503→  var pyRunning = false;  // true while a user script is currently executing
+   504→
+   505→  // ================= 2. CODEMIRROR EDITOR SETUP =================
+   506→  // Dark-themed editor with: Python syntax highlighting, line numbers,
+   507→  // auto-indentation (indentUnit 4), bracket matching + auto-closing
+   508→  // and active-line highlighting. Plain buttons only — no shortcuts.
+   509→  var STARTER_CODE = `# ============================================
+   510→#  Welcome to the Code Lab!
+   511→#  Real Python 3 running in your browser
+   512→#  (Pyodide + WebAssembly — no server needed)
+   513→# ============================================
+   514→
+   515→name = "PyDaily"        # a string variable
+   516→days = 100              # an integer variable
+   517→
+   518→print("Hello, World!")
+   519→print(f"Welcome to {name} — {days} days of Python!")
+   520→
+   521→# a loop
+   522→for day in range(1, 6):
+   523→    print(f"Day {day}: keep the streak alive!")
+   524→
+   525→# some math
+   526→import math
+   527→
+   528→print("The square root of 144 is", math.sqrt(144))
+   529→print("The sum of 1..100 is", sum(range(1, 101)))
+   530→
+   531→# Bonus: this lesson uses input() via a browser popup.
+   532→# Uncomment the two lines below and press Run!
+   533→# your_name = input("What is your name? ")
+   534→# print("Nice to meet you,", your_name)
+   535→`;
+   536→
+   537→  var editor = CodeMirror(editorHost, {
+   538→    value: STARTER_CODE,          // pre-filled "Hello, World!" script
+   539→    mode: "python",               // syntax highlighting (mode loaded above)
+   540→    theme: "material-darker",     // dark theme (CSS loaded above)
+   541→    lineNumbers: true,
+   542→    indentUnit: 4,                // Python-style 4-space indentation
+   543→    matchBrackets: true,
+   544→    autoCloseBrackets: true,
+   545→    styleActiveLine: true
+   546→  });
+   547→
+   548→  // ================= 3. PYODIDE PYTHON RUNTIME =================
+   549→  // Boot sequence (runs on window load):
+   550→  //   1. show the loading indicator + spinner pill, disable "Run Code"
+   551→  //   2. await loadPyodide(...)  ← downloads CPython→WASM (a few seconds)
+   552→  //   3. redirect stdout/stderr into the console pane (BEFORE user code runs)
+   553→  //   4. install the input() → window.prompt() override (section 5)
+   554→  //   5. mark ready: enable the button, flip the pill to "Python 3 · ready",
+   555→  //      hide the overlay, and notify the host page (if embedded in an iframe)
+   556→  // If the CDN fails, the catch block keeps the page alive and explains
+   557→  // the problem in red inside the console pane.
+   558→  function bootPyodide() {
+   559→    bootOverlay.hidden = false;   // loading indicator over the console
+   560→    runBtn.disabled = true;       // no running code until ready
+   561→    setStatus("booting");         // pill: spinner + amber dot
+   562→
+   563→    try {
+   564→      // Guard: pyodide.js may not have loaded (offline / blocked CDN).
+   565→      if (typeof loadPyodide !== "function") {
+   566→        throw new Error("loadPyodide() not found — the Pyodide CDN script did not load.");
+   567→      }
+   568→
+   569→      loadPyodide({ indexURL: PYODIDE_INDEX_URL })
+   570→        .then(function (py) {
+   571→          pyodide = py;
+   572→
+   573→          // Redirect Python's stdout/stderr to the console pane.
+   574→          // `batched` fires once per complete line of output.
+   575→          pyodide.setStdout({ batched: function (s) { appendOutput(s + "\n", "out"); } });
+   576→          pyodide.setStderr({ batched: function (s) { appendOutput(s + "\n", "err"); } });
+   577→
+   578→          // Python's input() opens a browser prompt (section 5).
+   579→          installInputOverride();
+   580→
+   581→          pyReady = true;
+   582→          bootOverlay.hidden = true;    // hide the loading indicator
+   583→          runBtn.disabled = false;      // enable "Run Code"
+   584→          setStatus("ready");           // pill: green "Python 3 · ready"
+   585→          appendOutput("Python runtime ready — press Run Code to execute main.py.\n", "muted");
+   586→
+   587→          notifyHostReady();            // postMessage to the host page
+   588→        })
+   589→        .catch(function (err) {
+   590→          bootOverlay.hidden = true;
+   591→          setStatus("error");           // pill: red dot (CDN failure)
+   592→          appendOutput("Could not load the Python runtime — check your internet connection.\n", "err");
+   593→          console.error("[Code Lab] Failed to boot Pyodide:", err);
+   594→        });
+   595→    } catch (err) {
+   596→      // Same failure path, for the synchronous typeof guard above.
+   597→      bootOverlay.hidden = true;
+   598→      setStatus("error");
+   599→      appendOutput("Could not load the Python runtime — check your internet connection.\n", "err");
+   600→      console.error("[Code Lab] Failed to boot Pyodide:", err);
+   601→    }
+   602→  }
+   603→
+   604→  // ================= 4. OUTPUT HANDLING (stdout/stderr) =================
+   605→  // appendOutput(text, cls) is the single gateway for everything that
+   606→  // appears in the console pane. Class names map to colors:
+   607→  //   "out"   → default ink      (print output / stdout)
+   608→  //   "err"   → red pen          (tracebacks / stderr)
+   609→  //   "muted" → gray             (system messages)
+   610→  // We use textContent (never innerHTML) so Python output can never
+   611→  // inject HTML into the page, and we auto-scroll to the newest line.
+   612→  function appendOutput(text, cls) {
+   613→    var line = document.createElement("div");
+   614→    line.className = cls || "out";
+   615→    line.textContent = text;
+   616→    consoleBody.appendChild(line);
+   617→    consoleBody.scrollTop = consoleBody.scrollHeight; // auto-scroll
+   618→  }
+   619→
+   620→  // clearOutput() empties the console pane (also called before each run).
+   621→  function clearOutput() {
+   622→    consoleBody.textContent = "";
+   623→  }
+   624→
+   625→  // ================= 5. INPUT() VIA WINDOW.PROMPT =================
+   626→  // Python's built-in input() blocks on stdin, which does not exist in a
+   627→  // browser — so after boot we override it with a small Python shim that
+   628→  // calls window.prompt() instead. Cancelling the prompt raises EOFError
+   629→  // (shown as a red traceback), which is exactly what real Python does on
+   630→  // an EOF. The override is wrapped in try/except-equivalent so a failure
+   631→  // here can NEVER block the boot sequence.
+   632→  var INPUT_OVERRIDE_PY = `
+   633→import builtins, js
+   634→
+   635→def _input(prompt=""):
+   636→    reply = js.window.prompt(str(prompt))
+   637→    if reply is None:
+   638→        raise EOFError("input() cancelled")
+   639→    return str(reply)
+   640→
+   641→builtins.input = _input
+   642→`;
+   643→
+   644→  function installInputOverride() {
+   645→    try {
+   646→      pyodide.runPython(INPUT_OVERRIDE_PY);
+   647→    } catch (err) {
+   648→      // input() simply keeps its default behavior if this fails.
+   649→      console.warn("[Code Lab] Could not install input() override:", err);
+   650→    }
+   651→  }
+   652→
+   653→  // ================= 6. RUN / CLEAR / STATUS =================
+   654→  // setStatus(state) drives the status pill through its states:
+   655→  //   booting → "Booting Python runtime…" (spinner + amber dot)
+   656→  //   ready   → "Python 3 · ready"        (green dot)
+   657→  //   running → "Running…"                (blue pulsing dot)
+   658→  //   error   → "Python failed to load"   (red dot, CDN failure only)
+   659→  function setStatus(state) {
+   660→    statusPill.classList.remove("booting", "ready", "running", "error");
+   661→    statusPill.classList.add(state);
+   662→    statusText.textContent = {
+   663→      booting: "Booting Python runtime…",
+   664→      ready:   "Python 3 · ready",
+   665→      running: "Running…",
+   666→      error:   "Python failed to load"
+   667→    }[state];
+   668→  }
+   669→
+   670→  // runCode() executes the editor's Python code:
+   671→  //   • ignored when the runtime is not ready or a run is already active
+   672→  //   • clears the console, prints a muted "▸ run started"
+   673→  //   • awaits pyodide.runPythonAsync(code); any Python traceback arrives
+   674→  //     as err.message and is printed in RED without crashing the page
+   675→  //   • a `finally` block always restores the UI state (muted "▸ run
+   676→  //     finished", button re-enabled, pill back to "Python 3 · ready")
+   677→  function runCode() {
+   678→    if (!pyReady || pyRunning || !pyodide) { return; } // do nothing if not ready/busy
+   679→    pyRunning = true;
+   680→    runBtn.disabled = true;
+   681→    setStatus("running");
+   682→
+   683→    clearOutput();                          // fresh console for each run
+   684→    appendOutput("\u25B8 run started\n", "muted");
+   685→
+   686→    var code = editor.getValue();
+   687→    pyodide.runPythonAsync(code)
+   688→      .catch(function (err) {
+   689→        appendOutput((err && err.message ? err.message : String(err)) + "\n", "err");
+   690→      })
+   691→      .then(function () {
+   692→        // `finally` equivalent: always runs, success or failure.
+   693→        pyRunning = false;
+   694→        appendOutput("\u25B8 run finished\n", "muted");
+   695→        if (pyReady) {
+   696→          runBtn.disabled = false;
+   697→          setStatus("ready");
+   698→        }
+   699→      });
+   700→  }
+   701→
+   702→  // Wire up the toolbar buttons.
+   703→  runBtn.addEventListener("click", runCode);
+   704→  clearBtn.addEventListener("click", clearOutput);
+   705→
+   706→  // ================= 7. CROSS-FRAME API (set-code) =================
+   707→  // When embedded in an iframe, the host notebook site can push code into
+   708→  // the editor by posting a message:
+   709→  //     iframe.contentWindow.postMessage({ type: "set-code", code: "..." }, "*")
+   710→  // This listener is harmless when the page is opened standalone (no
+   711→  // messages ever arrive).
+   712→  window.addEventListener("message", function (event) {
+   713→    if (event.data && event.data.type === "set-code") {
+   714→      editor.setValue(String(event.data.code ?? ""));
+   715→    }
+   716→  });
+   717→
+   718→  // Once Pyodide is ready, tell the host page we can accept code / runs.
+   719→  // When standalone, window.parent is this same window — posting to
+   720→  // ourselves is harmless (the listener above only reacts to "set-code").
+   721→  function notifyHostReady() {
+   722→    try {
+   723→      window.parent.postMessage({ type: "pyodide-ready" }, "*");
+   724→    } catch (err) { /* ignore — standalone page or restricted sandbox */ }
+   725→  }
+   726→
+   727→  /* ------------------------------------------------------------------
+   728→     Kick off the boot sequence when the page has fully loaded.
+   729→     ------------------------------------------------------------------ */
+   730→  if (document.readyState === "complete") {
+   731→    bootPyodide();
+   732→  } else {
+   733→    window.addEventListener("load", bootPyodide);
+   734→  }
+   735→})();
+   736→</script>
+   737→
+   738→</body>
+   739→</html>
+   740→

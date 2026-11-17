@@ -36,26 +36,27 @@ export function PlaygroundView() {
           href="/playground/index.html"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 text-sm font-bold"
+          className="neo-btn min-h-[40px] gap-2 rounded-xl px-4 text-sm"
         >
-          <ExternalLink className="h-4 w-4 text-pen-blue" aria-hidden />
-          Open full screen
+          <ExternalLink className="h-4 w-4 text-nb-purple" aria-hidden />
+          Full screen
         </a>
       </div>
 
-      <div className="sheet relative overflow-hidden rounded-2xl p-2 sm:p-3">
-        <span className="washi" aria-hidden />
+      <div className="relative">
         {!frameReady && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-2xl bg-card">
-            <Loader2 className="h-6 w-6 animate-spin text-pen-blue" aria-hidden />
-            <p className="text-sm font-semibold text-pencil">Preparing the lab…</p>
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-2xl bg-nb-card">
+            <span className="neo-tile h-12 w-12 bg-nb-yellow">
+              <Loader2 className="h-6 w-6 animate-spin text-[#17110a]" aria-hidden />
+            </span>
+            <p className="text-sm font-bold text-nb-muted">Loading the lab</p>
           </div>
         )}
         <iframe
           ref={iframeRef}
           src="/playground/index.html"
           title="Python Code Lab"
-          className="h-[72vh] min-h-[520px] w-full rounded-xl border border-ink/15 bg-white md:h-[calc(100vh-150px)] md:min-h-[640px]"
+          className="h-[76vh] min-h-[560px] w-full rounded-2xl border-[3px] border-nb-border bg-white shadow-hard md:h-[calc(100vh-150px)] md:min-h-[680px]"
           onLoad={() => setFrameReady(true)}
         />
       </div>

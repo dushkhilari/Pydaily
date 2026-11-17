@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Baloo_2, Nunito, JetBrains_Mono, Caveat } from "next/font/google";
+import { Space_Grotesk, Nunito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/study/theme-toggle";
@@ -9,9 +9,10 @@ const body = Nunito({
   subsets: ["latin"],
 });
 
-const display = Baloo_2({
+const display = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetMono = JetBrains_Mono({
@@ -19,16 +20,11 @@ const jetMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const hand = Caveat({
-  variable: "--font-hand",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "PyDaily — Your Python Notebook",
+  title: "PyDaily — Learn Python",
   description:
-    "A 100-day Python course kept like a notebook: ruled paper pages, handwritten tips, quizzes, exercises and a real in-browser Python Code Lab powered by Pyodide (WebAssembly).",
-  keywords: ["Python", "learn python", "100 days of code", "study", "course", "playground", "pyodide"],
+    "A 100-day Python course with lessons, quizzes, exercises and an in-browser code lab.",
+  keywords: ["Python", "learn python", "100 days of code", "course", "code lab"],
 };
 
 export default function RootLayout({
@@ -39,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${body.variable} ${display.variable} ${jetMono.variable} ${hand.variable} antialiased bg-background text-foreground`}
+        className={`${body.variable} ${display.variable} ${jetMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}

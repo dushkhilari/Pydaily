@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Code Lab — Real Python 3 in your browser</title>
-<meta name="description" content="Code Lab — a notebook-themed Python 3 playground. Real CPython compiled to WebAssembly via Pyodide + a CodeMirror editor. Runs 100% in your browser, no server needed.">
+<title>Code Lab — PyDaily</title>
+<meta name="description" content="Code Lab — a Python 3 playground with a CodeMirror editor and live output.">
 
 <!-- ========================================================================
-     CODE LAB — single-file Python playground
+     CODE LAB — single-file Python playground (neobrutalism theme)
      ------------------------------------------------------------------------
-     This page is built to be embedded in a notebook-themed learning site via
-     an <iframe>, but it also works perfectly when opened directly as a file.
+     This page is built to be embedded in PyDaily via an <iframe>, but it
+     also works perfectly when opened directly as a file.
 
      HOW THE PIECES FIT TOGETHER
-       <head>   : Google Fonts + CodeMirror stylesheets + all page CSS (§1)
+       <head>   : CodeMirror stylesheets + all page CSS (§1)
        <body>   : slim top bar (status pill + Run/Clear buttons), the editor
                   pane on TOP and the console pane BELOW it — stacked, so the
                   editor gets the full width and lots of height on any screen
@@ -29,12 +29,7 @@
        • If the host uses the `sandbox` attribute on the iframe, include
          `allow-scripts` (required) and `allow-modals` (needed so that
          Python's input() can open window.prompt()).
-     ======================================================================== -->
-
-<!-- Google Fonts: Caveat (handwritten headings) + Nunito (UI text) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+======================================================================== -->
 
 <!-- CodeMirror CSS: core editor chrome + the "material-darker" dark theme.
      Loaded BEFORE our <style> block below so our overrides win any ties. -->
@@ -42,362 +37,335 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
 
 <style>
-/* ============================================================
-   1. LAYOUT & NOTEBOOK THEME
-   A lab page taped into a paper notebook: warm paper background
-   with a faint grain, ink and ballpoint-pen colours, a tall dark
-   navy editor card on TOP and a ruled-paper console BELOW it.
-============================================================ */
+/* ======================================================================
+   §1  PAGE STYLES — neobrutalism theme
+   Warm cream page, white cards with thick ink borders and hard offset
+   shadows, loud sticker colours. The dark editor card sits on TOP and
+   the white console sits BELOW it.
+====================================================================== */
 
-/* ---- 1a. Design tokens (the notebook palette) -------------- */
 :root {
-  --paper:      #f6f3ec;  /* page background — warm paper          */
-  --paper-card: #fffdf8;  /* cards / buttons — paper white         */
-  --ink:        #23283b;  /* ink black — headings, borders         */
-  --ink-soft:   #2a3040;  /* console text                          */
-  --muted:      #8a8f9d;  /* gray system lines                     */
-  --blue:       #3457d5;  /* ballpoint blue — Run button, accents  */
-  --blue-dark:  #2a46ad;  /* ballpoint blue — hover state          */
-  --red:        #d0342c;  /* red pen — Python errors               */
-  --green:      #2e7d4f;  /* green pen — "ready" state             */
-  --amber:      #b8860b;  /* amber — "booting" state               */
-  --navy:       #1f2433;  /* editor card background                */
-  --navy-deep:  #171b28;  /* editor header strip                   */
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --cream:      #fcefdf;  /* page background                       */
+  --card:       #ffffff;  /* white paper cards                     */
+  --ink:        #1f1a14;  /* border + text ink                     */
+  --muted:      #7d7263;  /* secondary text                        */
+  --track:      #f3e8d5;  /* progress / track surfaces             */
+  --red:        #ff5959;
+  --purple:     #a98bfa;
+  --teal:       #3ecfc5;
+  --yellow:     #ffe35c;
+  --green:      #43d17c;
+  --code:       #211d17;  /* editor card background                */
+  --code-deep:  #17140f;  /* editor header strip                   */
+  --code-text:  #f2e9d8;
 }
 
-/* ---- 1b. Paper background: warm cream + subtle SVG grain + soft vignette */
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; height: 100%; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
-  min-height: 100vh;
+  background: var(--cream);
+  background-image: radial-gradient(circle, rgba(31,26,20,0.12) 1.4px, transparent 1.5px);
+  background-size: 26px 26px;
   color: var(--ink);
-  font-family: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  background-color: var(--paper);
-  background-image:
-    /* tiny inline SVG using feTurbulence = paper grain (~5% opacity) */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='0.05'/%3E%3C/svg%3E"),
-    /* soft light from the top + a faint vignette toward the edges */
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
-    radial-gradient(140% 120% at 50% 110%, rgba(35, 40, 59, 0.06) 0%, rgba(35, 40, 59, 0) 55%);
+  font-family: "Space Grotesk", "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700;
 }
 
-/* ---- 1c. Outer wrapper: single centered column that EXACTLY fills the
-     viewport (or iframe). The editor + console split whatever height is
-     left after the slim top bar, so the editor is always as large as the
-     screen allows and the output always stays visible below it.          */
+/* ---- 1a. Layout shell -----------------------------------------------
+   The whole lab fills the viewport (or iframe). The top bar, then the
+   two-pane stack split the height; the editor pane gets the larger
+   share (1.6fr vs 1fr) so the code editor is always BIG. */
 .lab-wrap {
-  max-width: 1240px;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 12px 16px 16px;
-  height: 100vh;               /* in an iframe, vh = the iframe height */
-  display: flex;
-  flex-direction: column;
-}
-@supports (height: 100dvh) {
-  .lab-wrap { height: 100dvh; }
 }
 
-/* ---- 1d. Slim top bar: status pill LEFT, action keys RIGHT ---
-     No big page title here — the host page (or the editor itself)
-     already says what this is. Everything lives on one row so the
-     panes below get maximum height.                               */
+/* ---- 1b. Top bar -----------------------------------------------------
+   Slim strip: status pill on the left, Run/Clear keys on the right. */
 .topbar {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px 14px;
-  margin-bottom: 12px;
-}
-.topbar-actions { display: inline-flex; align-items: center; gap: 10px; }
-
-/* Status pill — one element, three state classes:
-     .booting  → amber dot  + CSS spinner + "Booting Python runtime…"
-     .ready    → green dot  + "Python 3 · ready"
-     .running  → blue pulsing dot + "Running…"
-     (.error   → red dot, used only if the Pyodide CDN fails)        */
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: var(--paper-card);
-  border: 1.5px solid rgba(35, 40, 59, 0.18);
-  border-radius: 999px;
-  box-shadow: 0 1px 3px rgba(35, 40, 59, 0.08);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink-soft);
-  white-space: nowrap;
-}
-.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); flex: 0 0 auto; }
-.status-pill.ready   .status-dot { background: var(--green); }
-.status-pill.running .status-dot { background: var(--blue); animation: pill-pulse 1.1s ease-in-out infinite; }
-.status-pill.error   .status-dot { background: var(--red); }
-.status-spinner {
-  display: none;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(184, 134, 11, 0.25);
-  border-top-color: var(--amber);
-  animation: spin 0.8s linear infinite;
-}
-.status-pill.booting .status-spinner { display: inline-block; }
-
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pill-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.45; transform: scale(0.8); }
-}
-
-/* ---- 1e. Action keys ---------------------------------------- */
-/* Shared button base: ~44px tall, rounded, presses down on click */
-.btn {
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 12px;
-  font-family: "Nunito", sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.06s ease, box-shadow 0.15s ease;
-}
-.btn:active:not(:disabled) { transform: translateY(2px); }
-.btn:focus-visible { outline: 3px solid rgba(52, 87, 213, 0.35); outline-offset: 2px; }
-
-/* Run Code — solid ballpoint blue; grayed out while disabled.
-   The usage hint appears as a small ink speech bubble ON HOVER
-   (there is no keyboard shortcut in this lab).                   */
-.btn-run {
-  position: relative;
-  background: var(--blue);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 3px 0 rgba(26, 42, 110, 0.4), 0 8px 16px rgba(52, 87, 213, 0.22);
-}
-.btn-run:hover:not(:disabled) { background: var(--blue-dark); }
-.btn-run:disabled { background: #b7bac6; color: #f3f4f7; cursor: not-allowed; box-shadow: none; }
-
-/* hover tooltip (pure CSS, anchored below the button so it is never
-   clipped by the top edge of the viewport) */
-.btn-run::after {
-  content: attr(data-tip);
-  position: absolute;
-  top: calc(100% + 9px);
-  right: 0;
-  transform: translateY(-3px);
-  padding: 6px 12px;
-  border-radius: 9px;
-  background: var(--ink);
-  color: var(--paper-card);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(35, 40, 59, 0.25);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
-  z-index: 20;
-}
-/* the little bubble tail */
-.btn-run::before {
-  content: "";
-  position: absolute;
-  top: calc(100% + 3px);
-  right: 26px;
-  transform: translateY(-3px);
-  border: 6px solid transparent;
-  border-bottom-color: var(--ink);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
-  z-index: 20;
-}
-.btn-run:hover:not(:disabled)::after,
-.btn-run:hover:not(:disabled)::before {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.btn-run:disabled::after,
-.btn-run:disabled::before { display: none; }
-
-/* Clear Output — white paper button with an ink border */
-.btn-clear {
-  background: var(--paper-card);
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
-  box-shadow: 0 3px 0 rgba(35, 40, 59, 0.2);
-}
-.btn-clear:hover { background: #f3efe3; }
-
-/* ---- 1f. Main stack: editor on TOP, console BELOW ------------
-     A vertical grid that fills the remaining height. The editor row
-     gets roughly twice the console row (2fr vs 1fr), with sensible
-     minimums so both stay usable on short screens.                */
-.lab-stack {
-  flex: 1 1 auto;
-  min-height: 0;                /* let the grid shrink inside the flex column */
-  display: grid;
-  grid-template-columns: 1fr;   /* always one column: editor, then output */
-  grid-template-rows: minmax(260px, 2.1fr) minmax(150px, 1fr);
-  gap: 14px;
-  align-items: stretch;
-}
-.lab-stack > * { min-width: 0; } /* keep panes from overflowing */
-
-.pane {
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  overflow: hidden;
-}
-/* Editor pane — dark navy card with a subtle outer shadow */
-.pane-editor {
-  background: var(--navy);
-  box-shadow: 0 14px 30px rgba(35, 40, 59, 0.20), 0 3px 8px rgba(35, 40, 59, 0.12);
-}
-/* Console pane — light ruled-paper card */
-.pane-console {
-  background: var(--paper-card);
-  border: 1.5px solid rgba(35, 40, 59, 0.16);
-  box-shadow: 0 10px 24px rgba(35, 40, 59, 0.10);
-}
-
-/* Slim header strip shared by both panes */
-.pane-head {
-  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  min-height: 40px;
-  padding: 7px 16px;
+  flex-wrap: wrap;
 }
-.dark-head  { background: var(--navy-deep); }
-.paper-head { border-bottom: 1px solid rgba(35, 40, 59, 0.12); }
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  padding: 7px 14px;
+  font-size: 12.5px;
+  min-width: 0;
+}
+.status-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.status-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  border: 2.5px solid var(--ink);
+  background: var(--yellow);
+  flex-shrink: 0;
+}
+.status-pill.booting .status-dot { background: var(--yellow); animation: pulse 1.1s ease-in-out infinite; }
+.status-pill.ready   .status-dot { background: var(--green); }
+.status-pill.running .status-dot { background: var(--teal);   animation: pulse 0.9s ease-in-out infinite; }
+.status-pill.error   .status-dot { background: var(--red);    }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);     opacity: 1;   }
+  50%      { transform: scale(0.72);  opacity: 0.6; }
+}
+
+/* spinner shown inside the pill while booting */
+.status-spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  border: 3px solid var(--ink);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+  display: none;
+}
+.status-pill.booting .status-spinner { display: block; }
+.status-pill.booting .status-dot     { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- 1c. Buttons -----------------------------------------------------
+   Chunky pressable keys: thick ink border, hard shadow, and a press
+   animation that pushes them INTO the page. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  padding: 9px 18px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 110ms ease, box-shadow 110ms ease, filter 110ms ease;
+  will-change: transform;
+}
+.btn:hover:not(:disabled)  { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 0 var(--ink); filter: brightness(1.05); }
+.btn:active:not(:disabled) { transform: translate(2px,2px);   box-shadow: 1px 1px 0 0 var(--ink); }
+.btn:disabled              { opacity: 0.55; cursor: not-allowed; box-shadow: 2px 2px 0 0 var(--ink); }
+.btn:focus-visible         { outline: 3px solid var(--purple); outline-offset: 2px; }
+
+.btn-run   { background: var(--red);   color: #fff; }
+.btn-clear { background: var(--card);  color: var(--ink); }
+
+.topbar-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* hover-only tooltip on the Run key (shortcut hint) — drops BELOW the
+   key because the top bar sits at the very top of the viewport */
+.neo-tip { position: relative; }
+.neo-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  background: var(--ink);
+  color: var(--card);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 130ms ease, transform 130ms ease;
+  z-index: 30;
+}
+.neo-tip:hover::after { opacity: 1; transform: translateX(-50%) scale(1); }
+
+/* ---- 1f. Main stack: editor on TOP, console BELOW ------------
+   A vertical grid that fills the remaining height. The editor row
+   gets the bigger share (1.6fr vs 1fr) so the editor is generous on
+   every screen size. */
+.lab-stack {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;      /* always one column: editor, then output */
+  grid-template-rows: 1.6fr 1fr;   /* editor gets the lion's share           */
+  gap: 12px;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 5px 5px 0 0 var(--ink);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.pane-editor  { background: var(--code);     min-height: 280px; }
+.pane-console { background: var(--card);     min-height: 170px; }
+
+.pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  border-bottom: 3px solid var(--ink);
+  flex-shrink: 0;
+}
+.dark-head  { background: var(--code-deep); }
+.paper-head { background: var(--teal); }
+
 .file-name {
-  font-family: var(--mono);
-  font-size: 11.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--code-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.file-name::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(242,233,216,0.6);
+  background: var(--red);
+}
+.pane-head .head-right {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
-  text-transform: uppercase;   /* "main.py" renders as MAIN.PY */
-  color: #9aa4bf;
-}
-.paper-file { color: rgba(35, 40, 59, 0.6); }
-.head-right { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
-.mono-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: rgba(35, 40, 59, 0.45);
+  color: rgba(242,233,216,0.55);
   text-transform: uppercase;
 }
-.term-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: #6f7a99;
-}
+.pane-head .mono-label { color: rgba(12,39,37,0.75); }
+.pane-head .paper-file { color: #0c2725; }
+.pane-head .paper-file::before { background: var(--card); border-color: rgba(12,39,37,0.6); }
 
-/* ---- 1g. CodeMirror host: pane stretches to its grid row ------ */
-.editor-host { height: 100%; min-height: 260px; }
+/* ---- 1g. CodeMirror host (editor) ---------------------------------- */
+.editor-host { height: 100%; min-height: 240px; }
 .editor-host .CodeMirror {
-  height: 100%;               /* CodeMirror stretches to the pane */
-  background: transparent;    /* let the navy card show through   */
-  font-family: var(--mono);
-  font-size: 13.5px;
+  height: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
   line-height: 1.6;
+  background: var(--code);
 }
 .editor-host .CodeMirror-gutters {
-  background: transparent;
-  border-right: 1px solid rgba(154, 164, 191, 0.16);
+  background: var(--code-deep);
+  border-right: 2px solid rgba(242,233,216,0.14);
 }
 
-/* ---- 1h. Console: ruled paper, mono text, auto-scrolled ----- */
-.console-wrap { position: relative; height: 100%; min-height: 150px; }
+/* ---- 1h. Console ---------------------------------------------------- */
+.console-wrap { position: relative; height: 100%; min-height: 140px; }
 .console-body {
   height: 100%;
   overflow-y: auto;
-  padding: 0 16px 14px;
-  background-color: var(--paper-card);
-  /* horizontal ruled lines every 26px — output line-height matches */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 25px,
-    rgba(52, 87, 213, 0.14) 25px,
-    rgba(52, 87, 213, 0.14) 26px
-  );
-  background-attachment: local; /* rules scroll together with the text */
-  font-family: var(--mono);
+  padding: 12px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 13px;
-  line-height: 26px;
-  color: var(--ink-soft);
+  line-height: 1.65;
+  font-weight: 400;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 25px, rgba(31,26,20,0.05) 25px 26px);
 }
-/* every appended output line wraps instead of overflowing horizontally */
-.console-body > div {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-.console-body .err   { color: var(--red); }   /* Python tracebacks */
-.console-body .muted { color: var(--muted); } /* system messages   */
-/* thin, unobtrusive scrollbar */
+.console-body > div { white-space: pre-wrap; word-break: break-word; }
+.console-body .err   { color: #d63c3c; font-weight: 700; }  /* tracebacks */
+.console-body .muted { color: var(--muted); }               /* system     */
+
 .console-body::-webkit-scrollbar { width: 10px; }
 .console-body::-webkit-scrollbar-track { background: transparent; }
 .console-body::-webkit-scrollbar-thumb {
-  background: rgba(35, 40, 59, 0.18);
-  border-radius: 8px;
-  border: 2.5px solid transparent;
-  background-clip: content-box;
+  background: rgba(31,26,20,0.3);
+  border-radius: 999px;
+  border: 2px solid var(--card);
 }
 
-/* ---- 1i. Boot overlay: covers the console while Pyodide loads */
+/* empty-state hint shown when the console has no output yet */
+.console-hint {
+  color: var(--muted);
+  font-style: normal;
+}
+
+/* ---- 1i. Boot overlay: covers the console while Pyodide loads ------- */
 .boot-overlay {
   position: absolute;
   inset: 0;
-  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 14px;
+  background: var(--card);
+  z-index: 5;
   padding: 20px;
   text-align: center;
-  background: rgba(255, 253, 248, 0.92); /* semi-transparent over the rules */
 }
-.boot-overlay[hidden] { display: none !important; } /* beat the display:flex above */
+.boot-overlay[hidden] { display: none; }
 .boot-spinner {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: 3.5px solid rgba(52, 87, 213, 0.18);
-  border-top-color: var(--blue);
-  animation: spin 0.85s linear infinite;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 4px solid var(--ink);
+  border-top-color: var(--yellow);
+  border-right-color: var(--yellow);
+  animation: spin 0.8s linear infinite;
 }
 .boot-text {
   margin: 0;
-  max-width: 340px;
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--ink-soft);
+  color: var(--muted);
+  max-width: 300px;
 }
 
-/* ---- 1j. Responsive: keep the stack, tighten chrome on phones -- */
-@media (max-width: 700px) {
-  .lab-wrap { padding: 10px 12px 14px; }
-  .lab-stack { grid-template-rows: minmax(230px, 1.8fr) minmax(140px, 1fr); gap: 12px; }
-  .editor-host { min-height: 230px; }
-  .console-wrap { min-height: 140px; }
-  .btn { min-height: 42px; padding: 0 16px; font-size: 14px; }
-  .status-pill { font-size: 12px; padding: 7px 12px; }
-  /* let the pill and keys share the row nicely on narrow screens */
-  .topbar { justify-content: center; }
+/* ---- 1j. Small screens ---------------------------------------------- */
+@media (max-width: 640px) {
+  .lab-wrap { padding: 9px; gap: 9px; }
+  .lab-stack { gap: 9px; grid-template-rows: 1.5fr 1fr; }
+  .topbar { gap: 8px; }
+  .btn { padding: 8px 13px; font-size: 12.5px; }
+  .pane { border-radius: 13px; }
+  .pane-editor  { min-height: 230px; }
+  .pane-console { min-height: 150px; }
+  .editor-host .CodeMirror { font-size: 13px; }
+  .status-pill { padding: 6px 11px; font-size: 11.5px; }
 }
 </style>
 </head>
@@ -407,8 +375,8 @@ body {
 
   <!-- ====================================================================
        SLIM TOP BAR — runtime status pill on the left, Run/Clear keys on
-       the right. Run is disabled (grayed) until Pyodide is ready, and
-       hovering it shows a small ink tooltip instead of any shortcut hint.
+       the right. Run is disabled until Pyodide is ready; hovering it
+       reveals the keyboard shortcut via a small tooltip.
   ==================================================================== -->
   <div class="topbar">
     <div class="status-pill booting" id="status-pill" role="status" aria-live="polite">
@@ -418,7 +386,7 @@ body {
     </div>
 
     <div class="topbar-actions">
-      <button id="run-btn" class="btn btn-run" type="button" data-tip="Runs your Python code" aria-label="Run the Python code" disabled>Run Code</button>
+      <button id="run-btn" class="btn btn-run neo-tip" type="button" data-tip="Ctrl + Enter" aria-label="Run the Python code" disabled>Run Code</button>
       <button id="clear-btn" class="btn btn-clear" type="button" aria-label="Clear the console output">Clear Output</button>
     </div>
   </div>
@@ -430,18 +398,16 @@ body {
   ==================================================================== -->
   <main class="lab-stack">
 
-    <!-- EDITOR PANE: dark navy card, slim "main.py" header strip, CodeMirror inside -->
+    <!-- EDITOR PANE: dark card, slim "main.py" header strip, CodeMirror inside -->
     <section class="pane pane-editor" aria-label="Python code editor">
       <div class="pane-head dark-head">
         <span class="file-name">main.py</span>
-        <span class="head-right">
-          <span class="term-label">PYTHON · WASM</span>
-        </span>
+        <span class="head-right">Python · WASM</span>
       </div>
       <div class="editor-host" id="editor-host"><!-- CodeMirror mounts here --></div>
     </section>
 
-    <!-- CONSOLE PANE: ruled-paper card. role="log" + aria-live announce new
+    <!-- CONSOLE PANE: white card. role="log" + aria-live announce new
          output to screen readers. -->
     <section class="pane pane-console" aria-label="Python console">
       <div class="pane-head paper-head">
@@ -493,7 +459,7 @@ body {
   var runBtn      = document.getElementById("run-btn");       // "Run Code" button
   var clearBtn    = document.getElementById("clear-btn");     // "Clear Output" button
   var editorHost  = document.getElementById("editor-host");   // div CodeMirror mounts into
-  var consoleBody = document.getElementById("console-body");  // ruled-paper output pane
+  var consoleBody = document.getElementById("console-body");  // output pane
   var statusPill  = document.getElementById("status-pill");   // top-bar status pill
   var statusText  = document.getElementById("status-text");   // pill text node
   var bootOverlay = document.getElementById("boot-overlay");  // "Loading Python…" overlay
@@ -505,11 +471,10 @@ body {
   // ================= 2. CODEMIRROR EDITOR SETUP =================
   // Dark-themed editor with: Python syntax highlighting, line numbers,
   // auto-indentation (indentUnit 4), bracket matching + auto-closing
-  // and active-line highlighting. Plain buttons only — no shortcuts.
+  // and active-line highlighting.
   var STARTER_CODE = `# ============================================
 #  Welcome to the Code Lab!
 #  Real Python 3 running in your browser
-#  (Pyodide + WebAssembly — no server needed)
 # ============================================
 
 name = "PyDaily"        # a string variable
@@ -528,7 +493,7 @@ import math
 print("The square root of 144 is", math.sqrt(144))
 print("The sum of 1..100 is", sum(range(1, 101)))
 
-# Bonus: this lesson uses input() via a browser popup.
+# Bonus: input() opens a browser popup.
 # Uncomment the two lines below and press Run!
 # your_name = input("What is your name? ")
 # print("Nice to meet you,", your_name)
@@ -605,11 +570,14 @@ print("The sum of 1..100 is", sum(range(1, 101)))
   // appendOutput(text, cls) is the single gateway for everything that
   // appears in the console pane. Class names map to colors:
   //   "out"   → default ink      (print output / stdout)
-  //   "err"   → red pen          (tracebacks / stderr)
+  //   "err"   → red              (tracebacks / stderr)
   //   "muted" → gray             (system messages)
   // We use textContent (never innerHTML) so Python output can never
   // inject HTML into the page, and we auto-scroll to the newest line.
   function appendOutput(text, cls) {
+    var hint = consoleBody.querySelector(".console-hint");
+    if (hint) hint.remove();
+
     var line = document.createElement("div");
     line.className = cls || "out";
     line.textContent = text;
@@ -620,6 +588,10 @@ print("The sum of 1..100 is", sum(range(1, 101)))
   // clearOutput() empties the console pane (also called before each run).
   function clearOutput() {
     consoleBody.textContent = "";
+    var hint = document.createElement("div");
+    hint.className = "console-hint";
+    hint.textContent = "Run your code to see the output here.";
+    consoleBody.appendChild(hint);
   }
 
   // ================= 5. INPUT() VIA WINDOW.PROMPT =================
@@ -627,7 +599,7 @@ print("The sum of 1..100 is", sum(range(1, 101)))
   // browser — so after boot we override it with a small Python shim that
   // calls window.prompt() instead. Cancelling the prompt raises EOFError
   // (shown as a red traceback), which is exactly what real Python does on
-  // an EOF. The override is wrapped in try/except-equivalent so a failure
+  // an EOF. The override is wrapped in try/catch-equivalent so a failure
   // here can NEVER block the boot sequence.
   var INPUT_OVERRIDE_PY = `
 import builtins, js
@@ -654,7 +626,7 @@ builtins.input = _input
   // setStatus(state) drives the status pill through its states:
   //   booting → "Booting Python runtime…" (spinner + amber dot)
   //   ready   → "Python 3 · ready"        (green dot)
-  //   running → "Running…"                (blue pulsing dot)
+  //   running → "Running…"                (teal pulsing dot)
   //   error   → "Python failed to load"   (red dot, CDN failure only)
   function setStatus(state) {
     statusPill.classList.remove("booting", "ready", "running", "error");
@@ -703,8 +675,18 @@ builtins.input = _input
   runBtn.addEventListener("click", runCode);
   clearBtn.addEventListener("click", clearOutput);
 
+  // Keyboard shortcut: Ctrl/Cmd + Enter runs the code. The shortcut is
+  // advertised ONLY through the hover tooltip on the Run key — nothing
+  // is printed on the page itself.
+  window.addEventListener("keydown", function (event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      runCode();
+    }
+  });
+
   // ================= 7. CROSS-FRAME API (set-code) =================
-  // When embedded in an iframe, the host notebook site can push code into
+  // When embedded in an iframe, the host site can push code into
   // the editor by posting a message:
   //     iframe.contentWindow.postMessage({ type: "set-code", code: "..." }, "*")
   // This listener is harmless when the page is opened standalone (no

@@ -12,8 +12,7 @@ export function ThemeProvider({
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 
-/** SSR-safe hydration flag: false on the server, true after hydration.
- *  Avoids both hydration mismatches and setState-inside-effect. */
+/** SSR-safe hydration flag: false on the server, true after hydration. */
 const subscribeNoop = () => () => {};
 const useHydrated = () =>
   useSyncExternalStore(
@@ -23,10 +22,9 @@ const useHydrated = () =>
   );
 
 /**
- * Light / dark switch — styled like a small paper key. The icons are
- * swapped purely via the `dark:` CSS variant (no hydration-sensitive
- * markup); the state attributes wait for hydration so the first client
- * render always matches the server output.
+ * Light / dark switch — a neobrutalism toggle key: pill shell with a thick
+ * ink border and hard shadow; the knob slides between sun (light / teal)
+ * and moon (dark / purple) states exactly like the reference switch.
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -43,12 +41,24 @@ export function ThemeToggle({ className }: { className?: string }) {
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "btn3d btn-paper flex h-10 w-10 items-center justify-center rounded-xl",
+        "neo-btn relative h-10 w-[4.4rem] !rounded-full px-1",
+        isDark ? "bg-nb-purple" : "bg-nb-teal",
         className
       )}
     >
-      <Sun className="hidden h-[18px] w-[18px] text-pen-amber dark:block" aria-hidden />
-      <Moon className="h-[18px] w-[18px] text-pen-blue dark:hidden" aria-hidden />
+      {/* sliding knob */}
+      <span
+        className={cn(
+          "absolute top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border-[2.5px] border-nb-border bg-nb-card shadow-hard-xs transition-all duration-200",
+          isDark ? "left-[calc(100%-2rem)]" : "left-1"
+        )}
+      >
+        {isDark ? (
+          <Moon className="h-4 w-4 text-nb-purple" aria-hidden />
+        ) : (
+          <Sun className="h-4 w-4 text-nb-orange" aria-hidden />
+        )}
+      </span>
     </button>
   );
 }

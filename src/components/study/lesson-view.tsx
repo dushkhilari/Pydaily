@@ -22,9 +22,10 @@ import { markLessonComplete, toggleBookmarkApi, trackLessonVisit, saveNoteApi } 
 import { MarkdownRenderer } from "./markdown-renderer";
 import { ModuleIcon } from "./module-icon";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+
+type LessonTab = "tutorial" | "code" | "video";
 
 export function LessonView({ manifest }: { manifest: Manifest }) {
   const activeSlug = useStudyStore((s) => s.activeSlug);
@@ -32,9 +33,11 @@ export function LessonView({ manifest }: { manifest: Manifest }) {
   if (!activeSlug) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <PlayCircle className="h-10 w-10 text-pencil/50" aria-hidden />
+        <span className="neo-tile h-14 w-14 bg-nb-yellow">
+          <PlayCircle className="h-7 w-7 text-[#17110a]" aria-hidden />
+        </span>
         <h1 className="mt-4 font-display text-xl font-bold">No lesson open</h1>
-        <p className="mt-1 text-sm font-semibold text-pencil">Pick a lesson from the Lessons tab.</p>
+        <p className="mt-1 text-sm font-bold text-nb-muted">Pick a lesson from the list.</p>
         <OpenLessonsButton />
       </div>
     );
@@ -49,7 +52,7 @@ function OpenLessonsButton() {
   return (
     <Button
       onClick={() => setView("lessons")}
-      className="btn3d btn-ink mt-5 min-h-[44px] rounded-xl px-5 font-bold"
+      className="neo-btn neo-btn-red mt-5 min-h-[44px] rounded-xl px-5 text-sm"
     >
       Browse lessons
     </Button>
@@ -73,6 +76,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
   const [noteDraft, setNoteDraft] = useState(savedNote);
   const [noteSaving, setNoteSaving] = useState(false);
   const [codeFile, setCodeFile] = useState(0);
+  const [tab, setTab] = useState<LessonTab>("tutorial");
 
   const currentIndex = useMemo(
     () => manifest.lessons.findIndex((l) => l.slug === slug),
@@ -98,6 +102,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         setDetail(d);
         setNoteDraft("");
         setCodeFile(0);
+        setTab("tutorial");
         window.scrollTo({ top: 0 });
       })
       .catch(() => undefined)
@@ -127,7 +132,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
     toast({
       title: completed ? "Lesson complete" : "Marked as not done",
       description: completed
-        ? `Day ${meta.day} added to your streak. Keep going.`
+        ? `Day ${meta.day} added to your streak.`
         : `Day ${meta.day} is back on the list.`,
     });
   }, [meta, isDone, slug, progressEntry, upsertProgress, toast]);
@@ -158,17 +163,24 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
   if (loading || !detail || !meta) {
     return (
       <div className="space-y-5 py-10">
-        <div className="chip h-8 w-40 animate-pulse rounded-xl" />
-        <div className="chip h-14 w-4/5 animate-pulse rounded-2xl" />
-        <div className="chip h-64 animate-pulse rounded-2xl" />
-        <div className="chip h-72 animate-pulse rounded-2xl" />
-        <div className="flex items-center justify-center gap-2 text-sm font-semibold text-pencil">
+        <div className="neo-inset h-8 w-40 animate-pulse" />
+        <div className="neo-card-sm h-16 w-4/5 animate-pulse" />
+        <div className="neo-card h-64 animate-pulse" />
+        <div className="flex items-center justify-center gap-2 text-sm font-bold text-nb-muted">
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-          Loading lesson…
+          Loading
         </div>
       </div>
     );
   }
+
+  const hasVideo = Boolean(detail.videoUrl);
+
+  const segTabs: { id: LessonTab; label: string; icon: typeof FileText }[] = [
+    { id: "tutorial", label: "Tutorial", icon: FileText },
+    { id: "code", label: "Code", icon: Code2 },
+    ...(hasVideo ? [{ id: "video" as LessonTab, label: "Video", icon: PlayCircle }] : []),
+  ];
 
   return (
     <div className="space-y-5 pt-1 sm:space-y-6">
@@ -176,25 +188,25 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
       <header className="space-y-4">
         <button
           onClick={() => setView("lessons")}
-          className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-1.5 rounded-lg px-3 text-sm font-bold"
+          className="neo-btn min-h-[40px] gap-1.5 rounded-lg px-3 text-sm"
         >
-          <ArrowLeft className="h-4 w-4 text-pen-blue" aria-hidden />
+          <ArrowLeft className="h-4 w-4" aria-hidden />
           All lessons
         </button>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="btn-ink relative rounded-lg px-3 py-1 font-display text-xs font-bold uppercase tracking-wider">
+              <span className="neo-chip -rotate-1 bg-nb-red px-3 py-1 font-display text-xs font-bold uppercase tracking-wider text-white dark:text-[#1a1108]">
                 Day {meta.day}
               </span>
-              <span className="chip inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-pencil">
-                <ModuleIcon icon={moduleMeta.icon} className="h-3 w-3 text-pen-blue" aria-hidden />
+              <span className="neo-chip px-3 py-1 text-xs">
+                <ModuleIcon icon={moduleMeta.icon} className="h-3 w-3 text-nb-purple" aria-hidden />
                 {moduleMeta.title}
               </span>
-              <span className="chip inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-pencil">
-                <Clock3 className="h-3 w-3" aria-hidden />
-                {meta.minutes} min read
+              <span className="neo-chip px-3 py-1 text-xs">
+                <Clock3 className="h-3 w-3 text-nb-teal" aria-hidden />
+                {meta.minutes} min
               </span>
             </div>
             <h1 className="mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
@@ -208,89 +220,73 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
               aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
               aria-pressed={isBookmarked}
               className={cn(
-                "btn3d flex h-11 w-11 items-center justify-center rounded-xl",
-                isBookmarked ? "btn-pressed" : "btn-paper"
+                "neo-btn h-11 w-11 rounded-xl",
+                isBookmarked ? "bg-nb-yellow text-[#17110a]" : ""
               )}
             >
               {isBookmarked ? (
-                <BookmarkCheck className="h-5 w-5 text-pen-blue" aria-hidden />
+                <BookmarkCheck className="h-5 w-5" aria-hidden />
               ) : (
-                <Bookmark className="h-5 w-5 text-foreground/70" aria-hidden />
+                <Bookmark className="h-5 w-5" aria-hidden />
               )}
             </button>
             <button
               onClick={handleToggleComplete}
               aria-pressed={isDone}
               className={cn(
-                "btn3d inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 font-bold",
-                isDone ? "btn-pressed" : "btn-ink"
+                "neo-btn min-h-[44px] gap-2 rounded-xl px-4 text-sm",
+                isDone ? "bg-nb-green text-[#0b2a17]" : "neo-btn-teal"
               )}
             >
               <CheckCircle2 className="h-4.5 w-4.5" aria-hidden />
-              {isDone ? "Completed" : "Mark done"}
+              {isDone ? "Done" : "Mark done"}
             </button>
           </div>
         </div>
       </header>
 
-      {/* ---------- content tabs (file folders) ---------- */}
-      <Tabs defaultValue="tutorial" className="space-y-0">
-        <TabsList className="relative z-10 h-auto w-full justify-start gap-1.5 rounded-none border-b-0 bg-transparent p-0">
-          <TabsTrigger
-            value="tutorial"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
-          >
-            <FileText className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
-            <span className="hidden sm:inline">Tutorial</span>
-          </TabsTrigger>
-          <TabsTrigger
-            value="code"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
-          >
-            <Code2 className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
-            <span className="hidden sm:inline">Code</span>
-          </TabsTrigger>
-          {detail.videoUrl && (
-            <TabsTrigger
-              value="video"
-              className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
+      {/* ---------- segmented tabs ---------- */}
+      <div className="neo-seg w-full sm:w-auto" role="tablist" aria-label="Lesson content">
+        {segTabs.map((t) => {
+          const Icon = t.icon;
+          return (
+            <button
+              key={t.id}
+              role="tab"
+              aria-selected={tab === t.id}
+              data-active={tab === t.id}
+              onClick={() => setTab(t.id)}
+              className="neo-seg-item flex-1 text-sm sm:flex-none"
             >
-              <PlayCircle className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
-              <span className="hidden sm:inline">Video</span>
-            </TabsTrigger>
-          )}
-        </TabsList>
+              <Icon className="h-4 w-4" aria-hidden />
+              {t.label}
+            </button>
+          );
+        })}
+      </div>
 
-        {/* tutorial sheet with binder holes */}
-        <TabsContent
-          value="tutorial"
-          className="sheet relative mt-0 rounded-2xl !p-0"
-        >
-          {/* binder holes */}
-          <div aria-hidden className="absolute left-5 top-10 hidden flex-col items-center gap-16 sm:flex">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                className="h-4 w-4 rounded-full border border-ink/25 bg-paper-deep shadow-[0_2px_3px_oklch(0.3_0.03_262/0.2)_inset]"
-              />
-            ))}
-          </div>
-          <div className="space-y-2 px-5 py-6 sm:px-14 sm:py-8">
-            {detail.sections.map((section, idx) => (
-              <article key={section.file} className={idx > 0 ? "border-t border-dashed border-ink/20 pt-6" : ""}>
-                {detail.sections.length > 1 && (
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-pencil">
-                    Part {idx + 1} of {detail.sections.length}
-                  </p>
-                )}
-                <MarkdownRenderer markdown={section.markdown} />
-              </article>
-            ))}
-          </div>
-        </TabsContent>
+      {/* ---------- tutorial ---------- */}
+      {tab === "tutorial" && (
+        <div className="neo-card px-4 py-6 sm:px-8 sm:py-8">
+          {detail.sections.map((section, idx) => (
+            <article
+              key={section.file}
+              className={idx > 0 ? "mt-6 border-t-[3px] border-dashed border-border/30 pt-6" : ""}
+            >
+              {detail.sections.length > 1 && (
+                <span className="neo-chip mb-3 px-2.5 py-0.5 text-[10px] uppercase tracking-wider">
+                  Part {idx + 1}/{detail.sections.length}
+                </span>
+              )}
+              <MarkdownRenderer markdown={section.markdown} />
+            </article>
+          ))}
+        </div>
+      )}
 
-        {/* code on graph paper */}
-        <TabsContent value="code" className="sheet mt-0 rounded-2xl p-4 sm:p-6">
+      {/* ---------- code ---------- */}
+      {tab === "code" && (
+        <div className="neo-card p-4 sm:p-6">
           {detail.code.length > 1 && (
             <div className="mb-3 flex flex-wrap gap-2" role="tablist" aria-label="Code files">
               {detail.code.map((c, i) => (
@@ -300,8 +296,8 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
                   aria-selected={codeFile === i}
                   onClick={() => setCodeFile(i)}
                   className={cn(
-                    "btn3d rounded-lg px-3 py-1.5 font-mono text-xs font-bold",
-                    codeFile === i ? "btn-pressed" : "btn-paper"
+                    "neo-btn rounded-lg px-3 py-1.5 font-mono text-xs",
+                    codeFile === i ? "bg-nb-yellow text-[#17110a]" : ""
                   )}
                 >
                   {c.file}
@@ -310,69 +306,59 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
             </div>
           )}
           {detail.code.length > 0 ? (
-            <div className="md-scope [&>div]:my-0">
-              <MarkdownRenderer
-                markdown={`\`\`\`python\n${detail.code[codeFile]?.code ?? ""}\n\`\`\``}
+            <MarkdownRenderer
+              markdown={`\`\`\`python\n${detail.code[codeFile]?.code ?? ""}\n\`\`\``}
+            />
+          ) : (
+            <p className="py-10 text-center text-sm font-bold text-nb-muted">No code for this day.</p>
+          )}
+        </div>
+      )}
+
+      {/* ---------- video ---------- */}
+      {tab === "video" && hasVideo && (
+        <div className="neo-card p-3 sm:p-4">
+          <div className="overflow-hidden rounded-xl border-[3px] border-nb-border bg-black shadow-hard-sm">
+            <div className="aspect-video w-full">
+              <iframe
+                src={detail.videoUrl!}
+                title={`${meta.title} — lesson video`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
               />
             </div>
-          ) : (
-            <p className="py-10 text-center text-sm font-semibold text-pencil">
-              No code file for this day.
-            </p>
-          )}
-        </TabsContent>
+          </div>
+        </div>
+      )}
 
-        {/* video taped into the page */}
-        {detail.videoUrl && (
-          <TabsContent value="video" className="mt-0">
-            <div className="sheet relative rounded-2xl p-3">
-              <span className="washi" aria-hidden />
-              <div className="relative mt-2 overflow-hidden rounded-xl border border-ink/30 bg-black shadow-[0_3px_10px_oklch(0.02_0.02_264/0.6)_inset]">
-                <div className="aspect-video w-full">
-                  <iframe
-                    src={detail.videoUrl}
-                    title={`${meta.title} — lesson video`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full"
-                  />
-                </div>
-              </div>
-              <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-pencil">
-                Lesson video
-              </p>
-            </div>
-          </TabsContent>
-        )}
-      </Tabs>
-
-      {/* ---------- notes: ruled legal pad ---------- */}
-      <section aria-label="Lesson notes" className="sheet rounded-2xl p-5 sm:p-6">
+      {/* ---------- notes ---------- */}
+      <section aria-label="Lesson notes" className="neo-card p-4 sm:p-5">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="hand flex items-center gap-2 text-2xl font-bold">
-            <NotebookPen className="h-5 w-5 text-pen-blue" aria-hidden />
-            My notes
+          <h2 className="flex items-center gap-2 font-display text-xl font-bold">
+            <NotebookPen className="h-5 w-5 text-nb-purple" aria-hidden />
+            Notes
           </h2>
           <button
             onClick={handleSaveNote}
             disabled={noteSaving}
-            className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 text-sm font-bold disabled:opacity-60"
+            className="neo-btn min-h-[40px] gap-2 rounded-xl px-4 text-sm disabled:opacity-60"
           >
             {noteSaving ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
             ) : (
-              <StickyNote className="h-4 w-4 text-pen-blue" aria-hidden />
+              <StickyNote className="h-4 w-4 text-nb-purple" aria-hidden />
             )}
-            Save note
+            Save
           </button>
         </div>
-        <div className="legal-pad mt-3 rounded-lg">
+        <div className="neo-inset mt-3 shadow-hard-xs">
           <textarea
             value={noteDraft}
             onChange={(e) => setNoteDraft(e.target.value)}
-            placeholder="Write your notes here…"
+            placeholder="Write your notes here"
             aria-label="Lesson notes"
-            className="min-h-[168px] w-full resize-y bg-transparent px-14 py-[5px] text-sm font-semibold leading-[28px] text-foreground/85 placeholder:text-foreground/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-0"
+            className="min-h-[150px] w-full resize-y bg-transparent px-3.5 py-3 text-sm font-semibold leading-6 text-foreground placeholder:text-nb-muted/70 focus-visible:outline-none"
           />
         </div>
       </section>
@@ -382,11 +368,11 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {prev ? (
           <button
             onClick={() => openLesson(prev.slug)}
-            className="sheet btn3d group flex min-h-[56px] items-center gap-3 rounded-2xl px-4 py-3.5 text-left"
+            className="neo-card-sm group flex min-h-[56px] items-center gap-3 px-4 py-3 text-left transition-transform hover:scale-[1.01]"
           >
-            <ChevronLeft className="h-5 w-5 shrink-0 text-pencil transition-transform group-hover:-translate-x-0.5" aria-hidden />
+            <ChevronLeft className="h-5 w-5 shrink-0 text-nb-muted transition-transform group-hover:-translate-x-0.5" aria-hidden />
             <span className="min-w-0">
-              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-pencil">
+              <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-nb-muted">
                 Previous · Day {prev.day}
               </span>
               <span className="mt-0.5 block truncate text-sm font-bold">{prev.title}</span>
@@ -398,28 +384,28 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {next ? (
           <button
             onClick={() => openLesson(next.slug)}
-            className="sheet btn3d group flex min-h-[56px] items-center justify-end gap-3 rounded-2xl px-4 py-3.5 text-right shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_2px_4px_oklch(0.3_0.03_262/12%),0_0_0_1.5px_oklch(0.5_0.14_262/45%)]"
+            className="neo-card-sm group flex min-h-[56px] items-center justify-end gap-3 bg-nb-purple px-4 py-3 text-right transition-transform hover:scale-[1.01]"
           >
             <span className="min-w-0">
-              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-pen-blue">
+              <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-[#17110a]/70">
                 Next · Day {next.day}
               </span>
-              <span className="mt-0.5 block truncate text-sm font-bold">{next.title}</span>
+              <span className="mt-0.5 block truncate text-sm font-bold text-[#17110a]">{next.title}</span>
             </span>
-            <ChevronRight className="h-5 w-5 shrink-0 text-pen-blue transition-transform group-hover:translate-x-0.5" aria-hidden />
+            <ChevronRight className="h-5 w-5 shrink-0 text-[#17110a] transition-transform group-hover:translate-x-0.5" aria-hidden />
           </button>
         ) : (
-          <div className="sheet flex min-h-[56px] items-center justify-center rounded-2xl px-4 py-3.5 text-center">
-            <span className="hand text-2xl font-bold text-pen-green">Course complete!</span>
+          <div className="neo-card-sm flex min-h-[56px] items-center justify-center bg-nb-green px-4 py-3 text-center">
+            <span className="font-display text-lg font-bold text-[#0b2a17]">Course complete!</span>
           </div>
         )}
       </nav>
 
-      {/* completion flourish — green pen grade */}
+      {/* completion banner */}
       {isDone && (
-        <div className="sheet relative flex items-center justify-center gap-3 rounded-2xl p-3.5 text-center sm:p-4">
-          <CheckCircle2 className="h-6 w-6 shrink-0 text-pen-green" aria-hidden />
-          <p className="hand text-2xl leading-none text-pen-green">Day {meta.day} cleared!</p>
+        <div className="neo-card-sm flex items-center justify-center gap-2.5 bg-nb-green px-4 py-3.5 text-center">
+          <CheckCircle2 className="h-6 w-6 shrink-0 text-[#0b2a17]" aria-hidden />
+          <p className="font-display text-lg font-bold text-[#0b2a17]">Day {meta.day} cleared</p>
         </div>
       )}
     </div>
