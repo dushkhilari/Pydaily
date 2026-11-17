@@ -19,7 +19,6 @@ import { useStudyStore } from "@/lib/store";
 import { lessonStatus, modulePercent, type LessonStatus } from "@/lib/progress-utils";
 import { ModuleIcon } from "./module-icon";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 
 const TYPE_BADGES: Record<
@@ -28,17 +27,17 @@ const TYPE_BADGES: Record<
 > = {
   exercise: {
     label: "Exercise",
-    className: "bg-primary/15 text-primary border-primary/30",
+    className: "deboss text-primary",
     icon: Dumbbell,
   },
   solution: {
     label: "Solution",
-    className: "bg-[oklch(0.85_0.13_95)]/15 text-[oklch(0.88_0.13_95)] border-[oklch(0.85_0.13_95)]/30",
+    className: "deboss text-brass-deep",
     icon: Lightbulb,
   },
   conclusion: {
     label: "Finale",
-    className: "bg-secondary text-foreground border-border",
+    className: "deboss text-foreground/70",
     icon: Trophy,
   },
   lesson: undefined,
@@ -46,15 +45,15 @@ const TYPE_BADGES: Record<
 
 function StatusIcon({ status }: { status: LessonStatus }) {
   if (status === "done")
-    return <CheckCircle2 className="h-5 w-5 text-primary" aria-label="Completed" />;
+    return <CheckCircle2 className="h-5 w-5 text-brass-deep drop-shadow-[0_1px_0_oklch(1_0_0/50%)]" aria-label="Completed" />;
   if (status === "in-progress")
-    return <CircleDot className="h-5 w-5 text-primary/60" aria-label="In progress" />;
+    return <CircleDot className="h-5 w-5 text-primary/70" aria-label="In progress" />;
   return <Circle className="h-5 w-5 text-muted-foreground/40" aria-label="Not started" />;
 }
 
 function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
-  const progress = useStudyStore((s) => s.progress);
   const openLesson = useStudyStore((s) => s.openLesson);
+  const progress = useStudyStore((s) => s.progress);
   const status = lessonStatus(lesson, progress);
   const badge = TYPE_BADGES[lesson.type];
 
@@ -65,17 +64,14 @@ function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
       transition={{ delay: Math.min(index * 0.02, 0.3), duration: 0.2 }}
       onClick={() => openLesson(lesson.slug)}
       className={cn(
-        "group flex w-full items-center gap-3 rounded-2xl border px-3.5 py-3 text-left transition-all",
-        status === "done"
-          ? "border-primary/25 bg-primary/[0.06]"
-          : "border-border/50 bg-card/50 hover:border-primary/35 hover:bg-card",
-        "hover:shadow-sm hover:shadow-primary/10"
+        "btn3d group flex min-h-[56px] w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left",
+        status === "done" ? "paper-card" : "paper-card hover:shadow-[0_3px_0_oklch(1_0_0/70%)_inset,0_5px_10px_oklch(0.42_0.06_55/0.2)]"
       )}
     >
       <span
         className={cn(
-          "font-display w-11 shrink-0 rounded-xl py-1.5 text-center text-sm font-bold tabular-nums",
-          status === "done" ? "bg-ember text-primary-foreground" : "bg-secondary text-foreground/80"
+          "gloss relative flex h-10 w-11 shrink-0 items-center justify-center rounded-lg font-display text-sm font-bold tabular-nums",
+          status === "done" ? "btn-brass" : "btn-leather"
         )}
       >
         {lesson.day}
@@ -83,9 +79,9 @@ function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
 
       <span className="min-w-0 flex-1">
         <span className="flex items-center gap-2">
-          <span className="truncate text-sm font-semibold text-foreground/90">{lesson.title}</span>
+          <span className="truncate text-sm font-bold text-foreground/90">{lesson.title}</span>
         </span>
-        <span className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+        <span className="mt-1 flex flex-wrap items-center gap-2 text-[11px] font-semibold text-muted-foreground">
           <span className="flex items-center gap-1">
             <Clock3 className="h-3 w-3" aria-hidden />
             {lesson.minutes} min
@@ -97,7 +93,7 @@ function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
             </span>
           )}
           {badge && (
-            <span className={cn("inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-medium", badge.className)}>
+            <span className={cn("inline-flex items-center gap-1 rounded-full border border-border/40 px-2 py-0.5 font-bold", badge.className)}>
               <badge.icon className="h-3 w-3" aria-hidden />
               {badge.label}
             </span>
@@ -145,31 +141,31 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
     <div className="space-y-7 pt-2">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl font-bold tracking-tight">All lessons</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h1 className="text-engrave font-display text-3xl font-bold tracking-tight">All lessons</h1>
+          <p className="mt-1 text-sm font-semibold text-muted-foreground">
             {manifest.lessons.length} days of Python, from hello world to asyncio.
           </p>
         </div>
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search lessons…"
             aria-label="Search lessons"
-            className="h-11 rounded-2xl border-border/60 bg-card/70 pl-10 text-sm"
+            className="deboss h-11 rounded-xl border-border/40 bg-transparent pl-10 text-sm font-semibold"
           />
         </div>
       </div>
 
       {moduleFilter && (
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="gap-1.5 rounded-full bg-primary/15 text-primary border-primary/30 px-3 py-1">
+          <span className="btn-brass gloss inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold">
             {manifest.modules.find((m) => m.id === moduleFilter)?.title}
-          </Badge>
+          </span>
           <button
             onClick={() => setModuleFilter(null)}
-            className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground"
+            className="btn3d inline-flex min-h-[36px] items-center gap-1 rounded-lg px-2 text-xs font-bold text-muted-foreground hover:text-foreground"
           >
             <X className="h-3.5 w-3.5" aria-hidden />
             Clear filter
@@ -183,21 +179,21 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
           const doneCount = lessons.filter((l) => progress[l.slug]?.completed).length;
           return (
             <section key={mod.id} aria-label={mod.title}>
-              <div className="mb-3 flex items-center gap-3 rounded-2xl border border-border/50 bg-card/60 px-4 py-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+              <div className="leather-card stitch relative mb-3 flex items-center gap-3 rounded-xl px-4 py-3">
+                <span className="deboss-dark flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.06_90)]">
                   <ModuleIcon icon={mod.icon} className="h-5 w-5" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <h2 className="truncate font-display text-[15px] font-bold">{mod.title}</h2>
-                  <p className="truncate text-xs text-muted-foreground">
+                  <h2 className="text-engrave-cream truncate font-display text-[15px] font-bold">{mod.title}</h2>
+                  <p className="text-engrave-cream truncate text-xs font-semibold opacity-75">
                     {doneCount}/{lessons.length} complete · Days {mod.days[0]}–{mod.days[1]}
                   </p>
                 </div>
-                <span className="font-display text-sm font-bold tabular-nums text-primary">
+                <span className="text-engrave-cream font-display text-sm font-bold tabular-nums">
                   {Math.round(pct)}%
                 </span>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {lessons.map((l, i) => (
                   <LessonRow key={l.slug} lesson={l} index={i} />
                 ))}
@@ -208,10 +204,12 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
       </div>
 
       {grouped.length === 0 && (
-        <div className="rounded-3xl border border-dashed border-border/70 py-16 text-center">
+        <div className="paper-card rounded-2xl border-2 border-dashed border-border/50 py-16 text-center shadow-none">
           <Search className="mx-auto h-8 w-8 text-muted-foreground/50" aria-hidden />
-          <p className="mt-3 text-sm font-medium">No lessons match “{query}”</p>
-          <p className="mt-1 text-xs text-muted-foreground">Try a different keyword or clear the module filter.</p>
+          <p className="mt-3 text-sm font-bold">No lessons match “{query}”</p>
+          <p className="mt-1 text-xs font-semibold text-muted-foreground">
+            Try a different keyword or clear the module filter.
+          </p>
         </div>
       )}
     </div>

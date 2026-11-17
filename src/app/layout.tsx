@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Baloo_2, Nunito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({
-  variable: "--font-inter",
+const body = Nunito({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const display = Baloo_2({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
 const jetMono = JetBrains_Mono({
-  variable: "--font-jet-mono",
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "PyDaily — Learn Python in 100 Days",
   description:
-    "A modern, mobile-first study companion for the 100 Days of Python course. Lessons, runnable code, videos, notes, bookmarks, streaks and quizzes.",
+    "A skeuomorphic study desk for the 100 Days of Python course. Leather-bound lessons, runnable code on an LCD bench, notes, bookmarks, streaks and quizzes.",
   keywords: ["Python", "learn python", "100 days of code", "study", "course"],
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} ${jetMono.variable} antialiased bg-background text-foreground`}
+        className={`${body.variable} ${display.variable} ${jetMono.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

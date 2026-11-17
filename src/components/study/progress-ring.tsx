@@ -6,59 +6,83 @@ interface ProgressRingProps {
   stroke?: number;
   showLabel?: boolean;
   className?: string;
+  /** label material: "paper" (dark ink) or "cream" (on leather/brass) */
+  tone?: "paper" | "cream";
 }
 
-/** Gradient progress ring used on hero cards and stats. */
+/**
+ * Brass bench gauge: brushed-metal bezel, debossed track and a
+ * polished brass needle arc — like an analog dial on the study desk.
+ */
 export function ProgressRing({
   value,
   size = 128,
   stroke = 10,
   showLabel = true,
   className = "",
+  tone = "paper",
 }: ProgressRingProps) {
   const clamped = Math.max(0, Math.min(100, value));
-  const r = (size - stroke) / 2;
+  const r = (size - stroke - 6) / 2;
   const c = 2 * Math.PI * r;
   const offset = c - (clamped / 100) * c;
-  const gid = `ring-grad-${size}-${stroke}`;
+  const uid = `gauge-${size}-${stroke}`;
+  const cx = size / 2;
+  const cy = size / 2;
 
   return (
     <div
       className={`relative inline-flex items-center justify-center ${className}`}
       style={{ width: size, height: size }}
+      role="img"
+      aria-label={`Progress: ${Math.round(clamped)} percent`}
     >
       <svg width={size} height={size} className="-rotate-90">
         <defs>
-          <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="oklch(0.88 0.13 95)" />
-            <stop offset="60%" stopColor="oklch(0.82 0.16 78)" />
-            <stop offset="100%" stopColor="oklch(0.72 0.18 55)" />
+          {/* brushed metal bezel */}
+          <linearGradient id={`${uid}-metal`} x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="oklch(0.93 0.02 84)" />
+            <stop offset="50%" stopColor="oklch(0.8 0.025 80)" />
+            <stop offset="100%" stopColor="oklch(0.62 0.03 74)" />
+          </linearGradient>
+          {/* polished brass fill */}
+          <linearGradient id={`${uid}-brass`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="oklch(0.85 0.1 88)" />
+            <stop offset="55%" stopColor="oklch(0.76 0.115 82)" />
+            <stop offset="100%" stopColor="oklch(0.6 0.105 74)" />
           </linearGradient>
         </defs>
+
+        {/* metal bezel */}
+        <circle cx={cx} cy={cy} r={r + stroke / 2 + 3} fill="none" stroke={`url(#${uid}-metal)`} strokeWidth={4} />
+        {/* debossed track */}
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="oklch(0.58 0.04 62 / 50%)" strokeWidth={stroke} />
+        {/* brass needle arc */}
         <circle
-          cx={size / 2}
-          cy={size / 2}
+          cx={cx}
+          cy={cy}
           r={r}
           fill="none"
-          stroke="oklch(0.985 0 0 / 10%)"
-          strokeWidth={stroke}
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          stroke={`url(#${gid})`}
+          stroke={`url(#${uid}-brass)`}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={offset}
           className="transition-[stroke-dashoffset] duration-700 ease-out"
+          style={{ filter: "drop-shadow(0 0 3px oklch(0.74 0.115 82 / 45%))" }}
         />
       </svg>
       {showLabel && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-display text-2xl font-bold text-foreground">{Math.round(clamped)}%</span>
+          <span
+            className={
+              tone === "cream"
+                ? "font-display text-2xl font-bold text-engrave-cream"
+                : "font-display text-2xl font-bold text-engrave"
+            }
+          >
+            {Math.round(clamped)}%
+          </span>
         </div>
       )}
     </div>
