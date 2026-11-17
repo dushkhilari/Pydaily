@@ -7,7 +7,7 @@ interface ProgressGaugeProps {
   /** sizing classes, e.g. "h-20 w-20 sm:h-32 sm:w-32" */
   className?: string;
   showLabel?: boolean;
-  /** label material: "paper" (dark ink) or "cream" (on dark leather/blue plates) */
+  /** label material: "paper" (dark ink) or "cream" (on the dark cover) */
   tone?: "paper" | "cream";
 }
 
@@ -23,17 +23,17 @@ export function GaugeDefs() {
       className="absolute h-0 w-0 overflow-hidden"
     >
       <defs>
-        {/* brushed white-metal bezel */}
+        {/* paper bezel ring */}
         <linearGradient id="pgauge-metal" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="oklch(0.98 0.003 250)" />
-          <stop offset="50%" stopColor="oklch(0.86 0.008 253)" />
-          <stop offset="100%" stopColor="oklch(0.66 0.012 256)" />
+          <stop offset="0%" stopColor="oklch(0.995 0.003 95)" />
+          <stop offset="50%" stopColor="oklch(0.9 0.008 93)" />
+          <stop offset="100%" stopColor="oklch(0.76 0.012 90)" />
         </linearGradient>
-        {/* deep-blue enamel fill */}
+        {/* ballpoint-blue ink fill */}
         <linearGradient id="pgauge-fill" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="oklch(0.6 0.16 260)" />
-          <stop offset="55%" stopColor="oklch(0.48 0.15 263)" />
-          <stop offset="100%" stopColor="oklch(0.38 0.14 266)" />
+          <stop offset="0%" stopColor="oklch(0.6 0.15 260)" />
+          <stop offset="55%" stopColor="oklch(0.5 0.14 263)" />
+          <stop offset="100%" stopColor="oklch(0.4 0.13 266)" />
         </linearGradient>
       </defs>
     </svg>
@@ -41,9 +41,9 @@ export function GaugeDefs() {
 }
 
 /**
- * Rounded-square bench gauge: brushed-metal bezel, debossed track and a
- * deep-blue enamel progress bar with rounded corners — a square dial
- * instead of a circular one.
+ * Rounded-square progress dial: a paper bezel, a debossed track and a
+ * ballpoint-blue ink bar with rounded corners — drawn like a stamped
+ * progress sticker inside the notebook.
  */
 export function ProgressGauge({
   value,
@@ -70,7 +70,7 @@ export function ProgressGauge({
       aria-label={`Progress: ${Math.round(clamped)} percent`}
     >
       <svg viewBox="0 0 120 120" fill="none" className="h-full w-full -rotate-90">
-        {/* metal bezel */}
+        {/* paper bezel */}
         <rect
           x="3"
           y="3"
@@ -87,10 +87,10 @@ export function ProgressGauge({
           width={w}
           height={h}
           rx={rx}
-          stroke="oklch(0.4 0.03 258 / 40%)"
+          stroke="oklch(0.45 0.04 262 / 32%)"
           strokeWidth="9"
         />
-        {/* deep-blue progress bar */}
+        {/* blue ink progress bar */}
         <rect
           x={x}
           y={y}
@@ -103,7 +103,7 @@ export function ProgressGauge({
           strokeDasharray={perimeter}
           strokeDashoffset={offset}
           className="transition-[stroke-dashoffset] duration-700 ease-out"
-          style={{ filter: "drop-shadow(0 0 3px oklch(0.5 0.15 262 / 40%))" }}
+          style={{ filter: "drop-shadow(0 0 3px oklch(0.5 0.14 262 / 35%))" }}
         />
       </svg>
       {showLabel && (
@@ -111,7 +111,7 @@ export function ProgressGauge({
           <span
             className={cn(
               "font-display font-bold tabular-nums text-lg sm:text-2xl",
-              tone === "cream" ? "text-engrave-cream" : "text-engrave"
+              tone === "cream" ? "text-[oklch(0.96_0.006_95)]" : "text-foreground"
             )}
           >
             {Math.round(clamped)}%

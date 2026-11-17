@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ex-01",
+    "title": "Say hello to Python",
+    "module": "getting-started",
+    "day": 5,
+    "difficulty": "easy",
+    "task": "Use the print() function to display exactly: Hello, Python!",
+    "starterCode": "# Print the message below exactly as shown\n# Hello, Python!\n\n",
+    "expectedOutput": "Hello, Python!",
+    "hint": "print(\"Hello, Python!\") — don't forget the quotes.",
+    "solution": "print(\"Hello, Python!\")"
+  },
+  {
+    "id": "ex-02",
+    "title": "Rectangle area",
+    "module": "getting-started",
+    "day": 6,
+    "difficulty": "easy",
+    "task": "Store 7 in a variable called length and 3 in a variable called width. Multiply them and print the result (21).",
+    "starterCode": "length = 7\nwidth = 3\n\n# print the area\n",
+    "expectedOutput": "21",
+    "hint": "area = length * width, then print(area).",
+    "solution": "length = 7\nwidth = 3\narea = length * width\nprint(area)"
+  },
+  {
+    "id": "ex-03",
+    "title": "Countdown",
+    "module": "language-basics",
+    "day": 17,
+    "difficulty": "easy",
+    "task": "Use a for loop to print a countdown from 5 to 1, one number per line.",
+    "starterCode": "# countdown: 5 4 3 2 1 (one per line)\n\n",
+    "expectedOutput": "5\n4\n3\n2\n1",
+    "hint": "range(5, 0, -1) counts down: 5, 4, 3, 2, 1.",
+    "solution": "for i in range(5, 0, -1):\n    print(i)"
+  },
+  {
+    "id": "ex-04",
+    "title": "Even numbers only",
+    "module": "language-basics",
+    "day": 18,
+    "difficulty": "easy",
+    "task": "Print all even numbers from 1 to 10 (2, 4, 6, 8, 10), one per line, using a loop and an if statement.",
+    "starterCode": "for n in range(1, 11):\n    # if n is even, print it\n    pass\n",
+    "expectedOutput": "2\n4\n6\n8\n10",
+    "hint": "n % 2 == 0 means even. Remember to replace pass with your print.",
+    "solution": "for n in range(1, 11):\n    if n % 2 == 0:\n        print(n)"
+  },
+  {
+    "id": "ex-05",
+    "title": "String gym",
+    "module": "language-basics",
+    "day": 13,
+    "difficulty": "easy",
+    "task": "The variable word is \"python\". Print it in UPPERCASE, then print how many letters it has (6).",
+    "starterCode": "word = \"python\"\n\n# print the uppercase word\n# print the number of letters\n",
+    "expectedOutput": "PYTHON\n6",
+    "hint": "word.upper() gives \"PYTHON\" and len(word) counts characters.",
+    "solution": "word = \"python\"\nprint(word.upper())\nprint(len(word))"
+  },
+  {
+    "id": "ex-06",
+    "title": "Shopping list totals",
+    "module": "functions-collections",
+    "day": 22,
+    "difficulty": "medium",
+    "task": "Given prices = [4, 9, 2, 8, 7], print the total (30), then append 5 to the list and print the new total (35).",
+    "starterCode": "prices = [4, 9, 2, 8, 7]\n\n# print the sum of the list\n# append 5, then print the new sum\n",
+    "expectedOutput": "30\n35",
+    "hint": "sum(prices) adds everything; prices.append(5) adds an item to the end.",
+    "solution": "prices = [4, 9, 2, 8, 7]\nprint(sum(prices))\nprices.append(5)\nprint(sum(prices))"
+  },
+  {
+    "id": "ex-07",
+    "title": "Student ID card",
+    "module": "functions-collections",
+    "day": 33,
+    "difficulty": "medium",
+    "task": "Given the dictionary student, print exactly: Ada (36) — using an f-string with the dict values.",
+    "starterCode": "student = {\"name\": \"Ada\", \"age\": 36}\n\n# print: Ada (36)\n",
+    "expectedOutput": "Ada (36)",
+    "hint": "f\"{student['name']} ({student['age']})\" — mind the quotes inside the f-string.",
+    "solution": "student = {\"name\": \"Ada\", \"age\": 36}\nprint(f\"{student['name']} ({student['age']})\")"
+  },
+  {
+    "id": "ex-08",
+    "title": "Greeting machine",
+    "module": "functions-collections",
+    "day": 20,
+    "difficulty": "medium",
+    "task": "Write a function greet(name) that returns \"Hello, <name>!\". Call it with \"Ada\" and print the result (Hello, Ada!).",
+    "starterCode": "def greet(name):\n    # return the greeting string\n    pass\n\nprint(greet(\"Ada\"))\n",
+    "expectedOutput": "Hello, Ada!",
+    "hint": "return f\"Hello, {name}!\" — and delete the pass line.",
+    "solution": "def greet(name):\n    return f\"Hello, {name}!\"\n\nprint(greet(\"Ada\"))"
+  },
+  {
+    "id": "ex-09",
+    "title": "FizzBuzz, the classic",
+    "module": "errors-files-functional",
+    "day": 42,
+    "difficulty": "hard",
+    "task": "For numbers 1 to 15: print FizzBuzz if divisible by 3 AND 5, Fizz if divisible by 3, Buzz if divisible by 5, otherwise the number itself.",
+    "starterCode": "for n in range(1, 16):\n    # your logic here\n    pass\n",
+    "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz",
+    "hint": "Check the 3-and-5 case FIRST (n % 15 == 0), then n % 3, then n % 5, else print n.",
+    "solution": "for n in range(1, 16):\n    if n % 15 == 0:\n        print(\"FizzBuzz\")\n    elif n % 3 == 0:\n        print(\"Fizz\")\n    elif n % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(n)"
+  },
+  {
+    "id": "ex-10",
+    "title": "Robot dog",
+    "module": "oop",
+    "day": 57,
+    "difficulty": "hard",
+    "task": "Create a class Dog with __init__(self, name) storing the name, and a method speak(self) that returns \"<name> says Woof!\". Create Rex and print his speak().",
+    "starterCode": "class Dog:\n    # add __init__ and speak methods\n    pass\n\nd = Dog(\"Rex\")\nprint(d.speak())\n",
+    "expectedOutput": "Rex says Woof!",
+    "hint": "def __init__(self, name): self.name = name — and return f\"{self.name} says Woof!\".",
+    "solution": "class Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        return f\"{self.name} says Woof!\"\n\nd = Dog(\"Rex\")\nprint(d.speak())"
+  }
+]

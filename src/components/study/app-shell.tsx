@@ -2,8 +2,18 @@
 
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, BookOpen, Target, Bookmark, BarChart3, Flame, TerminalSquare } from "lucide-react";
-import type { Manifest, QuizModule } from "@/lib/types";
+import {
+  Home,
+  BookOpen,
+  Target,
+  Bookmark,
+  BarChart3,
+  Flame,
+  TerminalSquare,
+  NotebookPen,
+  type LucideIcon,
+} from "lucide-react";
+import type { Manifest, QuizModule, Exercise } from "@/lib/types";
 import { useStudyStore, type AppView } from "@/lib/store";
 import { Textures } from "./textures";
 import { GaugeDefs } from "./progress-gauge";
@@ -11,42 +21,41 @@ import { HomeView } from "./home-view";
 import { LessonsView } from "./lessons-view";
 import { LessonView } from "./lesson-view";
 import { QuizView } from "./quiz-view";
+import { PlaygroundView } from "./playground-view";
 import { SavedView } from "./saved-view";
 import { ProgressView } from "./progress-view";
 import { streakInfo, modulePercent } from "@/lib/progress-utils";
 import { ModuleIcon } from "./module-icon";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS: { id: AppView; label: string; icon: Home | BookOpen | Target | Bookmark | BarChart3 }[] = [
+const NAV_ITEMS: { id: AppView; label: string; icon: LucideIcon }[] = [
   { id: "home", label: "Home", icon: Home },
   { id: "lessons", label: "Lessons", icon: BookOpen },
   { id: "quiz", label: "Quiz", icon: Target },
+  { id: "lab", label: "Code Lab", icon: TerminalSquare },
   { id: "saved", label: "Saved", icon: Bookmark },
   { id: "progress", label: "Progress", icon: BarChart3 },
 ];
 
-function LogoMark({ onLeather = false }: { onLeather?: boolean }) {
+function LogoMark({ onCover = false }: { onCover?: boolean }) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="gloss relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/30 bg-brass-mat shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.15_0.06_265/0.45)]">
-        <TerminalSquare
-          className="h-5 w-5 text-[color:var(--brass-ink)] drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.6)]"
-          aria-hidden
-        />
+      <div
+        className={cn(
+          "relative flex h-11 w-11 -rotate-2 items-center justify-center rounded-xl border shadow-sm",
+          onCover ? "border-ink/25 bg-paper" : "border-ink/25 bg-paper"
+        )}
+      >
+        <NotebookPen className="h-5 w-5 text-pen-blue" aria-hidden />
       </div>
       <div className="leading-tight">
-        <p
-          className={cn(
-            "font-display text-lg font-bold tracking-tight",
-            onLeather ? "text-engrave-cream" : "text-engrave"
-          )}
-        >
+        <p className={cn("hand text-2xl leading-none", onCover ? "text-[oklch(0.96_0.006_95)]" : "text-foreground")}>
           PyDaily
         </p>
         <p
           className={cn(
-            "text-[11px] font-semibold",
-            onLeather ? "text-engrave-cream opacity-70" : "text-muted-foreground"
+            "mt-0.5 text-[11px] font-semibold",
+            onCover ? "text-[oklch(0.96_0.006_95)] opacity-70" : "text-pencil"
           )}
         >
           100 Days of Python
@@ -56,10 +65,19 @@ function LogoMark({ onLeather = false }: { onLeather?: boolean }) {
   );
 }
 
-export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: QuizModule[] }) {
+export function AppShell({
+  manifest,
+  quizzes,
+  exercises,
+}: {
+  manifest: Manifest;
+  quizzes: QuizModule[];
+  exercises: Exercise[];
+}) {
   const view = useStudyStore((s) => s.view);
   const setView = useStudyStore((s) => s.setView);
   const setModuleFilter = useStudyStore((s) => s.setModuleFilter);
+  const setActiveQuiz = useStudyStore((s) => s.setActiveQuiz);
   const bootstrap = useStudyStore((s) => s.bootstrap);
   const progress = useStudyStore((s) => s.progress);
   const streak = streakInfo(progress);
@@ -70,6 +88,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
 
   const navTo = (target: AppView) => {
     if (target === "lessons") setModuleFilter(null);
+    if (target === "quiz") setActiveQuiz(null);
     setView(target);
   };
 
@@ -78,19 +97,26 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
       <Textures />
       <GaugeDefs />
 
-      {/* ---------------- Desktop leather sidebar ---------------- */}
-      <aside className="leather-card stitch hidden md:flex fixed inset-y-0 left-0 w-72 flex-col z-40 !rounded-none border-y-0 border-l-0">
-        <div className="px-6 pt-7 pb-4">
-          <button
-            onClick={() => navTo("home")}
-            className="text-left transition-opacity hover:opacity-85"
-            aria-label="Go to home"
-          >
-            <LogoMark onLeather />
-          </button>
+      {/* ---------------- Desktop: notebook cover sidebar ---------------- */}
+      <aside className="cover-mat hidden md:flex fixed inset-y-0 left-0 w-72 flex-col z-40 border-r border-black/50 shadow-[inset_-6px_0_12px_-8px_oklch(0_0_0/0.6)]">
+        <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay" aria-hidden />
+        {/* elastic closure band */}
+        <span aria-hidden className="elastic-band absolute inset-y-0 right-3 w-2.5" />
+
+        <div className="relative px-6 pt-7 pb-4">
+          <div className="relative inline-block -rotate-1 rounded-lg border border-ink/20 bg-paper px-4 py-3 shadow-[0_2px_6px_oklch(0_0_0/0.4)]">
+            <span className="washi !left-auto right-[-14px] top-[-8px] !w-[58px] !h-4" aria-hidden />
+            <button
+              onClick={() => navTo("home")}
+              className="text-left transition-opacity hover:opacity-85"
+              aria-label="Go to home"
+            >
+              <LogoMark onCover />
+            </button>
+          </div>
         </div>
 
-        <nav aria-label="Primary" className="px-4 space-y-1.5">
+        <nav aria-label="Primary" className="relative px-4 space-y-1">
           {NAV_ITEMS.map((item) => {
             const active = view === item.id || (view === "lesson" && item.id === "lessons");
             const Icon = item.icon;
@@ -101,28 +127,28 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "btn3d group flex min-h-[44px] w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-bold transition-all",
-                  active ? "btn-pressed !bg-none !shadow-[0_2px_5px_oklch(0.05_0.01_262/55%)_inset] text-primary" : "text-engrave-cream opacity-85 hover:opacity-100 hover:!bg-white/5"
+                  active
+                    ? "bg-paper text-foreground shadow-[0_2px_6px_oklch(0_0_0/0.35)]"
+                    : "cover-text opacity-85 hover:opacity-100 hover:bg-white/5"
                 )}
               >
                 <Icon
-                  className={cn("h-[18px] w-[18px]", active ? "text-brass-deep" : "opacity-80")}
+                  className={cn("h-[18px] w-[18px]", active ? "text-pen-blue" : "opacity-80")}
                   aria-hidden
                 />
                 {item.label}
-                {active && <span className="ml-auto h-2 w-2 rounded-full bg-brass-mat shadow-sm" aria-hidden />}
+                {active && <span className="ribbon ml-auto h-3 w-1.5 rounded-full" aria-hidden />}
               </button>
             );
           })}
         </nav>
 
-        <div className="mx-6 my-4 h-px bg-black/25 shadow-[0_1px_0_oklch(1_0_0/12%)]" />
+        <div className="relative mx-6 my-4 border-t border-dashed border-white/15" />
 
-        <div className="px-6 pb-2">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-engrave-cream opacity-70">
-            Learning path
-          </p>
+        <div className="relative px-6 pb-2">
+          <p className="hand text-lg text-[oklch(0.96_0.006_95)] opacity-80">learning path</p>
         </div>
-        <div className="flex-1 overflow-y-auto scroll-slim px-4 pb-4 space-y-1.5">
+        <div className="relative flex-1 overflow-y-auto scroll-slim px-4 pb-4 space-y-1">
           {manifest.modules.map((mod) => {
             const pct = modulePercent(progress, manifest.lessons, mod.id);
             return (
@@ -132,23 +158,23 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                   setModuleFilter(mod.id);
                   setView("lessons");
                 }}
-                className="btn3d flex min-h-[52px] w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left hover:!bg-white/5"
+                className="btn3d flex min-h-[52px] w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left hover:bg-white/5"
               >
-                <span className="deboss-dark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.04_252)]">
+                <span className="chip-dark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[oklch(0.85_0.04_255)]">
                   <ModuleIcon icon={mod.icon} className="h-4 w-4" />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px] font-bold text-engrave-cream opacity-90">
+                  <span className="block truncate text-[13px] font-bold cover-text opacity-90">
                     {mod.title}
                   </span>
-                  <span className="deboss-dark mt-1.5 block h-2 w-full overflow-hidden rounded-full p-[2px]">
+                  <span className="chip-dark mt-1.5 block h-2 w-full overflow-hidden rounded-full p-[2px]">
                     <span
-                      className="block h-full rounded-full bg-brass-mat shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)]"
+                      className="block h-full rounded-full bg-pen-blue shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)]"
                       style={{ width: `${pct}%` }}
                     />
                   </span>
                 </span>
-                <span className="text-[11px] font-bold tabular-nums text-engrave-cream opacity-70">
+                <span className="text-[11px] font-bold tabular-nums cover-text opacity-70">
                   {Math.round(pct)}%
                 </span>
               </button>
@@ -156,74 +182,78 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
           })}
         </div>
 
-        <div className="border-t border-black/25 px-6 py-4 shadow-[0_1px_0_oklch(1_0_0/10%)_inset]">
+        <div className="relative border-t border-black/40 px-6 py-4 shadow-[0_1px_0_oklch(1_0_0/10%)_inset]">
           <a
             href={manifest.course.source}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[11px] font-semibold text-engrave-cream opacity-60 transition-opacity hover:opacity-100 break-all"
+            className="text-[11px] font-semibold text-[oklch(0.9_0.008_95)] opacity-60 transition-opacity hover:opacity-100 break-all"
           >
             Course content · dush404/Learn_Python
           </a>
         </div>
       </aside>
 
-      {/* ---------------- Mobile brushed-metal top bar ---------------- */}
-      <header className="sticky top-0 z-40 border-b border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_2px_6px_oklch(0.2_0.02_258/0.25)] md:hidden">
+      {/* ---------------- Mobile paper header ---------------- */}
+      <header className="sticky top-0 z-40 border-b border-ink/10 bg-card/95 shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_2px_6px_oklch(0.3_0.03_262/0.12)] backdrop-blur supports-[backdrop-filter]:bg-card/85 md:hidden">
         <div className="flex items-center justify-between px-4 py-2.5">
           <button onClick={() => navTo("home")} aria-label="Go to home" className="transition-opacity hover:opacity-80">
             <LogoMark />
           </button>
           <div
-            className="gloss relative flex items-center gap-1.5 rounded-full border border-black/25 bg-brass-mat px-3 py-1.5 text-sm font-bold shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.15_0.06_265/0.4)]"
+            className="chip flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold"
             aria-label={`Current streak: ${streak.current} days`}
           >
-            <Flame
-              className="h-4 w-4 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.5)]"
-              aria-hidden
-            />
-            <span className="text-engrave-brass tabular-nums">{streak.current}</span>
+            <Flame className="h-4 w-4 text-pen-red" aria-hidden />
+            <span className="tabular-nums">{streak.current}</span>
           </div>
         </div>
       </header>
 
-      {/* ---------------- Main content ---------------- */}
-      <main className="flex-1 flex w-full min-w-0 flex-col md:pl-72">
-        <div className="w-full min-w-0 max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 pt-5 sm:pt-6 pb-32 md:pb-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={view}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-            >
-              {view === "home" && <HomeView manifest={manifest} />}
-              {view === "lessons" && <LessonsView manifest={manifest} />}
-              {view === "lesson" && <LessonView manifest={manifest} />}
-              {view === "quiz" && <QuizView manifest={manifest} quizzes={quizzes} />}
-              {view === "saved" && <SavedView manifest={manifest} />}
-              {view === "progress" && <ProgressView manifest={manifest} quizzes={quizzes} />}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+      {/* ---------------- Main: the open notebook page ---------------- */}
+      <main className="relative flex-1 flex w-full min-w-0 flex-col md:pl-72">
+        <div className="page-sheet relative flex w-full flex-1 flex-col md:mx-6 md:my-6 md:w-auto md:rounded-[22px] md:border md:border-ink/15">
+          {/* punched holes + red margin line (desktop page) */}
+          <div aria-hidden className="hole-strip pointer-events-none absolute inset-y-0 left-4 hidden w-5 md:block" />
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-14 hidden w-px bg-margin-line/45 md:block" />
 
-        <footer className="mt-auto hidden md:block border-t border-[oklch(0.25_0.02_258/25%)] shadow-[0_1px_0_oklch(1_0_0/55%)]">
-          <div className="flex items-center justify-between px-8 py-4 text-xs font-semibold text-muted-foreground">
-            <p>
-              {manifest.course.title} · {manifest.course.totalDays} lessons synced from the course repo
-            </p>
-            <p className="text-engrave">Learn. Code. Repeat.</p>
+          <div className="relative w-full min-w-0 max-w-5xl flex-1 mx-auto px-4 sm:px-6 md:pl-20 md:pr-8 lg:pl-24 lg:pr-10 pt-5 sm:pt-6 pb-28 md:pb-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={view}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
+                {view === "home" && <HomeView manifest={manifest} />}
+                {view === "lessons" && <LessonsView manifest={manifest} />}
+                {view === "lesson" && <LessonView manifest={manifest} />}
+                {view === "quiz" && <QuizView manifest={manifest} quizzes={quizzes} exercises={exercises} />}
+                {view === "lab" && <PlaygroundView />}
+                {view === "saved" && <SavedView manifest={manifest} />}
+                {view === "progress" && <ProgressView manifest={manifest} quizzes={quizzes} />}
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </footer>
+
+          <footer className="relative mt-auto border-t border-dashed border-ink/20 px-4 py-4 sm:px-6 md:pl-20 md:pr-8 lg:pl-24">
+            <div className="flex flex-col gap-1 text-xs font-semibold text-pencil sm:flex-row sm:items-center sm:justify-between">
+              <p>
+                {manifest.course.title} · {manifest.course.totalDays} lessons synced from the course repo
+              </p>
+              <p className="hand text-lg leading-none text-pen-blue">Learn. Code. Repeat.</p>
+            </div>
+          </footer>
+        </div>
       </main>
 
-      {/* ---------------- Mobile brushed-metal dock ---------------- */}
+      {/* ---------------- Mobile paper dock ---------------- */}
       <nav
         aria-label="Bottom navigation"
-        className="fixed bottom-3 inset-x-3 z-50 rounded-[26px] border border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_10px_24px_-6px_oklch(0.12_0.02_260/0.5)] pb-safe md:hidden"
+        className="fixed bottom-3 inset-x-3 z-50 rounded-[24px] border border-ink/20 bg-card shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_12px_28px_-8px_oklch(0.3_0.03_262/0.45)] pb-safe md:hidden"
       >
-        <div className="grid grid-cols-5 px-1.5 py-1.5">
+        <div className="grid grid-cols-6 px-1 py-1.5">
           {NAV_ITEMS.map((item) => {
             const active = view === item.id || (view === "lesson" && item.id === "lessons");
             const Icon = item.icon;
@@ -233,13 +263,11 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                 onClick={() => navTo(item.id)}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "btn3d flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-2 text-[10.5px] font-bold transition-all",
-                  active
-                    ? "btn-pressed text-primary !shadow-[0_2px_5px_oklch(0.2_0.02_258/0.35)_inset]"
-                    : "text-foreground/55 hover:text-foreground/80"
+                  "btn3d flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-xl py-1.5 text-[9.5px] font-bold transition-all",
+                  active ? "btn-pressed" : "text-pencil hover:text-foreground"
                 )}
               >
-                <Icon className={cn("h-[19px] w-[19px]", active && "text-brass-deep")} aria-hidden />
+                <Icon className={cn("h-[18px] w-[18px]", active && "text-pen-blue")} aria-hidden />
                 {item.label}
               </button>
             );

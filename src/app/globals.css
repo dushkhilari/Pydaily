@@ -9,6 +9,7 @@
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), var(--font-body), ui-sans-serif, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-hand: var(--font-hand), "Segoe Print", cursive;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,16 +40,25 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  /* skeuomorphic material colors (monochrome + deep blue) */
-  --color-brass: var(--brass);
-  --color-brass-deep: var(--brass-deep);
-  --color-brass-ink: var(--brass-ink);
-  --color-leather: var(--leather);
-  --color-leather-deep: var(--leather-deep);
-  --color-leather-light: var(--leather-light);
+  /* notebook palette */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-pencil: var(--pencil);
+  --color-pen-blue: var(--pen-blue);
+  --color-pen-red: var(--pen-red);
+  --color-pen-green: var(--pen-green);
+  --color-pen-purple: var(--pen-purple);
+  --color-pen-amber: var(--pen-amber);
+  --color-marker: var(--marker);
+  --color-rule: var(--rule);
+  --color-margin-line: var(--margin-line);
+  --color-paper: var(--paper);
+  --color-paper-cream: var(--paper-cream);
   --color-paper-deep: var(--paper-deep);
-  --color-lcd: var(--lcd);
-  --color-lcd-text: var(--lcd-text);
+  --color-cover: var(--cover);
+  --color-cover-deep: var(--cover-deep);
+  --color-sticky: var(--sticky);
+  --color-sticky-deep: var(--sticky-deep);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -56,81 +66,88 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Skeuomorphic light theme — "Blueprint Study Desk"                    */
-/* Palette: white paper, black leather/ink, ONE deep blue for          */
-/* highlights (enamel plates, gauges, ribbons, links).                 */
+/* Notebook light theme — "PyDaily notebook"                           */
+/* The whole site is a notebook: warm paper pages, blue-black ink,     */
+/* ruled lines, a red margin, punched holes, washi tape and sticky     */
+/* notes. Highlights may use any pen colour; backgrounds stay paper.   */
 /* ------------------------------------------------------------------ */
 :root {
-  --radius: 1.05rem;
+  --radius: 1rem;
 
-  --background: oklch(0.985 0.003 250);       /* near-white desk */
-  --foreground: oklch(0.18 0.015 260);        /* black ink */
-  --card: oklch(0.995 0.002 250);             /* white paper */
-  --card-foreground: oklch(0.18 0.015 260);
-  --popover: oklch(0.99 0.002 250);
-  --popover-foreground: oklch(0.18 0.015 260);
-  --primary: oklch(0.44 0.155 265);           /* deep blue — the only accent */
-  --primary-foreground: oklch(0.985 0.003 250);
-  --secondary: oklch(0.94 0.008 255);         /* light gray-blue paper */
-  --secondary-foreground: oklch(0.2 0.015 260);
-  --muted: oklch(0.945 0.008 255);
-  --muted-foreground: oklch(0.48 0.02 258);
-  --accent: oklch(0.92 0.02 258);
-  --accent-foreground: oklch(0.2 0.015 260);
-  --destructive: oklch(0.24 0.015 260);       /* near-black for wrong states */
-  --destructive-foreground: oklch(0.985 0.003 250);
-  --border: oklch(0.25 0.02 258 / 22%);
-  --input: oklch(0.25 0.02 258 / 28%);
-  --ring: oklch(0.5 0.15 262);
-  --chart-1: oklch(0.44 0.155 265);           /* deep blue */
-  --chart-2: oklch(0.58 0.14 262);
-  --chart-3: oklch(0.24 0.02 262);            /* black leather */
-  --chart-4: oklch(0.72 0.1 258);
-  --chart-5: oklch(0.35 0.05 260);
-  --sidebar: oklch(0.24 0.02 262);
-  --sidebar-foreground: oklch(0.96 0.005 250);
-  --sidebar-primary: oklch(0.52 0.15 262);
-  --sidebar-primary-foreground: oklch(0.985 0.003 250);
-  --sidebar-accent: oklch(0.3 0.025 262);
-  --sidebar-accent-foreground: oklch(0.96 0.005 250);
-  --sidebar-border: oklch(0.1 0.01 262 / 70%);
-  --sidebar-ring: oklch(0.52 0.15 262);
+  --background: oklch(0.958 0.008 95);        /* warm desk around the notebook */
+  --foreground: oklch(0.27 0.025 262);        /* blue-black ink */
+  --card: oklch(0.993 0.003 95);              /* paper white */
+  --card-foreground: oklch(0.27 0.025 262);
+  --popover: oklch(0.99 0.003 95);
+  --popover-foreground: oklch(0.27 0.025 262);
+  --primary: oklch(0.5 0.14 262);             /* ballpoint blue */
+  --primary-foreground: oklch(0.99 0.003 95);
+  --secondary: oklch(0.945 0.008 95);         /* paper shadow tone */
+  --secondary-foreground: oklch(0.27 0.025 262);
+  --muted: oklch(0.945 0.008 95);
+  --muted-foreground: oklch(0.5 0.02 258);
+  --accent: oklch(0.93 0.015 262);
+  --accent-foreground: oklch(0.27 0.025 262);
+  --destructive: oklch(0.55 0.19 25);         /* red pen */
+  --destructive-foreground: oklch(0.99 0.003 95);
+  --border: oklch(0.3 0.03 262 / 16%);
+  --input: oklch(0.3 0.03 262 / 22%);
+  --ring: oklch(0.55 0.13 262);
+  --chart-1: oklch(0.5 0.14 262);
+  --chart-2: oklch(0.55 0.12 155);
+  --chart-3: oklch(0.55 0.19 25);
+  --chart-4: oklch(0.6 0.12 75);
+  --chart-5: oklch(0.52 0.12 305);
+  --sidebar: oklch(0.26 0.018 262);
+  --sidebar-foreground: oklch(0.955 0.006 95);
+  --sidebar-primary: oklch(0.5 0.14 262);
+  --sidebar-primary-foreground: oklch(0.99 0.003 95);
+  --sidebar-accent: oklch(0.32 0.02 262);
+  --sidebar-accent-foreground: oklch(0.955 0.006 95);
+  --sidebar-border: oklch(0.12 0.01 262 / 70%);
+  --sidebar-ring: oklch(0.55 0.13 262);
 
-  /* material tokens */
-  --brass: oklch(0.5 0.15 262);               /* deep-blue enamel plate */
-  --brass-deep: oklch(0.42 0.15 265);         /* deep blue highlight ink */
-  --brass-ink: oklch(0.97 0.008 250);         /* white text on blue plates */
-  --leather: oklch(0.24 0.02 262);            /* black leather */
-  --leather-deep: oklch(0.15 0.015 262);
-  --leather-light: oklch(0.33 0.025 262);
-  --paper-deep: oklch(0.955 0.004 250);
-  --lcd: oklch(0.23 0.05 265);                /* deep navy screen */
-  --lcd-edge: oklch(0.3 0.05 265);
-  --lcd-text: oklch(0.93 0.02 250);           /* ice white on navy */
-  --sticky: oklch(0.97 0.008 252);            /* pale blue-gray note */
-  --sticky-deep: oklch(0.94 0.01 252);
+  /* notebook tokens */
+  --ink: oklch(0.27 0.025 262);               /* blue-black ink */
+  --ink-soft: oklch(0.4 0.025 262);
+  --pencil: oklch(0.52 0.02 258);             /* gray pencil notes */
+  --pen-blue: oklch(0.5 0.14 262);            /* ballpoint blue */
+  --pen-red: oklch(0.55 0.19 25);             /* red pen / margin */
+  --pen-green: oklch(0.55 0.12 155);          /* green pen */
+  --pen-purple: oklch(0.52 0.12 305);         /* purple pen */
+  --pen-amber: oklch(0.6 0.12 75);            /* amber pen */
+  --marker: oklch(0.92 0.075 105);            /* highlighter yellow */
+  --rule: oklch(0.62 0.075 258);              /* ruled line blue */
+  --margin-line: oklch(0.63 0.18 25);         /* red margin line */
+  --paper: oklch(0.993 0.003 95);
+  --paper-cream: oklch(0.972 0.008 95);
+  --paper-deep: oklch(0.945 0.008 92);
+  --cover: oklch(0.26 0.018 262);             /* black notebook cover */
+  --cover-deep: oklch(0.19 0.015 262);
+  --sticky: oklch(0.975 0.05 105);            /* pale-yellow sticky */
+  --sticky-deep: oklch(0.955 0.055 100);
 }
 
 .dark {
-  --background: oklch(0.985 0.003 250);
-  --foreground: oklch(0.18 0.015 260);
-  --card: oklch(0.995 0.002 250);
-  --card-foreground: oklch(0.18 0.015 260);
-  --popover: oklch(0.99 0.002 250);
-  --popover-foreground: oklch(0.18 0.015 260);
-  --primary: oklch(0.44 0.155 265);
-  --primary-foreground: oklch(0.985 0.003 250);
-  --secondary: oklch(0.94 0.008 255);
-  --secondary-foreground: oklch(0.2 0.015 260);
-  --muted: oklch(0.945 0.008 255);
-  --muted-foreground: oklch(0.48 0.02 258);
-  --accent: oklch(0.92 0.02 258);
-  --accent-foreground: oklch(0.2 0.015 260);
-  --destructive: oklch(0.24 0.015 260);
-  --destructive-foreground: oklch(0.985 0.003 250);
-  --border: oklch(0.25 0.02 258 / 22%);
-  --input: oklch(0.25 0.02 258 / 28%);
-  --ring: oklch(0.5 0.15 262);
+  --background: oklch(0.958 0.008 95);
+  --foreground: oklch(0.27 0.025 262);
+  --card: oklch(0.993 0.003 95);
+  --card-foreground: oklch(0.27 0.025 262);
+  --popover: oklch(0.99 0.003 95);
+  --popover-foreground: oklch(0.27 0.025 262);
+  --primary: oklch(0.5 0.14 262);
+  --primary-foreground: oklch(0.99 0.003 95);
+  --secondary: oklch(0.945 0.008 95);
+  --secondary-foreground: oklch(0.27 0.025 262);
+  --muted: oklch(0.945 0.008 95);
+  --muted-foreground: oklch(0.5 0.02 258);
+  --accent: oklch(0.93 0.015 262);
+  --accent-foreground: oklch(0.27 0.025 262);
+  --destructive: oklch(0.55 0.19 25);
+  --destructive-foreground: oklch(0.99 0.003 95);
+  --border: oklch(0.3 0.03 262 / 16%);
+  --input: oklch(0.3 0.03 262 / 22%);
+  --ring: oklch(0.55 0.13 262);
 }
 
 @layer base {
@@ -145,91 +162,55 @@
     font-feature-settings: "ss01";
   }
   ::selection {
-    background: oklch(0.5 0.15 262 / 22%);
+    background: oklch(0.92 0.075 105 / 70%);   /* highlighter selection */
   }
 }
 
 /* ------------------------------------------------------------------ */
-/* Material utilities                                                  */
+/* Notebook material utilities                                         */
 /* ------------------------------------------------------------------ */
 
-/* Film grain / noise texture overlay */
+/* Film grain / paper fiber overlay */
 @utility bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
-/* Fine speckle (leather pores) */
-@utility bg-speckle {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
-}
-
-/* White desk weave */
-@utility bg-linen {
+/* Warm desk around the open notebook */
+@utility bg-desk {
   background-image:
-    repeating-linear-gradient(0deg, oklch(0.82 0.01 255 / 9%) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, oklch(0.82 0.01 255 / 7%) 0 1px, transparent 1px 4px),
-    linear-gradient(180deg, oklch(0.995 0.002 250) 0%, oklch(0.96 0.005 252) 100%);
+    radial-gradient(120% 60% at 50% -10%, oklch(1 0 0 / 50%) 0%, transparent 60%),
+    radial-gradient(ellipse at center, transparent 58%, oklch(0.45 0.04 80 / 0.14) 100%),
+    linear-gradient(180deg, oklch(0.962 0.008 95) 0%, oklch(0.942 0.012 92) 100%);
 }
 
-/* Black leather */
-@utility bg-leather-mat {
+/* Ruled paper lines (subtle, for the open page) */
+@utility bg-ruled {
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0 27px,
+    oklch(0.55 0.09 258 / 12%) 27px 28px
+  );
+}
+
+/* Graph paper (code on paper) */
+@utility bg-grid-paper {
   background-image:
-    radial-gradient(120% 90% at 30% 0%, oklch(0.36 0.025 262 / 70%) 0%, transparent 55%),
-    radial-gradient(90% 70% at 80% 100%, oklch(0.1 0.01 262 / 65%) 0%, transparent 60%),
-    linear-gradient(165deg, var(--leather-light) 0%, var(--leather) 45%, var(--leather-deep) 100%);
+    repeating-linear-gradient(0deg, oklch(0.55 0.08 258 / 13%) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, oklch(0.55 0.08 258 / 13%) 0 1px, transparent 1px 22px),
+    linear-gradient(180deg, oklch(0.995 0.003 95) 0%, oklch(0.975 0.005 95) 100%);
 }
 
-/* White paper */
-@utility bg-paper-mat {
-  background-image:
-    radial-gradient(130% 100% at 50% 0%, oklch(1 0 0 / 90%) 0%, transparent 60%),
-    linear-gradient(180deg, var(--card) 0%, var(--paper-deep) 130%);
-}
-
-/* Deep-blue enamel plate */
-@utility bg-brass-mat {
-  background-image:
-    repeating-linear-gradient(90deg, oklch(1 0 0 / 6%) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, oklch(0.58 0.155 260) 0%, var(--brass) 40%, var(--brass-deep) 100%);
-}
-
-/* Brushed white-metal */
-@utility bg-metal-mat {
-  background-image:
-    repeating-linear-gradient(90deg, oklch(1 0 0 / 8%) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, oklch(0.98 0.003 250) 0%, oklch(0.92 0.006 252) 55%, oklch(0.84 0.01 254) 100%);
-}
-
-/* Dark plastic bezel (code / video frames) */
-@utility bg-bezel-mat {
-  background-image:
-    radial-gradient(120% 90% at 50% 0%, oklch(0.36 0.03 262 / 55%) 0%, transparent 55%),
-    linear-gradient(180deg, oklch(0.32 0.03 262) 0%, oklch(0.26 0.03 263) 55%, oklch(0.2 0.025 264) 100%);
-}
-
-/* Deep navy LCD screen */
-@utility bg-lcd-mat {
-  background-image:
-    linear-gradient(180deg, oklch(0.27 0.05 264) 0%, var(--lcd) 60%, oklch(0.19 0.045 266) 100%);
-  color: var(--lcd-text);
-}
-
-/* Engraved text — black ink pressed into paper */
-@utility text-engrave {
-  color: var(--foreground);
-  text-shadow: 0 1px 0 oklch(1 0 0 / 60%);
-}
-
-/* Engraved text — white pressed into black leather / blue plates */
-@utility text-engrave-cream {
-  color: oklch(0.96 0.006 250);
-  text-shadow: 0 -1px 1px oklch(0.02 0.01 262 / 60%), 0 1px 1px oklch(1 0 0 / 14%);
-}
-
-/* Engraved white text on blue enamel plates */
-@utility text-engrave-brass {
-  color: oklch(0.97 0.008 250);
-  text-shadow: 0 -1px 1px oklch(0.2 0.09 266 / 55%), 0 1px 1px oklch(1 0 0 / 22%);
+/* Punched holes strip — repeats vertically down a page edge */
+@utility hole-strip {
+  background-image: radial-gradient(
+    circle at 50% 20px,
+    oklch(0.94 0.008 95) 0 4.5px,
+    oklch(0.42 0.03 262 / 40%) 5px 6px,
+    transparent 6.5px
+  );
+  background-size: 18px 44px;
+  background-repeat: repeat-y;
+  background-position: center top;
 }
 
 /* Bottom safe area for mobile */
@@ -243,13 +224,13 @@
 /* Custom scrollbars */
 @utility scroll-slim {
   scrollbar-width: thin;
-  scrollbar-color: oklch(0.45 0.04 258 / 45%) transparent;
+  scrollbar-color: oklch(0.5 0.05 258 / 45%) transparent;
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background: oklch(0.45 0.04 258 / 40%);
+    background: oklch(0.5 0.05 258 / 40%);
     border-radius: 999px;
   }
   &::-webkit-scrollbar-track {
@@ -258,58 +239,58 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Skeuomorphic component classes                                      */
+/* Notebook component classes                                          */
 /* ------------------------------------------------------------------ */
 @layer components {
-  /* ---- paper card: raised white sheet ---- */
-  .paper-card {
+  /* ---- raised paper sheet (cards) ---- */
+  .sheet {
+    background-color: var(--card);
     background-image:
-      radial-gradient(130% 100% at 50% 0%, oklch(1 0 0 / 92%) 0%, transparent 60%),
-      linear-gradient(180deg, var(--card) 0%, var(--paper-deep) 130%);
-    border: 1px solid oklch(0.25 0.02 258 / 18%);
+      radial-gradient(120% 90% at 50% 0%, oklch(1 0 0 / 85%) 0%, transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+    border: 1px solid oklch(0.3 0.03 262 / 16%);
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 80%) inset,
-      0 2px 4px oklch(0.2 0.02 258 / 12%),
-      0 10px 24px -12px oklch(0.2 0.02 258 / 22%);
+      0 1px 0 oklch(1 0 0 / 75%) inset,
+      0 2px 4px oklch(0.3 0.03 262 / 8%),
+      0 12px 24px -14px oklch(0.3 0.03 262 / 30%);
   }
 
-  /* ---- black leather card with stitched border ---- */
-  .leather-card {
-    background-image:
-      radial-gradient(120% 90% at 30% 0%, oklch(0.36 0.025 262 / 70%) 0%, transparent 55%),
-      radial-gradient(90% 70% at 80% 100%, oklch(0.1 0.01 262 / 65%) 0%, transparent 60%),
-      linear-gradient(165deg, var(--leather-light) 0%, var(--leather) 45%, var(--leather-deep) 100%);
-    border: 1px solid oklch(0.05 0.01 262 / 85%);
-    box-shadow:
-      0 1px 0 oklch(1 0 0 / 16%) inset,
-      0 -2px 6px oklch(0 0 0 / 40%) inset,
-      0 4px 10px oklch(0.1 0.015 262 / 30%),
-      0 16px 32px -16px oklch(0.05 0.01 262 / 45%);
+  /* ---- flat paper strip ---- */
+  .sheet-flat {
+    background-color: var(--card);
+    border: 1px solid oklch(0.3 0.03 262 / 14%);
+    box-shadow: 0 1px 2px oklch(0.3 0.03 262 / 10%);
   }
 
-  /* stitched seam (dashed outline inset) for leather surfaces */
-  .stitch {
-    outline: 1.5px dashed oklch(0.96 0.006 250 / 30%);
-    outline-offset: -9px;
-    border-radius: inherit;
+  /* ---- the big open notebook page ---- */
+  .page-sheet {
+    background-color: var(--card);
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0 27px,
+      oklch(0.55 0.09 258 / 10%) 27px 28px
+    );
+    box-shadow:
+      0 1px 0 oklch(1 0 0 / 70%) inset,
+      0 18px 40px -22px oklch(0.3 0.03 262 / 35%);
   }
 
-  /* ---- debossed well (paper) ---- */
-  .deboss {
-    background: linear-gradient(180deg, oklch(0.91 0.008 254) 0%, oklch(0.96 0.004 252) 100%);
-    border: 1px solid oklch(0.25 0.02 258 / 24%);
+  /* ---- paper chip (inset well for icons / badges) ---- */
+  .chip {
+    background: linear-gradient(180deg, oklch(0.965 0.006 95) 0%, oklch(0.93 0.01 93) 100%);
+    border: 1px solid oklch(0.3 0.03 262 / 22%);
     box-shadow:
-      0 2px 5px oklch(0.2 0.02 258 / 16%) inset,
-      0 -1px 0 oklch(1 0 0 / 70%);
+      0 2px 4px oklch(0.3 0.03 262 / 14%) inset,
+      0 1px 0 oklch(1 0 0 / 70%);
   }
 
-  /* ---- debossed well (black leather) ---- */
-  .deboss-dark {
-    background: linear-gradient(180deg, oklch(0.13 0.015 262) 0%, oklch(0.2 0.018 262) 100%);
-    border: 1px solid oklch(0.02 0.01 262 / 90%);
+  /* ---- dark inset chip (on the notebook cover) ---- */
+  .chip-dark {
+    background: linear-gradient(180deg, oklch(0.16 0.015 262) 0%, oklch(0.22 0.018 262) 100%);
+    border: 1px solid oklch(0.02 0.01 262 / 80%);
     box-shadow:
-      0 3px 6px oklch(0 0 0 / 45%) inset,
-      0 1px 0 oklch(1 0 0 / 10%);
+      0 2px 5px oklch(0 0 0 / 40%) inset,
+      0 1px 0 oklch(1 0 0 / 8%);
   }
 
   /* ---- physical buttons ---- */
@@ -331,170 +312,128 @@
     outline-offset: 2px;
   }
 
-  /* white plastic key (neutral action) */
-  .btn-key {
-    background-image: linear-gradient(180deg, oklch(0.995 0.002 250) 0%, oklch(0.94 0.005 252) 92%, oklch(0.89 0.008 254) 100%);
-    border: 1px solid oklch(0.25 0.02 258 / 32%);
+  /* white paper key (neutral action) */
+  .btn-paper {
+    background-image: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.965 0.005 95) 90%, oklch(0.935 0.008 93) 100%);
+    border: 1px solid oklch(0.3 0.03 262 / 28%);
     box-shadow:
       0 1px 0 oklch(1 0 0 / 90%) inset,
-      0 -3px 5px oklch(0.2 0.02 258 / 8%) inset,
-      0 3px 5px -1px oklch(0.2 0.02 258 / 28%);
+      0 -2px 3px oklch(0.3 0.03 262 / 6%) inset,
+      0 2px 3px -1px oklch(0.3 0.03 262 / 25%);
     color: var(--foreground);
-    text-shadow: 0 1px 0 oklch(1 0 0 / 70%);
   }
-  .btn-key:active:not(:disabled) {
+  .btn-paper:active:not(:disabled) {
     box-shadow:
-      0 2px 4px oklch(0.2 0.02 258 / 22%) inset,
-      0 1px 0 oklch(1 0 0 / 45%);
-  }
-
-  /* black leather strap button (neutral-dark action) */
-  .btn-leather {
-    background-image:
-      linear-gradient(180deg, oklch(0.34 0.02 262) 0%, oklch(0.25 0.02 262) 45%, oklch(0.17 0.015 262) 100%);
-    border: 1px solid oklch(0.05 0.01 262 / 90%);
-    box-shadow:
-      0 1px 0 oklch(1 0 0 / 22%) inset,
-      0 -3px 6px oklch(0 0 0 / 45%) inset,
-      0 3px 6px -1px oklch(0 0 0 / 40%);
-    color: oklch(0.96 0.006 250);
-    text-shadow: 0 -1px 1px oklch(0 0 0 / 55%);
-  }
-  .btn-leather:active:not(:disabled) {
-    box-shadow:
-      0 3px 6px oklch(0 0 0 / 45%) inset,
-      0 1px 0 oklch(1 0 0 / 15%);
-  }
-
-  /* deep-blue enamel plate button (highlight action) */
-  .btn-brass {
-    background-image:
-      repeating-linear-gradient(90deg, oklch(1 0 0 / 7%) 0 1px, transparent 1px 3px),
-      linear-gradient(180deg, oklch(0.56 0.155 260) 0%, var(--brass) 45%, var(--brass-deep) 100%);
-    border: 1px solid oklch(0.24 0.1 266 / 85%);
-    box-shadow:
-      0 1px 0 oklch(1 0 0 / 35%) inset,
-      0 -3px 6px oklch(0.18 0.08 266 / 45%) inset,
-      0 3px 6px -1px oklch(0.2 0.08 265 / 40%);
-    color: var(--brass-ink);
-    text-shadow: 0 -1px 1px oklch(0.2 0.09 266 / 55%);
-  }
-  .btn-brass:active:not(:disabled) {
-    box-shadow:
-      0 3px 6px oklch(0.18 0.08 266 / 45%) inset,
-      0 1px 0 oklch(1 0 0 / 25%);
-  }
-
-  /* pressed-in state (e.g. toggled / active nav) */
-  .btn-pressed {
-    background-image: linear-gradient(180deg, oklch(0.89 0.01 254) 0%, oklch(0.95 0.005 252) 100%);
-    border: 1px solid oklch(0.25 0.02 258 / 30%);
-    box-shadow:
-      0 2px 5px oklch(0.2 0.02 258 / 28%) inset,
+      0 2px 4px oklch(0.3 0.03 262 / 20%) inset,
       0 1px 0 oklch(1 0 0 / 50%);
-    color: var(--foreground);
   }
 
-  /* ---- glossy sheen overlay for buttons / plaques ---- */
-  .gloss {
-    position: relative;
-    overflow: hidden;
-  }
-  .gloss::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 46%;
-    border-radius: inherit;
-    background: linear-gradient(180deg, oklch(1 0 0 / 28%) 0%, oklch(1 0 0 / 4%) 100%);
-    pointer-events: none;
-  }
-
-  /* ---- dark steel screw head ---- */
-  .screw {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background:
-      linear-gradient(135deg, transparent 42%, oklch(0.12 0.01 260 / 80%) 44% 56%, transparent 58%),
-      radial-gradient(circle at 35% 30%, oklch(0.92 0.005 250) 0%, oklch(0.68 0.01 254) 55%, oklch(0.42 0.015 258) 100%);
-    box-shadow: 0 1px 1.5px oklch(0 0 0 / 55%), 0 1px 0 oklch(1 0 0 / 30%) inset;
-    pointer-events: none;
-  }
-
-  /* ---- deep navy LCD screen with scanlines + glass reflection ---- */
-  .lcd-screen {
-    background-image:
-      linear-gradient(180deg, oklch(0.27 0.05 264) 0%, var(--lcd) 60%, oklch(0.19 0.045 266) 100%);
+  /* ballpoint blue ink button (primary action) */
+  .btn-ink {
+    background-image: linear-gradient(180deg, oklch(0.58 0.14 262) 0%, var(--pen-blue) 50%, oklch(0.42 0.13 265) 100%);
+    border: 1px solid oklch(0.35 0.12 265 / 90%);
     box-shadow:
-      0 2px 8px oklch(0.02 0.02 266 / 70%) inset,
-      0 1px 0 oklch(1 0 0 / 8%);
-    color: var(--lcd-text);
-    position: relative;
-    overflow: hidden;
+      0 1px 0 oklch(1 0 0 / 30%) inset,
+      0 -2px 4px oklch(0.3 0.1 266 / 35%) inset,
+      0 2px 4px -1px oklch(0.35 0.12 265 / 45%);
+    color: oklch(0.99 0.003 95);
+    text-shadow: 0 -1px 0 oklch(0.3 0.1 266 / 40%);
   }
-  .lcd-screen::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(0deg, oklch(0 0 0 / 9%) 0 1px, transparent 1px 3px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .lcd-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, oklch(1 0 0 / 7%) 0%, oklch(1 0 0 / 0%) 28%);
-    pointer-events: none;
-    z-index: 2;
+  .btn-ink:active:not(:disabled) {
+    box-shadow:
+      0 3px 6px oklch(0.3 0.1 266 / 40%) inset,
+      0 1px 0 oklch(1 0 0 / 20%);
   }
 
-  /* ---- pale blue sticky note ---- */
+  /* pressed-in state (toggled / active nav) */
+  .btn-pressed {
+    background-image: linear-gradient(180deg, oklch(0.93 0.008 95) 0%, oklch(0.97 0.005 95) 100%);
+    border: 1px solid oklch(0.3 0.03 262 / 26%);
+    box-shadow:
+      0 2px 5px oklch(0.3 0.03 262 / 24%) inset,
+      0 1px 0 oklch(1 0 0 / 55%);
+    color: var(--pen-blue);
+  }
+
+  /* ---- black notebook cover (sidebar) ---- */
+  .cover-mat {
+    background-image:
+      radial-gradient(120% 80% at 30% 0%, oklch(0.36 0.02 262 / 80%) 0%, transparent 55%),
+      linear-gradient(165deg, oklch(0.31 0.02 262) 0%, var(--cover) 45%, var(--cover-deep) 100%);
+  }
+  .cover-text {
+    color: oklch(0.955 0.006 95);
+    text-shadow: 0 -1px 1px oklch(0 0 0 / 50%);
+  }
+  .elastic-band {
+    background: linear-gradient(90deg, oklch(0.2 0.015 262) 0%, oklch(0.34 0.02 262) 40%, oklch(0.17 0.015 262) 100%);
+    box-shadow:
+      1px 0 2px oklch(0 0 0 / 55%),
+      inset 0 0 0 1px oklch(1 0 0 / 6%);
+  }
+
+  /* ---- washi tape strip ---- */
+  .washi {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    width: 88px;
+    height: 20px;
+    transform: translateX(-50%) rotate(-2deg);
+    background:
+      repeating-linear-gradient(45deg, oklch(0.72 0.06 258 / 35%) 0 6px, oklch(0.96 0.01 250 / 55%) 6px 12px),
+      linear-gradient(180deg, oklch(0.98 0.004 250 / 72%) 0%, oklch(0.9 0.01 250 / 66%) 100%);
+    box-shadow: 0 1px 3px oklch(0.3 0.03 262 / 22%);
+    border-left: 1px dashed oklch(0.3 0.03 262 / 25%);
+    border-right: 1px dashed oklch(0.3 0.03 262 / 25%);
+    z-index: 5;
+  }
+
+  /* ---- pale-yellow sticky note ---- */
   .sticky-note {
     background:
-      repeating-linear-gradient(180deg, transparent 0 25px, oklch(0.5 0.12 262 / 28%) 25px 26px),
+      repeating-linear-gradient(180deg, transparent 0 25px, oklch(0.5 0.09 258 / 22%) 25px 26px),
       linear-gradient(180deg, var(--sticky) 0%, var(--sticky-deep) 100%);
-    border: 1px solid oklch(0.35 0.05 260 / 30%);
+    border: 1px solid oklch(0.55 0.06 100 / 40%);
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 60%) inset,
-      0 4px 10px -2px oklch(0.2 0.02 258 / 30%);
+      0 1px 0 oklch(1 0 0 / 55%) inset,
+      0 6px 14px -6px oklch(0.4 0.04 95 / 35%);
     transform: rotate(-1.1deg);
   }
   .sticky-note.alt {
     transform: rotate(1.2deg);
   }
-  .tape {
-    position: absolute;
-    top: -9px;
-    left: 50%;
-    width: 84px;
-    height: 20px;
-    transform: translateX(-50%) rotate(-2deg);
-    background: linear-gradient(180deg, oklch(0.98 0.004 250 / 85%) 0%, oklch(0.91 0.008 252 / 80%) 100%);
-    box-shadow: 0 1px 3px oklch(0.2 0.02 258 / 25%);
-    border-left: 1px dashed oklch(0.25 0.02 258 / 30%);
-    border-right: 1px dashed oklch(0.25 0.02 258 / 30%);
-  }
 
-  /* ---- ruled notebook (notes editor): white sheet, blue rules ---- */
+  /* ---- ruled legal pad (notes editor): white sheet, blue rules, red margin ---- */
   .legal-pad {
     background:
-      linear-gradient(90deg, transparent 0 34px, oklch(0.5 0.14 262 / 45%) 34px 35.5px, transparent 35.5px),
-      repeating-linear-gradient(180deg, transparent 0 27px, oklch(0.55 0.1 260 / 26%) 27px 28px),
-      linear-gradient(180deg, oklch(0.998 0.002 250) 0%, oklch(0.97 0.004 251) 100%);
-    border: 1px solid oklch(0.25 0.02 258 / 30%);
+      linear-gradient(90deg, transparent 0 34px, oklch(0.63 0.18 25 / 55%) 34px 35.5px, transparent 35.5px),
+      repeating-linear-gradient(180deg, transparent 0 27px, oklch(0.55 0.09 258 / 28%) 27px 28px),
+      linear-gradient(180deg, oklch(0.998 0.002 95) 0%, oklch(0.975 0.006 95) 100%);
+    border: 1px solid oklch(0.3 0.03 262 / 26%);
     box-shadow:
-      0 2px 6px oklch(0.2 0.02 258 / 15%) inset,
-      0 -1px 0 oklch(1 0 0 / 65%),
-      0 4px 10px -4px oklch(0.2 0.02 258 / 25%);
+      0 2px 6px oklch(0.3 0.03 262 / 12%) inset,
+      0 -1px 0 oklch(1 0 0 / 65%);
   }
 
-  /* ---- deep blue ribbon bookmark ---- */
+  /* ---- blue bookmark ribbon ---- */
   .ribbon {
-    background: linear-gradient(180deg, var(--brass) 0%, var(--brass-deep) 100%);
-    box-shadow: 0 1px 2px oklch(0.15 0.05 265 / 45%);
+    background: linear-gradient(180deg, var(--pen-blue) 0%, oklch(0.42 0.13 265) 100%);
+    box-shadow: 0 1px 2px oklch(0.3 0.1 265 / 45%);
+  }
+
+  /* ---- highlighter marker behind text ---- */
+  .marker-hl {
+    background: linear-gradient(180deg, transparent 8%, var(--marker) 8% 90%, transparent 90%);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    border-radius: 2px;
+    padding: 0 3px;
+  }
+
+  /* ---- handwritten font helper ---- */
+  .hand {
+    font-family: var(--font-hand), "Segoe Print", cursive;
   }
 }
 
@@ -502,16 +441,16 @@
 /* Markdown reader typography (lesson content on paper)                */
 /* ------------------------------------------------------------------ */
 .md-scope {
-  @apply text-[15.5px] leading-7 text-foreground/85;
+  @apply text-[15.5px] leading-7 text-foreground/90;
 }
 .md-scope h1 {
-  @apply font-display text-2xl font-bold text-engrave mt-1 mb-4;
+  @apply font-display text-2xl font-bold mt-1 mb-4;
 }
 .md-scope h2 {
-  @apply font-display text-xl font-bold text-engrave mt-8 mb-3;
+  @apply font-display text-xl font-bold mt-8 mb-3 underline decoration-pen-blue/30 decoration-2 underline-offset-8;
 }
 .md-scope h3 {
-  @apply font-display text-lg font-bold text-engrave mt-6 mb-2;
+  @apply font-display text-lg font-bold mt-6 mb-2;
 }
 .md-scope p {
   @apply my-3;
@@ -524,75 +463,76 @@
 }
 .md-scope ul li::before {
   content: "";
-  @apply absolute left-0 top-[0.6rem] h-1.5 w-1.5 rounded-full bg-brass-mat shadow-sm;
+  @apply absolute left-0 top-[0.6rem] h-1.5 w-1.5 rounded-full bg-pen-blue/70;
 }
 .md-scope ol {
-  @apply my-4 space-y-1.5 list-decimal pl-5 marker:text-brass-deep marker:font-semibold;
+  @apply my-4 space-y-1.5 list-decimal pl-5 marker:text-pen-blue marker:font-semibold;
 }
 .md-scope a {
-  @apply text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary break-words;
+  @apply text-pen-blue underline underline-offset-4 decoration-pen-blue/40 hover:decoration-pen-blue break-words;
 }
 .md-scope strong {
   @apply text-foreground font-bold;
 }
 .md-scope blockquote {
-  @apply my-4 rounded-r-lg border-l-4 border-primary/60 bg-secondary/50 py-1.5 pl-4 pr-3 text-muted-foreground italic;
+  @apply my-4 rounded-r-lg border-l-[3px] border-pen-red/60 py-1.5 pl-4 pr-3 text-pencil italic;
 }
 .md-scope hr {
-  @apply my-6 border-0 h-px shadow-[0_1px_0_oklch(1_0_0/60%)] bg-[oklch(0.25_0.02_258/25%)];
+  @apply my-6 border-0 border-t border-dashed border-ink/25;
 }
 .md-scope code:not(pre code) {
-  @apply rounded-md border border-border/40 bg-secondary/70 px-1.5 py-0.5 font-mono text-[13px] text-foreground shadow-[0_1px_0_oklch(1_0_0/60%)_inset];
+  @apply rounded-md border border-ink/15 bg-paper-cream px-1.5 py-0.5 font-mono text-[13px] text-foreground shadow-[0_1px_0_oklch(1_0_0/60%)_inset];
 }
 .md-scope pre {
   margin: 0;
 }
 .md-scope table {
-  @apply my-4 w-full text-sm border-separate border-spacing-0 rounded-xl overflow-hidden border border-border/50 shadow-sm;
+  @apply my-4 w-full text-sm border-separate border-spacing-0 rounded-xl overflow-hidden border border-ink/15 shadow-sm;
 }
 .md-scope th {
-  @apply bg-metal-mat px-3 py-2 text-left font-bold text-foreground/80;
+  @apply bg-paper-cream px-3 py-2 text-left font-bold text-foreground/80;
 }
 .md-scope td {
-  @apply border-t border-border/40 px-3 py-2;
+  @apply border-t border-ink/10 px-3 py-2;
 }
 .md-scope img {
-  @apply my-4 rounded-xl max-w-full border border-border/40 shadow-md;
+  @apply my-4 rounded-xl max-w-full border border-ink/15 shadow-md;
 }
 
-/* Python syntax token colors — deep-blue screen palette (white/blue only) */
+/* Python syntax token colors — "ink on graph paper" light palette */
 .hljs {
-  color: var(--lcd-text);
+  color: var(--ink);
   background: transparent;
 }
 .hljs-keyword,
 .hljs-built_in {
-  color: oklch(0.82 0.08 252);         /* light steel blue */
+  color: var(--pen-blue);
+  font-weight: 600;
 }
 .hljs-string,
 .hljs-attr {
-  color: oklch(0.9 0.035 246);         /* pale ice blue */
+  color: var(--pen-green);
 }
 .hljs-title,
 .hljs-title.function_,
 .hljs-section {
-  color: oklch(0.96 0.015 250);        /* white */
+  color: var(--pen-purple);
 }
 .hljs-number,
 .hljs-literal {
-  color: oklch(0.72 0.1 260);          /* periwinkle */
+  color: var(--pen-amber);
 }
 .hljs-comment {
-  color: oklch(0.6 0.035 256);         /* gray-blue */
+  color: var(--pencil);
   font-style: italic;
 }
 .hljs-name,
 .hljs-tag {
-  color: oklch(0.82 0.08 252);
+  color: var(--pen-blue);
 }
 .hljs-punctuation {
-  color: oklch(0.72 0.03 255);
+  color: oklch(0.45 0.02 262);
 }
 .hljs-operator {
-  color: oklch(0.85 0.04 250);
+  color: var(--ink-soft);
 }

@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import type { ProgressEntry, QuizResult } from "./types";
 
-export type AppView = "home" | "lessons" | "lesson" | "quiz" | "saved" | "progress";
+export type AppView = "home" | "lessons" | "lesson" | "quiz" | "lab" | "saved" | "progress";
 
 interface UserState {
   progress: Record<string, ProgressEntry>;
@@ -19,7 +19,10 @@ interface StudyStore extends UserState {
   activeSlug: string | null;
   moduleFilter: string | null;
   activeQuiz: string | null;
+  pendingLabCode: string | null;
   setActiveQuiz: (quizId: string | null) => void;
+  queueLabCode: (code: string) => void;
+  consumeLabCode: () => string | null;
   setView: (view: AppView) => void;
   openLesson: (slug: string) => void;
   setModuleFilter: (moduleId: string | null) => void;
@@ -47,13 +50,14 @@ function readUserKey(): string {
   return key;
 }
 
-export const useStudyStore = create<StudyStore>()((set) => ({
+export const useStudyStore = create<StudyStore>()((set, get) => ({
   hydrated: false,
   userKey: "",
   view: "home",
   activeSlug: null,
   moduleFilter: null,
   activeQuiz: null,
+  pendingLabCode: null,
   progress: {},
   bookmarks: {},
   notes: {},
@@ -64,6 +68,14 @@ export const useStudyStore = create<StudyStore>()((set) => ({
   openLesson: (slug) => set({ view: "lesson", activeSlug: slug }),
 
   setActiveQuiz: (quizId) => set({ activeQuiz: quizId }),
+
+  queueLabCode: (code) => set({ pendingLabCode: code }),
+
+  consumeLabCode: () => {
+    const code = get().pendingLabCode;
+    if (code !== null) set({ pendingLabCode: null });
+    return code;
+  },
 
   setModuleFilter: (moduleId) => set({ moduleFilter: moduleId }),
 

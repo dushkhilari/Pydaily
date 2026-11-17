@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Baloo_2, Nunito, JetBrains_Mono } from "next/font/google";
+import { Baloo_2, Nunito, JetBrains_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -18,11 +18,16 @@ const jetMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const hand = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "PyDaily — Learn Python in 100 Days",
+  title: "PyDaily — Your Python Notebook",
   description:
-    "A skeuomorphic study desk for the 100 Days of Python course. White paper, black leather and deep-blue enamel highlights — lessons, runnable code, notes, bookmarks, streaks and quizzes.",
-  keywords: ["Python", "learn python", "100 days of code", "study", "course"],
+    "A 100-day Python course kept like a notebook: ruled paper pages, handwritten tips, quizzes, exercises and a real in-browser Python Code Lab powered by Pyodide (WebAssembly).",
+  keywords: ["Python", "learn python", "100 days of code", "study", "course", "playground", "pyodide"],
 };
 
 export default function RootLayout({
@@ -33,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${body.variable} ${display.variable} ${jetMono.variable} antialiased bg-background text-foreground`}
+        className={`${body.variable} ${display.variable} ${jetMono.variable} ${hand.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

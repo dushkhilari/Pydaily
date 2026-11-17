@@ -106,6 +106,23 @@ export interface QuizModule {
   questions: QuizQuestion[];
 }
 
+/* ---------------- Practice exercises ---------------- */
+
+export type Difficulty = "easy" | "medium" | "hard";
+
+export interface Exercise {
+  id: string;
+  title: string;
+  module: string;
+  day: number;
+  difficulty: Difficulty;
+  task: string;
+  starterCode: string;
+  expectedOutput: string;
+  hint: string;
+  solution: string;
+}
+
 /* ---------------- Derived helpers ---------------- */
 
 export interface StreakInfo {

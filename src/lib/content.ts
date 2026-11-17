@@ -46,3 +46,9 @@ export function getQuizzes(): unknown {
   if (!fs.existsSync(p)) return [];
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
+
+export function getExercises(): unknown {
+  const p = path.join(process.cwd(), "content", "exercises.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}

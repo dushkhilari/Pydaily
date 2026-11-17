@@ -47,6 +47,41 @@
         ],
         "answer": 1,
         "explanation": "Escape sequences start with a backslash. \\n inserts a newline, \\t inserts a tab, and \\\" lets you place a quote inside a double-quoted string."
+      },
+      {
+        "id": "gs-6",
+        "prompt": "How do you write a single-line comment in Python?",
+        "options": ["// comment", "<!-- comment -->", "# comment", "/* comment */"],
+        "answer": 2,
+        "explanation": "The # symbol starts a single-line comment. Python ignores everything after it on that line — perfect for notes and TODOs."
+      },
+      {
+        "id": "gs-7",
+        "prompt": "Which data type represents True and False values?",
+        "options": ["str", "bool", "int", "float"],
+        "answer": 1,
+        "explanation": "bool is the Boolean type with exactly two values, True and False. They behave like 1 and 0 when used in arithmetic."
+      },
+      {
+        "id": "gs-8",
+        "prompt": "What is the output of print(\"5\" + \"3\")?",
+        "options": ["8", "53", "5 3", "TypeError"],
+        "answer": 1,
+        "explanation": "Both operands are strings, so + concatenates them: \"5\" + \"3\" gives \"53\". To get 8 you must convert them with int() first."
+      },
+      {
+        "id": "gs-9",
+        "prompt": "Which character ends a Python statement?",
+        "options": ["A semicolon ;", "A period .", "Nothing — the newline ends it", "A colon :"],
+        "answer": 2,
+        "explanation": "Python is line-based: a statement ends at the newline. Semicolons are legal but unnecessary, and colons belong to blocks like if/for/def."
+      },
+      {
+        "id": "gs-10",
+        "prompt": "What file extension does a Python program use?",
+        "options": [".pyth", ".p", ".py", ".python"],
+        "answer": 2,
+        "explanation": "Python source files end in .py. Files ending in .pyc are compiled bytecode that the interpreter generates automatically."
       }
     ]
   },
@@ -88,6 +123,46 @@
         "options": ["2", "3", "4", "Infinite"],
         "answer": 1,
         "explanation": "range(3) produces 0, 1, 2 — three values, so the loop body executes three times. The stop value (3) is excluded."
+      },
+      {
+        "id": "lb-6",
+        "prompt": "What is the value of 7 // 2?",
+        "options": ["3.5", "3", "4", "2"],
+        "answer": 1,
+        "explanation": "// is floor division — it divides and rounds down to the nearest whole number. 7 // 2 = 3, while 7 / 2 = 3.5."
+      },
+      {
+        "id": "lb-7",
+        "prompt": "What does 2 ** 3 evaluate to?",
+        "options": ["6", "8", "9", "5"],
+        "answer": 1,
+        "explanation": "** is the exponent operator: 2 ** 3 means 2 × 2 × 2 = 8. Don't confuse it with ^, which is bitwise XOR in Python."
+      },
+      {
+        "id": "lb-8",
+        "prompt": "What does the % operator return?",
+        "options": ["The percentage of a number", "The remainder after division", "The quotient", "The absolute value"],
+        "answer": 1,
+        "explanation": "% is the modulo operator: 10 % 3 is 1 because 10 = 3 × 3 + 1. It's perfect for even/odd checks like n % 2."
+      },
+      {
+        "id": "lb-9",
+        "prompt": "What is the difference between = and ==?",
+        "options": [
+          "They are interchangeable",
+          "= checks equality, == assigns",
+          "= assigns a value, == compares two values",
+          "== only works on numbers"
+        ],
+        "answer": 2,
+        "explanation": "= stores a value in a variable; == evaluates whether two values are equal and returns True or False."
+      },
+      {
+        "id": "lb-10",
+        "prompt": "What is the result of \"ab\" * 3?",
+        "options": ["\"ababab\"", "\"ab3\"", "Error", "\"ab ab ab\""],
+        "answer": 0,
+        "explanation": "Multiplying a string by an integer repeats it: \"ab\" * 3 gives \"ababab\". The same trick works with lists: [0] * 3 gives [0, 0, 0]."
       }
     ]
   },
@@ -144,6 +219,51 @@
         "options": ["members(0)", "members[\"harry\"]", "members.harry", "members->harry"],
         "answer": 1,
         "explanation": "Dictionaries map keys to values and are accessed with square brackets: members[\"harry\"] returns 20. Using .get(\"harry\") is a safe alternative."
+      },
+      {
+        "id": "fc-6",
+        "prompt": "What does the return statement do inside a function?",
+        "options": [
+          "Prints a value to the screen",
+          "Sends a value back to the caller and ends the function",
+          "Restarts the function",
+          "Deletes the function"
+        ],
+        "answer": 1,
+        "explanation": "return hands a result back to wherever the function was called and stops the function immediately. print() only displays — it doesn't return."
+      },
+      {
+        "id": "fc-7",
+        "prompt": "def greet(name, greeting=\"Hi\") — what happens when you call greet(\"Ada\")?",
+        "options": [
+          "Error — missing argument",
+          "greeting is \"Hi\" by default",
+          "greeting is None",
+          "name is ignored"
+        ],
+        "answer": 1,
+        "explanation": "Parameters with defaults are optional. greet(\"Ada\") uses greeting=\"Hi\", while greet(\"Ada\", \"Hello\") overrides it."
+      },
+      {
+        "id": "fc-8",
+        "prompt": "nums = [10, 20, 30, 40] — what does nums[1:3] return?",
+        "options": ["[10, 20]", "[20, 30]", "[20, 30, 40]", "[10, 40]"],
+        "answer": 1,
+        "explanation": "Slices go from the start index up to (but not including) the end index: nums[1:3] takes index 1 and 2 → [20, 30]."
+      },
+      {
+        "id": "fc-9",
+        "prompt": "Which collection automatically removes duplicate values?",
+        "options": ["list", "tuple", "set", "dictionary"],
+        "answer": 2,
+        "explanation": "A set stores only unique items: set([1, 1, 2]) → {1, 2}. Lists and tuples keep duplicates; dicts dedupe keys but not values."
+      },
+      {
+        "id": "fc-10",
+        "prompt": "What does len({\"a\": 1, \"b\": 2, \"c\": 3}) return?",
+        "options": ["6", "1", "3", "0"],
+        "answer": 2,
+        "explanation": "len() on a dictionary counts its keys, so three keys → 3."
       }
     ]
   },
@@ -200,6 +320,51 @@
         ],
         "answer": 2,
         "explanation": "enumerate() pairs each item with its index: `for i, ch in enumerate(list)`. It replaces manual counter variables."
+      },
+      {
+        "id": "ef-6",
+        "prompt": "Which exception is raised when you divide a number by zero?",
+        "options": ["ValueError", "MathError", "ZeroDivisionError", "TypeError"],
+        "answer": 2,
+        "explanation": "Dividing by zero raises ZeroDivisionError. Wrap risky math in try/except ZeroDivisionError to handle it gracefully."
+      },
+      {
+        "id": "ef-7",
+        "prompt": "What is the advantage of `with open(\"f.txt\") as f:`?",
+        "options": [
+          "It reads the file faster",
+          "It closes the file automatically, even if an error happens",
+          "It encrypts the file",
+          "It creates the file twice"
+        ],
+        "answer": 1,
+        "explanation": "The with statement is a context manager: the file is closed as soon as the block ends — no leaked file handles, even during exceptions."
+      },
+      {
+        "id": "ef-8",
+        "prompt": "What does list(map(str, [1, 2, 3])) produce?",
+        "options": ["[1, 2, 3]", "[\"1\", \"2\", \"3\"]", "\"123\"", "[str, str, str]"],
+        "answer": 1,
+        "explanation": "map applies str to every item, converting each number to its string form. Wrapping it in list() collects the results."
+      },
+      {
+        "id": "ef-9",
+        "prompt": "What does list(filter(lambda x: x > 2, [1, 2, 3, 4])) return?",
+        "options": ["[1, 2]", "[3, 4]", "[True, False, True, True]", "[1, 2, 3, 4]"],
+        "answer": 1,
+        "explanation": "filter keeps only items where the function returns True. Here 3 and 4 pass the x > 2 test, so the result is [3, 4]."
+      },
+      {
+        "id": "ef-10",
+        "prompt": "What is the difference between f.read() and f.readline()?",
+        "options": [
+          "No difference",
+          "read() reads the whole file; readline() reads one line",
+          "readline() reads the whole file; read() one line",
+          "read() only works on binary files"
+        ],
+        "answer": 1,
+        "explanation": "read() (with no size) returns the entire content as one string, while readline() returns just the next line, keeping a pointer where it stopped."
       }
     ]
   },
@@ -251,6 +416,61 @@
         ],
         "answer": 1,
         "explanation": "Dunder methods hook your class into Python syntax: __str__ controls what print(obj) shows, __add__ makes obj + obj2 work, __len__ powers len(obj)."
+      },
+      {
+        "id": "op-6",
+        "prompt": "How do you create an object from a class called Dog?",
+        "options": ["d = new Dog()", "d = Dog()", "d = Dog.create()", "d = object(Dog)"],
+        "answer": 1,
+        "explanation": "Calling the class like a function builds an instance: d = Dog(). Python has no `new` keyword — __init__ runs automatically."
+      },
+      {
+        "id": "op-7",
+        "prompt": "What does the __str__ method control?",
+        "options": [
+          "How objects are compared with <",
+          "The string shown by print(obj) and str(obj)",
+          "How many attributes a class has",
+          "The class name"
+        ],
+        "answer": 1,
+        "explanation": "__str__ returns the \"friendly\" string representation. Define it to make print(employee) show something meaningful instead of a memory address."
+      },
+      {
+        "id": "op-8",
+        "prompt": "What is method overriding?",
+        "options": [
+          "Deleting a parent method",
+          "A child class redefining a method it inherits from its parent",
+          "Calling two methods at once",
+          "Renaming a method"
+        ],
+        "answer": 1,
+        "explanation": "A child class can supply its own version of an inherited method — the child's implementation wins when called on child instances."
+      },
+      {
+        "id": "op-9",
+        "prompt": "What does super() do inside a child class method?",
+        "options": [
+          "Creates a second object",
+          "Calls the parent class's version of the method",
+          "Deletes the child class",
+          "Returns the current instance"
+        ],
+        "answer": 1,
+        "explanation": "super() gives access to the parent class — commonly used in __init__ to reuse the parent's setup before adding child-specific attributes."
+      },
+      {
+        "id": "op-10",
+        "prompt": "In Python, what does an attribute name with one underscore (like _name) conventionally mean?",
+        "options": [
+          "It is a keyword",
+          "Internal use / protected — please don't touch it from outside",
+          "It is a constant",
+          "It is automatically private and inaccessible"
+        ],
+        "answer": 1,
+        "explanation": "A single leading underscore is a convention meaning \"internal\". Python doesn't enforce it; double underscores (__name) trigger name mangling for stronger privacy."
       }
     ]
   },
@@ -312,6 +532,56 @@
         ],
         "answer": 1,
         "explanation": "\\d means any digit 0-9 and the + quantifier means one or more of them — so \\d+ matches \"42\", \"7\", \"2025\" etc."
+      },
+      {
+        "id": "ad-6",
+        "prompt": "What does a decorator like @timer above a function do?",
+        "options": [
+          "Deletes the function",
+          "Wraps the function to add behaviour without changing its code",
+          "Runs the function twice",
+          "Converts it to a class"
+        ],
+        "answer": 1,
+        "explanation": "A decorator takes the function as input and returns a wrapped version — a clean way to add logging, timing, caching, etc."
+      },
+      {
+        "id": "ad-7",
+        "prompt": "What does time.sleep(2) do?",
+        "options": [
+          "Crashes the program",
+          "Pauses the program for 2 seconds",
+          "Skips 2 loop iterations",
+          "Speeds up execution 2×"
+        ],
+        "answer": 1,
+        "explanation": "time.sleep(seconds) blocks the current thread for that many seconds — useful for delays, backoff and animation timing."
+      },
+      {
+        "id": "ad-8",
+        "prompt": "How do you define a coroutine in Python?",
+        "options": ["def task():", "async def task():", "lambda task:", "coroutine task():"],
+        "answer": 1,
+        "explanation": "async def creates a coroutine. Calling it returns a coroutine object which an event loop (like asyncio.run) must drive; inside it, await suspends execution."
+      },
+      {
+        "id": "ad-9",
+        "prompt": "What does re.findall(r\"\\d+\", \"a1b22c333\") return?",
+        "options": ["[\"1\", \"22\", \"333\"]", "[1, 22, 333]", "[\"a\", \"b\", \"c\"]", "Error"],
+        "answer": 0,
+        "explanation": "\\d+ matches runs of digits. findall returns every match as strings: \"1\", \"22\", \"333\". Numbers stay strings unless you convert them."
+      },
+      {
+        "id": "ad-10",
+        "prompt": "What does functools.lru_cache do when placed above a function?",
+        "options": [
+          "Limits recursion depth",
+          "Caches results so repeated calls with the same arguments return instantly",
+          "Reruns the function every time",
+          "Prints the last result"
+        ],
+        "answer": 1,
+        "explanation": "lru_cache memoises function calls: the first call computes, later identical calls return the stored result — a huge win for expensive pure functions like fibonacci."
       }
     ]
   }

@@ -21,7 +21,6 @@ import { useStudyStore } from "@/lib/store";
 import { markLessonComplete, toggleBookmarkApi, trackLessonVisit, saveNoteApi } from "@/lib/api-client";
 import { MarkdownRenderer } from "./markdown-renderer";
 import { ModuleIcon } from "./module-icon";
-import { Screws } from "./textures";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
@@ -33,9 +32,9 @@ export function LessonView({ manifest }: { manifest: Manifest }) {
   if (!activeSlug) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <PlayCircle className="h-10 w-10 text-muted-foreground/40" aria-hidden />
-        <h1 className="text-engrave mt-4 font-display text-xl font-bold">No lesson open</h1>
-        <p className="mt-1 max-w-sm text-sm font-semibold text-muted-foreground">
+        <PlayCircle className="h-10 w-10 text-pencil/50" aria-hidden />
+        <h1 className="mt-4 font-display text-xl font-bold">No lesson open</h1>
+        <p className="mt-1 max-w-sm text-sm font-semibold text-pencil">
           Pick any day from the Lessons tab and start learning Python.
         </p>
         <OpenLessonsButton />
@@ -52,7 +51,7 @@ function OpenLessonsButton() {
   return (
     <Button
       onClick={() => setView("lessons")}
-      className="btn3d btn-leather gloss mt-5 min-h-[44px] rounded-xl px-5 font-bold"
+      className="btn3d btn-ink mt-5 min-h-[44px] rounded-xl px-5 font-bold"
     >
       Browse lessons
     </Button>
@@ -161,11 +160,11 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
   if (loading || !detail || !meta) {
     return (
       <div className="space-y-5 py-10">
-        <div className="deboss h-8 w-40 animate-pulse rounded-xl" />
-        <div className="deboss h-14 w-4/5 animate-pulse rounded-2xl" />
-        <div className="deboss h-64 animate-pulse rounded-2xl" />
-        <div className="deboss h-72 animate-pulse rounded-2xl" />
-        <div className="flex items-center justify-center gap-2 text-sm font-semibold text-muted-foreground">
+        <div className="chip h-8 w-40 animate-pulse rounded-xl" />
+        <div className="chip h-14 w-4/5 animate-pulse rounded-2xl" />
+        <div className="chip h-64 animate-pulse rounded-2xl" />
+        <div className="chip h-72 animate-pulse rounded-2xl" />
+        <div className="flex items-center justify-center gap-2 text-sm font-semibold text-pencil">
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
           Loading lesson…
         </div>
@@ -179,28 +178,28 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
       <header className="space-y-4">
         <button
           onClick={() => setView("lessons")}
-          className="btn3d btn-key inline-flex min-h-[40px] items-center gap-1.5 rounded-lg px-3 text-sm font-bold"
+          className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-1.5 rounded-lg px-3 text-sm font-bold"
         >
-          <ArrowLeft className="h-4 w-4 text-primary" aria-hidden />
+          <ArrowLeft className="h-4 w-4 text-pen-blue" aria-hidden />
           All lessons
         </button>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="btn-brass gloss relative rounded-lg px-3 py-1 font-display text-xs font-bold uppercase tracking-wider">
+              <span className="btn-ink relative rounded-lg px-3 py-1 font-display text-xs font-bold uppercase tracking-wider">
                 Day {meta.day}
               </span>
-              <span className="deboss inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-muted-foreground">
-                <ModuleIcon icon={moduleMeta.icon} className="h-3 w-3 text-brass-deep" aria-hidden />
+              <span className="chip inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-pencil">
+                <ModuleIcon icon={moduleMeta.icon} className="h-3 w-3 text-pen-blue" aria-hidden />
                 {moduleMeta.title}
               </span>
-              <span className="deboss inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-muted-foreground">
+              <span className="chip inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold text-pencil">
                 <Clock3 className="h-3 w-3" aria-hidden />
                 {meta.minutes} min read
               </span>
             </div>
-            <h1 className="text-engrave mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
+            <h1 className="mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
               {meta.title}
             </h1>
           </div>
@@ -212,11 +211,11 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
               aria-pressed={isBookmarked}
               className={cn(
                 "btn3d flex h-11 w-11 items-center justify-center rounded-xl",
-                isBookmarked ? "btn-pressed" : "btn-key"
+                isBookmarked ? "btn-pressed" : "btn-paper"
               )}
             >
               {isBookmarked ? (
-                <BookmarkCheck className="h-5 w-5 text-brass-deep" aria-hidden />
+                <BookmarkCheck className="h-5 w-5 text-pen-blue" aria-hidden />
               ) : (
                 <Bookmark className="h-5 w-5 text-foreground/70" aria-hidden />
               )}
@@ -225,8 +224,8 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
               onClick={handleToggleComplete}
               aria-pressed={isDone}
               className={cn(
-                "btn3d gloss inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 font-bold",
-                isDone ? "btn-pressed text-primary" : "btn-leather"
+                "btn3d inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 font-bold",
+                isDone ? "btn-pressed" : "btn-ink"
               )}
             >
               <CheckCircle2 className="h-4.5 w-4.5" aria-hidden />
@@ -241,48 +240,48 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         <TabsList className="relative z-10 h-auto w-full justify-start gap-1.5 rounded-none border-b-0 bg-transparent p-0">
           <TabsTrigger
             value="tutorial"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
+            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
           >
-            <FileText className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
+            <FileText className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
             <span className="hidden sm:inline">Tutorial</span>
           </TabsTrigger>
           <TabsTrigger
             value="code"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
+            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
           >
-            <Code2 className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
+            <Code2 className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
             <span className="hidden sm:inline">Code</span>
           </TabsTrigger>
           {detail.videoUrl && (
             <TabsTrigger
               value="video"
-              className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
+              className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-ink/20 bg-paper-deep/70 px-4 py-2.5 text-sm font-bold text-pencil shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.3_0.03_262/0.12)]"
             >
-              <PlayCircle className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
+              <PlayCircle className="h-4 w-4 group-data-[state=active]:text-pen-blue sm:mr-0.5" aria-hidden />
               <span className="hidden sm:inline">Video</span>
             </TabsTrigger>
           )}
         </TabsList>
 
-        {/* tutorial sheet with punch holes */}
+        {/* tutorial sheet with binder holes */}
         <TabsContent
           value="tutorial"
-          className="paper-card relative mt-0 rounded-2xl !p-0"
+          className="sheet relative mt-0 rounded-2xl !p-0"
         >
           {/* binder holes */}
           <div aria-hidden className="absolute left-5 top-10 hidden flex-col items-center gap-16 sm:flex">
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="h-4 w-4 rounded-full border border-[oklch(0.25_0.02_258/30%)] bg-[oklch(0.91_0.008_254)] shadow-[0_2px_3px_oklch(0.2_0.02_258/20%)_inset]"
+                className="h-4 w-4 rounded-full border border-ink/25 bg-paper-deep shadow-[0_2px_3px_oklch(0.3_0.03_262/0.2)_inset]"
               />
             ))}
           </div>
           <div className="space-y-2 px-5 py-6 sm:px-14 sm:py-8">
             {detail.sections.map((section, idx) => (
-              <article key={section.file} className={idx > 0 ? "border-t border-border/40 pt-6" : ""}>
+              <article key={section.file} className={idx > 0 ? "border-t border-dashed border-ink/20 pt-6" : ""}>
                 {detail.sections.length > 1 && (
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-pencil">
                     Part {idx + 1} of {detail.sections.length}
                   </p>
                 )}
@@ -292,8 +291,8 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
           </div>
         </TabsContent>
 
-        {/* code bench */}
-        <TabsContent value="code" className="paper-card mt-0 rounded-2xl p-4 sm:p-6">
+        {/* code on graph paper */}
+        <TabsContent value="code" className="sheet mt-0 rounded-2xl p-4 sm:p-6">
           {detail.code.length > 1 && (
             <div className="mb-3 flex flex-wrap gap-2" role="tablist" aria-label="Code files">
               {detail.code.map((c, i) => (
@@ -304,7 +303,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
                   onClick={() => setCodeFile(i)}
                   className={cn(
                     "btn3d rounded-lg px-3 py-1.5 font-mono text-xs font-bold",
-                    codeFile === i ? "btn-pressed" : "btn-key"
+                    codeFile === i ? "btn-pressed" : "btn-paper"
                   )}
                 >
                   {c.file}
@@ -319,18 +318,18 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
               />
             </div>
           ) : (
-            <p className="py-10 text-center text-sm font-semibold text-muted-foreground">
+            <p className="py-10 text-center text-sm font-semibold text-pencil">
               This day has no standalone code file — follow the tutorial tab.
             </p>
           )}
         </TabsContent>
 
-        {/* television set */}
+        {/* video taped into the page */}
         {detail.videoUrl && (
           <TabsContent value="video" className="mt-0">
-            <div className="relative rounded-2xl border border-black/30 bg-bezel-mat p-3 shadow-[0_3px_8px_oklch(0.1_0.02_262/0.4)]">
-              <Screws inset={9} />
-              <div className="relative overflow-hidden rounded-xl border border-black/40 bg-black shadow-[0_3px_10px_oklch(0.02_0.02_264/0.7)_inset]">
+            <div className="sheet relative rounded-2xl p-3">
+              <span className="washi" aria-hidden />
+              <div className="relative mt-2 overflow-hidden rounded-xl border border-ink/30 bg-black shadow-[0_3px_10px_oklch(0.02_0.02_264/0.6)_inset]">
                 <div className="aspect-video w-full">
                   <iframe
                     src={detail.videoUrl}
@@ -341,7 +340,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
                   />
                 </div>
               </div>
-              <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-[oklch(0.9_0.02_252)]/70">
+              <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-pencil">
                 Lesson video · synced from the course repository
               </p>
             </div>
@@ -349,22 +348,22 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         )}
       </Tabs>
 
-      {/* ---------- notes: legal pad ---------- */}
-      <section aria-label="Lesson notes" className="paper-card rounded-2xl p-5 sm:p-6">
+      {/* ---------- notes: ruled legal pad ---------- */}
+      <section aria-label="Lesson notes" className="sheet rounded-2xl p-5 sm:p-6">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="text-engrave flex items-center gap-2 font-display text-lg font-bold">
-            <NotebookPen className="h-5 w-5 text-brass-deep" aria-hidden />
+          <h2 className="hand flex items-center gap-2 text-2xl font-bold">
+            <NotebookPen className="h-5 w-5 text-pen-blue" aria-hidden />
             My notes
           </h2>
           <button
             onClick={handleSaveNote}
             disabled={noteSaving}
-            className="btn3d btn-key gloss inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 text-sm font-bold disabled:opacity-60"
+            className="btn3d btn-paper inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 text-sm font-bold disabled:opacity-60"
           >
             {noteSaving ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
             ) : (
-              <StickyNote className="h-4 w-4 text-brass-deep" aria-hidden />
+              <StickyNote className="h-4 w-4 text-pen-blue" aria-hidden />
             )}
             Save note
           </button>
@@ -385,11 +384,11 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {prev ? (
           <button
             onClick={() => openLesson(prev.slug)}
-            className="paper-card btn3d group flex min-h-[56px] items-center gap-3 rounded-2xl px-4 py-3.5 text-left"
+            className="sheet btn3d group flex min-h-[56px] items-center gap-3 rounded-2xl px-4 py-3.5 text-left"
           >
-            <ChevronLeft className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-0.5" aria-hidden />
+            <ChevronLeft className="h-5 w-5 shrink-0 text-pencil transition-transform group-hover:-translate-x-0.5" aria-hidden />
             <span className="min-w-0">
-              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-pencil">
                 Previous · Day {prev.day}
               </span>
               <span className="mt-0.5 block truncate text-sm font-bold">{prev.title}</span>
@@ -401,41 +400,33 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {next ? (
           <button
             onClick={() => openLesson(next.slug)}
-            className="paper-card btn3d group flex min-h-[56px] items-center justify-end gap-3 rounded-2xl px-4 py-3.5 text-right shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_2px_4px_oklch(0.2_0.02_258/14%),0_0_0_1.5px_oklch(0.5_0.15_262/45%)]"
+            className="sheet btn3d group flex min-h-[56px] items-center justify-end gap-3 rounded-2xl px-4 py-3.5 text-right shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_2px_4px_oklch(0.3_0.03_262/12%),0_0_0_1.5px_oklch(0.5_0.14_262/45%)]"
           >
             <span className="min-w-0">
-              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-brass-deep">
+              <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-pen-blue">
                 Next · Day {next.day}
               </span>
               <span className="mt-0.5 block truncate text-sm font-bold">{next.title}</span>
             </span>
-            <ChevronRight className="h-5 w-5 shrink-0 text-brass-deep transition-transform group-hover:translate-x-0.5" aria-hidden />
+            <ChevronRight className="h-5 w-5 shrink-0 text-pen-blue transition-transform group-hover:translate-x-0.5" aria-hidden />
           </button>
         ) : (
-          <div className="paper-card flex min-h-[56px] items-center justify-center rounded-2xl px-4 py-3.5 text-center text-sm font-semibold text-muted-foreground">
-            <span className="text-engrave font-display font-bold">Course complete.</span>
+          <div className="sheet flex min-h-[56px] items-center justify-center rounded-2xl px-4 py-3.5 text-center text-sm font-semibold text-pencil">
+            <span className="hand text-2xl font-bold">Course complete.</span>
             <span className="ml-1.5">You made it to day {meta.day}.</span>
           </div>
         )}
       </nav>
 
-      {/* completion flourish — brass plaque */}
+      {/* completion flourish — green pen grade */}
       {isDone && (
-        <div className="relative rounded-2xl border border-black/30 bg-brass-mat p-4 shadow-[0_2px_6px_oklch(0.15_0.06_265/0.4)] sm:p-5">
-          <Screws inset={10} />
-          <div className="relative flex items-center justify-center gap-4 text-center">
-            <CheckCircle2
-              className="h-7 w-7 shrink-0 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.6)]"
-              aria-hidden
-            />
-            <div>
-              <p className="text-engrave-brass font-display text-sm font-bold">
-                Day {meta.day} cleared
-              </p>
-              <p className="text-engrave-brass text-xs font-semibold opacity-80">
-                Consistency beats intensity — see you tomorrow.
-              </p>
-            </div>
+        <div className="sheet relative flex items-center justify-center gap-4 rounded-2xl p-4 text-center sm:p-5">
+          <CheckCircle2 className="h-7 w-7 shrink-0 text-pen-green" aria-hidden />
+          <div>
+            <p className="hand text-2xl leading-none text-pen-green">Day {meta.day} cleared!</p>
+            <p className="mt-1 text-xs font-semibold text-pencil">
+              Consistency beats intensity — see you tomorrow.
+            </p>
           </div>
         </div>
       )}
