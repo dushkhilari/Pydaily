@@ -23,13 +23,8 @@ export function ProgressView({ manifest, quizzes }: { manifest: Manifest; quizze
   const completedLessons = manifest.lessons.filter((l) => progress[l.slug]?.completed);
 
   return (
-    <div className="space-y-8 pt-2">
-      <div>
-        <h1 className="font-display text-3xl font-bold tracking-tight">Your progress</h1>
-        <p className="mt-1 text-sm font-semibold text-pencil">
-          Every lesson you finish builds the streak. Keep it burning.
-        </p>
-      </div>
+    <div className="space-y-7 pt-2">
+      <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Your progress</h1>
 
       {/* summary hero — notebook page with blue progress dial */}
       <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
@@ -118,9 +113,6 @@ export function ProgressView({ manifest, quizzes }: { manifest: Manifest; quizze
           <div className="sheet rounded-2xl border-2 border-dashed border-ink/20 py-12 text-center shadow-none">
             <CheckCircle2 className="mx-auto h-8 w-8 text-pencil/50" aria-hidden />
             <p className="mt-3 text-sm font-bold">Nothing completed yet</p>
-            <p className="mt-1 text-xs font-semibold text-pencil">
-              Finish your first lesson to see it here.
-            </p>
           </div>
         ) : (
           <div className="space-y-2.5">

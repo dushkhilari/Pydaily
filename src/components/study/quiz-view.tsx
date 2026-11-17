@@ -54,25 +54,20 @@ export function QuizView({
   }
 
   return (
-    <div className="space-y-5 pt-2 sm:space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-            Knowledge check
-          </h1>
-          <p className="mt-1 text-[13px] font-semibold text-pencil sm:text-sm">
-            Quizzes and coding exercises per module — see how much sticks after each chapter.
-          </p>
-        </div>
+    <div className="space-y-4 pt-2 sm:space-y-6">
+      <div className="space-y-3 sm:flex sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
+        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          Knowledge check
+        </h1>
 
         {/* mode switch — paper tabs */}
-        <div className="chip inline-flex rounded-full p-1" role="tablist" aria-label="Practice mode">
+        <div className="chip inline-flex w-full rounded-full p-1 sm:w-auto" role="tablist" aria-label="Practice mode">
           <button
             role="tab"
             aria-selected={mode === "quiz"}
             onClick={() => setMode("quiz")}
             className={cn(
-              "btn3d inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-4 text-sm font-bold",
+              "btn3d inline-flex min-h-[38px] flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-bold sm:flex-none",
               mode === "quiz" ? "btn-pressed" : "text-pencil hover:text-foreground"
             )}
           >
@@ -84,7 +79,7 @@ export function QuizView({
             aria-selected={mode === "practice"}
             onClick={() => setMode("practice")}
             className={cn(
-              "btn3d inline-flex min-h-[38px] items-center gap-1.5 rounded-full px-4 text-sm font-bold",
+              "btn3d inline-flex min-h-[38px] flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-bold sm:flex-none",
               mode === "practice" ? "btn-pressed" : "text-pencil hover:text-foreground"
             )}
           >
@@ -355,9 +350,7 @@ function QuizRunner({ quiz }: { quiz: QuizModule }) {
               {score}/{total} correct
             </h1>
             <p className="mx-auto mt-1.5 max-w-xs text-[13px] font-semibold text-pencil sm:text-sm">
-              {passed
-                ? "That module is sinking in — keep the momentum."
-                : "Skim the module lessons and try again."}
+              {passed ? "Keep the momentum going." : "Review the lessons and retry."}
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3">
               <button

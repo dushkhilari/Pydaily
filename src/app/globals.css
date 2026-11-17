@@ -74,7 +74,8 @@
 :root {
   --radius: 1rem;
 
-  --background: oklch(0.958 0.008 95);        /* warm desk around the notebook */
+  /* desk around the notebook */
+  --background: oklch(0.958 0.008 95);
   --foreground: oklch(0.27 0.025 262);        /* blue-black ink */
   --card: oklch(0.993 0.003 95);              /* paper white */
   --card-foreground: oklch(0.27 0.025 262);
@@ -82,7 +83,7 @@
   --popover-foreground: oklch(0.27 0.025 262);
   --primary: oklch(0.5 0.14 262);             /* ballpoint blue */
   --primary-foreground: oklch(0.99 0.003 95);
-  --secondary: oklch(0.945 0.008 95);         /* paper shadow tone */
+  --secondary: oklch(0.945 0.008 95);
   --secondary-foreground: oklch(0.27 0.025 262);
   --muted: oklch(0.945 0.008 95);
   --muted-foreground: oklch(0.5 0.02 258);
@@ -107,47 +108,160 @@
   --sidebar-border: oklch(0.12 0.01 262 / 70%);
   --sidebar-ring: oklch(0.55 0.13 262);
 
-  /* notebook tokens */
-  --ink: oklch(0.27 0.025 262);               /* blue-black ink */
+  /* ink & pens */
+  --ink: oklch(0.27 0.025 262);
   --ink-soft: oklch(0.4 0.025 262);
-  --pencil: oklch(0.52 0.02 258);             /* gray pencil notes */
-  --pen-blue: oklch(0.5 0.14 262);            /* ballpoint blue */
-  --pen-red: oklch(0.55 0.19 25);             /* red pen / margin */
-  --pen-green: oklch(0.55 0.12 155);          /* green pen */
-  --pen-purple: oklch(0.52 0.12 305);         /* purple pen */
-  --pen-amber: oklch(0.6 0.12 75);            /* amber pen */
-  --marker: oklch(0.92 0.075 105);            /* highlighter yellow */
-  --rule: oklch(0.62 0.075 258);              /* ruled line blue */
-  --margin-line: oklch(0.63 0.18 25);         /* red margin line */
+  --pencil: oklch(0.52 0.02 258);
+  --pen-blue: oklch(0.5 0.14 262);
+  --pen-red: oklch(0.55 0.19 25);
+  --pen-green: oklch(0.55 0.12 155);
+  --pen-purple: oklch(0.52 0.12 305);
+  --pen-amber: oklch(0.6 0.12 75);
+
+  /* paper surfaces */
   --paper: oklch(0.993 0.003 95);
   --paper-cream: oklch(0.972 0.008 95);
   --paper-deep: oklch(0.945 0.008 92);
-  --cover: oklch(0.26 0.018 262);             /* black notebook cover */
+  --cover: oklch(0.26 0.018 262);
   --cover-deep: oklch(0.19 0.015 262);
-  --sticky: oklch(0.975 0.05 105);            /* pale-yellow sticky */
+
+  /* notebook hardware */
+  --rule: oklch(0.62 0.075 258 / 45%);
+  --rule-soft: oklch(0.55 0.09 258 / 12%);
+  --margin-line: oklch(0.63 0.18 25 / 55%);
+  --marker: oklch(0.92 0.075 105);
+  --sticky: oklch(0.975 0.05 105);
   --sticky-deep: oklch(0.955 0.055 100);
+
+  /* material plumbing (light) */
+  --ink-line: oklch(0.3 0.03 262 / 18%);
+  --ink-line-strong: oklch(0.3 0.03 262 / 30%);
+  --paper-sheen: oklch(1 0 0 / 85%);
+  --sheen-line: oklch(1 0 0 / 75%);
+  --shadow-soft: oklch(0.3 0.03 262 / 9%);
+  --shadow-deep: oklch(0.3 0.03 262 / 30%);
+  --chip-a: oklch(0.965 0.006 95);
+  --chip-b: oklch(0.93 0.01 93);
+  --chip-border: oklch(0.3 0.03 262 / 24%);
+  --btnp-a: oklch(1 0 0);
+  --btnp-b: oklch(0.965 0.005 95);
+  --btnp-c: oklch(0.935 0.008 93);
+  --btn-edge: oklch(0.3 0.03 262 / 26%);
+  --btnink-a: oklch(0.58 0.14 262);
+  --btnink-b: oklch(0.5 0.14 262);
+  --btnink-c: oklch(0.42 0.13 265);
+  --btnink-border: oklch(0.35 0.12 265 / 90%);
+  --pressed-a: oklch(0.93 0.008 95);
+  --pressed-b: oklch(0.97 0.005 95);
+  --grid-line: oklch(0.55 0.08 258 / 13%);
+  --hole-fill: oklch(0.94 0.008 95);
+  --hole-ring: oklch(0.42 0.03 262 / 40%);
+  --scrollbar: oklch(0.5 0.05 258 / 40%);
+  --selection: oklch(0.92 0.075 105 / 70%);
+  --code-chip-bg: oklch(0.972 0.008 95);
+
+  /* desk gradient stops */
+  --desk-light: oklch(1 0 0 / 50%);
+  --desk-vignette: oklch(0.45 0.04 80 / 0.14);
+  --desk-top: oklch(0.962 0.008 95);
+  --desk-bottom: oklch(0.942 0.012 92);
 }
 
+/* ------------------------------------------------------------------ */
+/* Notebook dark theme — the same notebook, studied at night:          */
+/* charcoal "black paper" pages, chalk-white ink, softer pen colours.  */
+/* ------------------------------------------------------------------ */
 .dark {
-  --background: oklch(0.958 0.008 95);
-  --foreground: oklch(0.27 0.025 262);
-  --card: oklch(0.993 0.003 95);
-  --card-foreground: oklch(0.27 0.025 262);
-  --popover: oklch(0.99 0.003 95);
-  --popover-foreground: oklch(0.27 0.025 262);
-  --primary: oklch(0.5 0.14 262);
-  --primary-foreground: oklch(0.99 0.003 95);
-  --secondary: oklch(0.945 0.008 95);
-  --secondary-foreground: oklch(0.27 0.025 262);
-  --muted: oklch(0.945 0.008 95);
-  --muted-foreground: oklch(0.5 0.02 258);
-  --accent: oklch(0.93 0.015 262);
-  --accent-foreground: oklch(0.27 0.025 262);
-  --destructive: oklch(0.55 0.19 25);
-  --destructive-foreground: oklch(0.99 0.003 95);
-  --border: oklch(0.3 0.03 262 / 16%);
-  --input: oklch(0.3 0.03 262 / 22%);
-  --ring: oklch(0.55 0.13 262);
+  --background: oklch(0.21 0.012 80);         /* dark desk at night */
+  --foreground: oklch(0.93 0.01 95);          /* chalk-white ink */
+  --card: oklch(0.265 0.012 262);             /* charcoal paper */
+  --card-foreground: oklch(0.93 0.01 95);
+  --popover: oklch(0.28 0.012 262);
+  --popover-foreground: oklch(0.93 0.01 95);
+  --primary: oklch(0.66 0.14 262);            /* ballpoint blue, lit */
+  --primary-foreground: oklch(0.14 0.02 262);
+  --secondary: oklch(0.315 0.012 262);
+  --secondary-foreground: oklch(0.93 0.01 95);
+  --muted: oklch(0.315 0.012 262);
+  --muted-foreground: oklch(0.68 0.015 258);
+  --accent: oklch(0.34 0.015 262);
+  --accent-foreground: oklch(0.93 0.01 95);
+  --destructive: oklch(0.68 0.17 25);
+  --destructive-foreground: oklch(0.14 0.02 262);
+  --border: oklch(0.85 0.01 95 / 15%);
+  --input: oklch(0.85 0.01 95 / 22%);
+  --ring: oklch(0.68 0.13 262);
+  --chart-1: oklch(0.72 0.13 262);
+  --chart-2: oklch(0.72 0.11 155);
+  --chart-3: oklch(0.7 0.16 25);
+  --chart-4: oklch(0.75 0.11 80);
+  --chart-5: oklch(0.7 0.11 305);
+  --sidebar: oklch(0.24 0.016 262);
+  --sidebar-foreground: oklch(0.93 0.01 95);
+  --sidebar-primary: oklch(0.66 0.14 262);
+  --sidebar-primary-foreground: oklch(0.14 0.02 262);
+  --sidebar-accent: oklch(0.3 0.018 262);
+  --sidebar-accent-foreground: oklch(0.93 0.01 95);
+  --sidebar-border: oklch(0.1 0.01 262 / 70%);
+  --sidebar-ring: oklch(0.68 0.13 262);
+
+  /* ink & pens — chalked up for dark paper */
+  --ink: oklch(0.92 0.01 95);
+  --ink-soft: oklch(0.8 0.012 260);
+  --pencil: oklch(0.63 0.015 258);
+  --pen-blue: oklch(0.74 0.12 262);
+  --pen-red: oklch(0.72 0.15 25);
+  --pen-green: oklch(0.74 0.11 155);
+  --pen-purple: oklch(0.73 0.11 305);
+  --pen-amber: oklch(0.78 0.12 80);
+
+  /* paper surfaces */
+  --paper: oklch(0.265 0.012 262);
+  --paper-cream: oklch(0.3 0.012 262);
+  --paper-deep: oklch(0.235 0.012 262);
+  --cover: oklch(0.2 0.016 262);
+  --cover-deep: oklch(0.14 0.014 262);
+
+  /* notebook hardware */
+  --rule: oklch(0.72 0.07 258 / 30%);
+  --rule-soft: oklch(0.72 0.07 258 / 10%);
+  --margin-line: oklch(0.66 0.16 25 / 50%);
+  --marker: oklch(0.44 0.07 105);
+  --sticky: oklch(0.42 0.045 100);
+  --sticky-deep: oklch(0.38 0.045 100);
+
+  /* material plumbing (dark) */
+  --ink-line: oklch(0.88 0.01 95 / 16%);
+  --ink-line-strong: oklch(0.88 0.01 95 / 30%);
+  --paper-sheen: oklch(1 0 0 / 5%);
+  --sheen-line: oklch(1 0 0 / 8%);
+  --shadow-soft: oklch(0 0 0 / 32%);
+  --shadow-deep: oklch(0 0 0 / 52%);
+  --chip-a: oklch(0.23 0.012 262);
+  --chip-b: oklch(0.3 0.012 262);
+  --chip-border: oklch(0.85 0.01 95 / 20%);
+  --btnp-a: oklch(0.32 0.012 262);
+  --btnp-b: oklch(0.28 0.012 262);
+  --btnp-c: oklch(0.245 0.012 262);
+  --btn-edge: oklch(0.88 0.01 95 / 28%);
+  --btnink-a: oklch(0.62 0.14 262);
+  --btnink-b: oklch(0.55 0.14 262);
+  --btnink-c: oklch(0.46 0.13 265);
+  --btnink-border: oklch(0.72 0.12 265 / 90%);
+  --pressed-a: oklch(0.21 0.012 262);
+  --pressed-b: oklch(0.25 0.012 262);
+  --grid-line: oklch(0.75 0.07 258 / 12%);
+  --hole-fill: oklch(0.22 0.012 80);
+  --hole-ring: oklch(0 0 0 / 55%);
+  --scrollbar: oklch(0.8 0.02 258 / 30%);
+  --selection: oklch(0.44 0.07 105 / 80%);
+  --code-chip-bg: oklch(0.3 0.012 262);
+
+  /* desk gradient stops */
+  --desk-light: oklch(1 0 0 / 4%);
+  --desk-vignette: oklch(0 0 0 / 0.42);
+  --desk-top: oklch(0.235 0.014 80);
+  --desk-bottom: oklch(0.185 0.012 78);
 }
 
 @layer base {
@@ -162,7 +276,7 @@
     font-feature-settings: "ss01";
   }
   ::selection {
-    background: oklch(0.92 0.075 105 / 70%);   /* highlighter selection */
+    background: var(--selection);
   }
 }
 
@@ -175,12 +289,12 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
-/* Warm desk around the open notebook */
+/* Desk around the open notebook (light: warm daylight; dark: lamplight) */
 @utility bg-desk {
   background-image:
-    radial-gradient(120% 60% at 50% -10%, oklch(1 0 0 / 50%) 0%, transparent 60%),
-    radial-gradient(ellipse at center, transparent 58%, oklch(0.45 0.04 80 / 0.14) 100%),
-    linear-gradient(180deg, oklch(0.962 0.008 95) 0%, oklch(0.942 0.012 92) 100%);
+    radial-gradient(120% 60% at 50% -10%, var(--desk-light) 0%, transparent 60%),
+    radial-gradient(ellipse at center, transparent 58%, var(--desk-vignette) 100%),
+    linear-gradient(180deg, var(--desk-top) 0%, var(--desk-bottom) 100%);
 }
 
 /* Ruled paper lines (subtle, for the open page) */
@@ -188,24 +302,24 @@
   background-image: repeating-linear-gradient(
     180deg,
     transparent 0 27px,
-    oklch(0.55 0.09 258 / 12%) 27px 28px
+    var(--rule-soft) 27px 28px
   );
 }
 
 /* Graph paper (code on paper) */
 @utility bg-grid-paper {
   background-image:
-    repeating-linear-gradient(0deg, oklch(0.55 0.08 258 / 13%) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(90deg, oklch(0.55 0.08 258 / 13%) 0 1px, transparent 1px 22px),
-    linear-gradient(180deg, oklch(0.995 0.003 95) 0%, oklch(0.975 0.005 95) 100%);
+    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 22px),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
 }
 
 /* Punched holes strip — repeats vertically down a page edge */
 @utility hole-strip {
   background-image: radial-gradient(
     circle at 50% 20px,
-    oklch(0.94 0.008 95) 0 4.5px,
-    oklch(0.42 0.03 262 / 40%) 5px 6px,
+    var(--hole-fill) 0 4.5px,
+    var(--hole-ring) 5px 6px,
     transparent 6.5px
   );
   background-size: 18px 44px;
@@ -224,13 +338,13 @@
 /* Custom scrollbars */
 @utility scroll-slim {
   scrollbar-width: thin;
-  scrollbar-color: oklch(0.5 0.05 258 / 45%) transparent;
+  scrollbar-color: var(--scrollbar) transparent;
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background: oklch(0.5 0.05 258 / 40%);
+    background: var(--scrollbar);
     border-radius: 999px;
   }
   &::-webkit-scrollbar-track {
@@ -244,44 +358,44 @@
 @layer components {
   /* ---- raised paper sheet (cards) ---- */
   .sheet {
-    background-color: var(--card);
+    background-color: var(--paper);
     background-image:
-      radial-gradient(120% 90% at 50% 0%, oklch(1 0 0 / 85%) 0%, transparent 55%),
+      radial-gradient(120% 90% at 50% 0%, var(--paper-sheen) 0%, transparent 55%),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-    border: 1px solid oklch(0.3 0.03 262 / 16%);
+    border: 1px solid var(--ink-line);
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 75%) inset,
-      0 2px 4px oklch(0.3 0.03 262 / 8%),
-      0 12px 24px -14px oklch(0.3 0.03 262 / 30%);
+      0 1px 0 var(--sheen-line) inset,
+      0 2px 4px var(--shadow-soft),
+      0 12px 24px -14px var(--shadow-deep);
   }
 
   /* ---- flat paper strip ---- */
   .sheet-flat {
-    background-color: var(--card);
-    border: 1px solid oklch(0.3 0.03 262 / 14%);
-    box-shadow: 0 1px 2px oklch(0.3 0.03 262 / 10%);
+    background-color: var(--paper);
+    border: 1px solid var(--ink-line);
+    box-shadow: 0 1px 2px var(--shadow-soft);
   }
 
   /* ---- the big open notebook page ---- */
   .page-sheet {
-    background-color: var(--card);
+    background-color: var(--paper);
     background-image: repeating-linear-gradient(
       180deg,
       transparent 0 27px,
-      oklch(0.55 0.09 258 / 10%) 27px 28px
+      var(--rule-soft) 27px 28px
     );
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 70%) inset,
-      0 18px 40px -22px oklch(0.3 0.03 262 / 35%);
+      0 1px 0 var(--sheen-line) inset,
+      0 18px 40px -22px var(--shadow-deep);
   }
 
   /* ---- paper chip (inset well for icons / badges) ---- */
   .chip {
-    background: linear-gradient(180deg, oklch(0.965 0.006 95) 0%, oklch(0.93 0.01 93) 100%);
-    border: 1px solid oklch(0.3 0.03 262 / 22%);
+    background: linear-gradient(180deg, var(--chip-a) 0%, var(--chip-b) 100%);
+    border: 1px solid var(--chip-border);
     box-shadow:
-      0 2px 4px oklch(0.3 0.03 262 / 14%) inset,
-      0 1px 0 oklch(1 0 0 / 70%);
+      0 2px 4px var(--shadow-soft) inset,
+      0 1px 0 var(--sheen-line);
   }
 
   /* ---- dark inset chip (on the notebook cover) ---- */
@@ -293,15 +407,20 @@
       0 1px 0 oklch(1 0 0 / 8%);
   }
 
-  /* ---- physical buttons ---- */
+  /* ---- hand-inked buttons ----
+     Pressable paper/ink keys with a pen-drawn offset edge, so every
+     button reads like it was drawn on the page. */
   .btn3d {
     cursor: pointer;
     user-select: none;
     transition: transform 90ms ease, box-shadow 90ms ease, filter 90ms ease;
     will-change: transform;
   }
+  .btn3d:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
   .btn3d:active:not(:disabled) {
-    transform: translateY(2px);
+    transform: translateY(1px);
   }
   .btn3d:disabled {
     opacity: 0.55;
@@ -314,30 +433,36 @@
 
   /* white paper key (neutral action) */
   .btn-paper {
-    background-image: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.965 0.005 95) 90%, oklch(0.935 0.008 93) 100%);
-    border: 1px solid oklch(0.3 0.03 262 / 28%);
+    background-image: linear-gradient(180deg, var(--btnp-a) 0%, var(--btnp-b) 90%, var(--btnp-c) 100%);
+    border: 1.5px solid var(--ink-line-strong);
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 90%) inset,
-      0 -2px 3px oklch(0.3 0.03 262 / 6%) inset,
-      0 2px 3px -1px oklch(0.3 0.03 262 / 25%);
+      2px 3px 0 -0.5px var(--btn-edge),
+      0 1px 0 var(--sheen-line) inset,
+      0 -2px 3px var(--shadow-soft) inset;
     color: var(--foreground);
+  }
+  .btn-paper:hover:not(:disabled) {
+    filter: brightness(1.03);
   }
   .btn-paper:active:not(:disabled) {
     box-shadow:
-      0 2px 4px oklch(0.3 0.03 262 / 20%) inset,
-      0 1px 0 oklch(1 0 0 / 50%);
+      0 2px 4px var(--shadow-soft) inset,
+      0 1px 0 var(--sheen-line);
   }
 
   /* ballpoint blue ink button (primary action) */
   .btn-ink {
-    background-image: linear-gradient(180deg, oklch(0.58 0.14 262) 0%, var(--pen-blue) 50%, oklch(0.42 0.13 265) 100%);
-    border: 1px solid oklch(0.35 0.12 265 / 90%);
+    background-image: linear-gradient(180deg, var(--btnink-a) 0%, var(--btnink-b) 50%, var(--btnink-c) 100%);
+    border: 1.5px solid var(--btnink-border);
     box-shadow:
+      2px 3px 0 -0.5px var(--btn-edge),
       0 1px 0 oklch(1 0 0 / 30%) inset,
-      0 -2px 4px oklch(0.3 0.1 266 / 35%) inset,
-      0 2px 4px -1px oklch(0.35 0.12 265 / 45%);
+      0 -2px 4px oklch(0.3 0.1 266 / 35%) inset;
     color: oklch(0.99 0.003 95);
     text-shadow: 0 -1px 0 oklch(0.3 0.1 266 / 40%);
+  }
+  .btn-ink:hover:not(:disabled) {
+    filter: brightness(1.06);
   }
   .btn-ink:active:not(:disabled) {
     box-shadow:
@@ -347,19 +472,19 @@
 
   /* pressed-in state (toggled / active nav) */
   .btn-pressed {
-    background-image: linear-gradient(180deg, oklch(0.93 0.008 95) 0%, oklch(0.97 0.005 95) 100%);
-    border: 1px solid oklch(0.3 0.03 262 / 26%);
+    background-image: linear-gradient(180deg, var(--pressed-a) 0%, var(--pressed-b) 100%);
+    border: 1px solid var(--chip-border);
     box-shadow:
-      0 2px 5px oklch(0.3 0.03 262 / 24%) inset,
-      0 1px 0 oklch(1 0 0 / 55%);
+      0 2px 5px var(--shadow-soft) inset,
+      0 1px 0 var(--sheen-line);
     color: var(--pen-blue);
   }
 
-  /* ---- black notebook cover (sidebar) ---- */
+  /* ---- black notebook cover (sidebar) — stays dark in both modes ---- */
   .cover-mat {
     background-image:
       radial-gradient(120% 80% at 30% 0%, oklch(0.36 0.02 262 / 80%) 0%, transparent 55%),
-      linear-gradient(165deg, oklch(0.31 0.02 262) 0%, var(--cover) 45%, var(--cover-deep) 100%);
+      linear-gradient(165deg, oklch(0.31 0.02 262) 0%, oklch(0.26 0.018 262) 45%, oklch(0.19 0.015 262) 100%);
   }
   .cover-text {
     color: oklch(0.955 0.006 95);
@@ -383,43 +508,43 @@
     background:
       repeating-linear-gradient(45deg, oklch(0.72 0.06 258 / 35%) 0 6px, oklch(0.96 0.01 250 / 55%) 6px 12px),
       linear-gradient(180deg, oklch(0.98 0.004 250 / 72%) 0%, oklch(0.9 0.01 250 / 66%) 100%);
-    box-shadow: 0 1px 3px oklch(0.3 0.03 262 / 22%);
-    border-left: 1px dashed oklch(0.3 0.03 262 / 25%);
-    border-right: 1px dashed oklch(0.3 0.03 262 / 25%);
+    box-shadow: 0 1px 3px var(--shadow-soft);
+    border-left: 1px dashed var(--ink-line);
+    border-right: 1px dashed var(--ink-line);
     z-index: 5;
   }
 
-  /* ---- pale-yellow sticky note ---- */
+  /* ---- sticky note (pale yellow in light, deep amber in dark) ---- */
   .sticky-note {
     background:
-      repeating-linear-gradient(180deg, transparent 0 25px, oklch(0.5 0.09 258 / 22%) 25px 26px),
+      repeating-linear-gradient(180deg, transparent 0 25px, var(--rule) 25px 26px),
       linear-gradient(180deg, var(--sticky) 0%, var(--sticky-deep) 100%);
-    border: 1px solid oklch(0.55 0.06 100 / 40%);
+    border: 1px solid var(--ink-line);
     box-shadow:
-      0 1px 0 oklch(1 0 0 / 55%) inset,
-      0 6px 14px -6px oklch(0.4 0.04 95 / 35%);
+      0 1px 0 var(--sheen-line) inset,
+      0 6px 14px -6px var(--shadow-deep);
     transform: rotate(-1.1deg);
   }
   .sticky-note.alt {
     transform: rotate(1.2deg);
   }
 
-  /* ---- ruled legal pad (notes editor): white sheet, blue rules, red margin ---- */
+  /* ---- ruled legal pad (notes editor): paper sheet, blue rules, red margin ---- */
   .legal-pad {
     background:
-      linear-gradient(90deg, transparent 0 34px, oklch(0.63 0.18 25 / 55%) 34px 35.5px, transparent 35.5px),
-      repeating-linear-gradient(180deg, transparent 0 27px, oklch(0.55 0.09 258 / 28%) 27px 28px),
-      linear-gradient(180deg, oklch(0.998 0.002 95) 0%, oklch(0.975 0.006 95) 100%);
-    border: 1px solid oklch(0.3 0.03 262 / 26%);
+      linear-gradient(90deg, transparent 0 34px, var(--margin-line) 34px 35.5px, transparent 35.5px),
+      repeating-linear-gradient(180deg, transparent 0 27px, var(--rule) 27px 28px),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    border: 1px solid var(--ink-line-strong);
     box-shadow:
-      0 2px 6px oklch(0.3 0.03 262 / 12%) inset,
-      0 -1px 0 oklch(1 0 0 / 65%);
+      0 2px 6px var(--shadow-soft) inset,
+      0 -1px 0 var(--sheen-line);
   }
 
   /* ---- blue bookmark ribbon ---- */
   .ribbon {
     background: linear-gradient(180deg, var(--pen-blue) 0%, oklch(0.42 0.13 265) 100%);
-    box-shadow: 0 1px 2px oklch(0.3 0.1 265 / 45%);
+    box-shadow: 0 1px 2px var(--shadow-deep);
   }
 
   /* ---- highlighter marker behind text ---- */
@@ -481,7 +606,8 @@
   @apply my-6 border-0 border-t border-dashed border-ink/25;
 }
 .md-scope code:not(pre code) {
-  @apply rounded-md border border-ink/15 bg-paper-cream px-1.5 py-0.5 font-mono text-[13px] text-foreground shadow-[0_1px_0_oklch(1_0_0/60%)_inset];
+  @apply rounded-md border border-ink/15 px-1.5 py-0.5 font-mono text-[13px] text-foreground shadow-[0_1px_0_oklch(1_0_0/30%)_inset];
+  background: var(--code-chip-bg);
 }
 .md-scope pre {
   margin: 0;
@@ -499,7 +625,9 @@
   @apply my-4 rounded-xl max-w-full border border-ink/15 shadow-md;
 }
 
-/* Python syntax token colors — "ink on graph paper" light palette */
+/* Python syntax token colors — "ink on graph paper" palette.
+   Colours come from the pen variables, so dark mode chalks them up
+   automatically. */
 .hljs {
   color: var(--ink);
   background: transparent;
@@ -531,7 +659,7 @@
   color: var(--pen-blue);
 }
 .hljs-punctuation {
-  color: oklch(0.45 0.02 262);
+  color: var(--pencil);
 }
 .hljs-operator {
   color: var(--ink-soft);

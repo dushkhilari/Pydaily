@@ -29,14 +29,9 @@ export function PlaygroundView() {
   }, [frameReady, pendingCode, pushCode]);
 
   return (
-    <div className="space-y-4 pt-2">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Code Lab</h1>
-          <p className="mt-1 text-[13px] font-semibold text-pencil sm:text-sm">
-            Real Python 3, running in your browser — no setup, no server.
-          </p>
-        </div>
+    <div className="space-y-3 pt-2">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Code Lab</h1>
         <a
           href="/playground/index.html"
           target="_blank"
@@ -60,14 +55,10 @@ export function PlaygroundView() {
           ref={iframeRef}
           src="/playground/index.html"
           title="Python Code Lab"
-          className="h-[68vh] min-h-[520px] w-full rounded-xl border border-ink/15 bg-white"
+          className="h-[72vh] min-h-[520px] w-full rounded-xl border border-ink/15 bg-white md:h-[calc(100vh-150px)] md:min-h-[640px]"
           onLoad={() => setFrameReady(true)}
         />
       </div>
-
-      <p className="text-center text-xs font-semibold text-pencil">
-        Powered by Pyodide (WebAssembly) + CodeMirror · your code never leaves the browser
-      </p>
     </div>
   );
 }

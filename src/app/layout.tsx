@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Baloo_2, Nunito, JetBrains_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/study/theme-toggle";
 
 const body = Nunito({
   variable: "--font-body",
@@ -40,8 +41,10 @@ export default function RootLayout({
       <body
         className={`${body.variable} ${display.variable} ${jetMono.variable} ${hand.variable} antialiased bg-background text-foreground`}
       >
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

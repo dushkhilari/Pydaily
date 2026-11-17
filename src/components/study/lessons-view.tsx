@@ -63,7 +63,7 @@ function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.02, 0.3), duration: 0.2 }}
       onClick={() => openLesson(lesson.slug)}
-      className="sheet btn3d group flex min-h-[56px] w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left"
+      className="sheet btn3d group flex min-h-[52px] w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left sm:min-h-[56px] sm:px-3.5 sm:py-3"
     >
       <span
         className={cn(
@@ -135,14 +135,9 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
   }, [filtered, manifest.modules]);
 
   return (
-    <div className="space-y-7 pt-2">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">All lessons</h1>
-          <p className="mt-1 text-sm font-semibold text-pencil">
-            {manifest.lessons.length} days of Python, from hello world to asyncio.
-          </p>
-        </div>
+    <div className="space-y-5 pt-2 sm:space-y-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">All lessons</h1>
         <div className="relative w-full sm:w-72">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-pencil" aria-hidden />
           <Input
@@ -150,7 +145,7 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search lessons…"
             aria-label="Search lessons"
-            className="h-11 rounded-xl border-ink/25 bg-card pl-10 text-sm font-semibold shadow-[inset_0_2px_4px_oklch(0.3_0.03_262/0.08)]"
+            className="h-10 rounded-xl border-ink/25 bg-card pl-10 text-sm font-semibold shadow-[inset_0_2px_4px_oklch(0.3_0.03_262/0.08)] sm:h-11"
           />
         </div>
       </div>
@@ -170,13 +165,13 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
         </div>
       )}
 
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {grouped.map(({ module: mod, lessons }) => {
           const pct = modulePercent(progress, manifest.lessons, mod.id);
           const doneCount = lessons.filter((l) => progress[l.slug]?.completed).length;
           return (
             <section key={mod.id} aria-label={mod.title}>
-              <div className="sheet relative mb-3 flex items-center gap-3 rounded-xl px-4 py-3">
+              <div className="sheet relative mb-2.5 flex items-center gap-3 rounded-xl px-3.5 py-2.5 sm:mb-3 sm:px-4 sm:py-3">
                 <span className="chip flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-pen-blue">
                   <ModuleIcon icon={mod.icon} className="h-5 w-5" />
                 </span>
@@ -190,7 +185,7 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
                   {Math.round(pct)}%
                 </span>
               </div>
-              <div className="space-y-2.5">
+              <div className="space-y-2 sm:space-y-2.5">
                 {lessons.map((l, i) => (
                   <LessonRow key={l.slug} lesson={l} index={i} />
                 ))}
@@ -201,12 +196,9 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
       </div>
 
       {grouped.length === 0 && (
-        <div className="sheet rounded-2xl border-2 border-dashed border-ink/20 py-16 text-center shadow-none">
+        <div className="sheet rounded-2xl border-2 border-dashed border-ink/20 py-14 text-center shadow-none">
           <Search className="mx-auto h-8 w-8 text-pencil/50" aria-hidden />
           <p className="mt-3 text-sm font-bold">No lessons match “{query}”</p>
-          <p className="mt-1 text-xs font-semibold text-pencil">
-            Try a different keyword or clear the module filter.
-          </p>
         </div>
       )}
     </div>

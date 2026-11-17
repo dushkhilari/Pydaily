@@ -7,7 +7,6 @@ import {
   Bookmark,
   CheckCircle2,
   ChevronRight,
-  Sparkles,
   Clock3,
   Lightbulb,
 } from "lucide-react";
@@ -24,29 +23,36 @@ import {
 } from "@/lib/progress-utils";
 import { ProgressGauge } from "./progress-gauge";
 import { ModuleIcon } from "./module-icon";
+import { cn } from "@/lib/utils";
 
-function StatCard({
+/** Small sticky-note scrap used for the three stats. */
+function StatScrap({
   icon: Icon,
-  label,
   value,
-  sub,
+  label,
+  tilt,
+  iconClass,
 }: {
   icon: typeof Flame;
-  label: string;
   value: string | number;
-  sub?: string;
+  label: string;
+  tilt: "left" | "right" | "none";
+  iconClass: string;
 }) {
   return (
-    <div className="sheet relative rounded-xl p-3 sm:rounded-2xl sm:p-5">
-      <div className="chip flex h-8 w-8 items-center justify-center rounded-lg sm:h-9 sm:w-9">
-        <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px] text-pen-blue" aria-hidden />
-      </div>
-      <p className="mt-1.5 font-display text-base font-bold tabular-nums leading-none sm:mt-3 sm:text-2xl">
+    <div
+      className={cn(
+        "sticky-note rounded-sm px-2 pb-3 pt-4 sm:px-4 sm:pb-4",
+        tilt === "left" && "-rotate-1",
+        tilt === "right" && "rotate-1",
+        tilt === "none" && "rotate-0"
+      )}
+    >
+      <Icon className={cn("h-4 w-4", iconClass)} aria-hidden />
+      <p className="mt-1 font-display text-lg font-bold tabular-nums leading-none sm:text-2xl">
         {value}
       </p>
-      <p className="mt-0.5 text-[10px] font-semibold text-pencil sm:mt-1.5 sm:text-xs">
-        {sub ?? label}
-      </p>
+      <p className="mt-0.5 text-[10px] font-semibold text-pencil sm:text-xs">{label}</p>
     </div>
   );
 }
@@ -70,81 +76,54 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
   };
 
   return (
-    <div className="space-y-5 pt-2 sm:space-y-8">
-      {/* greeting */}
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-pencil">
-            <Sparkles className="h-3.5 w-3.5 text-pen-blue" aria-hidden />
-            {manifest.course.title}
-          </p>
-          <h1 className="mt-2 font-display text-2xl font-bold tracking-tight sm:text-4xl">
-            Keep the <span className="marker-hl">streak</span> alive.
-          </h1>
-        </div>
-        <div className="chip hidden whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-bold text-pencil sm:block">
-          Day {next.day} of {manifest.course.totalDays}
-        </div>
-      </div>
-
-      {/* continue hero — a page from the notebook */}
+    <div className="space-y-4 pt-1 sm:space-y-7">
+      {/* ---------- the notebook's front page ---------- */}
       <motion.section
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35 }}
-        className="sheet relative overflow-hidden rounded-[20px] p-4 sm:rounded-[26px] sm:p-8"
+        className="sheet relative overflow-hidden rounded-[20px] px-4 pb-6 pt-8 sm:rounded-[26px] sm:px-8 sm:pb-8 sm:pt-10"
       >
         <span className="washi" aria-hidden />
-        <p
-          className="hand absolute right-5 top-4 hidden rotate-2 text-xl text-pen-blue/70 sm:block"
-          aria-hidden
-        >
-          keep going!
-        </p>
 
-        {/* symmetric composition: gauge on top, resume button directly below,
-            lesson text vertically centred beside it */}
-        <div className="relative flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
-          <div className="flex shrink-0 flex-col items-center gap-3 sm:gap-4">
-            <ProgressGauge
-              value={pct}
-              tone="paper"
-              className="h-20 w-20 sm:h-32 sm:w-32"
-            />
+        <div className="relative flex flex-col items-center text-center">
+          <p className="hand text-2xl leading-none text-pencil sm:text-3xl">My Python Notebook</p>
+
+          <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.18em] text-pencil sm:text-[11px]">
+            This notebook belongs to
+          </p>
+          <p className="hand mt-1 border-b-2 border-dashed border-pen-blue/50 px-8 text-3xl leading-tight text-foreground sm:text-4xl">
+            a Python learner
+          </p>
+
+          {/* progress dial with the resume key directly beneath it */}
+          <div className="mt-6 flex flex-col items-center gap-3.5">
+            <ProgressGauge value={pct} tone="paper" className="h-24 w-24 sm:h-28 sm:w-28" />
             <button
               onClick={() => openLesson(next.slug)}
-              className="btn3d btn-ink inline-flex min-h-[40px] items-center gap-2 rounded-full px-5 py-2 text-xs font-bold sm:min-h-[44px] sm:px-6 sm:py-2.5 sm:text-sm"
+              className="btn3d btn-ink inline-flex min-h-[42px] items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold"
             >
-              <Play className="h-3.5 w-3.5 fill-current sm:h-4 sm:w-4" aria-hidden />
+              <Play className="h-4 w-4 fill-current" aria-hidden />
               Resume lesson
             </button>
-          </div>
-
-          <div className="min-w-0 flex-1 text-center sm:text-left">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-pencil sm:text-[11px]">
-              Continue learning
-            </p>
-            <h2 className="mt-1 line-clamp-2 font-display text-[15px] font-bold leading-snug sm:mt-1.5 sm:text-2xl">
-              Day {next.day} · {next.title}
-            </h2>
-            <p className="mt-1.5 text-xs font-semibold text-pencil sm:text-sm">
-              {done} of {manifest.lessons.length} lessons complete · {next.minutes} min estimated
+            <p className="max-w-full truncate text-xs font-semibold text-pencil sm:text-sm">
+              Next: Day {next.day} · {next.title}
             </p>
           </div>
         </div>
       </motion.section>
 
-      {/* stats — small paper scraps */}
-      <section aria-label="Your stats" className="grid grid-cols-3 gap-2.5 sm:gap-4">
-        <StatCard icon={CheckCircle2} label="Lessons" value={done} sub="lessons done" />
-        <StatCard icon={Flame} label="Streak" value={streak.current} sub="day streak" />
-        <StatCard icon={Bookmark} label="Saved" value={Object.keys(bookmarks).length} sub="bookmarks" />
+      {/* ---------- stats — sticky scraps ---------- */}
+      <section aria-label="Your stats" className="grid grid-cols-3 gap-2.5 sm:gap-5">
+        <StatScrap icon={CheckCircle2} value={done} label="lessons done" tilt="left" iconClass="text-pen-green" />
+        <StatScrap icon={Flame} value={streak.current} label="day streak" tilt="none" iconClass="text-pen-red" />
+        <StatScrap icon={Bookmark} value={Object.keys(bookmarks).length} label="bookmarks" tilt="right" iconClass="text-pen-blue" />
       </section>
 
-      {/* learning path */}
+      {/* ---------- contents — notebook index ---------- */}
       <section aria-label="Learning path">
         <div className="mb-3 flex items-center justify-between sm:mb-4">
-          <h2 className="hand text-2xl font-bold tracking-tight sm:text-3xl">Your path</h2>
+          <h2 className="hand text-2xl font-bold tracking-tight sm:text-3xl">Contents</h2>
           <button
             onClick={openLessons}
             className="inline-flex min-h-[36px] items-center gap-1 text-sm font-bold text-pen-blue hover:underline"
@@ -153,7 +132,7 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
             <ChevronRight className="h-4 w-4" aria-hidden />
           </button>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+        <div className="space-y-2 sm:space-y-2.5">
           {manifest.modules.map((mod) => {
             const mPct = modulePercent(progress, manifest.lessons, mod.id);
             return (
@@ -163,51 +142,54 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
                   setModuleFilter(mod.id);
                   setView("lessons");
                 }}
-                className="sheet btn3d rounded-2xl p-4 text-left sm:p-5"
+                className="sheet btn3d flex min-h-[60px] w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-left"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <span className="chip flex h-9 w-9 items-center justify-center rounded-xl sm:h-11 sm:w-11">
-                    <ModuleIcon icon={mod.icon} className="h-4 w-4 sm:h-5 sm:w-5 text-pen-blue" />
-                  </span>
-                  <span className="chip rounded-full px-2 py-1 text-[10px] font-bold text-pencil sm:px-2.5 sm:text-[11px]">
-                    Days {mod.days[0]}–{mod.days[1]}
-                  </span>
-                </div>
-                <h3 className="mt-2.5 font-display text-sm font-bold leading-snug sm:mt-3.5 sm:text-[15px]">
-                  {mod.title}
-                </h3>
-                <p className="mt-1 line-clamp-2 text-[11px] font-semibold text-pencil sm:text-xs">
-                  {mod.subtitle}
-                </p>
-                <div className="mt-2.5 flex items-center gap-2.5 sm:mt-4 sm:gap-3">
-                  <div className="chip h-2.5 flex-1 overflow-hidden rounded-full p-[2px]">
-                    <div
-                      className="h-full rounded-full bg-pen-blue shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)] transition-all duration-500"
-                      style={{ width: `${mPct}%` }}
+                <span className="chip flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10">
+                  <ModuleIcon icon={mod.icon} className="h-4 w-4 text-pen-blue sm:h-5 sm:w-5" />
+                </span>
+
+                <span className="min-w-0 flex-1">
+                  {/* index row: title …… days */}
+                  <span className="flex items-center gap-2">
+                    <span className="truncate text-[13px] font-bold sm:text-sm">{mod.title}</span>
+                    <span
+                      aria-hidden
+                      className="hidden h-px min-w-6 flex-1 translate-y-[-2px] border-b border-dashed border-ink/25 sm:block"
                     />
-                  </div>
-                  <span className="text-[10px] font-bold tabular-nums text-pencil sm:text-[11px]">
-                    {mod.lessonCount} lessons
+                    <span className="shrink-0 text-[10px] font-bold tabular-nums text-pencil sm:text-[11px]">
+                      Days {mod.days[0]}–{mod.days[1]}
+                    </span>
                   </span>
-                </div>
+                  <span className="mt-1.5 flex items-center gap-2">
+                    <span className="chip h-2 flex-1 overflow-hidden rounded-full p-[2px]">
+                      <span
+                        className="block h-full rounded-full bg-pen-blue transition-all duration-500"
+                        style={{ width: `${mPct}%` }}
+                      />
+                    </span>
+                    <span className="w-9 shrink-0 text-right text-[10px] font-bold tabular-nums text-pencil sm:text-[11px]">
+                      {Math.round(mPct)}%
+                    </span>
+                  </span>
+                </span>
               </button>
             );
           })}
         </div>
       </section>
 
-      {/* jump back in */}
+      {/* ---------- jump back in ---------- */}
       {recent.length > 0 && (
         <section aria-label="Jump back in">
           <h2 className="hand mb-2.5 text-2xl font-bold tracking-tight sm:mb-3 sm:text-3xl">
             Jump back in
           </h2>
-          <div className="space-y-2.5 sm:space-y-3">
+          <div className="space-y-2 sm:space-y-2.5">
             {recent.map((l) => (
               <button
                 key={l.slug}
                 onClick={() => openLesson(l.slug)}
-                className="sheet btn3d flex min-h-[52px] w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left sm:min-h-[56px] sm:px-4 sm:py-3"
+                className="sheet btn3d flex min-h-[48px] w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-left sm:min-h-[52px]"
               >
                 <span className="chip flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-display text-xs font-bold text-pen-blue sm:h-9 sm:w-9 sm:text-sm">
                   {l.day}
@@ -215,9 +197,6 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13px] font-bold text-foreground/90 sm:text-sm">
                     Day {l.day} · {l.title}
-                  </span>
-                  <span className="text-[11px] font-semibold text-pencil capitalize sm:text-xs">
-                    {l.module.replace(/-/g, " ")}
                   </span>
                 </span>
                 <span className="hidden items-center gap-1 text-xs font-semibold text-pencil sm:flex">
@@ -231,15 +210,15 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
         </section>
       )}
 
-      {/* tip of the day — sticky note */}
+      {/* ---------- tip of the day — sticky note ---------- */}
       <section
         aria-label="Python tip"
-        className="sticky-note relative mx-auto mt-1 max-w-xl rounded-sm px-4 pb-5 pt-7 sm:px-6 sm:pb-6 sm:pt-8"
+        className="sticky-note relative mx-auto max-w-xl rounded-sm px-4 pb-5 pt-7 sm:px-6 sm:pb-6 sm:pt-8"
       >
         <span className="washi" aria-hidden />
         <div className="relative flex items-start gap-3">
           <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-pen-purple" aria-hidden />
-          <div>
+          <div className="min-w-0">
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-foreground/60 sm:text-xs">
               Tip of the day
             </p>

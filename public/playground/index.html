@@ -14,7 +14,9 @@
 
      HOW THE PIECES FIT TOGETHER
        <head>   : Google Fonts + CodeMirror stylesheets + all page CSS (§1)
-       <body>   : header / toolbar / editor + console grid / footer markup
+       <body>   : slim top bar (status pill + Run/Clear buttons), the editor
+                  pane on TOP and the console pane BELOW it — stacked, so the
+                  editor gets the full width and lots of height on any screen
        scripts  : pyodide.js (Python runtime) → CodeMirror JS (core FIRST,
                   then the Python mode, then the addons) → app script (§2–§7)
 
@@ -42,10 +44,9 @@
 <style>
 /* ============================================================
    1. LAYOUT & NOTEBOOK THEME
-   The whole page looks like a lab bench taped into a paper
-   notebook: warm paper background with a faint grain, ink and
-   ballpoint-pen colors, a dark navy "editor card" on the left
-   and a ruled-paper "console card" on the right.
+   A lab page taped into a paper notebook: warm paper background
+   with a faint grain, ink and ballpoint-pen colours, a tall dark
+   navy editor card on TOP and a ruled-paper console BELOW it.
 ============================================================ */
 
 /* ---- 1a. Design tokens (the notebook palette) -------------- */
@@ -67,7 +68,7 @@
 
 /* ---- 1b. Paper background: warm cream + subtle SVG grain + soft vignette */
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; height: 100%; }
 body {
   min-height: 100vh;
   color: var(--ink);
@@ -75,45 +76,42 @@ body {
   background-color: var(--paper);
   background-image:
     /* tiny inline SVG using feTurbulence = paper grain (~5% opacity) */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='0.05'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='0.05'/%3E%3C/svg%3E"),
     /* soft light from the top + a faint vignette toward the edges */
     radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
     radial-gradient(140% 120% at 50% 110%, rgba(35, 40, 59, 0.06) 0%, rgba(35, 40, 59, 0) 55%);
 }
 
-/* ---- 1c. Outer wrapper: centered column, max 1240px -------- */
-.lab-wrap { max-width: 1240px; margin: 0 auto; padding: 18px 20px 28px; }
-
-/* ---- 1d. Page header: handwritten title + swoosh + status pill ---- */
-.lab-header {
+/* ---- 1c. Outer wrapper: single centered column that EXACTLY fills the
+     viewport (or iframe). The editor + console split whatever height is
+     left after the slim top bar, so the editor is always as large as the
+     screen allows and the output always stays visible below it.          */
+.lab-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 16px 16px;
+  height: 100vh;               /* in an iframe, vh = the iframe height */
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+}
+@supports (height: 100dvh) {
+  .lab-wrap { height: 100dvh; }
+}
+
+/* ---- 1d. Slim top bar: status pill LEFT, action keys RIGHT ---
+     No big page title here — the host page (or the editor itself)
+     already says what this is. Everything lives on one row so the
+     panes below get maximum height.                               */
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 14px 20px;
-  margin-bottom: 16px;
+  gap: 10px 14px;
+  margin-bottom: 12px;
 }
-.title-block { min-width: 0; }
-.site-title {
-  margin: 0;
-  position: relative;
-  display: inline-block;
-  font-family: "Caveat", cursive;
-  font-size: 38px;              /* handwritten look */
-  font-weight: 700;
-  line-height: 1.05;
-  color: var(--ink);
-  padding-bottom: 12px;         /* room for the swoosh underneath */
-}
-/* the little ballpoint-blue underline swoosh is an inline SVG path */
-.swoosh { position: absolute; left: 4px; bottom: 0; width: 150px; height: 12px; }
-.site-sub {
-  margin: 4px 0 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(35, 40, 59, 0.72);
-  max-width: 640px;
-}
+.topbar-actions { display: inline-flex; align-items: center; gap: 10px; }
 
 /* Status pill — one element, three state classes:
      .booting  → amber dot  + CSS spinner + "Booting Python runtime…"
@@ -124,8 +122,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 16px;
-  margin-top: 6px;
+  padding: 8px 14px;
   background: var(--paper-card);
   border: 1.5px solid rgba(35, 40, 59, 0.18);
   border-radius: 999px;
@@ -155,26 +152,7 @@ body {
   50%      { opacity: 0.45; transform: scale(0.8); }
 }
 
-/* ---- 1e. Toolbar & buttons --------------------------------- */
-.toolbar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.toolbar-spacer { flex: 1 1 auto; }
-.kbd-hint { font-size: 12px; font-weight: 600; color: var(--muted); }
-.kbd-hint kbd {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-soft);
-  background: var(--paper-card);
-  border: 1px solid rgba(35, 40, 59, 0.28);
-  border-bottom-width: 2.5px;
-  border-radius: 6px;
-  padding: 1.5px 6px;
-}
+/* ---- 1e. Action keys ---------------------------------------- */
 /* Shared button base: ~44px tall, rounded, presses down on click */
 .btn {
   min-height: 44px;
@@ -190,8 +168,11 @@ body {
 .btn:active:not(:disabled) { transform: translateY(2px); }
 .btn:focus-visible { outline: 3px solid rgba(52, 87, 213, 0.35); outline-offset: 2px; }
 
-/* Run Code — solid ballpoint blue; grayed out while disabled */
+/* Run Code — solid ballpoint blue; grayed out while disabled.
+   The usage hint appears as a small ink speech bubble ON HOVER
+   (there is no keyboard shortcut in this lab).                   */
 .btn-run {
+  position: relative;
   background: var(--blue);
   color: #ffffff;
   border: none;
@@ -199,6 +180,52 @@ body {
 }
 .btn-run:hover:not(:disabled) { background: var(--blue-dark); }
 .btn-run:disabled { background: #b7bac6; color: #f3f4f7; cursor: not-allowed; box-shadow: none; }
+
+/* hover tooltip (pure CSS, anchored below the button so it is never
+   clipped by the top edge of the viewport) */
+.btn-run::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  transform: translateY(-3px);
+  padding: 6px 12px;
+  border-radius: 9px;
+  background: var(--ink);
+  color: var(--paper-card);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(35, 40, 59, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 20;
+}
+/* the little bubble tail */
+.btn-run::before {
+  content: "";
+  position: absolute;
+  top: calc(100% + 3px);
+  right: 26px;
+  transform: translateY(-3px);
+  border: 6px solid transparent;
+  border-bottom-color: var(--ink);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 20;
+}
+.btn-run:hover:not(:disabled)::after,
+.btn-run:hover:not(:disabled)::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.btn-run:disabled::after,
+.btn-run:disabled::before { display: none; }
 
 /* Clear Output — white paper button with an ink border */
 .btn-clear {
@@ -209,19 +236,25 @@ body {
 }
 .btn-clear:hover { background: #f3efe3; }
 
-/* ---- 1f. Main grid: editor LEFT / console RIGHT on desktop -- */
-.lab-grid {
+/* ---- 1f. Main stack: editor on TOP, console BELOW ------------
+     A vertical grid that fills the remaining height. The editor row
+     gets roughly twice the console row (2fr vs 1fr), with sensible
+     minimums so both stay usable on short screens.                */
+.lab-stack {
+  flex: 1 1 auto;
+  min-height: 0;                /* let the grid shrink inside the flex column */
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr;   /* always one column: editor, then output */
+  grid-template-rows: minmax(260px, 2.1fr) minmax(150px, 1fr);
+  gap: 14px;
   align-items: stretch;
 }
-.lab-grid > * { min-width: 0; } /* keep panes from overflowing on small screens */
+.lab-stack > * { min-width: 0; } /* keep panes from overflowing */
 
 .pane {
   display: flex;
   flex-direction: column;
-  border-radius: 16px;        /* rounded-xl */
+  border-radius: 16px;
   overflow: hidden;
 }
 /* Editor pane — dark navy card with a subtle outer shadow */
@@ -243,8 +276,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  min-height: 42px;
-  padding: 8px 16px;
+  min-height: 40px;
+  padding: 7px 16px;
 }
 .dark-head  { background: var(--navy-deep); }
 .paper-head { border-bottom: 1px solid rgba(35, 40, 59, 0.12); }
@@ -258,11 +291,13 @@ body {
 }
 .paper-file { color: rgba(35, 40, 59, 0.6); }
 .head-right { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
-.traffic-dots { display: inline-flex; gap: 5px; }
-.traffic-dots .dot { width: 9px; height: 9px; border-radius: 50%; }
-.traffic-dots .dot-r { background: var(--red); }
-.traffic-dots .dot-y { background: var(--amber); }
-.traffic-dots .dot-g { background: var(--green); }
+.mono-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(35, 40, 59, 0.45);
+  text-transform: uppercase;
+}
 .term-label {
   font-family: var(--mono);
   font-size: 10px;
@@ -270,16 +305,9 @@ body {
   letter-spacing: 0.18em;
   color: #6f7a99;
 }
-.mono-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  color: rgba(35, 40, 59, 0.45);
-  text-transform: uppercase;
-}
 
-/* ---- 1g. CodeMirror host: fixed-height pane, editor fills it */
-.editor-host { height: 340px; flex: 0 0 auto; }
+/* ---- 1g. CodeMirror host: pane stretches to its grid row ------ */
+.editor-host { height: 100%; min-height: 260px; }
 .editor-host .CodeMirror {
   height: 100%;               /* CodeMirror stretches to the pane */
   background: transparent;    /* let the navy card show through   */
@@ -293,12 +321,11 @@ body {
 }
 
 /* ---- 1h. Console: ruled paper, mono text, auto-scrolled ----- */
-.console-wrap { position: relative; height: 340px; flex: 0 0 auto; }
+.console-wrap { position: relative; height: 100%; min-height: 150px; }
 .console-body {
   height: 100%;
-  min-height: 260px;          /* desktop minimum */
   overflow-y: auto;
-  padding: 0 16px 16px;
+  padding: 0 16px 14px;
   background-color: var(--paper-card);
   /* horizontal ruled lines every 26px — output line-height matches */
   background-image: repeating-linear-gradient(
@@ -361,24 +388,16 @@ body {
   color: var(--ink-soft);
 }
 
-/* ---- 1j. Footer --------------------------------------------- */
-.lab-footer {
-  margin-top: 18px;
-  text-align: center;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: rgba(35, 40, 59, 0.55);
-}
-
-/* ---- 1k. Responsive: stack editor ON TOP / console BELOW on mobile */
-@media (max-width: 860px) {
-  .lab-grid { grid-template-columns: 1fr; }
-  .editor-host  { height: 300px; }
-  .console-wrap { height: 240px; }
-  .console-body { min-height: 0; } /* 240px mobile height wins over desktop min */
-  .lab-wrap { padding: 14px 14px 24px; }
-  .site-title { font-size: 34px; }
-  .status-pill { margin-top: 0; }
+/* ---- 1j. Responsive: keep the stack, tighten chrome on phones -- */
+@media (max-width: 700px) {
+  .lab-wrap { padding: 10px 12px 14px; }
+  .lab-stack { grid-template-rows: minmax(230px, 1.8fr) minmax(140px, 1fr); gap: 12px; }
+  .editor-host { min-height: 230px; }
+  .console-wrap { min-height: 140px; }
+  .btn { min-height: 42px; padding: 0 16px; font-size: 14px; }
+  .status-pill { font-size: 12px; padding: 7px 12px; }
+  /* let the pill and keys share the row nicely on narrow screens */
+  .topbar { justify-content: center; }
 }
 </style>
 </head>
@@ -387,54 +406,35 @@ body {
 <div class="lab-wrap">
 
   <!-- ====================================================================
-       PAGE HEADER — handwritten "Code Lab" title with swoosh, subtitle,
-       and the runtime status pill (booting / ready / running)
+       SLIM TOP BAR — runtime status pill on the left, Run/Clear keys on
+       the right. Run is disabled (grayed) until Pyodide is ready, and
+       hovering it shows a small ink tooltip instead of any shortcut hint.
   ==================================================================== -->
-  <header class="lab-header">
-    <div class="title-block">
-      <h1 class="site-title">
-        Code Lab
-        <svg class="swoosh" viewBox="0 0 150 12" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path d="M3 8 C 28 3, 52 10, 76 6 C 100 2, 126 9, 147 5"
-                fill="none" stroke="#3457d5" stroke-width="2.6" stroke-linecap="round" opacity="0.9"/>
-        </svg>
-      </h1>
-      <p class="site-sub">Real Python 3 in your browser — powered by Pyodide (WebAssembly). No server, no setup.</p>
-    </div>
-
+  <div class="topbar">
     <div class="status-pill booting" id="status-pill" role="status" aria-live="polite">
       <span class="status-spinner" aria-hidden="true"></span>
       <span class="status-dot" aria-hidden="true"></span>
       <span class="status-text" id="status-text">Booting Python runtime…</span>
     </div>
-  </header>
 
-  <!-- ====================================================================
-       TOOLBAR — Run Code (+ keyboard hint) on the left, Clear Output
-       on the right. Run is disabled (grayed) until Pyodide is ready.
-  ==================================================================== -->
-  <div class="toolbar">
-    <button id="run-btn" class="btn btn-run" type="button" aria-label="Run the Python code" disabled>Run Code</button>
-    <span class="kbd-hint" aria-hidden="true">press <kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
-    <span class="toolbar-spacer" aria-hidden="true"></span>
-    <button id="clear-btn" class="btn btn-clear" type="button" aria-label="Clear the console output">Clear Output</button>
+    <div class="topbar-actions">
+      <button id="run-btn" class="btn btn-run" type="button" data-tip="Runs your Python code" aria-label="Run the Python code" disabled>Run Code</button>
+      <button id="clear-btn" class="btn btn-clear" type="button" aria-label="Clear the console output">Clear Output</button>
+    </div>
   </div>
 
   <!-- ====================================================================
-       MAIN GRID — editor pane (left) and console pane (right) on desktop;
-       the grid collapses to one column below 860px (editor top, console
-       bottom). Both panes are also tagged with accessible labels.
+       MAIN STACK — the editor pane on TOP and the console pane BELOW it,
+       on every screen size. Both panes carry accessible labels. The boot
+       overlay covers the console while the Python runtime loads.
   ==================================================================== -->
-  <main class="lab-grid">
+  <main class="lab-stack">
 
     <!-- EDITOR PANE: dark navy card, slim "main.py" header strip, CodeMirror inside -->
     <section class="pane pane-editor" aria-label="Python code editor">
       <div class="pane-head dark-head">
         <span class="file-name">main.py</span>
         <span class="head-right">
-          <span class="traffic-dots" aria-hidden="true">
-            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          </span>
           <span class="term-label">PYTHON · WASM</span>
         </span>
       </div>
@@ -442,10 +442,10 @@ body {
     </section>
 
     <!-- CONSOLE PANE: ruled-paper card. role="log" + aria-live announce new
-         output to screen readers. The boot overlay covers it while loading. -->
+         output to screen readers. -->
     <section class="pane pane-console" aria-label="Python console">
       <div class="pane-head paper-head">
-        <span class="file-name paper-file">console</span>
+        <span class="file-name paper-file">output</span>
         <span class="head-right mono-label">stdout · stderr</span>
       </div>
       <div class="console-wrap">
@@ -458,10 +458,6 @@ body {
     </section>
 
   </main>
-
-  <footer class="lab-footer">
-    Powered by Pyodide (CPython compiled to WebAssembly) · CodeMirror editor · Runs 100% in your browser
-  </footer>
 
 </div>
 
@@ -498,7 +494,7 @@ body {
   var clearBtn    = document.getElementById("clear-btn");     // "Clear Output" button
   var editorHost  = document.getElementById("editor-host");   // div CodeMirror mounts into
   var consoleBody = document.getElementById("console-body");  // ruled-paper output pane
-  var statusPill  = document.getElementById("status-pill");   // header status pill
+  var statusPill  = document.getElementById("status-pill");   // top-bar status pill
   var statusText  = document.getElementById("status-text");   // pill text node
   var bootOverlay = document.getElementById("boot-overlay");  // "Loading Python…" overlay
 
@@ -508,11 +504,8 @@ body {
 
   // ================= 2. CODEMIRROR EDITOR SETUP =================
   // Dark-themed editor with: Python syntax highlighting, line numbers,
-  // auto-indentation (indentUnit 4), bracket matching + auto-closing,
-  // active-line highlighting and Ctrl/Cmd+Enter to run.
-  // NOTE: `runCode` (section 6) is a hoisted *function declaration*, so
-  // referencing it in `extraKeys` here is safe even though its body is
-  // written later in this file.
+  // auto-indentation (indentUnit 4), bracket matching + auto-closing
+  // and active-line highlighting. Plain buttons only — no shortcuts.
   var STARTER_CODE = `# ============================================
 #  Welcome to the Code Lab!
 #  Real Python 3 running in your browser
@@ -549,8 +542,7 @@ print("The sum of 1..100 is", sum(range(1, 101)))
     indentUnit: 4,                // Python-style 4-space indentation
     matchBrackets: true,
     autoCloseBrackets: true,
-    styleActiveLine: true,
-    extraKeys: { "Ctrl-Enter": runCode, "Cmd-Enter": runCode }
+    styleActiveLine: true
   });
 
   // ================= 3. PYODIDE PYTHON RUNTIME =================
@@ -590,7 +582,7 @@ print("The sum of 1..100 is", sum(range(1, 101)))
           bootOverlay.hidden = true;    // hide the loading indicator
           runBtn.disabled = false;      // enable "Run Code"
           setStatus("ready");           // pill: green "Python 3 · ready"
-          appendOutput("Python runtime ready — press Run Code (or Ctrl+Enter) to execute main.py.\n", "muted");
+          appendOutput("Python runtime ready — press Run Code to execute main.py.\n", "muted");
 
           notifyHostReady();            // postMessage to the host page
         })
@@ -659,7 +651,7 @@ builtins.input = _input
   }
 
   // ================= 6. RUN / CLEAR / STATUS =================
-  // setStatus(state) drives the header status pill through its states:
+  // setStatus(state) drives the status pill through its states:
   //   booting → "Booting Python runtime…" (spinner + amber dot)
   //   ready   → "Python 3 · ready"        (green dot)
   //   running → "Running…"                (blue pulsing dot)

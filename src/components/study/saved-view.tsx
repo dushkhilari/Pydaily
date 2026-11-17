@@ -16,13 +16,8 @@ export function SavedView({ manifest }: { manifest: Manifest }) {
   );
 
   return (
-    <div className="space-y-8 pt-2">
-      <div>
-        <h1 className="font-display text-3xl font-bold tracking-tight">Saved</h1>
-        <p className="mt-1 text-sm font-semibold text-pencil">
-          Bookmarked lessons and your personal notes, in one place.
-        </p>
-      </div>
+    <div className="space-y-7 pt-2">
+      <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">Saved</h1>
 
       {/* bookmarks — paper slips with blue ribbon */}
       <section aria-label="Bookmarked lessons">
@@ -34,9 +29,6 @@ export function SavedView({ manifest }: { manifest: Manifest }) {
           <div className="sheet rounded-2xl border-2 border-dashed border-ink/20 py-12 text-center shadow-none">
             <Bookmark className="mx-auto h-8 w-8 text-pencil/50" aria-hidden />
             <p className="mt-3 text-sm font-bold">No bookmarks yet</p>
-            <p className="mt-1 text-xs font-semibold text-pencil">
-              Tap the bookmark key inside any lesson to save it here.
-            </p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -68,12 +60,9 @@ export function SavedView({ manifest }: { manifest: Manifest }) {
           <div className="sheet rounded-2xl border-2 border-dashed border-ink/20 py-12 text-center shadow-none">
             <NotebookPen className="mx-auto h-8 w-8 text-pencil/50" aria-hidden />
             <p className="mt-3 text-sm font-bold">No notes yet</p>
-            <p className="mt-1 text-xs font-semibold text-pencil">
-              Write notes inside a lesson — they will appear here.
-            </p>
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             {notedLessons.map((l, i) => (
               <div
                 key={l.slug}

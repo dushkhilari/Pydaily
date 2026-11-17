@@ -34,9 +34,7 @@ export function LessonView({ manifest }: { manifest: Manifest }) {
       <div className="flex flex-col items-center justify-center py-24 text-center">
         <PlayCircle className="h-10 w-10 text-pencil/50" aria-hidden />
         <h1 className="mt-4 font-display text-xl font-bold">No lesson open</h1>
-        <p className="mt-1 max-w-sm text-sm font-semibold text-pencil">
-          Pick any day from the Lessons tab and start learning Python.
-        </p>
+        <p className="mt-1 text-sm font-semibold text-pencil">Pick a lesson from the Lessons tab.</p>
         <OpenLessonsButton />
       </div>
     );
@@ -173,7 +171,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
   }
 
   return (
-    <div className="space-y-6 pt-1">
+    <div className="space-y-5 pt-1 sm:space-y-6">
       {/* ---------- header ---------- */}
       <header className="space-y-4">
         <button
@@ -319,7 +317,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
             </div>
           ) : (
             <p className="py-10 text-center text-sm font-semibold text-pencil">
-              This day has no standalone code file — follow the tutorial tab.
+              No code file for this day.
             </p>
           )}
         </TabsContent>
@@ -341,7 +339,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
                 </div>
               </div>
               <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-pencil">
-                Lesson video · synced from the course repository
+                Lesson video
               </p>
             </div>
           </TabsContent>
@@ -372,7 +370,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
           <textarea
             value={noteDraft}
             onChange={(e) => setNoteDraft(e.target.value)}
-            placeholder="Write what you learned today, snippets to remember, questions to revisit…"
+            placeholder="Write your notes here…"
             aria-label="Lesson notes"
             className="min-h-[168px] w-full resize-y bg-transparent px-14 py-[5px] text-sm font-semibold leading-[28px] text-foreground/85 placeholder:text-foreground/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-0"
           />
@@ -411,23 +409,17 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
             <ChevronRight className="h-5 w-5 shrink-0 text-pen-blue transition-transform group-hover:translate-x-0.5" aria-hidden />
           </button>
         ) : (
-          <div className="sheet flex min-h-[56px] items-center justify-center rounded-2xl px-4 py-3.5 text-center text-sm font-semibold text-pencil">
-            <span className="hand text-2xl font-bold">Course complete.</span>
-            <span className="ml-1.5">You made it to day {meta.day}.</span>
+          <div className="sheet flex min-h-[56px] items-center justify-center rounded-2xl px-4 py-3.5 text-center">
+            <span className="hand text-2xl font-bold text-pen-green">Course complete!</span>
           </div>
         )}
       </nav>
 
       {/* completion flourish — green pen grade */}
       {isDone && (
-        <div className="sheet relative flex items-center justify-center gap-4 rounded-2xl p-4 text-center sm:p-5">
-          <CheckCircle2 className="h-7 w-7 shrink-0 text-pen-green" aria-hidden />
-          <div>
-            <p className="hand text-2xl leading-none text-pen-green">Day {meta.day} cleared!</p>
-            <p className="mt-1 text-xs font-semibold text-pencil">
-              Consistency beats intensity — see you tomorrow.
-            </p>
-          </div>
+        <div className="sheet relative flex items-center justify-center gap-3 rounded-2xl p-3.5 text-center sm:p-4">
+          <CheckCircle2 className="h-6 w-6 shrink-0 text-pen-green" aria-hidden />
+          <p className="hand text-2xl leading-none text-pen-green">Day {meta.day} cleared!</p>
         </div>
       )}
     </div>
