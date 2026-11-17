@@ -21,7 +21,7 @@ const jetMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "PyDaily — Learn Python in 100 Days",
   description:
-    "A skeuomorphic study desk for the 100 Days of Python course. Leather-bound lessons, runnable code on an LCD bench, notes, bookmarks, streaks and quizzes.",
+    "A skeuomorphic study desk for the 100 Days of Python course. White paper, black leather and deep-blue enamel highlights — lessons, runnable code, notes, bookmarks, streaks and quizzes.",
   keywords: ["Python", "learn python", "100 days of code", "study", "course"],
 };
 

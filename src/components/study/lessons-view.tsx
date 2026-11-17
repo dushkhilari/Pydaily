@@ -65,7 +65,7 @@ function LessonRow({ lesson, index }: { lesson: LessonMeta; index: number }) {
       onClick={() => openLesson(lesson.slug)}
       className={cn(
         "btn3d group flex min-h-[56px] w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left",
-        status === "done" ? "paper-card" : "paper-card hover:shadow-[0_3px_0_oklch(1_0_0/70%)_inset,0_5px_10px_oklch(0.42_0.06_55/0.2)]"
+        status === "done" ? "paper-card" : "paper-card hover:shadow-[0_3px_0_oklch(1_0_0/70%)_inset,0_5px_10px_oklch(0.2_0.02_258/0.18)]"
       )}
     >
       <span
@@ -141,7 +141,7 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
     <div className="space-y-7 pt-2">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-engrave font-display text-3xl font-bold tracking-tight">All lessons</h1>
+          <h1 className="text-engrave font-display text-2xl font-bold tracking-tight sm:text-3xl">All lessons</h1>
           <p className="mt-1 text-sm font-semibold text-muted-foreground">
             {manifest.lessons.length} days of Python, from hello world to asyncio.
           </p>
@@ -180,7 +180,7 @@ export function LessonsView({ manifest }: { manifest: Manifest }) {
           return (
             <section key={mod.id} aria-label={mod.title}>
               <div className="leather-card stitch relative mb-3 flex items-center gap-3 rounded-xl px-4 py-3">
-                <span className="deboss-dark flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.06_90)]">
+                <span className="deboss-dark flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.04_252)]">
                   <ModuleIcon icon={mod.icon} className="h-5 w-5" />
                 </span>
                 <div className="min-w-0 flex-1">

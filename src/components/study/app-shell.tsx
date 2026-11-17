@@ -6,6 +6,7 @@ import { Home, BookOpen, Target, Bookmark, BarChart3, Flame, TerminalSquare } fr
 import type { Manifest, QuizModule } from "@/lib/types";
 import { useStudyStore, type AppView } from "@/lib/store";
 import { Textures } from "./textures";
+import { GaugeDefs } from "./progress-gauge";
 import { HomeView } from "./home-view";
 import { LessonsView } from "./lessons-view";
 import { LessonView } from "./lesson-view";
@@ -27,9 +28,9 @@ const NAV_ITEMS: { id: AppView; label: string; icon: Home | BookOpen | Target | 
 function LogoMark({ onLeather = false }: { onLeather?: boolean }) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="gloss relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/30 bg-brass-mat shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.35_0.06_55/0.4)]">
+      <div className="gloss relative flex h-11 w-11 items-center justify-center rounded-xl border border-black/30 bg-brass-mat shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.15_0.06_265/0.45)]">
         <TerminalSquare
-          className="h-5 w-5 text-[color:var(--brass-ink)] drop-shadow-[0_1px_0_oklch(0.9_0.08_88/0.55)]"
+          className="h-5 w-5 text-[color:var(--brass-ink)] drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.6)]"
           aria-hidden
         />
       </div>
@@ -75,6 +76,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
   return (
     <div className="relative min-h-screen flex flex-col">
       <Textures />
+      <GaugeDefs />
 
       {/* ---------------- Desktop leather sidebar ---------------- */}
       <aside className="leather-card stitch hidden md:flex fixed inset-y-0 left-0 w-72 flex-col z-40 !rounded-none border-y-0 border-l-0">
@@ -99,7 +101,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "btn3d group flex min-h-[44px] w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-bold transition-all",
-                  active ? "btn-pressed !bg-none !shadow-[0_2px_5px_oklch(0.18_0.04_47/50%)_inset] text-primary" : "text-engrave-cream opacity-85 hover:opacity-100 hover:!bg-white/5"
+                  active ? "btn-pressed !bg-none !shadow-[0_2px_5px_oklch(0.05_0.01_262/55%)_inset] text-primary" : "text-engrave-cream opacity-85 hover:opacity-100 hover:!bg-white/5"
                 )}
               >
                 <Icon
@@ -132,7 +134,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                 }}
                 className="btn3d flex min-h-[52px] w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left hover:!bg-white/5"
               >
-                <span className="deboss-dark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.06_90)]">
+                <span className="deboss-dark flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[oklch(0.9_0.04_252)]">
                   <ModuleIcon icon={mod.icon} className="h-4 w-4" />
                 </span>
                 <span className="min-w-0 flex-1">
@@ -141,7 +143,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                   </span>
                   <span className="deboss-dark mt-1.5 block h-2 w-full overflow-hidden rounded-full p-[2px]">
                     <span
-                      className="block h-full rounded-full bg-brass-mat shadow-[0_1px_1px_oklch(0.35_0.06_55/0.5)]"
+                      className="block h-full rounded-full bg-brass-mat shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)]"
                       style={{ width: `${pct}%` }}
                     />
                   </span>
@@ -167,17 +169,17 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
       </aside>
 
       {/* ---------------- Mobile brushed-metal top bar ---------------- */}
-      <header className="sticky top-0 z-40 border-b border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_2px_6px_oklch(0.4_0.06_55/0.25)] md:hidden">
+      <header className="sticky top-0 z-40 border-b border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_2px_6px_oklch(0.2_0.02_258/0.25)] md:hidden">
         <div className="flex items-center justify-between px-4 py-2.5">
           <button onClick={() => navTo("home")} aria-label="Go to home" className="transition-opacity hover:opacity-80">
             <LogoMark />
           </button>
           <div
-            className="gloss relative flex items-center gap-1.5 rounded-full border border-black/25 bg-brass-mat px-3 py-1.5 text-sm font-bold shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.4_0.07_60/0.35)]"
+            className="gloss relative flex items-center gap-1.5 rounded-full border border-black/25 bg-brass-mat px-3 py-1.5 text-sm font-bold shadow-[0_1px_0_oklch(1_0_0/45%)_inset,0_2px_4px_oklch(0.15_0.06_265/0.4)]"
             aria-label={`Current streak: ${streak.current} days`}
           >
             <Flame
-              className="h-4 w-4 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.9_0.08_88/0.5)]"
+              className="h-4 w-4 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.5)]"
               aria-hidden
             />
             <span className="text-engrave-brass tabular-nums">{streak.current}</span>
@@ -186,8 +188,8 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
       </header>
 
       {/* ---------------- Main content ---------------- */}
-      <main className="flex-1 flex flex-col md:pl-72">
-        <div className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 pt-6 pb-32 md:pb-12">
+      <main className="flex-1 flex w-full min-w-0 flex-col md:pl-72">
+        <div className="w-full min-w-0 max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 pt-5 sm:pt-6 pb-32 md:pb-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={view}
@@ -206,7 +208,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
           </AnimatePresence>
         </div>
 
-        <footer className="mt-auto hidden md:block border-t border-[oklch(0.55_0.05_62/30%)] shadow-[0_1px_0_oklch(1_0_0/55%)]">
+        <footer className="mt-auto hidden md:block border-t border-[oklch(0.25_0.02_258/25%)] shadow-[0_1px_0_oklch(1_0_0/55%)]">
           <div className="flex items-center justify-between px-8 py-4 text-xs font-semibold text-muted-foreground">
             <p>
               {manifest.course.title} · {manifest.course.totalDays} lessons synced from the course repo
@@ -219,7 +221,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
       {/* ---------------- Mobile brushed-metal dock ---------------- */}
       <nav
         aria-label="Bottom navigation"
-        className="fixed bottom-3 inset-x-3 z-50 rounded-[26px] border border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_10px_24px_-6px_oklch(0.35_0.06_55/0.5)] pb-safe md:hidden"
+        className="fixed bottom-3 inset-x-3 z-50 rounded-[26px] border border-black/25 bg-metal-mat shadow-[0_1px_0_oklch(1_0_0/60%)_inset,0_10px_24px_-6px_oklch(0.12_0.02_260/0.5)] pb-safe md:hidden"
       >
         <div className="grid grid-cols-5 px-1.5 py-1.5">
           {NAV_ITEMS.map((item) => {
@@ -233,7 +235,7 @@ export function AppShell({ manifest, quizzes }: { manifest: Manifest; quizzes: Q
                 className={cn(
                   "btn3d flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-2 text-[10.5px] font-bold transition-all",
                   active
-                    ? "btn-pressed text-primary !shadow-[0_2px_5px_oklch(0.42_0.06_55/0.35)_inset]"
+                    ? "btn-pressed text-primary !shadow-[0_2px_5px_oklch(0.2_0.02_258/0.35)_inset]"
                     : "text-foreground/55 hover:text-foreground/80"
                 )}
               >

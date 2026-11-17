@@ -241,14 +241,14 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         <TabsList className="relative z-10 h-auto w-full justify-start gap-1.5 rounded-none border-b-0 bg-transparent p-0">
           <TabsTrigger
             value="tutorial"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.42_0.06_55/0.12)]"
+            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
           >
             <FileText className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
             <span className="hidden sm:inline">Tutorial</span>
           </TabsTrigger>
           <TabsTrigger
             value="code"
-            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.42_0.06_55/0.12)]"
+            className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
           >
             <Code2 className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
             <span className="hidden sm:inline">Code</span>
@@ -256,7 +256,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
           {detail.videoUrl && (
             <TabsTrigger
               value="video"
-              className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.42_0.06_55/0.12)]"
+              className="btn3d group relative top-[1.5px] z-10 inline-flex items-center gap-1.5 rounded-t-xl rounded-b-none border border-b-0 border-border/50 bg-secondary/70 px-4 py-2.5 text-sm font-bold text-muted-foreground shadow-none data-[state=active]:z-20 data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-[0_-2px_8px_oklch(0.2_0.02_258/0.12)]"
             >
               <PlayCircle className="h-4 w-4 group-data-[state=active]:text-brass-deep sm:mr-0.5" aria-hidden />
               <span className="hidden sm:inline">Video</span>
@@ -274,7 +274,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="h-4 w-4 rounded-full border border-[oklch(0.55_0.05_62/35%)] bg-[oklch(0.86_0.028_83)] shadow-[0_2px_3px_oklch(0.45_0.06_55/25%)_inset]"
+                className="h-4 w-4 rounded-full border border-[oklch(0.25_0.02_258/30%)] bg-[oklch(0.91_0.008_254)] shadow-[0_2px_3px_oklch(0.2_0.02_258/20%)_inset]"
               />
             ))}
           </div>
@@ -328,9 +328,9 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {/* television set */}
         {detail.videoUrl && (
           <TabsContent value="video" className="mt-0">
-            <div className="relative rounded-2xl border border-black/30 bg-bezel-mat p-3 shadow-[0_3px_8px_oklch(0.35_0.05_55/0.4)]">
+            <div className="relative rounded-2xl border border-black/30 bg-bezel-mat p-3 shadow-[0_3px_8px_oklch(0.1_0.02_262/0.4)]">
               <Screws inset={9} />
-              <div className="relative overflow-hidden rounded-xl border border-black/40 bg-black shadow-[0_3px_10px_oklch(0.08_0.02_60/0.7)_inset]">
+              <div className="relative overflow-hidden rounded-xl border border-black/40 bg-black shadow-[0_3px_10px_oklch(0.02_0.02_264/0.7)_inset]">
                 <div className="aspect-video w-full">
                   <iframe
                     src={detail.videoUrl}
@@ -341,7 +341,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
                   />
                 </div>
               </div>
-              <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-oklch(0.9_0.02_80)/70">
+              <p className="mt-2.5 px-1 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-[oklch(0.9_0.02_252)]/70">
                 Lesson video · synced from the course repository
               </p>
             </div>
@@ -401,7 +401,7 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
         {next ? (
           <button
             onClick={() => openLesson(next.slug)}
-            className="paper-card btn3d group flex min-h-[56px] items-center justify-end gap-3 rounded-2xl px-4 py-3.5 text-right shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_2px_4px_oklch(0.45_0.06_55/14%),0_0_0_1.5px_oklch(0.74_0.115_82/45%)]"
+            className="paper-card btn3d group flex min-h-[56px] items-center justify-end gap-3 rounded-2xl px-4 py-3.5 text-right shadow-[0_1px_0_oklch(1_0_0/70%)_inset,0_2px_4px_oklch(0.2_0.02_258/14%),0_0_0_1.5px_oklch(0.5_0.15_262/45%)]"
           >
             <span className="min-w-0">
               <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-brass-deep">
@@ -421,11 +421,11 @@ function LessonReader({ manifest, slug }: { manifest: Manifest; slug: string }) 
 
       {/* completion flourish — brass plaque */}
       {isDone && (
-        <div className="relative rounded-2xl border border-black/30 bg-brass-mat p-5 shadow-[0_2px_6px_oklch(0.4_0.08_65/0.4)]">
+        <div className="relative rounded-2xl border border-black/30 bg-brass-mat p-4 shadow-[0_2px_6px_oklch(0.15_0.06_265/0.4)] sm:p-5">
           <Screws inset={10} />
           <div className="relative flex items-center justify-center gap-4 text-center">
             <CheckCircle2
-              className="h-7 w-7 shrink-0 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.92_0.08_88/0.55)]"
+              className="h-7 w-7 shrink-0 text-engrave-brass drop-shadow-[0_1px_0_oklch(0.15_0.08_266/0.6)]"
               aria-hidden
             />
             <div>

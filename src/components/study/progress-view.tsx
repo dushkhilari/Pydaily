@@ -9,7 +9,7 @@ import {
   overallPercent,
   streakInfo,
 } from "@/lib/progress-utils";
-import { ProgressRing } from "./progress-ring";
+import { ProgressGauge } from "./progress-gauge";
 import { ModuleIcon } from "./module-icon";
 import { Screws } from "./textures";
 
@@ -32,11 +32,11 @@ export function ProgressView({ manifest, quizzes }: { manifest: Manifest; quizze
         </p>
       </div>
 
-      {/* summary hero — leather panel with brass gauge */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="leather-card stitch gloss relative flex items-center gap-5 overflow-hidden rounded-2xl p-6">
+      {/* summary hero — black leather panel with blue gauge */}
+      <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+        <div className="leather-card stitch gloss relative flex items-center gap-4 overflow-hidden rounded-2xl p-4 sm:gap-5 sm:p-6">
           <Screws inset={10} />
-          <ProgressRing value={pct} size={104} stroke={10} tone="cream" className="shrink-0" />
+          <ProgressGauge value={pct} tone="cream" className="h-24 w-24 shrink-0 sm:h-28 sm:w-28" />
           <div className="relative min-w-0">
             <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-engrave-cream opacity-80">
               Overall completion
@@ -50,15 +50,15 @@ export function ProgressView({ manifest, quizzes }: { manifest: Manifest; quizze
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="paper-card rounded-2xl p-5">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="paper-card rounded-2xl p-3.5 sm:p-5">
             <span className="deboss flex h-9 w-9 items-center justify-center rounded-lg text-brass-deep">
               <Trophy className="h-4.5 w-4.5" aria-hidden />
             </span>
             <p className="text-engrave mt-3 font-display text-2xl font-bold tabular-nums">{streak.best}</p>
             <p className="mt-1 text-xs font-semibold text-muted-foreground">best streak (days)</p>
           </div>
-          <div className="paper-card rounded-2xl p-5">
+          <div className="paper-card rounded-2xl p-3.5 sm:p-5">
             <span className="deboss flex h-9 w-9 items-center justify-center rounded-lg text-brass-deep">
               <Target className="h-4.5 w-4.5" aria-hidden />
             </span>
@@ -94,7 +94,7 @@ export function ProgressView({ manifest, quizzes }: { manifest: Manifest; quizze
                     </div>
                     <div className="deboss mt-2 h-2.5 w-full overflow-hidden rounded-full p-[2px]">
                       <div
-                        className="h-full rounded-full bg-brass-mat shadow-[0_1px_1px_oklch(0.35_0.06_55/0.5)] transition-all duration-500"
+                        className="h-full rounded-full bg-brass-mat shadow-[0_1px_1px_oklch(0.15_0.05_265/0.5)] transition-all duration-500"
                         style={{ width: `${mPct}%` }}
                       />
                     </div>
