@@ -162,7 +162,8 @@ export function AppShell({
           <div className="mx-auto flex w-full max-w-6xl items-center justify-center gap-2 px-4 py-4 pb-safe md:pb-4">
             <Sparkles className="h-4 w-4 text-nb-purple" aria-hidden />
             <p className="font-display text-sm font-bold tracking-tight text-foreground">
-              PyDaily<span className="text-nb-red">.</span>
+              PyDaily by <a href="https://www.linkedin.com/in/dushmanta-khilari-83727035b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">
+              @dush</a> <span className="text-nb-red">.</span>
             </p>
           </div>
         </footer>
