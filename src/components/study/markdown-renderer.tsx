@@ -104,7 +104,11 @@ function CodeBlock({ language, value }: { language: string; value: string }) {
             lineHeight: 1.65,
           }}
           codeTagProps={{
-            style: { fontFamily: "var(--font-mono), ui-monospace, monospace" },
+            style: {
+              fontFamily: "var(--font-mono), ui-monospace, monospace",
+              // base ink for every plain (un-tokenized) word on the dark sheet
+              color: "#f2e9d8",
+            },
           }}
         >
           {value}

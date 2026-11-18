@@ -1,0 +1,23 @@
+{
+  "day": 43,
+  "slug": "day-43-virtual-environment",
+  "title": "Virtual Environments in python",
+  "type": "lesson",
+  "module": "errors-files-functional",
+  "minutes": 13,
+  "words": 522,
+  "videoUrl": "https://www.youtube.com/embed/nt6LlFTWOkg",
+  "sections": [
+    {
+      "file": "Tutorial.md",
+      "heading": "Virtual Environments in python"
+    }
+  ],
+  "code": [
+    {
+      "file": "main.py",
+      "lines": 21
+    }
+  ],
+  "sourceFolder": "43-Day43-Virtual-Environment"
+}

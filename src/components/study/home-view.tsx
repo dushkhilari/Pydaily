@@ -112,7 +112,7 @@ export function HomeView({ manifest }: { manifest: Manifest }) {
             100 Days of{" "}
             <span className="relative inline-block">
               <span className="absolute inset-x-[-4px] inset-y-[8%] -rotate-1 bg-nb-yellow" aria-hidden />
-              <span className="relative">Python</span>
+              <span className="relative text-[#17110a]">Python</span>
             </span>
           </h1>
 
